@@ -3,6 +3,7 @@ import Header from './components/Navbar'
 import Search from './components/Search'
 import Aside from './components/Aside'
 import Cards from './components/Cards'
+import ProductNav from './components/ProductNav'
 
 export default function Home() {
     return (
@@ -15,13 +16,8 @@ export default function Home() {
 
             <div className='grid grid-cols-6 gap-3 mt-5'>
                 <Cards />
-                <Cards />
-                <Cards />
-                <Cards />
-                <Cards />
-                <Cards />
-                <Cards />
             </div>
+            {/* <ProductNav /> */}
 
           </section>
           <Aside />
