@@ -1,5 +1,5 @@
-import { createStore } from 'redux'
-
+import { configureStore } from '@reduxjs/toolkit'
+import rootReducer from './src/reducers'
 function counterReducer(state = { value: 0 }, action) {
     switch (action.type) {
       case 'counter/incremented':
@@ -11,7 +11,7 @@ function counterReducer(state = { value: 0 }, action) {
     }
   }
 
-  export let store = createStore(
-    counterReducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    )
+export const store = configureStore({
+  reducer: rootReducer,
+  devTools: true
+})

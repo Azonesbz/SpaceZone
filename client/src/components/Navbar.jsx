@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 export default function Header(){
     return (
         <>
-            <header className="flex absolute inset-0 z-50 h-20 w-full bg-gradient-to-br from-neutral-100 to-neutral-200">
+            <header className="flex relative inset-0 z-50 h-20 w-full bg-gradient-to-br from-neutral-100 to-neutral-200">
                 <nav className="flex items-center h-full w-full">
-                    <h1 className="font-kanit text-4xl flex-grow ml-10">
+                    <Link 
+                    className="font-kanit text-4xl flex-grow ml-10"
+                    to="/"
+                    >
                         SpaceZone
-                    </h1>
+                    </Link>
                     <ul className="flex justify-end mr-10 space-x-14">
                         <li className="cursor-pointer">
                             <Link to="/authentification">Se connecter</Link>
