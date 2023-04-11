@@ -5,6 +5,7 @@ import Aside from './components/Aside'
 import Cards from './components/Cards'
 import ProductNav from './components/ProductNav'
 import Footer from './components/Footer'
+import { useSelector } from 'react-redux'
 
 export default function Home() {
     return (

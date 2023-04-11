@@ -75,7 +75,7 @@ export default function Footer(){
                         </div>
                     </div>
                 </section>
-                <div className="bg-gradient-to-b from-gray-950 via-gray-950 to-black h-8"></div>
+                <div className="bg-gradient-to-b from-gray-950 via-gray-950 to-black h-2"></div>
                 <section className="flex flex-col bg-black h-60 text-white">
                     <div className="flex justify-center space-x-24 p-10 font-karla text-2xl">
                         <h1>A propos</h1>

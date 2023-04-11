@@ -12,8 +12,13 @@ export default {
       raleway: ['Raleway', 'sans-serif'],
       roboto: ['Roboto', 'sans-serif'],
       rajdhani: ['Rajdhani', 'sans-serif']
-    }
+    },
+    scrollbar: {
+      width: '12px',
+      track: 'bg-gray-200',
+      thumb: 'bg-gray-500',
+    },
   },
-  plugins: [],
+  plugins: ['tailwind-scrollbar'],
 }
 

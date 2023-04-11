@@ -1,20 +1,12 @@
-import { useState, useEffect } from "react"
+import { useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
+import { isEmpty } from "./Utils"
 
 export default function Cards(){
-
-    const [products, setProducts] = useState([])
-    useEffect(() => {
-        fetch('http://localhost:3001/product')
-        .then(async res => await res.json())
-        .then(data => {
-            setProducts(data.product)
-        })
-    }, [])
-
+    const products = useSelector((state) => state.productReducer)
     return (
         <>
-            {products.map(product => {
+            {!isEmpty(products) && products.map(product => {
                 return(
                 <div 
                 key={product.id}
