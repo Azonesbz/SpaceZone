@@ -4,6 +4,9 @@ import Header from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useSelector } from 'react-redux';
 import { isEmpty } from '../components/Utils';
+import mondialRelay from '/LogoMondialRelay.png'
+import ups from '/ups.svg'
+import fedex from '/fedex-express-6.svg'
 
 export default function ProductId() {
   const [isProduct, setIsProduct] = useState([])
@@ -35,7 +38,7 @@ export default function ProductId() {
               <div className={`flex flex-col col-span-3 duration-500 mt-10`}>
                 <div className={`flex flex-col mt-5 p-5 space-y-5 rounded-xl bg-slate-50 duration-500`}>
                   <h2 className='text-4xl font-kanit'>Description</h2>
-                  <p className="flex text-clip scrollbar rounded px-5 h-48 overflow-scroll font-roboto font-medium text-lg">
+                  <p className="flex text-clip scrollbar rounded px-5 overflow-scroll font-roboto font-medium text-lg">
                     {productId.description}
                   </p>
                 </div>
@@ -55,7 +58,7 @@ export default function ProductId() {
             </div>
           ))}
         </section>
-        <div className="bg-gradient-to-b from-transparent to-gray-950 h-2"></div>
+        <div className="bg-gradient-to-b from-transparent to-gray-950 h-1"></div>
         <section className='bg-gray-950 px-24 py-10 text-white'>
             <div className='flex flex-col col-span-1'>
                 <h1 className='text-white text-3xl'>
@@ -110,6 +113,46 @@ export default function ProductId() {
             </div>
         </section>
 
+        <div className="bg-gradient-to-b from-gray-950 to-transparent h-1"></div>
+
+        <section className='px-24 py-10 text-gray-950'>
+            <div className='flex flex-col w-3/4'>
+                <h1 className='text-3xl font-rajdhani font-semibold'>La livraison</h1>
+                <div>
+                    <p className='text-xl font-raleway font-medium border-b-[1px] border-black w-full pb-5 mb-5'>
+                      Recevez votre produit à domicile, nous nous engageons à vous garantir la meilleur livraison possible,<br /> et si vous n'êtes
+                      pas satisfait, un remboursement vous sera du dans les meilleurs délais.
+                      <br />
+                      <br />
+                      De plus, si le produit ne vous plaît pas, il est de notre devoir de vous rembourser l'intégralité de la somme sauf si et seulement si le produit est rendu en mauvaise état.
+                    </p>
+                </div>
+                <div className='flex items-center'>
+                    <div className='flex flex-col space-y-10 ml-5 w-full'>
+                        <div className='flex items-center space-x-5'>
+                            <h2 className='font-karla text-xl'>Mondial Relay</h2>
+                            <img src={mondialRelay} alt='logo mondial relay' width={100} className='hover:scale-110 duration-200'/>
+                            <div className='w-full h-[1px] bg-neutral-300'></div>
+                            <span className='font-rajdhani text-xl font-semibold'>5.30$</span>
+                        </div>
+                        <div className='flex items-center space-x-5'>
+                            <h2 className='text-center font-karla text-xl'>UPS</h2>
+                            <img src={ups} alt='logo mondial relay' width={40} className='hover:scale-110 duration-200'/>
+                            <div className='w-full h-[1px] bg-neutral-300'></div>
+                            <span className='font-rajdhani text-xl font-semibold'>5.30$</span>
+                        </div>
+                        <div className='flex items-center space-x-5'>
+                            <h2 className='text-center font-karla text-xl'>Fedex</h2>
+                            <img src={fedex} alt='logo mondial relay' width={100} className='hover:scale-110 duration-200'/>
+                            <div className='w-full h-[1px] bg-neutral-300'></div>
+                            <span className='font-rajdhani text-xl font-semibold'>5.30$</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div className="bg-gradient-to-b from-slate-50 to-gray-950 h-1"></div>
         <Footer />
       </>
     )
