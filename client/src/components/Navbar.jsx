@@ -13,13 +13,13 @@ export default function Header(){
                     </Link>
                     <ul className="flex justify-end mr-10 space-x-14">
                         <li className="cursor-pointer">
-                            <Link to="/authentification">Se connecter</Link>
+                            <Link to="/authentification" className="text-md font-karla uppercase font-medium rounded-md">Connection</Link>
                         </li>
                         <li>
-                            <Link to="/panier">Mon panier</Link>
+                            <Link to="/panier" className="text-md font-karla uppercase font-medium">Mon panier</Link>
                         </li>
                         <li>
-                            <Link to="/dashboard">Dashboard</Link>
+                            <Link to="/dashboard" className="text-md font-karla uppercase font-medium">Dashboard</Link>
                         </li>
                     </ul>
                 </nav>

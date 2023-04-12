@@ -11,7 +11,7 @@ export default function Cards(){
                 <div 
                 key={product.id}
                 className='flex items-center bg-gradient-to-br from-white to-zinc-200 col-span-6 shadow shadow-black rounded-xl 
-                w-full h-60 p-3 hover:scale-100 scale-95 duration-200'>
+                w-full h-60 p-3 hover:scale-95 duration-200'>
                     <Link 
                         className='flex bg-gradient-to-br w-full h-60 p-3'
                         to={`/product/${product.id}`}
