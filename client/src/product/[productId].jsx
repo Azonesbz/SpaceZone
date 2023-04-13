@@ -17,7 +17,6 @@ export default function ProductId() {
       window.scroll(0, 0)
       const result = product.filter((productId) => productId.id == id);
       setIsProduct(result);
-      console.log(isProduct)
     }
   }, [product]);
 

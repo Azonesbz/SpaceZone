@@ -6,9 +6,9 @@ export default function Search(){
     });
     const [formData, setFormData] = useState({
         search: '',
-        vêtement: null,
-        accessoire: null,
-        divers: null,
+        vêtements: null,
+        accessoires: null,
+        divers: false,
         priceMin: 0,
         priceMax: null,
     })
@@ -43,14 +43,14 @@ export default function Search(){
                         }}
                         />
                         <button className="mr-2 hover:scale-95 duration-200 active:scale-90" onClick={handleFilter}>
-                            <svg width="46" height="46" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="46" height="46" fill="currentColor" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M22 18.003c0 .55-.446.995-.995.995h-8.01a.995.995 0 0 1 0-1.99h8.01c.55 0 .995.445.995.995Z"></path>
                                 <path d="M22 12.003c0 .55-.446.995-.995.995H2.995a.995.995 0 1 1 0-1.99h18.01c.55 0 .995.445.995.995Z"></path>
                                 <path d="M21.005 6.99a.995.995 0 0 0 0-1.99H8.995a.995.995 0 1 0 0 1.99h12.01Z"></path>
                             </svg>
                         </button>
-                        <button className="mr-2" type="submit">
-                            <svg width="34" height="34" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <button className="mr-2 rotate-90" type="submit">
+                            <svg width="34" height="34" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10 17a7 7 0 1 0 0-14 7 7 0 0 0 0 14Z"></path>
                                 <path d="m21 21-6-6"></path>
                             </svg>
@@ -62,15 +62,45 @@ export default function Search(){
                         <h2 className="font-raleway text-xl font-semibold">Catégorie</h2>
                         <label htmlFor="" className="flex justify-between w-full items-center text-md font-raleway font-medium">
                             Vêtements
-                            <input type="checkbox" className="h-5 w-5" />
+                            <input 
+                            type="checkbox"
+                            className="h-5 w-5"
+                            checked={formData.vêtements}
+                            name="vêtements"
+                            onChange={(e) => {
+                                const { name, checked } = e.target;
+                                setFormData({ ...formData, [name]: checked });
+                                console.log(formData)
+                            }}
+                            />
                         </label>
                         <label htmlFor="" className="flex justify-between w-full items-center text-md font-raleway font-medium">
                             Accessoires
-                            <input type="checkbox"  className="h-5 w-5"/>
+                            <input
+                                type="checkbox"
+                                className="h-5 w-5"
+                                checked={formData.accessoire}
+                                name="accessoire"
+                                onChange={(e) => {
+                                    const { name, checked } = e.target;
+                                    setFormData({ ...formData, [name]: checked });
+                                    console.log(formData)
+                                }}
+                            />
                         </label>
                         <label htmlFor="" className="flex justify-between w-full items-center text-md font-raleway font-medium">
                             Autres
-                            <input type="checkbox" className="h-5 w-5" />
+                            <input 
+                            type="checkbox"
+                            className="h-5 w-5"
+                            checked={formData.divers}
+                            name="divers"
+                            onChange={(e) => {
+                                const { name, checked } = e.target;
+                                setFormData({ ...formData, [name]: checked });
+                                console.log(formData)
+                            }}
+                            />
                         </label>
                     </div>
                     <div className="flex flex-col ml-5 px-5 border-l-[1px] border-neutral-400 space-y-5 col-span-2 md:col-span-1">
@@ -82,7 +112,8 @@ export default function Search(){
                             </div>
                             <input
                             name="priceMin"
-                            type="range" 
+                            type="range"
+                            max={500}
                             onChange={(e) => {
                                 console.log(formData)
                                 const {name, value} = e.currentTarget
@@ -98,7 +129,8 @@ export default function Search(){
                             </div>
                             <input 
                             name="priceMax"
-                            type="range" 
+                            type="range"
+                            max={500}
                             onInput={(e) => {
                                 console.log(formData)
                                 const {name, value} = e.currentTarget

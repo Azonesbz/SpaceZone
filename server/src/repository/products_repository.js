@@ -29,10 +29,16 @@ const searchProduct = async (value) => {
     }
     return result
 }
+const addProduct = async (name, price, description) => {
+    const [info] = await createPoolConnection().query(`INSERT INTO products (id_user, name, price, description) VALUES (?, ?, ?, ?)`, ["Azones", name, price, description])
+    console.log(info.insertId)
+    return info
+}
 
 export const products = {
     all: getProducts,
     byId: byId,
+    add: addProduct,
     search: searchProduct,
     next: getNextProducts,
 }

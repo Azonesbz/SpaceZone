@@ -30,6 +30,17 @@ export async function getNextProduct(req, res){
         res.json({productNext})
     })
 }
+export async function addProduct(req, res){
+    const {description, name, price} = req.body
+    products.add(name, price, description).then(
+        response => {
+            res.status(200).json({msg: 'Le produit à bien été créer', response})
+        }
+    )
+    .catch(err => {
+        res.status(500).json({msg:`Une erreur est survenue, veuillez réessayer dans quelques instants`, err})
+    })
+}
 export async function getSearch(req, res){
     products.search(req.body.search).then(result => {
         res.json({result})

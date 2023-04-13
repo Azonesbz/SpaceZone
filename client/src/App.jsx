@@ -4,6 +4,7 @@ import Authentification from "./Authentification";
 import Dashboard from "./Dashboard";
 import Header from "./components/Navbar";
 import ProductId from "./product/[productId]";
+import CreateProduct from "./CreateProduct";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
             <Route path="/authentification" element={<Authentification />}/>
             <Route path="/dashboard" element={<Dashboard />}/>
             <Route path="/product/:id" element={<ProductId />}/>
+            <Route path="/product/new" element={<CreateProduct />}/>
           </Routes>
       </BrowserRouter>
     </>
