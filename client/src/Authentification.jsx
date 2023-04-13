@@ -1,9 +1,11 @@
 import React from 'react'
+import Header from './components/Navbar'
 
 export default function Authentification() {
     return (
-      <View>
-        <Text>Authentification</Text>
-      </View>
+      <>
+        <Header />
+        
+      </>
     )
 }

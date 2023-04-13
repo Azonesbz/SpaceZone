@@ -42,7 +42,12 @@ export async function addProduct(req, res){
     })
 }
 export async function getSearch(req, res){
-    products.search(req.body.search).then(result => {
-        res.json({result})
+    const {divers, accessoires, vêtements} = req.body
+    products.search(divers, accessoires, vêtements)
+    .then(result => {
+        res.status(200).json({result})
+    })
+    .catch(err => {
+        res.status(500).json({err})
     })
 }

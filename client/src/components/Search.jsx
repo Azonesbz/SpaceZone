@@ -1,9 +1,7 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export default function Search(){
-    const [inputValue, setInputValue] = useState({
-        search: '',
-    });
+    const form = useRef()
     const [formData, setFormData] = useState({
         search: '',
         vêtements: null,
@@ -19,15 +17,29 @@ export default function Search(){
         e.preventDefault()
        filter ? setFilter(false) : setFilter(true);
     }
+    const handleForm = (e) => {
+        e.preventDefault()
+        const dataSearch = {
+            search: form.current[0].value,
+            vêtements: form.current[3].checked,
+            accessoire: form.current[4].checked,
+            divers: form.current[5].checked,
+            priceMin: form.current[6].value,
+            priceMax: form.current[7].value,
+        }
+        console.log(dataSearch)
+        console.log(form)
+    }
 
     return(
         <>
-            <div className="flex flex-col p-4 rounded-xl bg-gradient-to-b from-slate-200 to-neutral-300">
+            <div className="flex flex-col w-full p-4 rounded-xl">
                 <form 
                 className="w-full"
                 action="" 
-                method=""
-                onSubmit={(e) => e.preventDefault}
+                method="post"
+                ref={form}
+                onSubmit={(e) => handleForm(e)}
                 >
                     <label htmlFor="search" className='flex items-center bg-neutral-50 border border-gray-700 rounded-full'>
                         <input 
@@ -43,7 +55,7 @@ export default function Search(){
                         }}
                         />
                         <button className="mr-2 hover:scale-95 duration-200 active:scale-90" onClick={handleFilter}>
-                            <svg width="46" height="46" fill="currentColor" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="34" height="34" fill="currentColor" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M22 18.003c0 .55-.446.995-.995.995h-8.01a.995.995 0 0 1 0-1.99h8.01c.55 0 .995.445.995.995Z"></path>
                                 <path d="M22 12.003c0 .55-.446.995-.995.995H2.995a.995.995 0 1 1 0-1.99h18.01c.55 0 .995.445.995.995Z"></path>
                                 <path d="M21.005 6.99a.995.995 0 0 0 0-1.99H8.995a.995.995 0 1 0 0 1.99h12.01Z"></path>
