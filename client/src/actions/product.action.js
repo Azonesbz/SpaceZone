@@ -12,7 +12,6 @@ export const getProduct = () => {
     }
 }
 export const addProduct = (data) => {
-    console.log(data)
     return (dispatch) => {
         return axios.post('http://localhost:3001/product', data).then(res => {
             console.log(res.data.response.insertId)
@@ -24,7 +23,7 @@ export const searchProduct = (data) => {
     console.log(data)
     return (dispatch) => {
         return axios.post('http://localhost:3001/search/product', data).then(res => {
-            console.log(res.data)
+            console.log(res)
             dispatch({ type: SEARCH_PRODUCTS, payload: res.data.product})
         })
     }

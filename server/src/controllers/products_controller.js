@@ -13,7 +13,6 @@ export async function getProductById(req, res){
     products.byId(req.params.id)
     .then(
         product => {
-            console.log(product)
             res.json({product})
         }
     )
@@ -26,7 +25,6 @@ export async function getProductById(req, res){
 export async function getNextProduct(req, res){
     const page = req.body.page
     products.next(page).then(productNext => {
-        console.log(productNext)
         res.json({productNext})
     })
 }
@@ -45,6 +43,7 @@ export async function getSearch(req, res){
     const {divers, accessoires, vêtements} = req.body
     products.search(divers, accessoires, vêtements)
     .then(result => {
+        console.log(result)
         res.status(200).json({result})
     })
     .catch(err => {

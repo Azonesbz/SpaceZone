@@ -1,4 +1,6 @@
 import { useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { searchProduct } from "../actions/product.action";
 
 export default function Search(){
     const form = useRef()
@@ -11,7 +13,7 @@ export default function Search(){
         priceMax: null,
     })
     const [filter, setFilter] = useState(false)
-
+    const dispatch = useDispatch()
 
     const handleFilter = (e) => {
         e.preventDefault()
@@ -27,8 +29,7 @@ export default function Search(){
             priceMin: form.current[6].value,
             priceMax: form.current[7].value,
         }
-        console.log(dataSearch)
-        console.log(form)
+        dispatch(searchProduct(dataSearch))
     }
 
     return(
@@ -91,7 +92,7 @@ export default function Search(){
                             <input
                                 type="checkbox"
                                 className="h-5 w-5"
-                                checked={formData.accessoire}
+                                checked={formData.accessoires}
                                 name="accessoire"
                                 onChange={(e) => {
                                     const { name, checked } = e.target;

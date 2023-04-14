@@ -15,7 +15,7 @@ await con.query(`CREATE TABLE users (
         password VARCHAR(255) NOT NULL,
         prenom VARCHAR(100),
         nom VARCHAR(100),
-        numberphone INT
+        numberphone VARCHAR(50)
     )`);
 
 await con.query(`CREATE TABLE roles (
@@ -46,5 +46,8 @@ await con.query(`CREATE TABLE products (
     await con.query(`INSERT INTO products (user_id, category_id, name, price, description) VALUES (?, ?, ?, ?, ?)`, ['Ali', 3,'Sweat à capuche', 85.50, 'Le t-shirt sur le thème de l\'espace est un vêtement incontournable pour tous les passionnés d\'astronomie. Le t-shirt sur le thème de l\'espace est un vêtement incontournable pour tous les passionnés d\'astronomie.'])
     await con.query(`INSERT INTO products (user_id, category_id, name, price, description) VALUES (?, ?, ?, ?, ?)`, ['Ali', 3,'Sweat à capuche', 85.50, 'Le t-shirt sur le thème de l\'espace est un vêtement incontournable pour tous les passionnés d\'astronomie. Le t-shirt sur le thème de l\'espace est un vêtement incontournable pour tous les passionnés d\'astronomie.'])
     await con.query(`INSERT INTO products (user_id, category_id, name, price, description) VALUES (?, ?, ?, ?, ?)`, ['Ali', 3,'Sweat à capuche', 85.50, 'Le t-shirt sur le thème de l\'espace est un vêtement incontournable pour tous les passionnés d\'astronomie. Le t-shirt sur le thème de l\'espace est un vêtement incontournable pour tous les passionnés d\'astronomie.'])
+
+    await con.query(`INSERT INTO users (user_id, email, password, prenom, nom, numberphone) VALUES (?, ?, ?, ?, ?, ?)`, ['Ali', 'ali@gmail.com','password', 'Ali', '', '0775498545'])
+    await con.query(`INSERT INTO users (user_id, email, password, prenom, nom, numberphone) VALUES (?, ?, ?, ?, ?, ?)`, ['Charlie', 'charlie@gmail.com','password', 'Charlie','Dallier-Wood', '0784965485'])
 
 }

@@ -22,6 +22,21 @@ const getNextProducts = async (page) => {
     return nextProducts
 }
 const searchProduct = async (vêtements, accessoires, divers, priceMin, priceMax) => {
+    if(vêtements === true) {
+        vêtements = "vêtements"
+    } else {
+        vêtements = null
+    }
+    if(accessoires === true){
+        accessoires = "accessoires"
+    } else {
+        accessoires = null
+    }
+    if(divers === true){
+        divers = "accessoires"
+    } else {
+        divers = null
+    }
     const query =
     `SELECT *
     FROM products p 
@@ -34,7 +49,7 @@ const searchProduct = async (vêtements, accessoires, divers, priceMin, priceMax
 
 // Modifier le nom d'utilisateur pour l'auteur du produit
 const addProduct = async (name, price, description) => {
-    const [info] = await createPoolConnection().query(`INSERT INTO products (id_user, name, price, description) VALUES (?, ?, ?, ?)`, ["Azones", name, price, description])
+    const [info] = await createPoolConnection().query(`INSERT INTO products (user_id, name, price, description) VALUES (?, ?, ?, ?)`, ["Azones", name, price, description])
     return info
 }
 
