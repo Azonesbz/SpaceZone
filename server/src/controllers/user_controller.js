@@ -11,15 +11,18 @@ export async function getAllUsers(req, res){
 
 export async function addUser(req, res) {
     const {username, email, password} = req.body
-    const hashedPassword = bcrypt.hash(JSON.stringify(password), 15)
-    users.addUser(username, email, hashedPassword)
+    console.log(req.body)
+    const hashedPassword = await bcrypt.hash(password, 15)
+    console.log("🚀 ~ file: user_controller.js:16 ~ addUser ~ hashedPassword:", hashedPassword)
+    users.add(username, email, hashedPassword)
     .then(
-        res => {
-            res.json({res})
+        response => {
+            res.status(201).json({response})
         }
     )
     .catch(
         err => {
+            console.log(err)
             res.status(300).json({err})
         }
     )

@@ -21,7 +21,7 @@ export async function addUserDb(username, email, password){ // Ajoute un utilisa
         const err = `Cet utilisateur existe déjà.`
         throw err
     }
-    const [info] = await createPoolConnection().query(`INSERT INTO users (user_id, email, password)`, [username, email, password])
+    const [info] = await createPoolConnection().query(`INSERT INTO users (user_id, email, password) VALUES (?, ?, ?)`, [username, email, password])
     return info
 }
 export async function searchUserDb(){ // Recherche un utilisateur en base de donnée en fonction de différent critère
