@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import rootReducer from './src/reducers'
 import { getProduct } from './src/actions/product.action'
-import { getAllUser } from './src/actions/user.action'
+import { getAllUser, sessionIsValid } from './src/actions/user.action'
 
 
 export const store = configureStore({
@@ -10,4 +10,5 @@ export const store = configureStore({
 })
 
 store.dispatch(getProduct())
+store.dispatch(sessionIsValid())
 store.dispatch(getAllUser())

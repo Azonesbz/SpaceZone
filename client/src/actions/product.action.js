@@ -13,7 +13,7 @@ export const getProduct = () => {
 }
 export const addProduct = (data) => {
     return (dispatch) => {
-        return axios.post('http://localhost:3001/product', data).then(res => {
+        return axios.post('http://localhost:3001/product/new', data).then(res => {
             console.log(res.data.response.insertId)
             dispatch({ type: ADD_PRODUCTS, payload: {...data, id: res.data.response.insertId}})
         })

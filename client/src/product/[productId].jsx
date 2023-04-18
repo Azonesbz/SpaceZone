@@ -29,7 +29,7 @@ export default function ProductId() {
               {/* Image of product */}
               <div className='flex flex-col col-span-3'>
                 <h1 className='text-3xl font-raleway font-semibold'>{productId.name}</h1>
-                <i className='text-xl'>Vendu par <span className='text-indigo-900'>{productId.id_user}</span></i>
+                <i className='text-xl'>Vendu par <span className='text-indigo-900'>{productId.user_id}</span></i>
                 <img className='h-5/6 w-5/6' src='https://via.placeholder.com/550x550' alt='image du produit' />
               </div>
 
@@ -73,34 +73,6 @@ export default function ProductId() {
                         <h2 className='flex flex-col text-lg ml-5 text-slate-500'>Catégorie: <span className='text-slate-50 text-xl'>Vêtements</span></h2>
                     </div>
                   {/* Taille */}
-                    <div className='col-span-4 flex items-center'>
-                        <svg width="46" height="46" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path fill="currentColor" d="M8.5 9.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"></path>
-                          <path d="M4 7v3.859c0 .537.213 1.052.593 1.432l8.116 8.116a2.023 2.023 0 0 0 2.864 0l4.834-4.834a2.023 2.023 0 0 0 0-2.864L12.29 4.593A2.025 2.025 0 0 0 10.859 4H7a3 3 0 0 0-3 3v0Z"></path>
-                        </svg>
-                        <h2 className='flex flex-col text-lg ml-5 text-slate-500'>Catégorie: <span className='text-slate-50 text-xl'>Vêtements</span></h2>
-                    </div>
-                    <div className='col-span-4 flex items-center'>
-                        <svg width="46" height="46" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path fill="currentColor" d="M8.5 9.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"></path>
-                          <path d="M4 7v3.859c0 .537.213 1.052.593 1.432l8.116 8.116a2.023 2.023 0 0 0 2.864 0l4.834-4.834a2.023 2.023 0 0 0 0-2.864L12.29 4.593A2.025 2.025 0 0 0 10.859 4H7a3 3 0 0 0-3 3v0Z"></path>
-                        </svg>
-                        <h2 className='flex flex-col text-lg ml-5 text-slate-500'>Catégorie: <span className='text-slate-50 text-xl'>Vêtements</span></h2>
-                    </div>
-                    <div className='col-span-4 flex items-center'>
-                        <svg width="46" height="46" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path fill="currentColor" d="M8.5 9.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"></path>
-                          <path d="M4 7v3.859c0 .537.213 1.052.593 1.432l8.116 8.116a2.023 2.023 0 0 0 2.864 0l4.834-4.834a2.023 2.023 0 0 0 0-2.864L12.29 4.593A2.025 2.025 0 0 0 10.859 4H7a3 3 0 0 0-3 3v0Z"></path>
-                        </svg>
-                        <h2 className='flex flex-col text-lg ml-5 text-slate-500'>Catégorie: <span className='text-slate-50 text-xl'>Vêtements</span></h2>
-                    </div>
-                    <div className='col-span-4 flex items-center'>
-                        <svg width="46" height="46" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                          <path fill="currentColor" d="M8.5 9.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"></path>
-                          <path d="M4 7v3.859c0 .537.213 1.052.593 1.432l8.116 8.116a2.023 2.023 0 0 0 2.864 0l4.834-4.834a2.023 2.023 0 0 0 0-2.864L12.29 4.593A2.025 2.025 0 0 0 10.859 4H7a3 3 0 0 0-3 3v0Z"></path>
-                        </svg>
-                        <h2 className='flex flex-col text-lg ml-5 text-slate-500'>Catégorie: <span className='text-slate-50 text-xl'>Vêtements</span></h2>
-                    </div>
                     <div className='col-span-4 flex items-center'>
                         <svg width="46" height="46" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path fill="currentColor" d="M8.5 9.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"></path>

@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function CreateProduct(){
     const form = useRef()
-    const product = useSelector((state) => state.productReducer)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -22,7 +21,7 @@ export default function CreateProduct(){
         }
 
         dispatch(addProduct(productData))
-        navigate('/')
+        navigate('/home')
     }
     return (
         <>

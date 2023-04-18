@@ -21,33 +21,24 @@ const getNextProducts = async (page) => {
     const [nextProducts] = await createPoolConnection().query(`SELECT * FROM products LIMIT 3 OFFSET ?`, [page])
     return nextProducts
 }
+
+// Search system
+
 const searchProduct = async (vêtements, accessoires, divers, priceMin, priceMax) => {
-    if(vêtements === true) {
-        vêtements = "vêtements"
-    } else {
-        vêtements = null
-    }
-    if(accessoires === true){
-        accessoires = "accessoires"
-    } else {
-        accessoires = null
-    }
-    if(divers === true){
-        divers = "accessoires"
-    } else {
-        divers = null
-    }
     const query =
     `SELECT *
     FROM products p 
     LEFT JOIN product_category c ON p.category_id = c.id
-    WHERE c.title IN (?, ?, ?)
+    WHERE c.title = ?
     GROUP BY p.id`
     const [result] = await createPoolConnection().query(query, [accessoires, vêtements, divers])
     return result
 }
 
-// Modifier le nom d'utilisateur pour l'auteur du produit
+
+
+// Add product
+
 const addProduct = async (name, price, description) => {
     const [info] = await createPoolConnection().query(`INSERT INTO products (user_id, name, price, description) VALUES (?, ?, ?, ?)`, ["Azones", name, price, description])
     return info
