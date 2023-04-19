@@ -1,11 +1,9 @@
-import Header from './components/Navbar'
+import Header from '../components/Navbar'
 import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import React, { useRef } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
-import Register from './components/Authentification/RegisterForm'
-import Login from './components/Authentification/LoginForm'
+import { useSelector } from 'react-redux'
+import React, { useRef, useState } from 'react'
+import Register from '../components/Authentification/RegisterForm'
+import Login from '../components/Authentification/LoginForm'
 
 
 export default function Welcome() {
@@ -20,21 +18,23 @@ export default function Welcome() {
 
   let handleForm = async (e) => {
     e.preventDefault()
-    const identifyData = {
-      identifier: form.current[0].value
-    }
     try {
-      const user = users.filter(user => user.email === identifyData.identifier || user.id_user === identifyData.identifier)
-      setIdentify(user)
-      setIdentifierValid(true)
-      setLogin(true)
-    } catch {
-      const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-
-      if(emailRegex.test(identifyData.identifier)){
+      const user = users.filter(user => user.email === form.current[0].value)
+      console.log(user.length)
+      if(user.length){
+        setIdentify(user)
         setIdentifierValid(true)
-        setRegister(true)
+        setLogin(true)
+      } else {
+        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
+        if(emailRegex.test(form.current[0].value)){
+          setIdentifierValid(true)
+          setRegister(true)
+        }
       }
+    } catch {
+        return
     }
   }
 

@@ -1,8 +1,8 @@
 import { useRef } from "react";
-import Header from "./components/Navbar";
-import Footer from "./components/Footer";
+import Header from "../components/Navbar";
+import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { addProduct } from "./actions/product.action";
+import { addProduct } from "../actions/product.action";
 import { useNavigate } from "react-router-dom";
 
 export default function CreateProduct(){

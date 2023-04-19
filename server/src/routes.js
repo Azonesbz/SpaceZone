@@ -18,7 +18,7 @@ router.post('/search/product', getSearch)
 router.get('/users', getAllUsers)
 router.post('/users/new', addUser)
 router.post('/users/login', connectUser)
-router.post('/users/logout', userLogout)
+router.put('/users/:id', userLogout)
 
 // Vérification du token
 

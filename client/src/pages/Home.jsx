@@ -1,16 +1,11 @@
-import React from 'react'
-import Header from './components/Navbar'
-import Search from './components/Search'
-import Cards from './components/Cards'
-import Footer from './components/Footer'
-import { Link, useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
-import { sessionIsValid } from './actions/user.action'
-
+import Header from '../components/Navbar'
+import Search from '../components/Search'
+import Cards from '../components/Cards'
+import Footer from '../components/Footer'
+import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react'
 
 export default function Home({session}) {
-
     return (
       <>
         <Header session={session} />

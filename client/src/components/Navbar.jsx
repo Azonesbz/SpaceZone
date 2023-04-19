@@ -1,24 +1,26 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { sessionIsValid, userLogout } from "../actions/user.action";
+import { userLogout } from "../actions/user.action";
 import { useEffect } from "react";
 import { useState } from "react";
 
 export default function Header({session}){
 
     const [isLogged, setIsLogged] = useState(session)
+    const [isAdmin, setIsAdmin] = useState(false)
+    const dispatch = useDispatch()
+    const user = useSelector((state) => state.currentUserReducer)
     const navigate = useNavigate()
-    
+
     useEffect(() => {
-        const token = window.localStorage.getItem('token');
-        if (token) {
+        if (user) {
             setIsLogged(true);
         } else {
             setIsLogged(false);
         }
-      }, []);
+      }, [user]);
     let handleLogout = () => {
-        window.localStorage.removeItem('token')
+        dispatch(userLogout(user.id))
         navigate('/')
     }
     return (
@@ -28,26 +30,32 @@ export default function Header({session}){
                     <div>
                         <Link 
                         className="font-kanit text-4xl flex-grow ml-10"
-                        to="/"
+                        to="/home"
                         >
                             SpaceZone
                         </Link>
                     </div>
                     <ul className="flex mr-10 space-x-14">
-                        {!session ? <li className="cursor-pointer">
+                        {!isLogged ? <li className="cursor-pointer">
                             <Link to="/" className="text-md font-karla font-medium rounded-md text-blue-700">S'identifier</Link>
                         </li> : "" }
-                        {session ? <li className="cursor-pointer">
+                        {isLogged ? <li className="cursor-pointer">
                             <Link to="/profil" className="text-md font-karla font-medium rounded-md text-blue-700">Mon profil</Link>
                         </li> : "" }
-                        {session ? <li className="cursor-pointer">
+                        {isLogged ? <li className="cursor-pointer">
                             <Link to="/profil" className="text-md font-karla rounded-md text-black">Mon Panier</Link>
                         </li> : "" }
-                        {session ? <li className="cursor-pointer">
+                        {isLogged ? <li className="cursor-pointer">
                             <button 
                             className="text-md font-karla rounded-md text-black"
                             onClick={handleLogout}
                             >Se déconnecter</button>
+                        </li> : "" }
+                        {isLogged ? <li className="cursor-pointer">
+                            <Link 
+                            className="text-md font-karla rounded-md text-black"
+                            to="/dashboard"
+                            >Dashboard</Link>
                         </li> : "" }
                         <li className="hidden">
                             <Link to="/panier" className="text-md font-karla uppercase font-medium">Mon panier</Link>

@@ -1,13 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./Home";
-import Welcome from "./Welcome";
-import Dashboard from "./Dashboard";
-import ProductId from "./product/[productId]";
-import CreateProduct from "./CreateProduct";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { sessionIsValid } from "./actions/user.action";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Dashboard from "./pages/Dashboard";
+import Home from "./pages/Home";
+import Welcome from "./pages/Welcome";
+import CreateProduct from "./pages/CreateProduct";
+import ProductId from "./pages/product/[productId]";
+
 
 export default function App() {
   const [session, setSession] = useState(false)
@@ -19,6 +17,7 @@ export default function App() {
       setSession(false);
     }
   }, [window.localStorage]);
+  
   return (
     <>
       <BrowserRouter>

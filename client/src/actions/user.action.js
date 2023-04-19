@@ -1,4 +1,5 @@
 import axios from 'axios'
+import jwt_decode from "jwt-decode";
 
 export const ADD_USER = "ADD_USER"
 export const GET_ALL_USERS = "GET_ALL_USERS"
@@ -7,6 +8,7 @@ export const USER_LOGOUT = "USER_LOGOUT"
 export const LOGIN_USER = "LOGIN_USER"
 export const SAVE_USER_DATA = "SAVE_USER_DATA"
 export const DELETE_USER_DATA = "DELETE_USER_DATA"
+export const SET_USER = "SET_USER"
 
 
 export const getAllUser = () => {
@@ -28,34 +30,28 @@ export const addUser = (data) => {
 }
 export const loginUser = (data) => {
     return (dispatch) => {
-        return axios.post('http://localhost:3001/users/login', data).then(res => {
-            console.log(res)
-            window.localStorage.setItem('token', res.data.token)
-            dispatch({ type: SAVE_USER_DATA, payload: {
-                id: res.data.id, 
-                email: res.data.email, 
-                token: res.data.token,
-                Authorization: true, 
-            }})
+        return axios.post('http://localhost:3001/users/login', data).then(async res => {
+            localStorage.setItem('token', res.data.token)
+            const token = localStorage.getItem('token')
+            const decodedToken = jwt_decode(token);
+            dispatch({ type: SET_USER, payload: decodedToken})
         })
     }
 }
 
 export const userLogout = (id) => {
     return (dispatch) => {
-        return axios.put(`http://localhost:3001/users/${id}`, data).then(res => {
+        return axios.put(`http://localhost:3001/users/${id}`).then(() => {
             window.localStorage.removeItem('token')
-            dispatch({ type: DELETE_USER_DATA, payload: {Authorization: false}})
+            dispatch({ type: SET_USER, payload: ""})
         })
     }
 }
+
 export const sessionIsValid = () => {
     return (dispatch) => {
         const token = window.localStorage.getItem('token')
-        if(token){
-            dispatch({ type: SESSION_IS_VALID, payload: {Authorization: true}})
-        } else {
-            dispatch({ type: SESSION_IS_VALID, payload: {Authorization: false}})
-        }
+        const decodedToken = jwt_decode(token);
+        dispatch({ type: SET_USER, payload: decodedToken})
     }
 }

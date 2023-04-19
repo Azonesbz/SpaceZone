@@ -1,4 +1,4 @@
-import { ADD_USER, LOGIN_USER, GET_ALL_USERS, SAVE_USER_DATA, DELETE_USER_DATA } from "../actions/user.action"
+import { ADD_USER, LOGIN_USER, GET_ALL_USERS, DELETE_USER_DATA, SET_USER } from "../actions/user.action"
 
 const initialState = {}
 
@@ -18,8 +18,8 @@ export function allUserReducer(state = initialState, action){
 
 export function currentUserReducer(state = initialState, action){
     switch(action.type){
-        case SAVE_USER_DATA:
-            return [action.payload, ...state]
+        case SET_USER:
+            return action.payload
         case DELETE_USER_DATA:
             return action.payload
         default:

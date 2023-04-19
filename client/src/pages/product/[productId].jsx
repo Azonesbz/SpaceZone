@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Header from '../components/Navbar';
-import Footer from '../components/Footer';
+import Header from '../../components/Navbar';
+import Footer from '../../components/Footer';
 import { useSelector } from 'react-redux';
-import { isEmpty } from '../components/Utils';
+import { isEmpty } from '../../components/Utils';
 import mondialRelay from '/LogoMondialRelay.png'
 import ups from '/ups.svg'
 import fedex from '/fedex-express-6.svg'

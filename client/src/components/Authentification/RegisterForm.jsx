@@ -32,7 +32,6 @@ export default function Register({
             password: form.current[2].value,
         }
         dispatch(addUser(data))
-        dispatch(getAllUser())
         navigate('/home')
     }
 
