@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
 import Welcome from "./pages/Welcome";
 import CreateProduct from "./pages/CreateProduct";
+import Profil from "./pages/Profil";
 import ProductId from "./pages/product/[productId]";
 
 
@@ -27,6 +28,7 @@ export default function App() {
             <Route path="/dashboard" element={<Dashboard />}/>
             <Route path="/product/:id" element={<ProductId />}/>
             <Route path="/product/new" element={<CreateProduct />}/>
+            <Route path="/profil" element={<Profil />}/>
           </Routes>
       </BrowserRouter>
     </>

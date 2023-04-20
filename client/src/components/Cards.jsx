@@ -30,7 +30,7 @@ export default function Cards(){
                                 <button className='ml-5 border border-black w-18 md:w-2/4 lg:w-1/4 font-karla text-lg py-2 px-5 rounded-xl'>Panier</button>
                             </div>
                             <div className='font-roboto flex flex-col mt-2'>
-                                <p className='text-md'>Par {product.id_user}</p>
+                                <p className='text-md'>Par {product.user_id}</p>
                                 <button className='underline text-indigo-800 underline-offset-2 text-left'><p>Contacter le vendeur</p></button>
                             </div>
                         </div>

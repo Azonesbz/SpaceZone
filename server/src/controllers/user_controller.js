@@ -19,7 +19,16 @@ export async function addUser(req, res) {
         .then(
             response => {
                 console.log(response)
-                const token = jwt.sign({response}, process.env.PRIVATE_KEY, {expiresIn: '1h'})
+                let tokenData = {
+                    id: response[0].id,
+                    user_id: response[0].user_id,
+                    email: response[0].email,
+                    name: response[0].prenom,
+                    surname: response[0].nom,
+                    numberphone: response[0].numberphone,
+                    permission: response[0].permission
+                }
+                const token = jwt.sign(tokenData, process.env.PRIVATE_KEY, {expiresIn: '1h'})
     
                 users.newToken(email, token)
                 .then(() => res.status(201).json({response, token}))

@@ -29,8 +29,8 @@ export async function getNextProduct(req, res){
     })
 }
 export async function addProduct(req, res){
-    const {description, name, price} = req.body
-    products.add(name, price, description).then(
+    const {description, name, price, user_id} = req.body
+    products.add(user_id, name, price, description).then(
         response => {
             res.status(200).json({msg: 'Le produit à bien été créer', response})
         }

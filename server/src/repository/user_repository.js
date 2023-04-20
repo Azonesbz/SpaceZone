@@ -16,12 +16,14 @@ export async function getUserbyEmail(email){ // Fonction pour vérifier si un ut
 }
 
 export async function addUserDb(username, email, password){ // Ajoute un utilisateur en base de donnée
-    const [verify] = await createPoolConnection().query(`SELECT * FROM users WHERE user_id = ?`, [username])
+    const [verify] = await createPoolConnection().query(`SELECT * FROM users WHERE email = ?`, [email])
     if(verify.length){
         const err = `Cet utilisateur existe déjà.`
         throw err
     }
-    const [info] = await createPoolConnection().query(`INSERT INTO users (user_id, role_id, email, password) VALUES (?, ?, ?, ?)`, [username, 3, email, password])
+    await createPoolConnection().query(`INSERT INTO users (user_id, role_id, email, password) VALUES (?, ?, ?, ?)`, [username, 3, email, password])
+    const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.user_id, users.email, users.prenom, users.nom, users.numberphone, role.permission FROM users INNER JOIN role ON users.role_id = role.id WHERE email = ?`, [email])
+
     return info
 }
 

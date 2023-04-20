@@ -23,8 +23,11 @@ export const getAllUser = () => {
 export const addUser = (data) => {
     return (dispatch) => {
         return axios.post('http://localhost:3001/users/new', data).then(res => { // J'envoie les données au serveur et je récupère la réponse
-            window.localStorage.setItem('token', res.data.token)
+            localStorage.setItem('token', res.data.token)
+            const token = localStorage.getItem('token')
+            const decodedToken = jwt_decode(token);
             dispatch({ type: ADD_USER, payload: res.data})
+            dispatch({ type: SET_USER, payload: decodedToken})
         })
     }
 }

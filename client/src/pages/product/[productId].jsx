@@ -20,6 +20,7 @@ export default function ProductId() {
     }
   }, [product]);
 
+
     return (
       <>
         <Header />

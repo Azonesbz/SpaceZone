@@ -39,8 +39,8 @@ const searchProduct = async (vêtements, accessoires, divers, priceMin, priceMax
 
 // Add product
 
-const addProduct = async (name, price, description) => {
-    const [info] = await createPoolConnection().query(`INSERT INTO products (user_id, name, price, description) VALUES (?, ?, ?, ?)`, ["Azones", name, price, description])
+const addProduct = async (user_id, name, price, description) => {
+    const [info] = await createPoolConnection().query(`INSERT INTO products (user_id, name, price, description) VALUES (?, ?, ?, ?)`, [user_id, name, price, description])
     return info
 }
 

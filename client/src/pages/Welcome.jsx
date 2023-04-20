@@ -1,9 +1,10 @@
 import Header from '../components/Navbar'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import React, { useRef, useState } from 'react'
 import Register from '../components/Authentification/RegisterForm'
 import Login from '../components/Authentification/LoginForm'
+import { useEffect } from 'react'
 
 
 export default function Welcome() {
@@ -13,8 +14,16 @@ export default function Welcome() {
   const [login, setLogin] = useState(false)
   const [register, setRegister] = useState(false)
 
+  const navigate = useNavigate()
   const form = useRef()
   const users = useSelector((state) => state.allUserReducer)
+  const currentUser = useSelector((state) => state.currentUserReducer)
+
+  useEffect(() => {
+    if(currentUser){
+      navigate('/home')
+    }
+  }, [currentUser])
 
   let handleForm = async (e) => {
     e.preventDefault()

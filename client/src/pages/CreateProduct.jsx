@@ -10,11 +10,13 @@ export default function CreateProduct(){
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    const currentUser = useSelector((state) => state.currentUserReducer)
+
     const handleForm = async (e) => {
         e.preventDefault()
-        console.log(form.current[0].value)
+        console.log(currentUser.user_id)
         const productData = {
-            id_user: 'Azones',
+            user_id: currentUser.user_id,
             name: form.current[0].value,
             price: form.current[1].value,
             description: form.current[2].value,

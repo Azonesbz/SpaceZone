@@ -13,7 +13,8 @@ export default {
       kanit: ['Kanit', 'sans-serif'],
       raleway: ['Raleway', 'sans-serif'],
       roboto: ['Roboto', 'sans-serif'],
-      rajdhani: ['Rajdhani', 'sans-serif']
+      rajdhani: ['Rajdhani', 'sans-serif'],
+      ubuntu: ['Ubuntu', 'sans-serif'],
     },
     scrollbar: {
       width: '12px',
