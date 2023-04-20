@@ -1,6 +1,7 @@
 import { useRef } from "react"
 import { useState } from "react"
 import { useSelector } from "react-redux"
+import { setFile, uploadStarted, uploadSuccess, uploadError } from "../../actions/upload.action";
 
 export default function Information(){
 
@@ -8,11 +9,13 @@ export default function Information(){
     const formEmail = useRef()
     const formNumber = useRef()
     const formName = useRef()
+    const formUpload = useRef()
 
     const [showFormPseudo, setShowFormPseudo] = useState(false)
     const [showFormEmail, setShowFormEmail] = useState(false)
     const [showFormNumber, setShowFormNumber] = useState(false)
     const [showFormName, setShowFormName] = useState(false)
+    const [file, setFile] = useState(null);
     
 
     const currentUser = useSelector((state) => state.currentUserReducer)
@@ -45,6 +48,26 @@ export default function Information(){
             username: formName.current[0].value
         }
         setShowFormName(false)
+    }
+
+    const handleChangeFile = (e) => {
+        setFile(e.target.files[0]);
+      };
+
+    let handleSubmitFile = (e) => {
+        e.preventDefault()
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("user", currentUser.user_id)
+        console.log(formData)
+        fetch('http://localhost:3001/upload', {
+            method: "POST",
+            body: formData
+        }).then(
+            response => response.json()
+        ).then(
+            data => console.log(data)
+        ).catch(err => console.error(err))
     }
 
     return(
@@ -112,6 +135,17 @@ export default function Information(){
                     </div>
                     }
                     
+                </div>
+                <div className="flex mt-5">
+                    <div className="flex flex-col">
+                        <h2 className="text-slate-200 font-ubuntu text-xl font-thin">Image de profil</h2>
+                        <img src="profil.jpg" alt="image de profil" className="rounded-full mt-5" height={150} width={150} />
+                    </div>
+                    <form onSubmit={handleSubmitFile} encType="multipart/form-data">
+                        <input type="file" name="file" onChange={handleChangeFile} />
+                        <input type="hidden" name="user" value={currentUser.user_id} />
+                        <button type="submit">Envoyer</button>
+                    </form>
                 </div>
             </div>
         </>

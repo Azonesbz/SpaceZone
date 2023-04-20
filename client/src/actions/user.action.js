@@ -12,7 +12,7 @@ export const SET_USER = "SET_USER"
 
 
 export const getAllUser = () => {
-    return (dispatch) => {
+    return async (dispatch) => {
         return axios.get('http://localhost:3001/users').then(res => {
             console.log(res.data.response)
             dispatch({ type: GET_ALL_USERS, payload: res.data.response })
@@ -21,18 +21,18 @@ export const getAllUser = () => {
 }
 
 export const addUser = (data) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         return axios.post('http://localhost:3001/users/new', data).then(res => { // J'envoie les données au serveur et je récupère la réponse
             localStorage.setItem('token', res.data.token)
             const token = localStorage.getItem('token')
-            const decodedToken = jwt_decode(token);
+            // const decodedToken = jwt_decode(token);
             dispatch({ type: ADD_USER, payload: res.data})
             dispatch({ type: SET_USER, payload: decodedToken})
         })
     }
 }
 export const loginUser = (data) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         return axios.post('http://localhost:3001/users/login', data).then(async res => {
             localStorage.setItem('token', res.data.token)
             const token = localStorage.getItem('token')
@@ -43,7 +43,7 @@ export const loginUser = (data) => {
 }
 
 export const userLogout = (id) => {
-    return (dispatch) => {
+    return async (dispatch) => {
         return axios.put(`http://localhost:3001/users/${id}`).then(() => {
             window.localStorage.removeItem('token')
             dispatch({ type: SET_USER, payload: ""})
@@ -54,6 +54,10 @@ export const userLogout = (id) => {
 export const sessionIsValid = () => {
     return (dispatch) => {
         const token = window.localStorage.getItem('token')
+        if(!token){
+            dispatch({ type: SET_USER, payload: ""})
+            return
+        }
         const decodedToken = jwt_decode(token);
         dispatch({ type: SET_USER, payload: decodedToken})
     }

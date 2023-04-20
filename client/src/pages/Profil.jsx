@@ -51,7 +51,7 @@ export default function Profil(){
     return (
         <>
             <Header />
-            <section className="flex items-center justify-center h-screen p-10 px-40">
+            <section className="flex items-center justify-center p-10 px-40">
                 <aside className="bg-gradient-to-br from-slate-400 to-neutral-400 w-2/6 h-full m-5 text-black shadow rounded-xl">
                     <header className="flex flex-col items-center bg-gradient-to-tl from-slate-200 to-slate-300 p-5 rounded-t-xl">
                         <img src="profil.jpg" alt="image de profil" className="rounded-full" height={150} width={150}/>
