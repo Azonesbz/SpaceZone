@@ -7,26 +7,35 @@ import CreateProduct from "./pages/CreateProduct";
 import Profil from "./pages/Profil";
 import ProductId from "./pages/product/[productId]";
 import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
 import { sessionIsValid } from "./actions/session.action";
 
 
-export default function App() {
-  const dispatch = useDispatch()
+function RouteWrapper({ children }) {
+  const dispatch = useDispatch();
+  const location = useLocation();
+
   useEffect(() => {
-    dispatch(sessionIsValid())
-  }, []);
-  
+    dispatch(sessionIsValid());
+  }, [location]);
+
+  return <>{children}</>;
+}
+
+export default function App() {
   return (
     <>
       <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Welcome />}/>
-            <Route path="/home" element={<Home />}/>
-            <Route path="/dashboard" element={<Dashboard />}/>
-            <Route path="/product/:id" element={<ProductId />}/>
-            <Route path="/product/new" element={<CreateProduct />}/>
-            <Route path="/profil" element={<Profil />}/>
-          </Routes>
+          <RouteWrapper>
+              <Routes>
+                <Route path="/" element={<Welcome />}/>
+                <Route path="/home" element={<Home />}/>
+                <Route path="/dashboard" element={<Dashboard />}/>
+                <Route path="/product/:id" element={<ProductId />}/>
+                <Route path="/product/new" element={<CreateProduct />}/>
+                <Route path="/profil" element={<Profil />}/>
+              </Routes>
+          </RouteWrapper>
       </BrowserRouter>
     </>
   )

@@ -15,10 +15,10 @@ export const sessionIsValid = () => {
         return axios.post(`http://localhost:3001/api/session`, {token: token})
         .then(
             response => {
-                console.log(response.status)
+                console.log(response)
                 if(response.status === 200){
                     dispatch({ type: SET_SESSION_TRUE, payload: {Authorization: true}})
-                    dispatch({ type: SET_USER, payload: response.decoded})
+                    dispatch({ type: SET_USER, payload: response.data.decoded})
                 }
             }
         )
