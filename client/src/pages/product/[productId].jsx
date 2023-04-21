@@ -10,7 +10,7 @@ import fedex from '/fedex-express-6.svg'
 
 export default function ProductId() {
   const [isProduct, setIsProduct] = useState([])
-  const product = useSelector((state) => state.productReducer)
+  const product = useSelector((state) => state.productReducer.product)
   const {id} = useParams()
   useEffect(() => {
     if (product.length > 0) {

@@ -1,13 +1,23 @@
 import { products } from "../repository/products_repository.js";
 
-export async function getAllProducts(req, res){
-    products.all()
+export async function getProducts(req, res){
+    const currentPage = req.body.page
+    const offset = currentPage * 6 - 6
+    products.all(offset)
     .then(product => {
-        res.json({product})
+        res.status(201).json({product})
     })
     .catch(err => {
-        res.json({message: `Aucun article pour le moment, revenez plus tard !`, err})
+        res.status(404).json({message: `Aucun article pour le moment, revenez plus tard !`, err})
     })
+}
+export async function getNumberProduct(req, res){
+    products.number().then(
+        result => {
+            res.status(200).json({result: result[0].total_produits})
+        }
+    )
+    .catch(err => res.status(404).json({err}))
 }
 export async function getProductById(req, res){
     products.byId(req.params.id)
@@ -43,7 +53,6 @@ export async function getSearch(req, res){
     const {divers, accessoires, vêtements} = req.body
     products.search(divers, accessoires, vêtements)
     .then(result => {
-        console.log(result)
         res.status(200).json({result})
     })
     .catch(err => {

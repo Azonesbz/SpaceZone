@@ -1,14 +1,14 @@
 import express from 'express'
-import { addProduct, getAllProducts, getProductById, getSearch } from './controllers/products_controller.js'
+import { addProduct, getNumberProduct, getProductById, getProducts, getSearch } from './controllers/products_controller.js'
 import { addUser, connectUser, getAllUsers, sessionIsValid, updateUserPseudo, userLogout } from './controllers/user_controller.js'
 import { upload, uploadFile } from './controllers/uploadFile_controller.js'
-import { updatePseudo } from './repository/user_repository.js'
 
 const router = express.Router()
 
 // Route product
 
-router.get('/product', getAllProducts)
+router.post('/product', getProducts)
+router.get('/allproduct', getNumberProduct)
 router.get('/product/:id', getProductById)
 
 router.post('/product/new', addProduct)

@@ -1,7 +1,6 @@
 import { useRef } from "react"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { setFile, uploadStarted, uploadSuccess, uploadError } from "../../actions/upload.action";
 import { updateUserPseudo } from "../../actions/user.action";
 
 export default function Information(){
@@ -59,7 +58,6 @@ export default function Information(){
         const file = e.target.files[0]
         setFile(file);
         const path = URL.createObjectURL(file);
-        console.log(path)
       };
 
     let handleSubmitFile = (e) => {
@@ -67,7 +65,6 @@ export default function Information(){
         const formData = new FormData();
         formData.append("file", file);
         formData.append("user", currentUser.user_id)
-        console.log(formData)
         fetch('http://localhost:3001/upload', {
             method: "POST",
             body: formData

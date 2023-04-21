@@ -50,7 +50,6 @@ export default function Search(){
                         placeholder="Rechercher un article..."
                         value={formData.search}
                         onChange={(e) => {
-                            console.log(formData)
                             const {name, value} = e.currentTarget
                             setFormData({...formData, [name]: value})
                         }}
@@ -83,7 +82,6 @@ export default function Search(){
                             onChange={(e) => {
                                 const { name, checked } = e.target;
                                 setFormData({ ...formData, [name]: checked });
-                                console.log(formData)
                             }}
                             />
                         </label>
@@ -97,7 +95,6 @@ export default function Search(){
                                 onChange={(e) => {
                                     const { name, checked } = e.target;
                                     setFormData({ ...formData, [name]: checked });
-                                    console.log(formData)
                                 }}
                             />
                         </label>
@@ -111,7 +108,6 @@ export default function Search(){
                             onChange={(e) => {
                                 const { name, checked } = e.target;
                                 setFormData({ ...formData, [name]: checked });
-                                console.log(formData)
                             }}
                             />
                         </label>
@@ -128,7 +124,6 @@ export default function Search(){
                             type="range"
                             max={500}
                             onChange={(e) => {
-                                console.log(formData)
                                 const {name, value} = e.currentTarget
                                 setFormData({...formData, [name]: value})
                             }}
@@ -145,7 +140,6 @@ export default function Search(){
                             type="range"
                             max={500}
                             onInput={(e) => {
-                                console.log(formData)
                                 const {name, value} = e.currentTarget
                                 setFormData({...formData, [name]: value})
                             }} 

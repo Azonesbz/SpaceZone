@@ -28,7 +28,6 @@ const storage = multer.diskStorage({
 export const upload = multer({ storage: storage });
 
 export async function uploadFile(req, res){
-    console.log(req.file)
     try {
         if(!req.file) {
             res.status(400).send('No file uploaded.');
@@ -37,7 +36,6 @@ export async function uploadFile(req, res){
 
         const oldPath = req.file.path;
         const newFileName = path.join(path.dirname(oldPath), req.body.user + '.jpg');
-        console.log(newFileName)
         
         fs.rename(oldPath, path.join(process.cwd(), newFileName), (err) => {
           if (err) {

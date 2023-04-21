@@ -14,7 +14,6 @@ export default function ProductNav(){
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
         })
     }
     return (

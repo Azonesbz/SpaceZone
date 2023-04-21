@@ -29,7 +29,6 @@ export default function Welcome() {
     e.preventDefault()
     try {
       const user = users.filter(user => user.email === form.current[0].value)
-      console.log(user.length)
       if(user.length){
         setIdentify(user)
         setIdentifierValid(true)

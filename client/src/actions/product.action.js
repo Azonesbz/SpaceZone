@@ -15,7 +15,6 @@ export const getProduct = (data) => {
 export const getAllProduct = () => {
     return (dispatch) => {
         return axios.get('http://localhost:3001/allproduct').then(res => {
-            console.log(res.data)
             dispatch({ type: NUMBER_OF_PRODUCT, payload: res.data.result })
         })
     }
@@ -24,16 +23,13 @@ export const getAllProduct = () => {
 export const addProduct = (data) => {
     return (dispatch) => {
         return axios.post('http://localhost:3001/product/new', data).then(res => {
-            console.log(res.data.response.insertId)
             dispatch({ type: ADD_PRODUCTS, payload: {...data, id: res.data.response.insertId}})
         })
     }
 }
 export const searchProduct = (data) => {
-    console.log(data)
     return (dispatch) => {
         return axios.post('http://localhost:3001/search/product', data).then(res => {
-            console.log(res)
             dispatch({ type: SEARCH_PRODUCTS, payload: res.data.product})
         })
     }

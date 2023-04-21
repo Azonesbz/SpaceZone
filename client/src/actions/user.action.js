@@ -16,7 +16,6 @@ export const SET_USER_PSEUDO = "SET_USER_PSEUDO"
 export const getAllUser = () => {
     return async (dispatch) => {
         return axios.get('http://localhost:3001/users').then(res => {
-            console.log(res.data.response)
             dispatch({ type: GET_ALL_USERS, payload: res.data.response })
         })
     }

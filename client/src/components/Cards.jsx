@@ -24,7 +24,6 @@ export default function Cards({page}){
 
     useEffect(() => {
         scrollToTop()
-        console.log(page)
         let data = {
             page: page
         }

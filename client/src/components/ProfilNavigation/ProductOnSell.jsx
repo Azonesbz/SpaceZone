@@ -5,21 +5,9 @@ import { isEmpty } from '../Utils'
 export default function ProductOnSell(){
 const [getMyProduct, setGetMyProduct] = useState([])
 
-    const product = useSelector((state) => state.productReducer)
+    const product = useSelector((state) => state.productReducer.product)
     const currentUser = useSelector((state) => state.currentUserReducer)
-    const scrollToTop = () => {
-        const scrollStep = -window.scrollY / (500 / 15); // 500 est la durée de l'animation en millisecondes
-        const scrollInterval = setInterval(() => {
-          if (window.scrollY !== 0) {
-            window.scrollBy(0, scrollStep);
-          } else {
-            clearInterval(scrollInterval);
-          }
-        }, 15);
-      }
-      useEffect(() => {
-        scrollToTop()
-      }, [])
+
     useEffect(() => {
         const myProduct = product.filter(allproduct => allproduct.user_id === currentUser.user_id)
         setGetMyProduct(...getMyProduct, myProduct)
