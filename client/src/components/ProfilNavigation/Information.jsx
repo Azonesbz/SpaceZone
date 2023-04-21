@@ -1,7 +1,8 @@
 import { useRef } from "react"
 import { useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { setFile, uploadStarted, uploadSuccess, uploadError } from "../../actions/upload.action";
+import { updateUserPseudo } from "../../actions/user.action";
 
 export default function Information(){
 
@@ -9,49 +10,56 @@ export default function Information(){
     const formEmail = useRef()
     const formNumber = useRef()
     const formName = useRef()
-    const formUpload = useRef()
 
     const [showFormPseudo, setShowFormPseudo] = useState(false)
     const [showFormEmail, setShowFormEmail] = useState(false)
     const [showFormNumber, setShowFormNumber] = useState(false)
     const [showFormName, setShowFormName] = useState(false)
     const [file, setFile] = useState(null);
-    
 
+    const dispatch = useDispatch()
+    
     const currentUser = useSelector((state) => state.currentUserReducer)
 
     let data;
     let handleSubmitPseudo = (e) => {
         e.preventDefault()
         data = {
-            username: formPseudo.current[0].value
+            pseudo: formPseudo.current[0].value
         }
+        dispatch(updateUserPseudo(currentUser.id, data))
         setShowFormPseudo(false)
     }
     let handleSubmitEmail = (e) => {
         e.preventDefault()
         data = {
-            username: formEmail.current[0].value
+            email: formEmail.current[0].value
         }
+        dispatch(updateUserEmail(currentUser.id, data))
         setShowFormEmail(false)
     }
     let handleSubmitNumber = (e) => {
         e.preventDefault()
         data = {
-            username: formNumber.current[0].value
+            number: formNumber.current[0].value
         }
+        dispatch(updateUserNumber(currentUser.id, data))
         setShowFormNumber(false)
     }
     let handleSubmitName = (e) => {
         e.preventDefault()
         data = {
-            username: formName.current[0].value
+            name: formName.current[0].value
         }
+        dispatch(updateUserName(currentUser.id, data))
         setShowFormName(false)
     }
 
     const handleChangeFile = (e) => {
-        setFile(e.target.files[0]);
+        const file = e.target.files[0]
+        setFile(file);
+        const path = URL.createObjectURL(file);
+        console.log(path)
       };
 
     let handleSubmitFile = (e) => {
@@ -72,7 +80,7 @@ export default function Information(){
 
     return(
         <>
-            <div className="bg-gradient-to-br from-gray-500 to-gray-600 rounded-xl w-4/6 p-5 m-5 h-full">
+            <div className="bg-gradient-to-br from-gray-500 to-gray-600 rounded-xl col-span-7 row-span-3 p-5">
                 <header>
                     <h1 className="text-4xl font-thin font-ubuntu text-white border-b-[1px] border-neutral-400 pb-5 mt-3">Information</h1>
                 </header>
@@ -81,7 +89,7 @@ export default function Information(){
                     {showFormPseudo ? <form action="" className="flex flex-col duration-200" onSubmit={handleSubmitPseudo} ref={formPseudo}>
                         <h2 className="text-2xl font-thin font-ubuntu text-white">Pseudonyme</h2>
                         <label htmlFor="" className="flex items-center">
-                            <input type="text" defaultValue={currentUser.user_id} className="py-2 px-2 rounded-md" onChange={(e) => setInputPseudo(e.currentTarget.value)}/>
+                            <input type="text" defaultValue={currentUser.user_id} className="py-2 px-2 rounded-md" />
                             <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
                         </label>
                     </form> : <div className="flex flex-col hover:scale-95 duration-200">
@@ -136,15 +144,20 @@ export default function Information(){
                     }
                     
                 </div>
-                <div className="flex mt-5">
-                    <div className="flex flex-col">
+                <div className="flex mt-5 justify-between">
+                    <div className="flex flex-col justify-center items-center m-auto">
                         <h2 className="text-slate-200 font-ubuntu text-xl font-thin">Image de profil</h2>
-                        <img src="profil.jpg" alt="image de profil" className="rounded-full mt-5" height={150} width={150} />
+                        <img src={`./uploads/${currentUser.user_id}.jpg`} alt="image de profil" className="rounded-full mt-5 h-24 w-24" />
                     </div>
-                    <form onSubmit={handleSubmitFile} encType="multipart/form-data">
-                        <input type="file" name="file" onChange={handleChangeFile} />
-                        <input type="hidden" name="user" value={currentUser.user_id} />
-                        <button type="submit">Envoyer</button>
+                    <form onSubmit={handleSubmitFile} encType="multipart/form-data" className="flex items-center bg-slate-200 p-5 h-48 rounded-xl border-[2px] border-gray-700">
+                        <input 
+                        className="file:py-2 file:flex "
+                        type="file" 
+                        name="file"
+                        placeholder="Glisser pour déposer un fichier"
+                        accept="image/png, image/jpeg"
+                        onChange={handleChangeFile} />
+                        <button type="submit" className="bg-gray-700 text-white px-2 py-1 rounded">Envoyer</button>
                     </form>
                 </div>
             </div>

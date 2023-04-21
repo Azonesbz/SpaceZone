@@ -99,9 +99,48 @@ export async function userLogout(req, res){
     .catch(err => {
         res.status(500).json({msg:'Erreur, veuillez réessayer.', err})
     })
-    
 }
 
+export async function updateUserPseudo(req, res){
+    const id = req.params.id
+    const {token, pseudo} = req.body
+
+    jwt.verify(token, process.env.PRIVATE_KEY, function(err, decoded){
+        if(err) {
+            console.log(err)
+            res.status(401).json({err})
+        } else {
+            users.newPseudo(id, pseudo).then(response => {
+                let tokenData = {
+                    id: response[0].id,
+                    user_id: response[0].user_id,
+                    email: response[0].email,
+                    name: response[0].prenom,
+                    surname: response[0].nom,
+                    numberphone: response[0].numberphone,
+                    permission: response[0].permission
+                }
+                const token = jwt.sign(tokenData, process.env.PRIVATE_KEY, {expiresIn: '1h'})
+                users.newToken(id, token).then(() => {
+                    res.status(201).json({msg: `Mise à jour réussi, votre nouveau pseudo est ${response[0].user_id}`})
+                })
+            })
+        }
+    }) 
+}
+
+export async function sessionIsValid(req, res){
+    const { token } = req.body
+    console.log(req.body)
+    jwt.verify(token, process.env.PRIVATE_KEY, function(err, decoded){
+        if(err){
+            console.log(err)
+            res.status(401).json({msg: `Votre session a expirer, veuillez vous reconnecter.`, err})
+        } else {
+            res.status(200).json({msg: `Session valide.`, decoded})
+        }
+    })
+}
 
 
 

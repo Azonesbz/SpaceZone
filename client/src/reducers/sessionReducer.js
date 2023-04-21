@@ -1,10 +1,13 @@
-import { SESSION_IS_VALID } from "../actions/user.action"
+import { SET_SESSION_FALSE, SET_SESSION_TRUE } from "../actions/session.action"
+
 
 const initialState = {}
 
-export default function userReducer(state = initialState, action){
+export default function sessionReducer(state = initialState, action){
     switch(action.type){
-        case SESSION_IS_VALID:
+        case SET_SESSION_TRUE:
+            return action.payload
+        case SET_SESSION_FALSE:
             return action.payload
         default: 
             return state

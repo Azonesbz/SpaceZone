@@ -6,25 +6,22 @@ import Welcome from "./pages/Welcome";
 import CreateProduct from "./pages/CreateProduct";
 import Profil from "./pages/Profil";
 import ProductId from "./pages/product/[productId]";
+import { useDispatch } from "react-redux";
+import { sessionIsValid } from "./actions/session.action";
 
 
 export default function App() {
-  const [session, setSession] = useState(false)
+  const dispatch = useDispatch()
   useEffect(() => {
-    const token = window.localStorage.getItem('token');
-    if (token) {
-      setSession(true);
-    } else {
-      setSession(false);
-    }
-  }, [window.localStorage]);
+    dispatch(sessionIsValid())
+  }, []);
   
   return (
     <>
       <BrowserRouter>
           <Routes>
             <Route path="/" element={<Welcome />}/>
-            <Route path="/home" element={<Home session={session} />}/>
+            <Route path="/home" element={<Home />}/>
             <Route path="/dashboard" element={<Dashboard />}/>
             <Route path="/product/:id" element={<ProductId />}/>
             <Route path="/product/new" element={<CreateProduct />}/>

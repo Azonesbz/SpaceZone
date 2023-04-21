@@ -1,8 +1,8 @@
 import express from 'express'
 import { addProduct, getAllProducts, getProductById, getSearch } from './controllers/products_controller.js'
-import { addUser, connectUser, getAllUsers, userLogout } from './controllers/user_controller.js'
-import sessionIsValid from './security/session.js'
+import { addUser, connectUser, getAllUsers, sessionIsValid, updateUserPseudo, userLogout } from './controllers/user_controller.js'
 import { upload, uploadFile } from './controllers/uploadFile_controller.js'
+import { updatePseudo } from './repository/user_repository.js'
 
 const router = express.Router()
 
@@ -21,9 +21,11 @@ router.post('/users/new', addUser)
 router.post('/users/login', connectUser)
 router.put('/users/:id', userLogout)
 
+router.put('/updatePseudo/:id', updateUserPseudo)
+
 // Vérification du token
 
-router.get('/api/session', sessionIsValid)
+router.post('/api/session', sessionIsValid)
 
 // Upload de fichier
 

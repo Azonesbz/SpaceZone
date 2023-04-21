@@ -42,8 +42,25 @@ export async function updateToken(email, token, id) {
     return
 }
 
-export async function searchUserDb(){ // Recherche un utilisateur en base de donnée en fonction de différent critère
-
+export async function updatePseudo(id, pseudo){
+    await createPoolConnection().query(`UPDATE users SET user_id = ? WHERE id = ?`, [pseudo, id])
+    const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.user_id, users.email, users.prenom, users.nom, users.numberphone, role.permission FROM users INNER JOIN role ON users.role_id = role.id WHERE users.id = ?`, [id])
+    return info
+}
+export async function updateEmail(id, email){
+    await createPoolConnection().query(`UPDATE users SET email = ? WHERE id = ?`, [email, id])
+    const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.user_id, users.email, users.prenom, users.nom, users.numberphone, role.permission FROM users INNER JOIN role ON users.role_id = role.id WHERE email = ?`, [email])
+    return info
+}
+export async function updateNumber(id, number){
+    await createPoolConnection().query(`UPDATE users SET numberphone = ? WHERE id = ?`, [pseudo, id])
+    const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.user_id, users.email, users.prenom, users.nom, users.numberphone, role.permission FROM users INNER JOIN role ON users.role_id = role.id WHERE email = ?`, [email])
+    return info
+}
+export async function updateName(id, name){
+    await createPoolConnection().query(`UPDATE users SET name = ? WHERE id = ?`, [name, id])
+    const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.user_id, users.email, users.prenom, users.nom, users.numberphone, role.permission FROM users INNER JOIN role ON users.role_id = role.id WHERE email = ?`, [email])
+    return info
 }
 
 export const users = {
@@ -51,6 +68,9 @@ export const users = {
     byEmail: getUserbyEmail,
     add: addUserDb,
     login: loginUserDb,
-    search: searchUserDb,
     newToken: updateToken,
+    newPseudo: updatePseudo,
+    newEmail: updateEmail,
+    newNumber: updateNumber,
+    newName: updateName,
 }

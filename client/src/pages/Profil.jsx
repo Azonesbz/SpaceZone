@@ -4,7 +4,9 @@ import Information from "../components/ProfilNavigation/Information";
 import ProductOnSell from "../components/ProfilNavigation/ProductOnSell";
 import Purshases from "../components/ProfilNavigation/Purshases";
 import About from "../components/ProfilNavigation/About";
+import Footer from "../components/Footer";
 import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 export default function Profil(){
 
@@ -14,6 +16,20 @@ export default function Profil(){
     const [purshaseNav, setPurshaseNav] = useState(false)
     const [informationNav, setInformationNav] = useState(true)
     const [productOnSellNav, setProductOnSellNav] = useState(false)
+
+    const scrollToTop = () => {
+      const scrollStep = -window.scrollY / (500 / 15); // 500 est la durée de l'animation en millisecondes
+      const scrollInterval = setInterval(() => {
+        if (window.scrollY !== 0) {
+          window.scrollBy(0, scrollStep);
+        } else {
+          clearInterval(scrollInterval);
+        }
+      }, 15);
+    }
+    useEffect(() => {
+      scrollToTop()
+    }, [aboutNav, purshaseNav, informationNav, productOnSellNav])
 
     const handleNav = (e) => {
         let parent = e.target;
@@ -51,8 +67,8 @@ export default function Profil(){
     return (
         <>
             <Header />
-            <section className="flex items-center justify-center p-10 px-40">
-                <aside className="bg-gradient-to-br from-slate-400 to-neutral-400 w-2/6 h-full m-5 text-black shadow rounded-xl">
+            <section className="grid grid-rows-3 grid-cols-12 gap-5 p-10 px-40">
+                <aside className="sticky bg-gradient-to-br col-span-4 from-slate-400 to-neutral-400 text-black shadow rounded-xl row-span-3">
                     <header className="flex flex-col items-center bg-gradient-to-tl from-slate-200 to-slate-300 p-5 rounded-t-xl">
                         <img src="profil.jpg" alt="image de profil" className="rounded-full" height={150} width={150}/>
                         <h1 className="mt-3 text-2xl text-center font-semibold font-raleway first-letter:uppercase">{currentUser.user_id}</h1>
@@ -80,6 +96,7 @@ export default function Profil(){
                 {purshaseNav ? <Purshases /> : ""} 
                 {aboutNav ? <About /> : ""} 
             </section>
+            <Footer />
         </>
     )
 }

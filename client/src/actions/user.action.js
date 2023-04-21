@@ -9,6 +9,8 @@ export const LOGIN_USER = "LOGIN_USER"
 export const SAVE_USER_DATA = "SAVE_USER_DATA"
 export const DELETE_USER_DATA = "DELETE_USER_DATA"
 export const SET_USER = "SET_USER"
+export const SET_USER_PSEUDO = "SET_USER_PSEUDO"
+
 
 
 export const getAllUser = () => {
@@ -25,7 +27,7 @@ export const addUser = (data) => {
         return axios.post('http://localhost:3001/users/new', data).then(res => { // J'envoie les données au serveur et je récupère la réponse
             localStorage.setItem('token', res.data.token)
             const token = localStorage.getItem('token')
-            // const decodedToken = jwt_decode(token);
+            const decodedToken = jwt_decode(token);
             dispatch({ type: ADD_USER, payload: res.data})
             dispatch({ type: SET_USER, payload: decodedToken})
         })
@@ -51,14 +53,15 @@ export const userLogout = (id) => {
     }
 }
 
-export const sessionIsValid = () => {
+
+
+// Update user information
+
+export const updateUserPseudo = (id, data) => {
     return (dispatch) => {
-        const token = window.localStorage.getItem('token')
-        if(!token){
-            dispatch({ type: SET_USER, payload: ""})
-            return
-        }
-        const decodedToken = jwt_decode(token);
-        dispatch({ type: SET_USER, payload: decodedToken})
+        const token = localStorage.getItem('token')
+        axios.put(`http://localhost:3001/updatePseudo/${id}`, {pseudo: data.pseudo, token}).then(res => {
+            dispatch({ type: SET_USER_PSEUDO, payload: res.user_id})
+        })
     }
 }
