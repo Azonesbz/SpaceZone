@@ -16,7 +16,7 @@ export default function CreateProduct(){
         e.preventDefault()
         console.log(currentUser.user_id)
         const productData = {
-            user_id: currentUser.user_id,
+            id: currentUser.id,
             name: form.current[0].value,
             price: form.current[1].value,
             description: form.current[2].value,

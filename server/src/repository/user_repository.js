@@ -21,8 +21,9 @@ export async function addUserDb(username, email, password){ // Ajoute un utilisa
         const err = `Cet utilisateur existe déjà.`
         throw err
     }
-    await createPoolConnection().query(`INSERT INTO users (user_id, role_id, email, password) VALUES (?, ?, ?, ?)`, [username, 3, email, password])
-    const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.user_id, users.email, users.prenom, users.nom, users.numberphone, role.permission FROM users INNER JOIN role ON users.role_id = role.id WHERE email = ?`, [email])
+    await createPoolConnection().query(`INSERT INTO users (role_id, username, email, password) VALUES (?, ?, ?, ?)`, [3, username, email, password])
+    const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.username, users.email, users.first_name, users.number_phone, roles.name FROM users INNER JOIN roles ON users.role_id = roles.id WHERE email = ?`, [email])
+    await createPoolConnection().query(`INSERT INTO carts (user_id) VALUES (?)`, [info[0].id])
 
     return info
 }
@@ -30,7 +31,7 @@ export async function addUserDb(username, email, password){ // Ajoute un utilisa
 
 
 export async function loginUserDb(email){
-    const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.user_id, users.email, users.prenom, users.nom, users.numberphone, role.permission FROM users INNER JOIN role ON users.role_id = role.id WHERE email = ?`, [email])
+    const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.username, users.email, users.first_name, users.number_phone, roles.name FROM users INNER JOIN roles ON users.role_id = roles.id WHERE email = ?`, [email])
     if(!info.length){
         const err = 'Une erreur est survenue, veuillez réessayer.'
         throw err

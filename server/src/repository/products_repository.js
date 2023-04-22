@@ -12,7 +12,7 @@ let getNumberProduct = async () => {
 }
 
 let getProducts = async (page) => {
-    const [products] = await createPoolConnection().query(`SELECT * FROM products LIMIT 6 OFFSET ?`, [page])
+    const [products] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username FROM products p INNER JOIN users u ON p.user_id = u.id LIMIT 6 OFFSET ?`, [page])
     return products
 }
 let byId = async (id) => {
@@ -44,8 +44,8 @@ const searchProduct = async (vêtements, accessoires, divers, priceMin, priceMax
 
 // Add product
 
-const addProduct = async (user_id, name, price, description) => {
-    const [info] = await createPoolConnection().query(`INSERT INTO products (user_id, name, price, description) VALUES (?, ?, ?, ?)`, [user_id, name, price, description])
+const addProduct = async (id, title, price, description) => {
+    const [info] = await createPoolConnection().query(`INSERT INTO products (user_id, title, price, description, category_id) VALUES (?, ?, ?, ?, ?)`, [id, title, price, description, 3])
     return info
 }
 

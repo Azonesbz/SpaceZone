@@ -21,12 +21,11 @@ export async function addUser(req, res) {
                 console.log(response)
                 let tokenData = {
                     id: response[0].id,
-                    user_id: response[0].user_id,
+                    username: response[0].username,
                     email: response[0].email,
-                    name: response[0].prenom,
-                    surname: response[0].nom,
-                    numberphone: response[0].numberphone,
-                    permission: response[0].permission
+                    first_name: response[0].first_name,
+                    number_phone: response[0].number_phone,
+                    permission: response[0].name
                 }
                 const token = jwt.sign(tokenData, process.env.PRIVATE_KEY, {expiresIn: '1h'})
     
@@ -58,12 +57,11 @@ export async function connectUser(req, res) {
             {
                 let tokenData = {
                     id: response[0].id,
-                    user_id: response[0].user_id,
+                    username: response[0].username,
                     email: response[0].email,
-                    name: response[0].prenom,
-                    surname: response[0].nom,
-                    numberphone: response[0].numberphone,
-                    permission: response[0].permission
+                    first_name: response[0].first_name,
+                    number_phone: response[0].number_phone,
+                    permission: response[0].name
                 }
                 const token = jwt.sign(tokenData, process.env.PRIVATE_KEY, {expiresIn: '1h'})
                 users.newToken(email, JSON.stringify(token))
@@ -113,12 +111,11 @@ export async function updateUserPseudo(req, res){
             users.newPseudo(id, pseudo).then(response => {
                 let tokenData = {
                     id: response[0].id,
-                    user_id: response[0].user_id,
+                    username: response[0].username,
                     email: response[0].email,
-                    name: response[0].prenom,
-                    surname: response[0].nom,
-                    numberphone: response[0].numberphone,
-                    permission: response[0].permission
+                    first_name: response[0].first_name,
+                    number_phone: response[0].number_phone,
+                    permission: response[0].name
                 }
                 const token = jwt.sign(tokenData, process.env.PRIVATE_KEY, {expiresIn: '1h'})
                 users.newToken(id, token).then(() => {

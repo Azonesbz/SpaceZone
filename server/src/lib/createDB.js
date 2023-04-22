@@ -20,16 +20,15 @@ export async function createDB(){
         email VARCHAR(255) NOT NULL,
         password VARCHAR(255) NOT NULL,
         token TEXT,
-        prenom VARCHAR(100),
-        nom VARCHAR(100),
+        firstname VARCHAR(100),
+        lastname VARCHAR(100),
         numberphone VARCHAR(50),
         FOREIGN KEY (role_id) REFERENCES role(id)
     )`);
-        
-await con.query(`CREATE TABLE products_features (
-        id INTEGER PRIMARY KEY AUTO_INCREMENT,
-        categorie VARCHAR(150) NOT NULL
-    )`);
+    await con.query(`CREATE TABLE products_features (
+            id INTEGER PRIMARY KEY AUTO_INCREMENT,
+            categorie VARCHAR(150) NOT NULL
+        )`);
 
 await con.query(`CREATE TABLE products (
         id INTEGER PRIMARY KEY AUTO_INCREMENT,

@@ -36,6 +36,7 @@ export async function uploadFile(req, res){
 
         const oldPath = req.file.path;
         const newFileName = path.join(path.dirname(oldPath), req.body.user + '.jpg');
+        console.log(newFileName)
         
         fs.rename(oldPath, path.join(process.cwd(), newFileName), (err) => {
           if (err) {
@@ -44,7 +45,7 @@ export async function uploadFile(req, res){
           }
         
           console.log('File renamed successfully.');
-          return res.status(200).send('File renamed successfully.');
+          return res.status(200).json({msg: 'File renamed successfully.', newFileName});
         });
     } catch (err) {
         console.error(err);

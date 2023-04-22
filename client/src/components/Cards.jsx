@@ -8,9 +8,8 @@ import { useState } from "react"
 export default function Cards({page}){
     
     const dispatch = useDispatch()
-    const getProducts = useSelector((state) => state.productReducer)
+    const getProducts = useSelector((state) => state.productReducer.product)
     const currentUser = useSelector((state) => state.currentUserReducer)
-    const { product } = getProducts
 
     const scrollToTop = () => {
         const scrollStep = -window.scrollY / (300 / 15); // 500 est la durée de l'animation en millisecondes
@@ -39,7 +38,7 @@ export default function Cards({page}){
 
     return (
         <>
-            {!isEmpty(product) && product.map(product => {
+            {!isEmpty(getProducts) && getProducts.map(product => {
                 return(
                 <div 
                 key={product.id}
@@ -51,7 +50,7 @@ export default function Cards({page}){
                     >
                         <img src="https://via.placeholder.com/720x720" alt="Placeholder" className='rounded-xl object-contain h-48 w-48' />
                         <div className='p-5 w-full'>
-                            <h2 className='font-raleway font-medium text-2xl'>{product.name}</h2>
+                            <h2 className='font-raleway font-medium text-2xl'>{product.title}</h2>
                             <span className='font-semibold font-rajdhani text-2xl'>{product.price}€</span>
                             <div className='flex mt-1 w-full'>
                                 <button 
@@ -70,15 +69,14 @@ export default function Cards({page}){
                             <div className='font-roboto flex flex-col mt-2'>
                                 <div className="flex items-center">
                                     <img
-                                        src={`./uploads/${product.user_id}.jpg`}
+                                        src={`./uploads/${product.username}.jpg`}
                                         onError={(e) => {
-                                            e.target.onerror = null;
                                             e.target.src = './uploads/default.jpg';
                                         }}
                                         alt="image de profil"
                                         className="rounded-full h-8 w-8 mr-2"
                                     />
-                                    <p className='text-md'>A vendre par <span className="font-semibold">{product.user_id}</span></p>
+                                    <p className='text-md'>A vendre par <span className="font-semibold">{product.username}</span></p>
                                 </div>
                                 <button className='underline text-indigo-800 underline-offset-2 text-left'><p>Contacter le vendeur</p></button>
                             </div>
