@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Welcome from "./pages/Welcome";
 import CreateProduct from "./pages/CreateProduct";
 import Profil from "./pages/Profil";
+import Carts from "./pages/Carts";
 import ProductId from "./pages/product/[productId]";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
@@ -34,6 +35,7 @@ export default function App() {
                 <Route path="/product/:id" element={<ProductId />}/>
                 <Route path="/product/new" element={<CreateProduct />}/>
                 <Route path="/profil" element={<Profil />}/>
+                <Route path="/carts" element={<Carts />}/>
               </Routes>
           </RouteWrapper>
       </BrowserRouter>

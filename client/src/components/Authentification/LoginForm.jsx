@@ -4,12 +4,11 @@ import { useRef } from "react"
 import { useDispatch } from "react-redux"
 import { loginUser } from "../../actions/user.action"
 import { useNavigate } from "react-router-dom"
+import { sessionIsValid } from "../../actions/session.action"
 
 export default function Login({
     setLogin, 
-    setIdentifierValid, 
-    login, 
-    identifierValid,
+    setIdentifierValid,
     identify
 }){
     const dispatch = useDispatch()
@@ -30,6 +29,7 @@ export default function Login({
             password: form.current[0].value,
         }
         dispatch(loginUser(data))
+        dispatch(sessionIsValid())
         navigate('/home')
     }
     return(

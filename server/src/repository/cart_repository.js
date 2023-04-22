@@ -1,16 +1,47 @@
 import { createPoolConnection } from "../lib/db.js";
 
-export async function addToCart(){
-    const query = `INSERT INTO cart_items (cart_id, product_id, quantity, price)
-    SELECT c.cart_id, p.name, 1, p.price
-    FROM users u
-    INNER JOIN cart c ON u.user_id = c.user_id
-    INNER JOIN products p ON p.name = ?
-    WHERE u.user_id = ?`
-    const values = ['Portable', 'Azones']
-    const [info] = await createPoolConnection().query(query, values)
-    console.log(info)
-    return info
+export async function addToCart(productId, quantity, userId, price) {
+    console.log(productId + '' + quantity + '' + userId + '' + price)
+    const pool = createPoolConnection();
+    try {
+        const [cart] = await pool.query('SELECT id FROM carts WHERE user_id = ?', [userId]);
+
+        if (cart.length) {
+            const [existingItem] = await pool.query(
+                'SELECT id, quantity FROM carts_items WHERE cart_id = ? AND product_id = ?',
+                [cart[0].id, productId]
+            );
+
+            if (existingItem.length) {
+                await pool.query(
+                    'UPDATE carts_items SET quantity = ? WHERE id = ?',
+                    [existingItem.quantity + quantity, existingItem.id]
+                );
+            } else {
+                await pool.query(
+                    'INSERT INTO carts_items (cart_id, product_id, quantity, price) VALUES (?, ?, ?, ?)',
+                    [cart[0].id, productId, quantity, price]
+                );
+            }
+        } else {
+            const [result] = await pool.query(
+                'INSERT INTO carts (user_id, created_at) VALUES (?, ?)',
+                [userId, new Date()]
+            );
+
+            await pool.query(
+                'INSERT INTO carts_items (cart_id, product_id, quantity, price) VALUES (?, ?, ?, ?)',
+                [result.insertId, productId, quantity, price]
+            );
+        }
+
+        return { success: true };
+    } catch (error) {
+        console.error(error);
+        return { success: false, error: error.message };
+    } finally {
+        pool.end();
+    }
 }
 
 export const cart = {

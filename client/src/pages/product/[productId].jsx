@@ -2,15 +2,20 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { isEmpty } from '../../components/Utils';
 import mondialRelay from '/LogoMondialRelay.png'
 import ups from '/ups.svg'
 import fedex from '/fedex-express-6.svg'
+import { addProductCart } from '../../actions/cart.action';
+import Counter from '../../components/Counter';
 
 export default function ProductId() {
   const [isProduct, setIsProduct] = useState([])
+  const [value, setValue] = useState(1)
   const product = useSelector((state) => state.productReducer.product)
+  const currentUser = useSelector((state) => state.currentUserReducer)
+  const dispatch = useDispatch()
   const {id} = useParams()
   useEffect(() => {
     if (product.length > 0) {
@@ -19,7 +24,17 @@ export default function ProductId() {
       setIsProduct(result);
     }
   }, [product]);
-
+  let data;
+  let handleCart = async () => {
+    const product = isProduct.filter(productId => productId.id)
+    data = {
+        user_id: currentUser.id,
+        id: id,
+        quantity: JSON.stringify(value),
+        price: product[0].price * value
+    }
+      dispatch(addProductCart(data))
+  }
 
     return (
       <>
@@ -36,22 +51,28 @@ export default function ProductId() {
 
               {/* Description of product */}
               <div className={`flex flex-col col-span-3 duration-500 mt-10`}>
-                <div className={`flex flex-col mt-5 p-5 space-y-5 rounded-xl bg-slate-50 duration-500`}>
-                  <h2 className='text-4xl font-kanit'>Description</h2>
-                  <p className="flex text-clip scrollbar rounded px-5 overflow-scroll font-roboto font-medium text-lg">
+                <div className={`flex flex-col p-5 space-y-5 rounded-xl bg-slate-50 duration-500`}>
+                  <h2 className='text-4xl font-kanit'>A propos de cet article</h2>
+                  <p className="flex text-clip scrollbar rounded  overflow-scroll font-roboto font-medium text-lg">
                     {productId.description}
                   </p>
                 </div>
 
                 <div className='flex flex-col h-full mt-5'>
-                  <div className='flex items-center font-rajdhani font-bold'>
-                    <h2 className='text-4xl border-r-[1px] border-black mr-2 pr-2 h-10'>{productId.price}$</h2>
-                    <p className='text-lg'>Livraison à partir de 5$</p>
+                  <div className='flex items-center justify-between font-rajdhani font-bold box-content'>
+                    <div className='flex items-center w-full'>
+                        <h2 className='text-4xl border-r-[1px] border-black mr-2 pr-2 h-10'>{productId.price * value}$</h2>
+                        <p className='text-lg'>Livraison à partir de 5$</p>
+                    </div>
+                    <div className='flex items-center'>
+                        <h3 className='mr-3'>Quantité:</h3>
+                        <Counter value={value} setValue={setValue} />
+                    </div>
                   </div>
 
                   <div className='flex font-rajdhani font-bold mt-2'>
-                    <button className='py-2 px-5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-800 text-white font-karla shadow shadow-blue-800'>Acheter immédiatement</button>
-                    <button className='py-2 px-5 rounded-xl border border-blue-600 text-black font-karla shadow-sm shadow-blue-800 ml-5'>Ajouter au panier</button>
+                    <button className='py-2 px-5 rounded-xl bg-neutral-900 text-white font-karla shadow-md'>Acheter immédiatement</button>
+                    <button className='py-2 px-5 rounded-xl border border-neutral-900 text-black font-karla shadow-md ml-5' onClick={handleCart}>Ajouter au panier</button>
                   </div>
                 </div>
               </div>

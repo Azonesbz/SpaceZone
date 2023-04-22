@@ -3,7 +3,7 @@ export default function Footer(){
         <>
             <footer className="flex flex-col">
                 <section className="flex flex-col bg-gray-950 text-white py-10">
-                    <h1 className="text-center p-8 font-karla text-3xl">Pourquoi nous faire confiance ?</h1>
+                    <h1 className="text-center p-8 font-karla text-3xl">Nos engagements envers nos clients</h1>
                     <div className="flex border-t w-5/6 mx-auto border-white">
                         <div className="p-5">
                             <svg 

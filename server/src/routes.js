@@ -26,7 +26,7 @@ router.put('/updatePseudo/:id', updateUserPseudo)
 
 // Panier utilisateur
 
-router.post('/cart/product', addProductCard)
+router.post('/cart/newItem', addProductCard)
 
 // Vérification du token
 

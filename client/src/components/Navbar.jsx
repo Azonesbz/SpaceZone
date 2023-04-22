@@ -46,7 +46,7 @@ export default function Header(){
                             <Link to="/profil" className="text-md font-karla font-medium rounded-md text-blue-700 ml-2">Mon profil</Link>
                         </li> : "" }
                         {isLogged ? <li className="cursor-pointer">
-                            <Link to="/cart" className="text-md font-karla rounded-md text-black">Mon Panier</Link>
+                            <Link to="/carts" className="text-md font-karla rounded-md text-black">Mon Panier</Link>
                         </li> : "" }
                         {isLogged ? <li className="cursor-pointer">
                             <button 

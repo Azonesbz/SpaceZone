@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
 import { isEmpty } from "./Utils"
-import { useEffect } from "react"
-import { addProductCard, getProduct } from "../actions/product.action"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { getProduct } from "../actions/product.action"
+import { addProductCart } from "../actions/cart.action"
+import Counter from "./Counter"
 
-export default function Cards({page}){
+export default function Carts({page}){
     
     const dispatch = useDispatch()
     const getProducts = useSelector((state) => state.productReducer.product)
@@ -30,10 +31,10 @@ export default function Cards({page}){
         dispatch(getProduct(data))
     }, [page])
 
-    let handleCart = (e, id) => {
+    let handleCart = (e, idProduct, quantity) => {
         e.preventDefault()
         console.log(id)
-        dispatch(addProductCard(id))
+        dispatch(addProductCart(id))
     }
 
     return (
@@ -49,24 +50,12 @@ export default function Cards({page}){
                         to={`/product/${product.id}`}
                     >
                         <img src="https://via.placeholder.com/720x720" alt="Placeholder" className='rounded-xl object-contain h-48 w-48' />
-                        <div className='p-5 w-full'>
+                        <div className='flex flex-col p-5 w-full'>
                             <h2 className='font-raleway font-medium text-2xl'>{product.title}</h2>
                             <span className='font-semibold font-rajdhani text-2xl'>{product.price}€</span>
-                            <div className='flex mt-1 w-full'>
-                                <button 
-                                className='bg-black text-white text-lg font-karla py-2 px-5 rounded-xl active:scale-95'
-                                onClick={(e) => e.preventDefault()}
-                                >
-                                    Acheter
-                                </button>
-                                <button 
-                                className='ml-5 border border-black font-karla text-lg py-2 px-5 rounded-xl'
-                                onClick={(e) => handleCart(e, product.id)}
-                                >
-                                    Panier
-                                </button>
-                            </div>
-                            <div className='font-roboto flex flex-col mt-2'>
+                            
+                            
+                            <div className='font-roboto flex flex-col'>
                                 <div className="flex items-center">
                                     <img
                                         src={`./uploads/${product.username}.jpg`}

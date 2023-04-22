@@ -1,4 +1,3 @@
-import { ADD_PRODUCTS_CARD } from "../actions/product.action"
 import { ADD_USER, LOGIN_USER, GET_ALL_USERS, SET_USER, SET_USER_PSEUDO } from "../actions/user.action"
 
 const initialState = {}
@@ -26,14 +25,6 @@ export function currentUserReducer(state = initialState, action){
                 user_id: action.payload
             }
         default:
-            return state
-    }
-}
-export function cardReducer(state = initialState, action){
-    switch(action.type){
-        case ADD_PRODUCTS_CARD:
-            return action.payload
-        default: 
             return state
     }
 }
