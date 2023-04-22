@@ -26,23 +26,22 @@ export default function Welcome() {
   }, [currentUser])
 
   let handleForm = async (e) => {
+    console.log('ok')
     e.preventDefault()
-    try {
-      const user = users.filter(user => user.email === form.current[0].value)
-      if(user.length){
-        setIdentify(user)
-        setIdentifierValid(true)
-        setLogin(true)
-      } else {
-        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    if(users === null){
+      const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
         if(emailRegex.test(form.current[0].value)){
           setIdentifierValid(true)
           setRegister(true)
         }
+    } else {
+      const user = users.filter(user => user.email === form.current[0].value)
+      if(user.length){
+        setIdentify(user)
+        setIdentifierValid(true)
+        setLogin(true)
       }
-    } catch {
-        return
     }
   }
 

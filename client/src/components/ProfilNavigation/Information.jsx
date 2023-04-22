@@ -93,7 +93,7 @@ export default function Information() {
                             <input type="text" defaultValue={currentUser.user_id} className="py-2 px-2 rounded-md" />
                             <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
                         </label>
-                    </form> : <div className="flex flex-col hover:scale-95 duration-200">
+                    </form> : <div className="flex flex-col duration-200">
                         <div className="flex justify-between items-center">
                             <h2 className="text-2xl font-thin font-ubuntu text-white">Pseudonyme</h2>
                             <button onClick={() => setShowFormPseudo(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
@@ -106,7 +106,7 @@ export default function Information() {
                             <input type="text" defaultValue={currentUser.email} className="py-2 px-2 rounded-md" />
                             <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
                         </label>
-                    </form> : <div className="flex flex-col hover:scale-95 mt-5 duration-200">
+                    </form> : <div className="flex flex-col mt-5 duration-200">
                         <div className="flex justify-between items-center">
                             <h2 className="text-2xl font-thin font-ubuntu text-white">Email</h2>
                             <button onClick={() => setShowFormEmail(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
@@ -119,7 +119,7 @@ export default function Information() {
                             <input type="text" defaultValue={currentUser.numberphone} className="py-2 px-2 rounded-md" />
                             <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
                         </label>
-                    </form> : <div className="flex flex-col hover:scale-95 mt-5 duration-200">
+                    </form> : <div className="flex flex-col mt-5 duration-200">
                         <div className="flex justify-between items-center">
                             <h2 className="text-2xl font-thin font-ubuntu text-white">Numéro de téléphone</h2>
                             <button onClick={() => setShowFormNumber(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
@@ -135,7 +135,7 @@ export default function Information() {
                             </label>
                         </form>
                         :
-                        <div className="flex flex-col hover:scale-95 mt-5 duration-200">
+                        <div className="flex flex-col mt-5 duration-200">
                             <div className="flex justify-between items-center">
                                 <h2 className="text-2xl font-thin font-ubuntu text-white">Prénom</h2>
                                 <button onClick={() => setShowFormName(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>

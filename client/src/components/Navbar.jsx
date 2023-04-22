@@ -4,23 +4,16 @@ import { userLogout } from "../actions/user.action";
 import { useEffect } from "react";
 import { useState } from "react";
 
-export default function Header({session}){
+export default function Header(){
 
-    const [isLogged, setIsLogged] = useState(session)
     const [isAdmin, setIsAdmin] = useState(false)
     const dispatch = useDispatch()
-    const user = useSelector((state) => state.currentUserReducer)
+    const currentUser = useSelector((state) => state.currentUserReducer)
+    const isLogged = useSelector((state) => state.sessionReducer.Authorization)
     const navigate = useNavigate()
 
-    useEffect(() => {
-        if (user) {
-            setIsLogged(true);
-        } else {
-            setIsLogged(false);
-        }
-      }, [user]);
     let handleLogout = () => {
-        dispatch(userLogout(user.id))
+        dispatch(userLogout(currentUser.id))
         navigate('/')
     }
     return (
@@ -35,12 +28,22 @@ export default function Header({session}){
                             SpaceZone
                         </Link>
                     </div>
-                    <ul className="flex mr-10 space-x-14">
+                    <ul className="flex items-center mr-10 space-x-14">
                         {!isLogged ? <li className="cursor-pointer">
                             <Link to="/" className="text-md font-karla font-medium rounded-md text-blue-700">S'identifier</Link>
                         </li> : "" }
-                        {isLogged ? <li className="cursor-pointer">
-                            <Link to="/profil" className="text-md font-karla font-medium rounded-md text-blue-700">Mon profil</Link>
+                        {isLogged ? 
+                        <li className="flex items-center cursor-pointer">
+                            <img
+                            src={`./uploads/${currentUser.user_id}.jpg`}
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = '../uploads/default.jpg';
+                            }}
+                            alt="image de profil"
+                            className="rounded-full h-8 w-8"
+                            />
+                            <Link to="/profil" className="text-md font-karla font-medium rounded-md text-blue-700 ml-2">Mon profil</Link>
                         </li> : "" }
                         {isLogged ? <li className="cursor-pointer">
                             <Link to="/cart" className="text-md font-karla rounded-md text-black">Mon Panier</Link>

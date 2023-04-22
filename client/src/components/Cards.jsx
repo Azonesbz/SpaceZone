@@ -2,13 +2,14 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
 import { isEmpty } from "./Utils"
 import { useEffect } from "react"
-import { getProduct } from "../actions/product.action"
+import { addProductCard, getProduct } from "../actions/product.action"
 import { useState } from "react"
 
 export default function Cards({page}){
     
     const dispatch = useDispatch()
     const getProducts = useSelector((state) => state.productReducer)
+    const currentUser = useSelector((state) => state.currentUserReducer)
     const { product } = getProducts
 
     const scrollToTop = () => {
@@ -29,6 +30,13 @@ export default function Cards({page}){
         }
         dispatch(getProduct(data))
     }, [page])
+
+    let handleCart = (e, id) => {
+        e.preventDefault()
+        console.log(id)
+        dispatch(addProductCard(id))
+    }
+
     return (
         <>
             {!isEmpty(product) && product.map(product => {
@@ -52,10 +60,26 @@ export default function Cards({page}){
                                 >
                                     Acheter
                                 </button>
-                                <button className='ml-5 border border-black font-karla text-lg py-2 px-5 rounded-xl'>Panier</button>
+                                <button 
+                                className='ml-5 border border-black font-karla text-lg py-2 px-5 rounded-xl'
+                                onClick={(e) => handleCart(e, product.id)}
+                                >
+                                    Panier
+                                </button>
                             </div>
                             <div className='font-roboto flex flex-col mt-2'>
-                                <p className='text-md'>Par {product.user_id}</p>
+                                <div className="flex items-center">
+                                    <img
+                                        src={`./uploads/${product.user_id}.jpg`}
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.src = './uploads/default.jpg';
+                                        }}
+                                        alt="image de profil"
+                                        className="rounded-full h-8 w-8 mr-2"
+                                    />
+                                    <p className='text-md'>A vendre par <span className="font-semibold">{product.user_id}</span></p>
+                                </div>
                                 <button className='underline text-indigo-800 underline-offset-2 text-left'><p>Contacter le vendeur</p></button>
                             </div>
                         </div>
