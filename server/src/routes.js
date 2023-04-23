@@ -2,7 +2,7 @@ import express from 'express'
 import { addProduct, getNumberProduct, getProductById, getProducts, getSearch } from './controllers/products_controller.js'
 import { addUser, connectUser, getAllUsers, sessionIsValid, updateUserPseudo, userLogout } from './controllers/user_controller.js'
 import { upload, uploadFile } from './controllers/uploadFile_controller.js'
-import { addProductCard } from './controllers/cart_controller.js'
+import getCarts, { addProductCart } from './controllers/cart_controller.js'
 
 const router = express.Router()
 
@@ -26,7 +26,8 @@ router.put('/updatePseudo/:id', updateUserPseudo)
 
 // Panier utilisateur
 
-router.post('/cart/newItem', addProductCard)
+router.get('/carts', getCarts)
+router.post('/cart/newItem', addProductCart)
 
 // Vérification du token
 
