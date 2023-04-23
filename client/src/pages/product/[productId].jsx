@@ -9,21 +9,18 @@ import ups from '/ups.svg'
 import fedex from '/fedex-express-6.svg'
 import { addProductCart } from '../../actions/cart.action';
 import Counter from '../../components/Counter';
+import { getProductById } from '../../actions/product.action';
 
 export default function ProductId() {
   const [isProduct, setIsProduct] = useState([])
   const [value, setValue] = useState(1)
-  const product = useSelector((state) => state.productReducer.product)
+  const {id} = useParams()
+  const product = useSelector((state) => state.productReducer.productId)
   const currentUser = useSelector((state) => state.currentUserReducer)
   const dispatch = useDispatch()
-  const {id} = useParams()
   useEffect(() => {
-    if (product.length > 0) {
-      window.scroll(0, 0)
-      const result = product.filter((productId) => productId.id == id);
-      setIsProduct(result);
-    }
-  }, [product]);
+    dispatch(getProductById(id))
+  }, []);
   let data;
   let handleCart = async () => {
     const product = isProduct.filter(productId => productId.id)
@@ -40,12 +37,12 @@ export default function ProductId() {
       <>
         <Header />
         <section className='flex relative min-h-screen min-w-full'>
-          {!isEmpty(isProduct) && isProduct.map(productId => (
+          {!isEmpty(product) && product.map(productId => (
             <div key={productId.id} className='grid grid-cols-6 p-10 min-h-screen'>
               {/* Image of product */}
               <div className='flex flex-col col-span-3'>
                 <h1 className='text-3xl font-raleway font-semibold'>{productId.name}</h1>
-                <i className='text-xl'>Vendu par <span className='text-indigo-900'>{productId.user_id}</span></i>
+                <i className='text-xl'>Vendu par <span className='text-indigo-900'>{productId.username}</span></i>
                 <img className='h-5/6 w-5/6' src='https://via.placeholder.com/550x550' alt='image du produit' />
               </div>
 

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import jwt_decode from "jwt-decode";
+import { SET_SESSION_TRUE } from './session.action';
 
 export const ADD_USER = "ADD_USER"
 export const GET_ALL_USERS = "GET_ALL_USERS"
@@ -29,6 +30,7 @@ export const addUser = (data) => {
             const decodedToken = jwt_decode(token);
             dispatch({ type: ADD_USER, payload: res.data})
             dispatch({ type: SET_USER, payload: decodedToken})
+            dispatch({ type: SET_SESSION_TRUE, payload: {Authorization: true}})
         })
     }
 }
@@ -39,6 +41,7 @@ export const loginUser = (data) => {
             const token = localStorage.getItem('token')
             const decodedToken = jwt_decode(token);
             dispatch({ type: SET_USER, payload: decodedToken})
+            dispatch({ type: SET_SESSION_TRUE, payload: {Authorization: true}})
         })
     }
 }
