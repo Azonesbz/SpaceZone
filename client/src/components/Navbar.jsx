@@ -35,7 +35,7 @@ export default function Header(){
                         {isLogged ? 
                         <li className="flex items-center cursor-pointer">
                             <img
-                            src={`./uploads/${currentUser.user_id}.jpg`}
+                            src={`./uploads/${currentUser.username}.jpg`}
                             onError={(e) => {
                                 e.target.onerror = null;
                                 e.target.src = '../uploads/default.jpg';

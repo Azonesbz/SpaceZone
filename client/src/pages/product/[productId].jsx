@@ -12,7 +12,6 @@ import Counter from '../../components/Counter';
 import { getProductById } from '../../actions/product.action';
 
 export default function ProductId() {
-  const [isProduct, setIsProduct] = useState([])
   const [value, setValue] = useState(1)
   const {id} = useParams()
   const product = useSelector((state) => state.productReducer.productId)

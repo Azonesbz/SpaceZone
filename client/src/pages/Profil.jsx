@@ -71,7 +71,7 @@ export default function Profil(){
                 <aside className="sticky bg-gradient-to-br col-span-4 from-slate-400 to-neutral-400 text-black shadow rounded-xl row-span-3">
                     <header className="flex flex-col items-center bg-gradient-to-tl from-slate-200 to-slate-300 p-5 rounded-t-xl">
                         <img
-                          src={`./uploads/${currentUser.user_id}.jpg`}
+                          src={`./uploads/${currentUser.username}.jpg`}
                           onError={(e) => {
                             e.target.onerror = null;
                             e.target.src = './uploads/default.jpg';
@@ -79,7 +79,7 @@ export default function Profil(){
                           alt="image de profil"
                           className="rounded-full mt-5 h-48 w-48"
                         />
-                        <h1 className="mt-3 text-2xl text-center font-semibold font-raleway first-letter:uppercase">{currentUser.user_id}</h1>
+                        <h1 className="mt-3 text-2xl text-center font-semibold font-raleway first-letter:uppercase">{currentUser.username}</h1>
                     </header>
                     <div className="flex flex-col p-3 space-y-2" onClick={handleNav}>
                         <button className="flex w-full h-12 p-3 hover:p-5 rounded items-center bg-slate-200 cursor-pointer duration-100"

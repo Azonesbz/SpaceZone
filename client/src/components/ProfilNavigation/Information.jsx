@@ -65,7 +65,7 @@ export default function Information() {
         e.preventDefault()
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("user", currentUser.user_id)
+        formData.append("user", currentUser.username)
         fetch('http://localhost:3001/upload', {
             method: "POST",
             body: formData
@@ -90,7 +90,7 @@ export default function Information() {
                     {showFormPseudo ? <form action="" className="flex flex-col duration-200" onSubmit={handleSubmitPseudo} ref={formPseudo}>
                         <h2 className="text-2xl font-thin font-ubuntu text-white">Pseudonyme</h2>
                         <label htmlFor="" className="flex items-center">
-                            <input type="text" defaultValue={currentUser.user_id} className="py-2 px-2 rounded-md" />
+                            <input type="text" defaultValue={currentUser.username} className="py-2 px-2 rounded-md" />
                             <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
                         </label>
                     </form> : <div className="flex flex-col duration-200">
@@ -98,7 +98,7 @@ export default function Information() {
                             <h2 className="text-2xl font-thin font-ubuntu text-white">Pseudonyme</h2>
                             <button onClick={() => setShowFormPseudo(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
                         </div>
-                        <h3>{currentUser.user_id}</h3>
+                        <h3>{currentUser.username}</h3>
                     </div>}
                     {showFormEmail ? <form action="" className="flex flex-col duration-200 mt-5" onSubmit={handleSubmitEmail} ref={formEmail}>
                         <h2 className="text-2xl font-thin font-ubuntu text-white">Email</h2>
@@ -149,7 +149,7 @@ export default function Information() {
                     <div className="flex flex-col justify-center items-center m-auto">
                         <h2 className="text-slate-200 font-ubuntu text-xl font-thin">Image de profil</h2>
                         <img
-                            src={`./uploads/${currentUser.user_id}.jpg`}
+                            src={`./uploads/${currentUser.username}.jpg`}
                             onError={(e) => {
                                 e.target.onerror = null; // empêche les boucles d'erreur infinies
                                 e.target.src = './uploads/default.jpg'; // charge une image alternative
