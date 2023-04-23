@@ -39,8 +39,6 @@ export async function addToCart(productId, quantity, userId, price) {
     } catch (error) {
         console.error(error);
         return { success: false, error: error.message };
-    } finally {
-        pool.end();
     }
 }
 

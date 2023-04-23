@@ -16,11 +16,12 @@ let getProducts = async (page) => {
     return products
 }
 let byId = async (id) => {
-    const [product] = await createPoolConnection().query(`SELECT * FROM products WHERE id = ?`, [id])
-    if(product.length <= 0){
-        throw err
+    console.log(id)
+    const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username FROM products p INNER JOIN users u ON p.user_id = u.id WHERE p.id = ?`, [id])
+    if(product.length){
+        return product
     }
-    return product
+    throw err
 }
 let getNextProducts = async (page) => {
     const [nextProducts] = await createPoolConnection().query(`SELECT * FROM products LIMIT 3 OFFSET ?`, [page])

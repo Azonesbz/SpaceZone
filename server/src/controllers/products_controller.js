@@ -2,7 +2,7 @@ import { products } from "../repository/products_repository.js";
 
 export async function getProducts(req, res){
     const currentPage = req.body.page
-    const offset = currentPage * 6 - 6
+    const offset = (currentPage * 6 - 6) || 1
     products.all(offset)
     .then(product => {
         res.status(201).json({product})
@@ -20,14 +20,16 @@ export async function getNumberProduct(req, res){
     .catch(err => res.status(404).json({err}))
 }
 export async function getProductById(req, res){
-    products.byId(req.params.id)
+    const id = req.params.id
+    products.byId(id)
     .then(
         product => {
-            res.json({product})
+            res.status(201).json({product})
         }
     )
     .catch(
         err => {
+            console.log(err)
             res.status(404).json({message: `Page introuvable, redirection vers la page d'acceuil.`, err})
         }
     )
