@@ -13,14 +13,12 @@ export default function Carts({page}){
     const currentUser = useSelector((state) => state.currentUserReducer)
 
     const scrollToTop = () => {
-        const scrollStep = -window.scrollY / (300 / 15); // 500 est la durée de l'animation en millisecondes
-        const scrollInterval = setInterval(() => {
-          if (window.scrollY !== 0) {
-            window.scrollBy(0, scrollStep);
-          } else {
-            clearInterval(scrollInterval);
-          }
-        }, 15);
+        if (window.scrollY !== 0) {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+            });
+        }
       }
 
     useEffect(() => {
@@ -49,7 +47,9 @@ export default function Carts({page}){
                         className='flex flex-col sm:flex-row bg-gradient-to-br w-full p-3'
                         to={`/product/${product.id}`}
                     >
-                        <img src="https://via.placeholder.com/720x720" alt="Placeholder" className='rounded-xl object-contain h-48 w-48' />
+                        <div className="aspect-h-5 aspect-w-2">
+                            <img src="https://via.placeholder.com/720x720" alt="Placeholder" className='rounded-xl object-cover object-center h-full w-full' />
+                        </div>
                         <div className='flex flex-col p-5 w-full'>
                             <h2 className='font-raleway font-medium text-2xl'>{product.title}</h2>
                             <span className='font-semibold font-rajdhani text-2xl'>{product.price}€</span>
@@ -58,7 +58,7 @@ export default function Carts({page}){
                             <div className='font-roboto flex flex-col'>
                                 <div className="flex items-center">
                                     <img
-                                        src={`./uploads/${product.username}.jpg`}
+                                        src={`./uploads/profil/${product.username}.jpg`}
                                         onError={(e) => {
                                             e.target.src = './uploads/default.jpg';
                                         }}

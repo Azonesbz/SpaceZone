@@ -4,9 +4,9 @@ import fs from 'node:fs'
 
 let data; 
 
-const storage = multer.diskStorage({
+const storageProfil = multer.diskStorage({
     destination: function (req, file, cb) {
-        const uploadDir = '../client/uploads';
+        const uploadDir = '../client/uploads/profil';
         cb(null, uploadDir)
     },
     filename: function (req, file, cb) {
@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
     }
 });
 
-export const upload = multer({ storage: storage });
+export const upload = multer({ storage: storageProfil });
 
 export async function uploadFile(req, res){
     try {

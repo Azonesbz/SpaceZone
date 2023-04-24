@@ -23,7 +23,6 @@ export async function addUserDb(username, email, password){ // Ajoute un utilisa
     }
     await createPoolConnection().query(`INSERT INTO users (role_id, username, email, password) VALUES (?, ?, ?, ?)`, [3, username, email, password])
     const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.username, users.email, users.first_name, users.number_phone, roles.name FROM users INNER JOIN roles ON users.role_id = roles.id WHERE email = ?`, [email])
-    await createPoolConnection().query(`INSERT INTO carts (user_id) VALUES (?)`, [info[0].id])
 
     return info
 }

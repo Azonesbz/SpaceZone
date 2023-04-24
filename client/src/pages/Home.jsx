@@ -14,15 +14,10 @@ export default function Home({session}) {
     return (
       <>
         <Header session={session} />
-        <div className='flex flex-col-reverse md:flex-row relative min-h-screen min-w-screen justify-center bg-gradient-to-r from-neutral-100 to-neutral-300 p-5 gap-5'>
+        <div className='flex flex-col-reverse container md:flex-row relative min-h-screen min-w-screen justify-center gap-5'>
 
-          <section className='flex flex-col w-full xl:w-5/6'>
-            <div className='flex justify-between items-center'>
-              <Search />
-
-              
-
-            </div>
+          <section className='flex flex-col w-full'>
+            <Search />
             <div className='grid grid-cols-6 gap-3 mt-5'>
                 <Cards page={page} />
             </div>

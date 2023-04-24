@@ -14,7 +14,7 @@ import { getProductById } from '../../actions/product.action';
 export default function ProductId() {
   const [value, setValue] = useState(1)
   const {id} = useParams()
-  const product = useSelector((state) => state.productReducer.productId)
+  const allProduct = useSelector((state) => state.productReducer.productId)
   const currentUser = useSelector((state) => state.currentUserReducer)
   const dispatch = useDispatch()
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function ProductId() {
   }, []);
   let data;
   let handleCart = async () => {
-    const product = isProduct.filter(productId => productId.id)
+    const product = allProduct.filter(productId => productId.id)
     data = {
         user_id: currentUser.id,
         id: id,
@@ -36,7 +36,7 @@ export default function ProductId() {
       <>
         <Header />
         <section className='flex relative min-h-screen min-w-full'>
-          {!isEmpty(product) && product.map(productId => (
+          {!isEmpty(allProduct) && allProduct.map(productId => (
             <div key={productId.id} className='grid grid-cols-6 p-10 min-h-screen'>
               {/* Image of product */}
               <div className='flex flex-col col-span-3'>

@@ -2,8 +2,12 @@ import { createPoolConnection } from "../lib/db.js";
 
 const pool = createPoolConnection();
 
-export async function getItemsCart(){
-    const [cartItems] = await pool.query(`SELECT c.id, p.title, u.username, c.price, c.quantity FROM carts_items c INNER JOIN users u ON c.cart_id = u.id INNER JOIN products p ON c.product_id = p.id`)
+export async function getUserItemsCart(id){
+    const [cartItems] = await pool.query(`SELECT c.quantity, u.username, p.price, p.title, category.name FROM carts_items c 
+    INNER JOIN carts ON c.cart_id = carts.id 
+    INNER JOIN users u ON carts.user_id = u.id
+    INNER JOIN products p ON c.product_id = p.id
+    INNER JOIN category ON p.category_id = category.id WHERE u.id = ?`, [id]);
     return cartItems
 }
 
@@ -48,6 +52,6 @@ export async function addToCart(productId, quantity, userId, price) {
 }
 
 export const cart = {
-    all: getItemsCart,
+    all: getUserItemsCart,
     add: addToCart,
 }

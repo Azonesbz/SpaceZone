@@ -7,23 +7,26 @@ import CreateProduct from "./pages/CreateProduct";
 import Profil from "./pages/Profil";
 import Carts from "./pages/Carts";
 import ProductId from "./pages/product/[productId]";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { sessionIsValid } from "./actions/session.action";
 
 
 function RouteWrapper({ children }) {
-  const dispatch = useDispatch();
+  
+  const dispatch = useDispatch()
   const location = useLocation();
 
   useEffect(() => {
     dispatch(sessionIsValid());
+    
   }, [location]);
 
   return <>{children}</>;
 }
 
 export default function App() {
+
   return (
     <>
       <BrowserRouter>

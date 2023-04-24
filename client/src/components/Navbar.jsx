@@ -20,13 +20,17 @@ export default function Header(){
         <>
             <header className="flex relative inset-0 z-50 h-20 w-full bg-gradient-to-br from-neutral-100 to-neutral-200">
                 <nav className="flex justify-between items-center h-full w-full">
-                    <div>
+                    <div className="flex items-center space-x-10">
                         <Link 
                         className="font-kanit text-4xl flex-grow ml-10"
                         to="/home"
                         >
                             SpaceZone
                         </Link>
+                        <select className="bg-neutral-900 text-slate-200 rounded-xl py-1 px-2 active:scale-95 duration-200" name="language">
+                            <option value="fr">Français</option>
+                            <option value="en">Anglais</option>
+                        </select>
                     </div>
                     <ul className="flex items-center mr-10 space-x-14">
                         {!isLogged ? <li className="cursor-pointer">
@@ -35,10 +39,10 @@ export default function Header(){
                         {isLogged ? 
                         <li className="flex items-center cursor-pointer">
                             <img
-                            src={`./uploads/${currentUser.username}.jpg`}
+                            src={`./uploads/profil/${currentUser.username}.jpg`}
                             onError={(e) => {
                                 e.target.onerror = null;
-                                e.target.src = '../uploads/default.jpg';
+                                e.target.src = `../uploads/profil/${currentUser.username}.jpg` || '../uploads/profil/default.jpg';
                             }}
                             alt="image de profil"
                             className="rounded-full h-8 w-8"
@@ -66,10 +70,7 @@ export default function Header(){
                         <li className="hidden">
                             <Link to="/dashboard" className="text-md font-karla uppercase font-medium">Dashboard</Link>
                         </li>
-                        <select name="language">
-                            <option value="fr">Français</option>
-                            <option value="en">Anglais</option>
-                        </select>
+                        <Link to="/product/new">Ajouter un produit</Link>
                     </ul>
                 </nav>
             </header>

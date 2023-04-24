@@ -1,13 +1,22 @@
+import jwt from "jsonwebtoken"
 import { cart } from "../repository/cart_repository.js"
 
 export default function getCarts(req, res){
-    cart.all().then(response => {
-        console.log(response)
-        res.status(200).json({cartItem: response})
-    })
-    .catch(err => {
-        console.error(err)
-        res.status(404).json({msg: 'Aucun article dans votre panier', err})
+    const token = req.body.token
+    console.log(req.body.token)
+    jwt.verify(token, process.env.PRIVATE_KEY, (err, decoded) =>{
+        if(err){
+            return res.status(500).json({err})
+        }
+        console.log(decoded)
+        cart.all(decoded.id).then(response => {
+            console.log(response)
+            res.status(200).json({cartItem: response})
+        })
+        .catch(err => {
+            console.error(err)
+            res.status(404).json({msg: 'Aucun article dans votre panier', err})
+        })
     })
 }
 

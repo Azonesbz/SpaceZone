@@ -21,6 +21,9 @@ export default {
       track: 'bg-gray-200',
       thumb: 'bg-gray-500',
     },
+    container: {
+      center: true,
+    },
   },
   plugins: [
     scrollbar

@@ -149,7 +149,7 @@ export default function Information() {
                     <div className="flex flex-col justify-center items-center m-auto">
                         <h2 className="text-slate-200 font-ubuntu text-xl font-thin">Image de profil</h2>
                         <img
-                            src={`./uploads/${currentUser.username}.jpg`}
+                            src={`./uploads/profil/${currentUser.username}.jpg`}
                             onError={(e) => {
                                 e.target.onerror = null; // empêche les boucles d'erreur infinies
                                 e.target.src = './uploads/default.jpg'; // charge une image alternative

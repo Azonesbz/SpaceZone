@@ -28,7 +28,8 @@ export default function Welcome() {
   let handleForm = async (e) => {
     console.log('ok')
     e.preventDefault()
-    if(users === null){
+    const verifyUser = users.filter(user => user.username === form.current[0].value)
+    if(verifyUser.length){
       const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
         if(emailRegex.test(form.current[0].value)){

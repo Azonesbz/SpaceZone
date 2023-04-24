@@ -14,7 +14,6 @@ export default function CreateProduct(){
 
     const handleForm = async (e) => {
         e.preventDefault()
-        console.log(currentUser.user_id)
         const productData = {
             id: currentUser.id,
             name: form.current[0].value,
@@ -25,10 +24,22 @@ export default function CreateProduct(){
         dispatch(addProduct(productData))
         navigate('/home')
     }
+    let handleStart = () => {
+        const balise = document.querySelector("#start-now");
+        const position = balise.offsetTop;
+        window.scrollTo({
+            top: position,
+            behavior: "smooth"
+        });
+    }
     return (
         <>
             <Header />
-            <div className="min-h-screen flex flex-col items-center mt-10">
+            <section className="min-h-screen p-10 w-3/4 m-auto">
+                <h1 className="text-5xl">Comment vendre un produit avec SpaceZone ?</h1>
+                <h2 className="text-xl">Je sais déjà comment faire<button className="bg-indigo-600 hover:bg-indigo-800 ml-5 py-2 px-4 rounded-md" onClick={handleStart}>Commencer maintenant</button></h2>
+            </section>
+            <div className="min-h-screen flex flex-col items-center mt-10" id="start-now">
                 <h1 className="text-2xl font-raleway font-medium">Vendre un produit</h1>
                 <h2 className="text-xl font-raleway font-medium">Commencer par renseigner les informations sur votre produit ci-dessous</h2>
                 <form action="" ref={form} onSubmit={handleForm} className="flex flex-col space-y-5">
