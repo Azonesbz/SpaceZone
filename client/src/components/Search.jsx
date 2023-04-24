@@ -24,7 +24,7 @@ export default function Search(){
         const dataSearch = {
             search: form.current[0].value,
             vêtements: form.current[3].checked,
-            accessoire: form.current[4].checked,
+            accessoires: form.current[4].checked,
             divers: form.current[5].checked,
             priceMin: form.current[6].value,
             priceMax: form.current[7].value,

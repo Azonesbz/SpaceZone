@@ -31,13 +31,17 @@ let getNextProducts = async (page) => {
 // Search system
 
 const searchProduct = async (vêtements, accessoires, divers, priceMin, priceMax) => {
+    const category = [];
+    if (vêtements) category.push("VÊTEMENTS");
+    if (accessoires) category.push("ACCESSOIRES");
+    if (divers) category.push("DIVERS");
+    console.log(category)
     const query =
-    `SELECT *
-    FROM products p 
-    LEFT JOIN product_category c ON p.category_id = c.id
-    WHERE c.title = ?
-    GROUP BY p.id`
-    const [result] = await createPoolConnection().query(query, [accessoires, vêtements, divers])
+    `SELECT * FROM products p
+    JOIN category c ON p.category_id = c.name
+    WHERE c.name IN (?) AND p.price <= ? AND p.price >= ?`
+    const [result] = await createPoolConnection().query(query, [category, priceMax, priceMin])
+    console.log(result)
     return result
 }
 

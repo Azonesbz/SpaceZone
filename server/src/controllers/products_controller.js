@@ -52,12 +52,19 @@ export async function addProduct(req, res){
     })
 }
 export async function getSearch(req, res){
-    const {divers, accessoires, vêtements} = req.body
-    products.search(divers, accessoires, vêtements)
+    const {divers, accessoires, vêtements, priceMin, priceMax} = req.body
+    if(divers === false && accessoires === false && vêtements === false){
+        res.status(300).json({msg: 'Veuillez sélectionner au moins un critères de recherche.'})
+        return;
+    }
+    console.log(accessoires)
+    products.search(divers, accessoires, vêtements, priceMin, priceMax)
     .then(result => {
+        console.log(result)
         res.status(200).json({result})
     })
     .catch(err => {
+        console.log(err)
         res.status(500).json({err})
     })
 }
