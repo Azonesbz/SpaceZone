@@ -1,31 +1,41 @@
 import React,{ useEffect } from 'react'
 import Header from '../components/Navbar'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { isEmpty } from '../utils/utils'
 import { Link, useNavigate } from 'react-router-dom'
+import { deleteUser } from '../actions/user.action'
 
 export default function Dashboard() {
 
     const allUser = useSelector((state) => state.allUserReducer)
     const currentUser = useSelector((state) => state.currentUserReducer)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     useEffect(() => {
         if(currentUser.permission !== 'ADMINISTRATOR'){
             navigate('/home')
         }
     }, [])
 
+    let data;
     let handleUserManage = (e) => {
         let parent = e.target
         for(let i = 0; i < 5; i++){
             if(parent.id === 'delete-user'){
-                console.log(parent.value)
+                data = {
+                    id: parent.value
+                }
+                dispatch(deleteUser(parent.value))
                 break;
             } else if(parent.id === 'update-user'){
-
+                data = {
+                    id: parent.value
+                }
                 break;
             } else {
-                parent.parentNode
+                parent = parent.parentNode
+                console.log(parent)
             }
         }
 
@@ -102,8 +112,8 @@ export default function Dashboard() {
                                                         <h1>{user.name}</h1>
                                                     </td>
                                                     <td className='flex items-center space-x-2 py-2 pr-20'>
-                                                        <button className=' bg-red-600 p-1 rounded-lg' id='delete-user'>
-                                                            <svg width="30" height="30" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <button className=' bg-red-600 p-1 text-slate-200 rounded-lg active:scale-95 duration-200' id='delete-user' value={user.id}>
+                                                            <svg width="30" height="30" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                                 <path d="M4 7h16"></path>
                                                                 <path d="M10 11v6"></path>
                                                                 <path d="M14 11v6"></path>
@@ -111,8 +121,8 @@ export default function Dashboard() {
                                                                 <path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path>
                                                             </svg>
                                                         </button>
-                                                        <button className='bg-neutral-900 text-slate-200 p-1 rounded-lg'>
-                                                            <svg width="30" height="30" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                        <button className='bg-neutral-900 text-slate-200 p-1 rounded-lg active:scale-95 duration-200' id='update-user' value={user}>
+                                                            <svg width="30" height="30" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                                 <path d="M4 20h4L18.5 9.5a2.829 2.829 0 0 0-4-4L4 16v4Z"></path>
                                                                 <path d="m13.5 6.5 4 4"></path>
                                                             </svg>

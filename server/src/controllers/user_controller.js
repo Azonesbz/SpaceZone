@@ -147,6 +147,16 @@ export async function userExist(req, res){
         res.status(200).json({err: err})
     })
 }
+export async function deleteUser(req, res){
+    const id = req.params.id
+    console.log(id)
+    users.delete(id).then(user => {
+        res.status(200).json({user: user})
+    })
+    .catch(err => {
+        res.status(500).json({err: err})
+    })
+}
 
 
 

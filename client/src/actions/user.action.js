@@ -7,8 +7,8 @@ export const GET_ALL_USERS = "GET_ALL_USERS"
 export const SESSION_IS_VALID = "SESSION_IS_VALID"
 export const USER_LOGOUT = "USER_LOGOUT"
 export const LOGIN_USER = "LOGIN_USER"
-export const SAVE_USER_DATA = "SAVE_USER_DATA"
-export const DELETE_USER_DATA = "DELETE_USER_DATA"
+export const UPDATE_USER = "UPDATE_USER"
+export const DELETE_USER = "DELETE_USER"
 export const SET_USER = "SET_USER"
 export const SET_USER_PSEUDO = "SET_USER_PSEUDO"
 
@@ -61,9 +61,16 @@ export const userLogout = (id) => {
 
 export const updateUserPseudo = (id, data) => {
     return (dispatch) => {
-        const token = localStorage.getItem('token')
-        axios.put(`http://localhost:3001/updatePseudo/${id}`, {pseudo: data.pseudo, token}).then(res => {
+        axios.put(`http://localhost:3001/updateUser/${id}`, data).then(res => {
             dispatch({ type: SET_USER_PSEUDO, payload: res.user_id})
+        })
+    }
+}
+export const deleteUser = (id) => {
+    return (dispatch) => {
+        console.log(id)
+        axios.delete(`http://localhost:3001/deleteUser/${id}`).then(res => {
+            dispatch({ type: DELETE_USER, payload: id})
         })
     }
 }

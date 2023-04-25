@@ -43,6 +43,10 @@ export async function updateToken(email, token, id) {
     return
 }
 
+export async function deleteUserDb(id){
+    const [info] = await createPoolConnection().query(`DELETE FROM users WHERE id = ?`, [id])
+    return info
+}
 export async function updatePseudo(id, pseudo){
     await createPoolConnection().query(`UPDATE users SET user_id = ? WHERE id = ?`, [pseudo, id])
     const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.user_id, users.email, users.prenom, users.nom, users.numberphone, role.permission FROM users INNER JOIN role ON users.role_id = role.id WHERE users.id = ?`, [id])
@@ -68,6 +72,7 @@ export const users = {
     all: getUsers,
     byEmail: getUserbyEmail,
     add: addUserDb,
+    delete: deleteUserDb,
     login: loginUserDb,
     newToken: updateToken,
     newPseudo: updatePseudo,
