@@ -42,7 +42,7 @@ export default function Header(){
                             src={`./uploads/profil/${currentUser.username}.jpg`}
                             onError={(e) => {
                                 e.target.onerror = null;
-                                e.target.src = `../uploads/profil/${currentUser.username}.jpg` || '../uploads/profil/default.jpg';
+                                e.target.src = '../uploads/profil/default.jpg';
                             }}
                             alt="image de profil"
                             className="rounded-full h-8 w-8"

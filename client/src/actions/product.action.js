@@ -39,7 +39,6 @@ export let addProduct = (data) => {
 export let searchProduct = (data) => {
     return (dispatch) => {
         return axios.post('http://localhost:3001/search/product', data).then(res => {
-            console.log(res)
             dispatch({ type: SEARCH_PRODUCTS, payload: res.data.product})
         })
     }

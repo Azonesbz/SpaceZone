@@ -13,19 +13,14 @@ export default function Login({
 }){
     const dispatch = useDispatch()
     const form = useRef()
-    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
     let data;
 
-    useEffect(() => {
-        setEmail(identify[0].email)
-    }, [])
-
     let handleSubmit = (e) => {
         e.preventDefault()
         data = {
-            email: email,
+            email: identify,
             password: form.current[0].value,
         }
         dispatch(loginUser(data))

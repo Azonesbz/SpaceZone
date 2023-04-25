@@ -73,7 +73,6 @@ export default function Information() {
             response => response.json()
         ).then(
             data => {
-                console.log(window.location.data)
                 console.log(data)
             }
         ).catch(err => console.error(err))

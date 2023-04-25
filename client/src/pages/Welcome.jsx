@@ -5,6 +5,7 @@ import React, { useRef, useState } from 'react'
 import Register from '../components/Authentification/RegisterForm'
 import Login from '../components/Authentification/LoginForm'
 import { useEffect } from 'react'
+import axios from 'axios'
 
 
 export default function Welcome() {
@@ -13,10 +14,11 @@ export default function Welcome() {
   const [identify, setIdentify] = useState({})
   const [login, setLogin] = useState(false)
   const [register, setRegister] = useState(false)
+  const [emailInvalid, setEmailInvalid] = useState(false)
+  const [loader, setLoader] = useState(false)
 
   const navigate = useNavigate()
   const form = useRef()
-  const users = useSelector((state) => state.allUserReducer)
   const currentUser = useSelector((state) => state.currentUserReducer)
 
   useEffect(() => {
@@ -25,24 +27,32 @@ export default function Welcome() {
     }
   }, [currentUser])
 
+  let data;
   let handleForm = async (e) => {
-    console.log('ok')
+    setLoader(true)
     e.preventDefault()
-    const verifyUser = users.filter(user => user.username === form.current[0].value)
-    if(verifyUser.length){
-      const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    data = {
+      email: form.current[0].value
+    }
+    setIdentify(data.email)
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
-        if(emailRegex.test(form.current[0].value)){
+    if(emailRegex.test(data.email)){
+      return axios.post('http://localhost:3001/users/search', data).then(
+      res => {
+        if(res.status === 404){
           setIdentifierValid(true)
           setRegister(true)
+          setLoader(false)
+        } else if(res.status === 200){
+          setIdentifierValid(true)
+          setLogin(true)
+          setLoader(false)
         }
+      })
     } else {
-      const user = users.filter(user => user.email === form.current[0].value)
-      if(user.length){
-        setIdentify(user)
-        setIdentifierValid(true)
-        setLogin(true)
-      }
+      setEmailInvalid(true)
+      setLoader(false)
     }
   }
 
@@ -64,6 +74,7 @@ export default function Welcome() {
                   </label>
                   <button className='whitespace-nowrap px-4 py-4 ml-5 rounded-md text-slate-200 text-xl font-medium bg-gradient-to-tr from-blue-700 to-blue-900' type='submit'>Commencer</button>
               </form>
+              <h3 className={`${emailInvalid ? "" : "hidden" } text-red-600 font-semibold`}>Cette adresse email est invalide, renseigner une adresse email valide ou continuer en tant qu'invité</h3>
               <div className='mt-5'>
                 <Link className='whitespace-nowrap px-4 py-2 rounded-md text-slate-200 text-xl font-medium bg-gradient-to-tr from-blue-700 to-blue-900' to="/home">Continuer en tant qu'invité</Link>
               </div>
@@ -78,7 +89,7 @@ export default function Welcome() {
         /> : ""}
         {register ? 
         <Register 
-        emailValue={form.current[0].value || null}
+        emailValue={identify}
         register={register}
         identifierValid={identifierValid}
         setRegister={setRegister}

@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken'
 export async function getAllUsers(req, res){
     users.all().then(
         response => {
+            console.log(response)
             res.status(200).json({response})
         }
     )
@@ -18,7 +19,6 @@ export async function addUser(req, res) {
         users.add(username, email, hashedPassword)
         .then(
             response => {
-                console.log(response)
                 let tokenData = {
                     id: response[0].id,
                     username: response[0].username,
@@ -128,7 +128,6 @@ export async function updateUserPseudo(req, res){
 
 export async function sessionIsValid(req, res){
     const { token } = req.body
-    console.log(req.body)
     jwt.verify(token, process.env.PRIVATE_KEY, function(err, decoded){
         if(err){
             console.log(err)
@@ -136,6 +135,16 @@ export async function sessionIsValid(req, res){
         } else {
             res.status(200).json({msg: `Session valide.`, decoded})
         }
+    })
+}
+export async function userExist(req, res){
+    const { email } = req.body
+    users.byEmail(email).then(user => {
+        console.log(user)
+        res.status(200).json({user: user})
+    })
+    .catch(err => {
+        res.status(200).json({err: err})
     })
 }
 

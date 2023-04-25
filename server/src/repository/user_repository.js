@@ -1,18 +1,19 @@
 import { createPoolConnection } from "../lib/db.js"
 
 export async function getUsers(){ // Fonction pour récupérer tout les utilisateurs en base de donnée
-    const [result] = await createPoolConnection().query(`SELECT * FROM users`)
+    const [result] = await createPoolConnection().query(`SELECT users.id, users.username, users.email, users.first_name, users.number_phone, r.name  FROM users INNER JOIN roles r ON users.role_id = r.id`)
     if(result.length){
         return result
     }
     return null
 }
 export async function getUserbyEmail(email){ // Fonction pour vérifier si un utilisateur existe
-    const [userId] = await createPoolConnection().query(`SELECT * FROM users WHERE id = ?`, [email])
-    if(userId.length){
-        return userId
+    const [user] = await createPoolConnection().query(`SELECT * FROM users WHERE id = ?`, [email])
+    if(user.length){
+        return user
     }
-    return null
+    const err = 'Aucun utilisateur n\'a été trouvé pour cette adresse email'
+    throw err
 }
 
 export async function addUserDb(username, email, password){ // Ajoute un utilisateur en base de donnée

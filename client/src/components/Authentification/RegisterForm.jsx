@@ -16,6 +16,7 @@ export default function Register({
     const navigate = useNavigate()
 
     useEffect(() => {
+        console.log(email)
         const clearPassword = setTimeout(() => {
             setPassword('')
             clearTimeout(clearPassword)
@@ -69,7 +70,7 @@ export default function Register({
                                 type="email" 
                                 name="email" 
                                 placeholder="Email"
-                                value={email}
+                                value={emailValue}
                                 onInput={(e) => setEmail(e.currentTarget.value)}
                                 />
                             </label>

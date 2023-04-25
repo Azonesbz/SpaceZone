@@ -10,7 +10,6 @@ export default function Carts(){
     const [totalPrice, setTotalPrice] = useState(null)
     const dispatch = useDispatch()
     const cartItem = useSelector((state) => state.cartReducer)
-    console.log(cartItem)
     let data;
     useEffect(() => {
         dispatch(getCarts())

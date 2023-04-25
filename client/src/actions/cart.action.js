@@ -14,7 +14,6 @@ export let getCarts = () => {
             token: token
         }
         return axios.post(`http://localhost:3001/carts`, data).then(response => {
-            console.log(response.data)
             dispatch({ type: GET_CARTS_PRODUCT, payload: response.data.cartItem })
         })
         .catch(err => {

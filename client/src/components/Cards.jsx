@@ -31,7 +31,6 @@ export default function Carts({page}){
 
     let handleCart = (e, idProduct, quantity) => {
         e.preventDefault()
-        console.log(id)
         dispatch(addProductCart(id))
     }
 
