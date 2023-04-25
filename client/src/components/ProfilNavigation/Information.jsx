@@ -1,7 +1,6 @@
 import { useRef } from "react"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { updateUserPseudo } from "../../actions/user.action";
 
 export default function Information() {
 
@@ -26,7 +25,6 @@ export default function Information() {
         data = {
             pseudo: formPseudo.current[0].value
         }
-        dispatch(updateUserPseudo(currentUser.id, data))
         setShowFormPseudo(false)
     }
     let handleSubmitEmail = (e) => {

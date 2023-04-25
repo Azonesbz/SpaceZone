@@ -61,7 +61,7 @@ export const userLogout = (id) => {
 
 // Update user information
 
-export const updateUserPseudo = (id, data) => {
+export const updateUser = () => {
     return (dispatch) => {
         axios.put(`http://localhost:3001/updateUser/${id}`, data).then(res => {
             dispatch({ type: SET_USER_PSEUDO, payload: res.user_id})

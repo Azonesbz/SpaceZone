@@ -1,15 +1,74 @@
-import React,{ useEffect } from 'react'
-import Header from '../components/Navbar'
+import React,{ useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { isEmpty } from '../utils/utils'
 import { Link, useNavigate } from 'react-router-dom'
 import { deleteUser, getAllUser } from '../actions/user.action'
+import Modal from '../components/Modal'
+
+function EditUserModal({ user, isOpen, onClose }) {
+    const [username, setUsername] = useState(user.username);
+    const [email, setEmail] = useState(user.email);
+    const [name, setName] = useState(user.name);
+
+    useEffect(() => {
+        console.log(user)
+    }, [])
+  
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      // Envoyer une requête PUT pour mettre à jour l'utilisateur
+      onClose();
+    };
+
+    return (
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <form onSubmit={handleSubmit} className='h-full flex flex-col p-5 space-y-3 text-black'>
+          <label className='flex flex-col w-3/4'>
+                Username:
+                <input
+                className='w-full py-[5px] px-2 rounded'
+                type='text'
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
+                />
+          </label>
+          <label className='flex flex-col w-3/4'>
+                Email:
+                <input
+                className='w-full py-[5px] px-2 rounded'
+                type='text'
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                />
+          </label>
+          <label className='flex flex-col w-3/4'>
+                Name:
+                <select 
+                className='w-full py-[5px] px-2 rounded'
+                id="" 
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+                >
+                    <option value="1">Administrateur</option>
+                    <option value="2">Modérateur</option>
+                    <option value="3">Utilisateur</option>
+                </select>
+          </label>
+          <div className='flex justify-center items-end h-full'>
+            <button className='bg-indigo-700 font-raleway font-medium px-10 py-1 rounded-lg' type='submit'>Enregistrer</button>
+          </div>
+        </form>
+      </Modal>
+    );
+  }
 
 export default function Dashboard() {
 
     const allUser = useSelector((state) => state.allUserReducer)
     const currentUser = useSelector((state) => state.currentUserReducer)
     const numberProduct = useSelector((state) => state.productReducer.number)
+    const [editUser, setEditUser] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -29,11 +88,6 @@ export default function Dashboard() {
                 }
                 dispatch(deleteUser(parent.value))
                 dispatch(getAllUser())
-                break;
-            } else if(parent.id === 'update-user'){
-                data = {
-                    id: parent.value
-                }
                 break;
             } else {
                 parent = parent.parentNode
@@ -90,8 +144,7 @@ export default function Dashboard() {
                                 Gérer les utilisateurs 
                                 
                             </h2>
-                            <div className='bg-slate-400 h-96 mt-5 rounded-xl p-5 overflow-scroll'>
-                                <ul>
+                            <div className='bg-slate-400 h-96 mt-5 rounded-xl p-5 overflow-scroll relative'>
                                     <table className='table-auto'>
                                         <thead>
                                             <tr className='text-left'>
@@ -123,7 +176,7 @@ export default function Dashboard() {
                                                                 <path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path>
                                                             </svg>
                                                         </button>
-                                                        <button className='bg-neutral-900 text-slate-200 p-1 rounded-lg active:scale-95 duration-200' id='update-user' value={user}>
+                                                        <button className='bg-neutral-900 text-slate-200 p-1 rounded-lg active:scale-95 duration-200' id='update-user' value={user} onClick={() => setEditUser(user)}>
                                                             <svg width="30" height="30" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                                 <path d="M4 20h4L18.5 9.5a2.829 2.829 0 0 0-4-4L4 16v4Z"></path>
                                                                 <path d="m13.5 6.5 4 4"></path>
@@ -134,8 +187,14 @@ export default function Dashboard() {
                                             ))}
                                         </tbody>
                                     </table>
-                                </ul>
                             </div>
+                            {editUser && (
+                                <EditUserModal
+                                    user={editUser}
+                                    isOpen={true}
+                                    onClose={() => setEditUser(false)}
+                                />
+                            )}
                         </div>
                     </div>
                 </div>
