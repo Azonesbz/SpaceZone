@@ -38,17 +38,19 @@ export default function Welcome() {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
     if(emailRegex.test(data.email)){
-      return axios.post('http://localhost:3001/users/search', data).then(
+      return axios.post('http://localhost:3001/users/search', data)
+      .then(
       res => {
-        if(res.status === 404){
-          setIdentifierValid(true)
-          setRegister(true)
-          setLoader(false)
-        } else if(res.status === 200){
+        if(res.status === 200){
           setIdentifierValid(true)
           setLogin(true)
           setLoader(false)
         }
+      })
+      .catch(err => {
+        setIdentifierValid(true)
+        setRegister(true)
+        setLoader(false)
       })
     } else {
       setEmailInvalid(true)

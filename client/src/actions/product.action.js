@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const GET_PRODUCTS = "GET_PRODUCTS"
-export const NUMBER_OF_PRODUCT = "NUMBER_OF_PRODUCT"
+export const NUMBER_OF_PRODUCTS = "NUMBER_OF_PRODUCTS"
 export const ADD_PRODUCTS = "ADD_PRODUCT"
 export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS"
 export const GET_PRODUCT_BY_ID = "GET_PRODUCT_BY_ID"
@@ -17,7 +17,7 @@ export let getProduct = (data) => {
 export let getAllProduct = () => {
     return (dispatch) => {
         return axios.get('http://localhost:3001/allproduct').then(res => {
-            dispatch({ type: NUMBER_OF_PRODUCT, payload: res.data.result })
+            dispatch({ type: NUMBER_OF_PRODUCTS, payload: res.data.result })
         })
     }
 }

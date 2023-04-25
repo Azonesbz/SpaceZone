@@ -8,7 +8,7 @@ export async function getUsers(){ // Fonction pour récupérer tout les utilisat
     return null
 }
 export async function getUserbyEmail(email){ // Fonction pour vérifier si un utilisateur existe
-    const [user] = await createPoolConnection().query(`SELECT * FROM users WHERE id = ?`, [email])
+    const [user] = await createPoolConnection().query(`SELECT * FROM users WHERE email = ?`, [email])
     if(user.length){
         return user
     }
@@ -44,9 +44,21 @@ export async function updateToken(email, token, id) {
 }
 
 export async function deleteUserDb(id){
-    const [info] = await createPoolConnection().query(`DELETE FROM users WHERE id = ?`, [id])
-    return info
+    // Supprimer tous les enregistrements de la table carts_items qui font référence aux produits de l'utilisateur
+    await createPoolConnection().query(`DELETE FROM carts_items WHERE product_id IN (SELECT id FROM products WHERE user_id = ?)`, [id]);
+
+    // Supprimer tous les enregistrements de la table carts qui appartiennent à l'utilisateur
+    await createPoolConnection().query(`DELETE FROM carts WHERE user_id = ?`, [id]);
+
+    // Supprimer tous les enregistrements de la table products qui appartiennent à l'utilisateur
+    await createPoolConnection().query(`DELETE FROM products WHERE user_id = ?`, [id]);
+
+    // Supprimer l'utilisateur
+    const [info] = await createPoolConnection().query(`DELETE FROM users WHERE id = ?`, [id]);
+    return info;
 }
+
+
 export async function updatePseudo(id, pseudo){
     await createPoolConnection().query(`UPDATE users SET user_id = ? WHERE id = ?`, [pseudo, id])
     const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.user_id, users.email, users.prenom, users.nom, users.numberphone, role.permission FROM users INNER JOIN role ON users.role_id = role.id WHERE users.id = ?`, [id])

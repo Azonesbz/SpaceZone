@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken'
 export async function getAllUsers(req, res){
     users.all().then(
         response => {
-            console.log(response)
             res.status(200).json({response})
         }
     )
@@ -140,20 +139,19 @@ export async function sessionIsValid(req, res){
 export async function userExist(req, res){
     const { email } = req.body
     users.byEmail(email).then(user => {
-        console.log(user)
         res.status(200).json({user: user})
     })
     .catch(err => {
-        res.status(200).json({err: err})
+        res.status(404).json({err: err})
     })
 }
 export async function deleteUser(req, res){
     const id = req.params.id
-    console.log(id)
     users.delete(id).then(user => {
         res.status(200).json({user: user})
     })
     .catch(err => {
+        console.log(err)
         res.status(500).json({err: err})
     })
 }

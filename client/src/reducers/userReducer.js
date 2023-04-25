@@ -1,4 +1,4 @@
-import { ADD_USER, LOGIN_USER, GET_ALL_USERS, SET_USER, SET_USER_PSEUDO } from "../actions/user.action"
+import { ADD_USER, LOGIN_USER, GET_ALL_USERS, SET_USER, SET_USER_PSEUDO, NUMBER_OF_USER } from "../actions/user.action"
 
 const initialState = {}
 
@@ -10,6 +10,8 @@ export function allUserReducer(state = initialState, action){
             return [action.payload, ...state]
         case LOGIN_USER:
             return [action.payload, ...state]
+        case NUMBER_OF_USER:
+            return {...state, number: action.payload}
         default: 
             return state
     }

@@ -3,12 +3,13 @@ import Header from '../components/Navbar'
 import { useDispatch, useSelector } from 'react-redux'
 import { isEmpty } from '../utils/utils'
 import { Link, useNavigate } from 'react-router-dom'
-import { deleteUser } from '../actions/user.action'
+import { deleteUser, getAllUser } from '../actions/user.action'
 
 export default function Dashboard() {
 
     const allUser = useSelector((state) => state.allUserReducer)
     const currentUser = useSelector((state) => state.currentUserReducer)
+    const numberProduct = useSelector((state) => state.productReducer.number)
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -27,6 +28,7 @@ export default function Dashboard() {
                     id: parent.value
                 }
                 dispatch(deleteUser(parent.value))
+                dispatch(getAllUser())
                 break;
             } else if(parent.id === 'update-user'){
                 data = {
@@ -70,7 +72,7 @@ export default function Dashboard() {
                             </div>
                             <div className='flex items-center space-x-5 mt-5'>
                                 <div className='flex items-center justify-center h-20 p-5 bg-gradient-to-br from-indigo-700 to-indigo-950 rounded-full'>
-                                    <h2 className='text-4xl text-rajdhani'>19633</h2>
+                                    <h2 className='text-4xl text-rajdhani'>{numberProduct}</h2>
                                 </div>
                                 <div className='h-[1px] w-full bg-neutral-800 mx-5'></div>
                                 <h1 className='text-xl font-thin whitespace-nowrap'>Articles sont en ventes</h1>
