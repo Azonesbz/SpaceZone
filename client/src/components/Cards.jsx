@@ -4,7 +4,6 @@ import { isEmpty } from "./Utils"
 import { useEffect, useState } from "react"
 import { getProduct } from "../actions/product.action"
 import { addProductCart } from "../actions/cart.action"
-import Counter from "./Counter"
 
 export default function Carts({page}){
     
