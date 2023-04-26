@@ -2,6 +2,7 @@ import { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Modal from "../modal/Modal"
 import { editEmail, editFirstName, editNumberPhone, editUsername } from "../../actions/user.action"
+import axios from "axios"
 
 function UsernameModal({currentUser, isOpen, onClose}){
 
@@ -46,7 +47,7 @@ function EmailModal({currentUser, isOpen, onClose}){
         onClose()
     }
     return(
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} height={'h-40'} width={'w-full'}>
             <form action="" className="flex flex-col duration-200 mt-5" onSubmit={handleEditEmail} ref={formData}>
                 <h2 className="text-2xl font-thin font-ubuntu text-white">Email</h2>
                 <label htmlFor="" className="flex items-center">
@@ -73,7 +74,7 @@ function PhoneNumberModal({currentUser, isOpen, onClose}){
     }
     
     return(
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isOpen={isOpen} onClose={onClose} height={'h-40'} width={'w-full'}>
             <form action="" className="flex flex-col duration-200 mt-5" onSubmit={handleEditPhoneNumber} ref={formData}>
                 <h2 className="text-2xl font-thin font-ubuntu text-white">Numéro de téléphone</h2>
                 <label htmlFor="" className="flex items-center">
@@ -100,7 +101,7 @@ function FirstNameModal({currentUser, isOpen, onClose}){
     }
 
     return(
-        <Modal isOpen={isOpen} onClose={onClose} >
+        <Modal isOpen={isOpen} onClose={onClose} height={'h-40'} width={'w-full'}>
             <form action="" className="flex flex-col duration-200 mt-5" onSubmit={handleEditFirstName} ref={formData}>
                 <h2 className="text-2xl font-thin font-ubuntu text-white">Pseudonyme</h2>
                 <label htmlFor="" className="flex items-center">
@@ -131,17 +132,8 @@ export default function Information() {
         e.preventDefault()
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("user_id", currentUser.id)
-        fetch('http://localhost:3001/upload', {
-            method: "POST",
-            body: formData
-        }).then(
-            response => response.json()
-        ).then(
-            data => {
-                console.log(data)
-            }
-        ).catch(err => console.error(err))
+        dispatch(uploadFile())
+            
     }
     let handleCloseUsername = () => {
         setShowFormUsername(false)
@@ -198,7 +190,7 @@ export default function Information() {
                     <div className="flex flex-col justify-center items-center m-auto">
                         <h2 className="text-slate-200 font-ubuntu text-xl font-thin">Image de profil</h2>
                         <img
-                            src={`./uploads/profil/${currentUser.id}.jpg`}
+                            src={`./uploads/profil/${currentUser.profil_picture}`}
                             onError={(e) => {
                                 e.target.onerror = null; // empêche les boucles d'erreur infinies
                                 e.target.src = './uploads/default.jpg'; // charge une image alternative

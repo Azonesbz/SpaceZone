@@ -43,6 +43,6 @@ router.post('/api/session', sessionIsValid)
 
 // Upload de fichier
 
-router.post('/upload', upload.single('file'), uploadFile)
+router.put('/upload/:id', upload.single('file'), uploadFile)
 
 export default router

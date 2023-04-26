@@ -1,4 +1,4 @@
-import { ADD_USER, LOGIN_USER, GET_ALL_USERS, SET_USER, SET_USER_PSEUDO, NUMBER_OF_USER, UPDATE_USER, EDIT_USER_PROFIL } from "../actions/user.action"
+import { ADD_USER, LOGIN_USER, GET_ALL_USERS, SET_USER, SET_USER_PSEUDO, NUMBER_OF_USER, EDIT_USER_PROFIL } from "../actions/user.action"
 
 const initialState = {}
 
@@ -48,6 +48,11 @@ export function currentUserReducer(state = initialState, action){
                 return {
                     ...state,
                     first_name: action.payload.first_name
+                }
+            } else if(action.payload.url){
+                return {
+                    ...state,
+                    profil_picture: action.payload.url
                 }
             }
 

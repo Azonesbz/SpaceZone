@@ -7,6 +7,7 @@ import About from "../components/ProfilNavigation/About";
 import Footer from "../components/Footer";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import ProfilePicture from "../components/picture/ProfilPicture";
 
 export default function Profil(){
 
@@ -15,6 +16,7 @@ export default function Profil(){
     const [aboutNav, setAboutNav] = useState(false)
     const [purshaseNav, setPurshaseNav] = useState(false)
     const [informationNav, setInformationNav] = useState(true)
+    const [productLike, setProductLike] = useState(false)
     const [productOnSellNav, setProductOnSellNav] = useState(false)
 
     const scrollToTop = () => {
@@ -82,13 +84,13 @@ export default function Profil(){
                 <aside className="sticky bg-gradient-to-br col-span-4 from-slate-400 to-neutral-400 text-black shadow rounded-xl row-span-3">
                     <header className="flex flex-col items-center bg-gradient-to-tl from-slate-200 to-slate-300 p-5 rounded-t-xl">
                         <img
-                          src={`./uploads/profil/${currentUser.id}.jpg`}
+                          src={`./uploads/profil/${currentUser.profil_picture}`}
                           onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.src = './uploads/default.jpg';
+                            e.target.onerror = null; // empêche les boucles d'erreur infinies
+                            e.target.src = './uploads/default.jpg'; // charge une image alternative
                           }}
                           alt="image de profil"
-                          className="rounded-full mt-5 h-48 w-48"
+                          className="rounded-full mt-5 h-36 w-36"
                         />
                         <h1 className="mt-3 text-2xl text-center font-semibold font-raleway first-letter:uppercase">{currentUser.username}</h1>
                     </header>
@@ -116,7 +118,8 @@ export default function Profil(){
                 {informationNav ? <Information /> : ""} 
                 {productOnSellNav ? <ProductOnSell /> : ""} 
                 {purshaseNav ? <Purshases /> : ""} 
-                {aboutNav ? <About /> : ""} 
+                {aboutNav ? <About /> : ""}
+                {productLike ? <LikedProduct /> : ""}
             </section>
             <Footer />
         </>

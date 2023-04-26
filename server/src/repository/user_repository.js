@@ -1,7 +1,7 @@
 import { createPoolConnection } from "../lib/db.js"
 
 export async function getUsers(){ // Fonction pour récupérer tout les utilisateurs en base de donnée
-    const [result] = await createPoolConnection().query(`SELECT users.id, users.username, users.email, users.first_name, users.number_phone, r.name  FROM users INNER JOIN roles r ON users.role_id = r.id`)
+    const [result] = await createPoolConnection().query(`SELECT users.id, users.username, users.email, users.first_name, users.number_phone, users.profil_picture, r.name  FROM users INNER JOIN roles r ON users.role_id = r.id`)
     if(result.length){
         return result
     }
@@ -23,7 +23,7 @@ export async function addUserDb(username, email, password){ // Ajoute un utilisa
         throw err
     }
     await createPoolConnection().query(`INSERT INTO users (role_id, username, email, password) VALUES (?, ?, ?, ?)`, [3, username, email, password])
-    const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.username, users.email, users.first_name, users.number_phone, roles.name FROM users INNER JOIN roles ON users.role_id = roles.id WHERE email = ?`, [email])
+    const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.username, users.email, users.first_name, users.number_phone, users.profil_picture, roles.name FROM users INNER JOIN roles ON users.role_id = roles.id WHERE email = ?`, [email])
 
     return info
 }
@@ -31,7 +31,7 @@ export async function addUserDb(username, email, password){ // Ajoute un utilisa
 
 
 export async function loginUserDb(email){
-    const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.username, users.email, users.first_name, users.number_phone, roles.name FROM users INNER JOIN roles ON users.role_id = roles.id WHERE email = ?`, [email])
+    const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.username, users.email, users.first_name, users.number_phone, users.profil_picture, roles.name FROM users INNER JOIN roles ON users.role_id = roles.id WHERE email = ?`, [email])
     if(!info.length){
         const err = 'Une erreur est survenue, veuillez réessayer.'
         throw err
@@ -111,6 +111,16 @@ export async function editFirstNameDb(id, firstName){
         return
     }
 }
+export async function editPictureDb(id, picture){
+    console.log(picture)
+    try {
+        await createPoolConnection().query(`UPDATE users SET profil_picture = ? WHERE id = ?`, [picture, id])
+        return
+    } catch (err) {
+        console.log('Une erreur lors de la modification' + err)
+        return
+    }
+}
 
 export const users = {
     all: getUsers,
@@ -124,4 +134,5 @@ export const users = {
     number: editNumberDb,
     firstName: editFirstNameDb,
     newToken: updateToken,
+    picture: editPictureDb,
 }

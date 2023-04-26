@@ -110,3 +110,10 @@ export let editFirstName = (data) => {
         })
     }
 }
+export let editPicture = (data) => {
+    return (dispatch) => {
+        axios.put(`http://localhost:3001/upload/${data.id}`, data).then(res => {
+            dispatch({type: EDIT_USER_PROFIL, payload: {url: res.data.url}})
+        })
+    }
+}

@@ -24,7 +24,8 @@ export async function addUser(req, res) {
                     email: response[0].email,
                     first_name: response[0].first_name,
                     number_phone: response[0].number_phone,
-                    permission: response[0].name
+                    permission: response[0].name,
+                    profil_picture: response[0].profil_picture
                 }
                 const token = jwt.sign(tokenData, process.env.PRIVATE_KEY, {expiresIn: '1h'})
     
@@ -60,7 +61,8 @@ export async function connectUser(req, res) {
                     email: response[0].email,
                     first_name: response[0].first_name,
                     number_phone: response[0].number_phone,
-                    permission: response[0].name
+                    permission: response[0].name,
+                    profil_picture: response[0].profil_picture
                 }
                 const token = jwt.sign(tokenData, process.env.PRIVATE_KEY, {expiresIn: '1h'})
                 users.newToken(email, JSON.stringify(token))
