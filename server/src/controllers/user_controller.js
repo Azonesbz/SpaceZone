@@ -100,28 +100,14 @@ export async function userLogout(req, res){
 
 export async function updateUserPseudo(req, res){
     const id = req.params.id
-    const {token, pseudo} = req.body
-
-    jwt.verify(token, process.env.PRIVATE_KEY, function(err, decoded){
-        if(err) {
-            console.log(err)
-            res.status(401).json({err})
-        } else {
-            users.newPseudo(id, pseudo).then(response => {
-                let tokenData = {
-                    id: response[0].id,
-                    username: response[0].username,
-                    email: response[0].email,
-                    first_name: response[0].first_name,
-                    number_phone: response[0].number_phone,
-                    permission: response[0].name
-                }
-                const token = jwt.sign(tokenData, process.env.PRIVATE_KEY, {expiresIn: '1h'})
-                users.newToken(id, token).then(() => {
-                    res.status(201).json({msg: `Mise à jour réussi, votre nouveau pseudo est ${response[0].user_id}`})
-                })
-            })
-        }
+    const {username, email, permission} = req.body
+    console.log(permission)
+    users.update(id, username, email, permission).then((userEdited) => {
+        console.log(userEdited)
+        res.status(200).json({response: userEdited})
+    })
+    .catch(err => {
+        console.log(err)
     }) 
 }
 

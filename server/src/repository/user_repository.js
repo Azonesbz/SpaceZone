@@ -59,11 +59,21 @@ export async function deleteUserDb(id){
 }
 
 
-export async function updatePseudo(id, pseudo){
-    await createPoolConnection().query(`UPDATE users SET user_id = ? WHERE id = ?`, [pseudo, id])
-    const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.user_id, users.email, users.prenom, users.nom, users.numberphone, role.permission FROM users INNER JOIN role ON users.role_id = role.id WHERE users.id = ?`, [id])
-    return info
-}
+export async function updateUserDb(id, username, email, permission) {
+    console.table({
+        id, username, email, permission
+    })
+    try{
+        await createPoolConnection(
+            `UPDATE users SET username = ? WHERE id = ?`,
+            [username, id]
+          );
+          return
+    } catch(err) {
+        console.log('Une erreur lors de la modification' + err)
+        return
+    }
+  }
 export async function updateEmail(id, email){
     await createPoolConnection().query(`UPDATE users SET email = ? WHERE id = ?`, [email, id])
     const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.user_id, users.email, users.prenom, users.nom, users.numberphone, role.permission FROM users INNER JOIN role ON users.role_id = role.id WHERE email = ?`, [email])
@@ -87,7 +97,7 @@ export const users = {
     delete: deleteUserDb,
     login: loginUserDb,
     newToken: updateToken,
-    newPseudo: updatePseudo,
+    update: updateUserDb,
     newEmail: updateEmail,
     newNumber: updateNumber,
     newName: updateName,

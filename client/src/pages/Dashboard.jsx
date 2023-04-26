@@ -2,27 +2,37 @@ import React,{ useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { isEmpty } from '../utils/utils'
 import { Link, useNavigate } from 'react-router-dom'
-import { deleteUser, getAllUser } from '../actions/user.action'
+import { deleteUser, getAllUser, updateUser } from '../actions/user.action'
 import Modal from '../components/Modal'
+import { useRef } from 'react'
 
 function EditUserModal({ user, isOpen, onClose }) {
     const [username, setUsername] = useState(user.username);
     const [email, setEmail] = useState(user.email);
     const [name, setName] = useState(user.name);
+    const editFormUser = useRef()
+    const dispatch = useDispatch()
 
     useEffect(() => {
         console.log(user)
     }, [])
-  
+    let data;
     const handleSubmit = (event) => {
       event.preventDefault();
-      // Envoyer une requête PUT pour mettre à jour l'utilisateur
+      data = {
+        id: user.id,
+        username: editFormUser.current[0].value,
+        email: editFormUser.current[1].value,
+        permission: editFormUser.current[2].value,
+      }
+      console.log(data)
+      dispatch(updateUser(data))
       onClose();
     };
 
     return (
       <Modal isOpen={isOpen} onClose={onClose}>
-        <form onSubmit={handleSubmit} className='h-full flex flex-col p-5 space-y-3 text-black'>
+        <form onSubmit={handleSubmit} className='h-full flex flex-col p-5 space-y-3 text-black' ref={editFormUser}>
           <label className='flex flex-col w-3/4'>
                 Username:
                 <input
@@ -199,9 +209,9 @@ export default function Dashboard() {
                     </div>
                 </div>
                 <div className='w-1/3'>
-                    <div className='sticky my-auto top-2 flex flex-col justify-center h-[80vh] gap-5'>
-                        <article className='h-1/2 bg-gradient-to-br from-neutral-900 to-neutral-950 rounded-xl hover:scale-150 hover:relative hover:translate-x-(-3rem) hover:translate-y-20 duration-300'></article>
-                        <article className='h-1/2 bg-gradient-to-br from-neutral-900 to-neutral-950 rounded-xl hover:scale-150 hover:relative hover:right-40 hover:bottom-40 duration-300'></article>
+                    <div className='sticky top-5 flex flex-col h-[100vh] gap-5'>
+                        <article className='h-2/3 bg-gradient-to-br from-neutral-900 to-neutral-950 rounded-xl'></article>
+                        <article className='h-1/3 bg-gradient-to-br from-neutral-900 to-neutral-950 rounded-xl'></article>
                     </div>
                 </div>
             </div>

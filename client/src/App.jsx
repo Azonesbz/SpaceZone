@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { sessionIsValid } from "./actions/session.action";
 import { getAllUser } from "./actions/user.action";
+import Error from "./pages/404";
 
 
 function RouteWrapper({ children }) {
@@ -40,6 +41,7 @@ export default function App() {
                 <Route path="/product/new" element={<CreateProduct />}/>
                 <Route path="/profil" element={<Profil />}/>
                 <Route path="/carts" element={<Carts />}/>
+                <Route path="/*" element={<Error />}/>
               </Routes>
           </RouteWrapper>
       </BrowserRouter>
