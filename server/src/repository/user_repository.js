@@ -64,18 +64,15 @@ export async function updateUserDb(id, username, email, permission) {
         id, username, email, permission
     })
     try{
-        await createPoolConnection(
-            `UPDATE users SET username = ? WHERE id = ?`,
-            [username, id]
-          );
-          return
+        const [result] = await createPoolConnection().query(`UPDATE users SET username = ?, email = ?, role_id = ? WHERE id = ?`, [username, email, permission, id])
+          return result
     } catch(err) {
         console.log('Une erreur lors de la modification' + err)
         return
     }
   }
-export async function updateEmail(id, email){
-    await createPoolConnection().query(`UPDATE users SET email = ? WHERE id = ?`, [email, id])
+export async function updateEmail(id, username){
+    await createPoolConnection().query(`UPDATE users SET email = ? WHERE id = ?`, [username, id])
     const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.user_id, users.email, users.prenom, users.nom, users.numberphone, role.permission FROM users INNER JOIN role ON users.role_id = role.id WHERE email = ?`, [email])
     return info
 }
