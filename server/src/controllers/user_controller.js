@@ -114,7 +114,40 @@ export async function editUsername(req, res){
     console.log(req.body)
     const {username} = req.body
     users.username(id, username).then(() => {
-        res.status(200)
+        res.status(200).json({username: username})
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({err})
+    }) 
+}
+export async function editEmail(req, res){
+    const id = req.params.id
+    const {email} = req.body
+    users.email(id, email).then(() => {
+        res.status(200).json({email: email})
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({err})
+    }) 
+}
+export async function editNumberPhone(req, res){
+    const id = req.params.id
+    const {numberphone} = req.body
+    users.number(id, numberphone).then(() => {
+        res.status(200).json({numberPhone: numberphone})
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({err})
+    }) 
+}
+export async function editFirstName(req, res){
+    const id = req.params.id
+    const {firstName} = req.body
+    users.firstName(id, firstName).then(() => {
+        res.status(200).json({firstName: firstName})
     })
     .catch(err => {
         console.log(err)

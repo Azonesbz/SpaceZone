@@ -71,29 +71,45 @@ export async function updateUserDb(id, username, email, permission) {
         return
     }
   }
+
 export async function editUsernameDb(id, username) {
-    try{
+    try {
         await createPoolConnection().query(`UPDATE users SET username = ? WHERE id = ?`, [username, id])
         return username
-    } catch(err) {
+    } catch (err) {
         console.log('Une erreur lors de la modification' + err)
         return
     }
-  }
-export async function updateEmail(id, username){
-    await createPoolConnection().query(`UPDATE users SET email = ? WHERE id = ?`, [username, id])
-    const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.user_id, users.email, users.prenom, users.nom, users.numberphone, role.permission FROM users INNER JOIN role ON users.role_id = role.id WHERE email = ?`, [email])
-    return info
 }
-export async function updateNumber(id, number){
-    await createPoolConnection().query(`UPDATE users SET numberphone = ? WHERE id = ?`, [pseudo, id])
-    const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.user_id, users.email, users.prenom, users.nom, users.numberphone, role.permission FROM users INNER JOIN role ON users.role_id = role.id WHERE email = ?`, [email])
-    return info
+
+
+export async function editEmailDb(id, email){
+    try {
+        await createPoolConnection().query(`UPDATE users SET email = ? WHERE id = ?`, [email, id])
+        return email
+    } catch (err) {
+        console.log('Une erreur lors de la modification' + err)
+        return
+    }
 }
-export async function updateName(id, name){
-    await createPoolConnection().query(`UPDATE users SET name = ? WHERE id = ?`, [name, id])
-    const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.user_id, users.email, users.prenom, users.nom, users.numberphone, role.permission FROM users INNER JOIN role ON users.role_id = role.id WHERE email = ?`, [email])
-    return info
+export async function editNumberDb(id, number){
+    JSON.stringify(number)
+    try {
+        await createPoolConnection().query(`UPDATE users SET number_phone = ? WHERE id = ?`, [number, id])
+        return number
+    } catch (err) {
+        console.log('Une erreur lors de la modification' + err)
+        return
+    }
+}
+export async function editFirstNameDb(id, firstName){
+    try {
+        await createPoolConnection().query(`UPDATE users SET first_name = ? WHERE id = ?`, [firstName, id])
+        return firstName
+    } catch (err) {
+        console.log('Une erreur lors de la modification' + err)
+        return
+    }
 }
 
 export const users = {
@@ -104,8 +120,8 @@ export const users = {
     delete: deleteUserDb,
     update: updateUserDb,
     username: editUsernameDb,
+    email: editEmailDb,
+    number: editNumberDb,
+    firstName: editFirstNameDb,
     newToken: updateToken,
-    newEmail: updateEmail,
-    newNumber: updateNumber,
-    newName: updateName,
 }

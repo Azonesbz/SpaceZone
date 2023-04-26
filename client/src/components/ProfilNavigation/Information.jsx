@@ -1,7 +1,7 @@
 import { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Modal from "../modal/Modal"
-import { editUsername } from "../../actions/user.action"
+import { editEmail, editFirstName, editNumberPhone, editUsername } from "../../actions/user.action"
 
 function UsernameModal({currentUser, isOpen, onClose}){
 
@@ -32,17 +32,22 @@ function UsernameModal({currentUser, isOpen, onClose}){
     )
 }
 function EmailModal({currentUser, isOpen, onClose}){
-    let handleSubmitEmail = (e) => {
+    const formData = useRef()
+    const dispatch = useDispatch()
+
+    let data;
+    let handleEditEmail = (e) => {
         e.preventDefault()
         data = {
-            email: formEmail.current[0].value
+            id: currentUser.id,
+            email: formData.current[0].value
         }
-        dispatch(updateUserEmail(currentUser.id, data))
-        setShowFormEmail(false)
+        dispatch(editEmail(data))
+        onClose()
     }
     return(
         <Modal isOpen={isOpen} onClose={onClose}>
-            <form action="" className="flex flex-col duration-200 mt-5" onSubmit={handleSubmitEmail}>
+            <form action="" className="flex flex-col duration-200 mt-5" onSubmit={handleEditEmail} ref={formData}>
                 <h2 className="text-2xl font-thin font-ubuntu text-white">Email</h2>
                 <label htmlFor="" className="flex items-center">
                     <input type="text" defaultValue={currentUser.email} className="py-2 px-2 rounded-md" />
@@ -52,41 +57,51 @@ function EmailModal({currentUser, isOpen, onClose}){
         </Modal>
     )
 }
-function FirstNameModal({currentUser, isOpen, onClose}){
-    let handleSubmitNumber = (e) => {
+function PhoneNumberModal({currentUser, isOpen, onClose}){
+    const formData = useRef()
+    const dispatch = useDispatch()
+
+    let data;
+    let handleEditPhoneNumber = (e) => {
         e.preventDefault()
         data = {
-            number: formNumber.current[0].value
+            id: currentUser.id,
+            numberphone: formData.current[0].value
         }
-        dispatch(updateUserNumber(currentUser.id, data))
-        setShowFormNumber(false)
+        dispatch(editNumberPhone(data))
+        onClose()
     }
     
     return(
         <Modal isOpen={isOpen} onClose={onClose}>
-            <form action="" className="flex flex-col duration-200 mt-5" onSubmit={handleSubmitNumber}>
+            <form action="" className="flex flex-col duration-200 mt-5" onSubmit={handleEditPhoneNumber} ref={formData}>
                 <h2 className="text-2xl font-thin font-ubuntu text-white">Numéro de téléphone</h2>
                 <label htmlFor="" className="flex items-center">
-                    <input type="text" defaultValue={currentUser.numberphone} className="py-2 px-2 rounded-md" />
+                    <input type="text" defaultValue={currentUser.number_phone} className="py-2 px-2 rounded-md" />
                     <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
                 </label>
             </form>
         </Modal>
     )
 }
-function PhoneNumberModal({currentUser, isOpen, onClose}){
-    let handleSubmitName = (e) => {
+function FirstNameModal({currentUser, isOpen, onClose}){
+    const formData = useRef()
+    const dispatch = useDispatch()
+
+    let data;
+    let handleEditFirstName = (e) => {
         e.preventDefault()
         data = {
-            name: formName.current[0].value
+            id: currentUser.id,
+            firstName: formData.current[0].value
         }
-        dispatch(updateUserName(currentUser.id, data))
-        setShowFormName(false)
+        dispatch(editFirstName(data))
+        onClose()
     }
 
     return(
         <Modal isOpen={isOpen} onClose={onClose} >
-            <form action="" className="flex flex-col duration-200 mt-5" onSubmit={handleSubmitName}>
+            <form action="" className="flex flex-col duration-200 mt-5" onSubmit={handleEditFirstName} ref={formData}>
                 <h2 className="text-2xl font-thin font-ubuntu text-white">Pseudonyme</h2>
                 <label htmlFor="" className="flex items-center">
                     <input type="text" defaultValue={currentUser.first_name} className="py-2 px-2 rounded-md" />
@@ -168,14 +183,14 @@ export default function Information() {
                             <h2 className="text-2xl font-thin font-ubuntu text-white">Numéro de téléphone</h2>
                             <button onClick={() => setShowFormNumber(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
                         </div>
-                        <h3>{currentUser.numberphone ? currentUser.numberphone : "Aucun numéro de téléphone"}</h3>
+                        <h3>{currentUser.number_phone ? currentUser.number_phone : "Aucun numéro de téléphone"}</h3>
                     </div>
                     <div className="flex flex-col mt-5 duration-200">
                         <div className="flex justify-between items-center">
                             <h2 className="text-2xl font-thin font-ubuntu text-white">Prénom</h2>
                             <button onClick={() => setShowFormName(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
                         </div>
-                        <h3 className="text-lg font-ubuntu font-thin">{currentUser.name ? currentUser.name : "Aucun prénom définie"}</h3>
+                        <h3 className="text-lg font-ubuntu font-thin">{currentUser.first_name ? currentUser.first_name : "Aucun prénom définie"}</h3>
                     </div>
 
                 </div>

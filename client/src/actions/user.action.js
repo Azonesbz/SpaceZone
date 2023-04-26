@@ -12,7 +12,7 @@ export const DELETE_USER = "DELETE_USER"
 export const SET_USER = "SET_USER"
 export const SET_USER_PSEUDO = "SET_USER_PSEUDO"
 export const NUMBER_OF_USER = "NUMBER_OF_USER"
-export const UPDATE_USER_USERNAME = "UPDATE_USER_USERNAME"
+export const EDIT_USER_PROFIL = "EDIT_USER_PROFIL"
 
 
 
@@ -85,7 +85,28 @@ export const updateUser = (data) => {
 export let editUsername = (data) => {
     return (dispatch) => {
         axios.put(`http://localhost:3001/editUsername/${data.id}`, data).then(res => {
-            dispatch({type: UPDATE_USER_USERNAME, payload: res.data.username})
+            dispatch({type: EDIT_USER_PROFIL, payload: {username: res.data.username}})
+        })
+    }
+}
+export let editEmail = (data) => {
+    return (dispatch) => {
+        axios.put(`http://localhost:3001/editEmail/${data.id}`, data).then(res => {
+            dispatch({type: EDIT_USER_PROFIL, payload: {email: res.data.email}})
+        })
+    }
+}
+export let editNumberPhone = (data) => {
+    return (dispatch) => {
+        axios.put(`http://localhost:3001/editNumberPhone/${data.id}`, data).then(res => {
+            dispatch({type: EDIT_USER_PROFIL, payload: {number_phone: res.data.numberPhone}})
+        })
+    }
+}
+export let editFirstName = (data) => {
+    return (dispatch) => {
+        axios.put(`http://localhost:3001/editFirstName/${data.id}`, data).then(res => {
+            dispatch({type: EDIT_USER_PROFIL, payload: {first_name: res.data.firstName}})
         })
     }
 }
