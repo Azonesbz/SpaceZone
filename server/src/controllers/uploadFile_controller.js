@@ -35,7 +35,7 @@ export async function uploadFile(req, res){
         }
 
         const oldPath = req.file.path;
-        const newFileName = path.join(path.dirname(oldPath), req.body.user + '.jpg');
+        const newFileName = path.join(path.dirname(oldPath), req.body.user_id + '.jpg');
         console.log(newFileName)
         
         fs.rename(oldPath, path.join(process.cwd(), newFileName), (err) => {

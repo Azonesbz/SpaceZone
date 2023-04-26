@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { isEmpty } from '../utils/utils'
 import { Link, useNavigate } from 'react-router-dom'
 import { deleteUser, getAllUser, updateUser } from '../actions/user.action'
-import Modal from '../components/Modal'
+import Modal from '../components/modal/Modal'
 import { useRef } from 'react'
 
 function EditUserModal({ user, isOpen, onClose }) {
@@ -31,7 +31,7 @@ function EditUserModal({ user, isOpen, onClose }) {
     };
 
     return (
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} height={'25rem'} width={'w-full'}>
         <form onSubmit={handleSubmit} className='h-full flex flex-col p-5 space-y-3 text-black' ref={editFormUser}>
           <label className='flex flex-col w-3/4'>
                 Username:

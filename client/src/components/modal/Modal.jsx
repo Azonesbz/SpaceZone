@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function Modal({ isOpen, onClose, children }) {
+export default function Modal({ isOpen, onClose, height, width, children }) {
   if (!isOpen) {
     return null;
   }
@@ -13,9 +13,9 @@ export default function Modal({ isOpen, onClose, children }) {
           aria-hidden='true'
           onClick={onClose}
         />
-        <div className='relative bg-gradient-to-br from-slate-300 to-slate-400 rounded-lg z-50 max-w-md w-full h-80 p-6'>
-            <button className='text-gray-700 absolute z-50 right-0 top-0 m-2 hover:text-black duration-200' onClick={onClose}>
-                <svg className='' width="35" height="35" fill="white" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <div className={`relative bg-slate-400 rounded-lg z-50 max-w-md ${width} ${height} p-6`}>
+            <button className='text-gray-700 absolute z-50 right-0 top-0 m-2 hover:text-black hover:scale-95 duration-200' onClick={onClose}>
+                <svg className='' width="40" height="40" fill="white" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z"></path>
                     <path d="m14.829 9.172-5.657 5.657"></path>
                     <path d="m9.172 9.172 5.656 5.657"></path>

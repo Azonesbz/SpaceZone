@@ -98,16 +98,27 @@ export async function userLogout(req, res){
     })
 }
 
-export async function updateUserPseudo(req, res){
+export async function updateUser(req, res){
     const id = req.params.id
     const {username, email, permission} = req.body
-    console.log(permission)
     users.update(id, username, email, permission).then((userEdited) => {
-        console.log(userEdited)
         res.status(200).json({response: userEdited})
     })
     .catch(err => {
         console.log(err)
+        res.status(500).json({err})
+    }) 
+}
+export async function editUsername(req, res){
+    const id = req.params.id
+    console.log(req.body)
+    const {username} = req.body
+    users.username(id, username).then(() => {
+        res.status(200)
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({err})
     }) 
 }
 

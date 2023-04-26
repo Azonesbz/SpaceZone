@@ -14,7 +14,6 @@ export default function Header(){
 
     let handleLogout = () => {
         dispatch(userLogout(currentUser.id))
-        navigate('/')
     }
     return (
         <>
@@ -39,7 +38,7 @@ export default function Header(){
                         {isLogged ? 
                         <li className="flex items-center cursor-pointer">
                             <img
-                            src={`./uploads/profil/${currentUser.username}.jpg`}
+                            src={`./uploads/profil/${currentUser.id}.jpg`}
                             onError={(e) => {
                                 e.target.onerror = null;
                                 e.target.src = '../uploads/profil/default.jpg';

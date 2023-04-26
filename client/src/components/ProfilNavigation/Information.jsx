@@ -1,32 +1,37 @@
-import { useRef } from "react"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import Modal from "../modal/Modal"
+import { editUsername } from "../../actions/user.action"
 
-export default function Information() {
+function UsernameModal({currentUser, isOpen, onClose}){
 
-    const formPseudo = useRef()
-    const formEmail = useRef()
-    const formNumber = useRef()
-    const formName = useRef()
-
-    const [showFormPseudo, setShowFormPseudo] = useState(false)
-    const [showFormEmail, setShowFormEmail] = useState(false)
-    const [showFormNumber, setShowFormNumber] = useState(false)
-    const [showFormName, setShowFormName] = useState(false)
-    const [file, setFile] = useState(null);
-
+    const formData = useRef()
     const dispatch = useDispatch()
-
-    const currentUser = useSelector((state) => state.currentUserReducer)
 
     let data;
     let handleSubmitPseudo = (e) => {
         e.preventDefault()
         data = {
-            pseudo: formPseudo.current[0].value
+            id: currentUser.id,
+            username: formData.current[0].value
         }
-        setShowFormPseudo(false)
+        dispatch(editUsername(data))
+        onClose()
     }
+    
+    return(
+        <Modal isOpen={isOpen} onClose={onClose} height={'h-40'} width={'w-full'}>
+            <form action="" className="flex flex-col h-full duration-200 py-7 px-8" onSubmit={handleSubmitPseudo} ref={formData}>
+                <h2 className="text-3xl font-karla text-black">Pseudonyme</h2>
+                <label htmlFor="" className="flex items-center mt-3">
+                    <input type="text" defaultValue={currentUser.username} className="py-2 px-2 rounded-md" />
+                    <button className="bg-gray-800 px-5 py-2 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
+                </label>
+            </form>
+        </Modal>
+    )
+}
+function EmailModal({currentUser, isOpen, onClose}){
     let handleSubmitEmail = (e) => {
         e.preventDefault()
         data = {
@@ -35,6 +40,19 @@ export default function Information() {
         dispatch(updateUserEmail(currentUser.id, data))
         setShowFormEmail(false)
     }
+    return(
+        <Modal isOpen={isOpen} onClose={onClose}>
+            <form action="" className="flex flex-col duration-200 mt-5" onSubmit={handleSubmitEmail}>
+                <h2 className="text-2xl font-thin font-ubuntu text-white">Email</h2>
+                <label htmlFor="" className="flex items-center">
+                    <input type="text" defaultValue={currentUser.email} className="py-2 px-2 rounded-md" />
+                    <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
+                </label>
+            </form>
+        </Modal>
+    )
+}
+function FirstNameModal({currentUser, isOpen, onClose}){
     let handleSubmitNumber = (e) => {
         e.preventDefault()
         data = {
@@ -43,6 +61,20 @@ export default function Information() {
         dispatch(updateUserNumber(currentUser.id, data))
         setShowFormNumber(false)
     }
+    
+    return(
+        <Modal isOpen={isOpen} onClose={onClose}>
+            <form action="" className="flex flex-col duration-200 mt-5" onSubmit={handleSubmitNumber}>
+                <h2 className="text-2xl font-thin font-ubuntu text-white">Numéro de téléphone</h2>
+                <label htmlFor="" className="flex items-center">
+                    <input type="text" defaultValue={currentUser.numberphone} className="py-2 px-2 rounded-md" />
+                    <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
+                </label>
+            </form>
+        </Modal>
+    )
+}
+function PhoneNumberModal({currentUser, isOpen, onClose}){
     let handleSubmitName = (e) => {
         e.preventDefault()
         data = {
@@ -52,18 +84,39 @@ export default function Information() {
         setShowFormName(false)
     }
 
+    return(
+        <Modal isOpen={isOpen} onClose={onClose} >
+            <form action="" className="flex flex-col duration-200 mt-5" onSubmit={handleSubmitName}>
+                <h2 className="text-2xl font-thin font-ubuntu text-white">Pseudonyme</h2>
+                <label htmlFor="" className="flex items-center">
+                    <input type="text" defaultValue={currentUser.first_name} className="py-2 px-2 rounded-md" />
+                    <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
+                </label>
+            </form>
+        </Modal>
+    )
+}
+
+export default function Information() {
+
+    const [showFormUsername, setShowFormUsername] = useState(false)
+    const [showFormEmail, setShowFormEmail] = useState(false)
+    const [showFormNumber, setShowFormNumber] = useState(false)
+    const [showFormName, setShowFormName] = useState(false)
+    const [file, setFile] = useState(null);
+
+    const currentUser = useSelector((state) => state.currentUserReducer)
+
     const handleChangeFile = (e) => {
         const file = e.target.files[0]
         setFile(file);
-
-        const path = URL.createObjectURL(file);
     };
 
     let handleSubmitFile = (e) => {
         e.preventDefault()
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("user", currentUser.username)
+        formData.append("user_id", currentUser.id)
         fetch('http://localhost:3001/upload', {
             method: "POST",
             body: formData
@@ -75,6 +128,18 @@ export default function Information() {
             }
         ).catch(err => console.error(err))
     }
+    let handleCloseUsername = () => {
+        setShowFormUsername(false)
+    }
+    let handleCloseEmail = () => {
+        setShowFormEmail(false)
+    }
+    let handleCloseNumber = () => {
+        setShowFormNumber(false)
+    }
+    let handleCloseName = () => {
+        setShowFormName(false)
+    }
 
     return (
         <>
@@ -84,69 +149,41 @@ export default function Information() {
                 </header>
                 <div className="bg-gray-600 mt-5 p-5 rounded-xl">
 
-                    {showFormPseudo ? <form action="" className="flex flex-col duration-200" onSubmit={handleSubmitPseudo} ref={formPseudo}>
-                        <h2 className="text-2xl font-thin font-ubuntu text-white">Pseudonyme</h2>
-                        <label htmlFor="" className="flex items-center">
-                            <input type="text" defaultValue={currentUser.username} className="py-2 px-2 rounded-md" />
-                            <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
-                        </label>
-                    </form> : <div className="flex flex-col duration-200">
+                    <div className="flex flex-col duration-200">
                         <div className="flex justify-between items-center">
                             <h2 className="text-2xl font-thin font-ubuntu text-white">Pseudonyme</h2>
-                            <button onClick={() => setShowFormPseudo(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
+                            <button onClick={() => setShowFormUsername(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
                         </div>
                         <h3>{currentUser.username}</h3>
-                    </div>}
-                    {showFormEmail ? <form action="" className="flex flex-col duration-200 mt-5" onSubmit={handleSubmitEmail} ref={formEmail}>
-                        <h2 className="text-2xl font-thin font-ubuntu text-white">Email</h2>
-                        <label htmlFor="" className="flex items-center">
-                            <input type="text" defaultValue={currentUser.email} className="py-2 px-2 rounded-md" />
-                            <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
-                        </label>
-                    </form> : <div className="flex flex-col mt-5 duration-200">
+                    </div>
+                    <div className="flex flex-col mt-5 duration-200">
                         <div className="flex justify-between items-center">
                             <h2 className="text-2xl font-thin font-ubuntu text-white">Email</h2>
                             <button onClick={() => setShowFormEmail(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
                         </div>
                         <h3>{currentUser.email}</h3>
-                    </div>}
-                    {showFormNumber ? <form action="" className="flex flex-col duration-200 mt-5" onSubmit={handleSubmitNumber} ref={formNumber}>
-                        <h2 className="text-2xl font-thin font-ubuntu text-white">Numéro de téléphone</h2>
-                        <label htmlFor="" className="flex items-center">
-                            <input type="text" defaultValue={currentUser.numberphone} className="py-2 px-2 rounded-md" />
-                            <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
-                        </label>
-                    </form> : <div className="flex flex-col mt-5 duration-200">
+                    </div>
+                    <div className="flex flex-col mt-5 duration-200">
                         <div className="flex justify-between items-center">
                             <h2 className="text-2xl font-thin font-ubuntu text-white">Numéro de téléphone</h2>
                             <button onClick={() => setShowFormNumber(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
                         </div>
                         <h3>{currentUser.numberphone ? currentUser.numberphone : "Aucun numéro de téléphone"}</h3>
-                    </div>}
-                    {showFormName ?
-                        <form action="" className="flex flex-col duration-200 mt-5" onSubmit={handleSubmitName} ref={formName}>
-                            <h2 className="text-2xl font-thin font-ubuntu text-white">Pseudonyme</h2>
-                            <label htmlFor="" className="flex items-center">
-                                <input type="text" defaultValue={currentUser.name} className="py-2 px-2 rounded-md" />
-                                <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
-                            </label>
-                        </form>
-                        :
-                        <div className="flex flex-col mt-5 duration-200">
-                            <div className="flex justify-between items-center">
-                                <h2 className="text-2xl font-thin font-ubuntu text-white">Prénom</h2>
-                                <button onClick={() => setShowFormName(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
-                            </div>
-                            <h3 className="text-lg font-ubuntu font-thin">{currentUser.name ? currentUser.name : "Aucun prénom définie"}</h3>
+                    </div>
+                    <div className="flex flex-col mt-5 duration-200">
+                        <div className="flex justify-between items-center">
+                            <h2 className="text-2xl font-thin font-ubuntu text-white">Prénom</h2>
+                            <button onClick={() => setShowFormName(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
                         </div>
-                    }
+                        <h3 className="text-lg font-ubuntu font-thin">{currentUser.name ? currentUser.name : "Aucun prénom définie"}</h3>
+                    </div>
 
                 </div>
                 <div className="flex mt-5 justify-between">
                     <div className="flex flex-col justify-center items-center m-auto">
                         <h2 className="text-slate-200 font-ubuntu text-xl font-thin">Image de profil</h2>
                         <img
-                            src={`./uploads/profil/${currentUser.username}.jpg`}
+                            src={`./uploads/profil/${currentUser.id}.jpg`}
                             onError={(e) => {
                                 e.target.onerror = null; // empêche les boucles d'erreur infinies
                                 e.target.src = './uploads/default.jpg'; // charge une image alternative
@@ -166,6 +203,10 @@ export default function Information() {
                         <button type="submit" className="bg-gray-700 text-white px-2 py-1 rounded">Envoyer</button>
                     </form>
                 </div>
+                <UsernameModal currentUser={currentUser} isOpen={showFormUsername} onClose={handleCloseUsername} />
+                <EmailModal currentUser={currentUser} isOpen={showFormEmail} onClose={handleCloseEmail} />
+                <PhoneNumberModal currentUser={currentUser} isOpen={showFormNumber} onClose={handleCloseNumber} />
+                <FirstNameModal currentUser={currentUser} isOpen={showFormName} onClose={handleCloseName} />
             </div>
         </>
     )

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import jwt_decode from "jwt-decode";
-import { SET_SESSION_TRUE } from './session.action';
+import { SET_SESSION_FALSE, SET_SESSION_TRUE } from './session.action';
 
 export const ADD_USER = "ADD_USER"
 export const GET_ALL_USERS = "GET_ALL_USERS"
@@ -12,6 +12,7 @@ export const DELETE_USER = "DELETE_USER"
 export const SET_USER = "SET_USER"
 export const SET_USER_PSEUDO = "SET_USER_PSEUDO"
 export const NUMBER_OF_USER = "NUMBER_OF_USER"
+export const UPDATE_USER_USERNAME = "UPDATE_USER_USERNAME"
 
 
 
@@ -53,27 +54,38 @@ export const userLogout = (id) => {
         return axios.put(`http://localhost:3001/users/${id}`).then(() => {
             window.localStorage.removeItem('token')
             dispatch({ type: SET_USER, payload: ""})
+            dispatch({type: SET_SESSION_FALSE, payload: {Authorization: false}})
         })
     }
 }
 
 
 
-// Update user information
+// Delete user from back-office
 
-export const updateUser = (data) => {
-    return (dispatch) => {
-        axios.put(`http://localhost:3001/updateUser/${data.id}`, data).then(res => {
-            console.log(res)
-            dispatch({ type: UPDATE_USER, payload: res.user_id})
-        })
-    }
-}
 export const deleteUser = (id) => {
     return (dispatch) => {
         console.log(id)
         axios.delete(`http://localhost:3001/deleteUser/${id}`).then(res => {
             dispatch({ type: DELETE_USER, payload: id})
+        })
+    }
+}
+
+// Update user information from back-office
+
+export const updateUser = (data) => {
+    return (dispatch) => {
+        axios.put(`http://localhost:3001/updateUser/${data.id}`, data).then(res => {
+            console.log(res)
+            dispatch({ type: UPDATE_USER, payload: res.data})
+        })
+    }
+}
+export let editUsername = (data) => {
+    return (dispatch) => {
+        axios.put(`http://localhost:3001/editUsername/${data.id}`, data).then(res => {
+            dispatch({type: UPDATE_USER_USERNAME, payload: res.data.username})
         })
     }
 }
