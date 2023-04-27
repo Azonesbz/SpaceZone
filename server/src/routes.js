@@ -1,6 +1,6 @@
 import express from 'express'
 import { addProduct, getNumberProduct, getProductById, getProducts, getSearch } from './controllers/products_controller.js'
-import { addUser, connectUser, deleteUser, editEmail, editFirstName, editNumberPhone, editUsername, getAllUsers, sessionIsValid, updateUser, userExist, userLogout } from './controllers/user_controller.js'
+import { addUser, connectUser, deleteUser, editEmail, editFirstName, editNumberPhone, editUsername, getAllUsers, getNumberUser, sessionIsValid, updateUser, userExist, userLogout } from './controllers/user_controller.js'
 import { upload, uploadFile } from './controllers/uploadFile_controller.js'
 import getCarts, { addProductCart } from './controllers/cart_controller.js'
 
@@ -17,8 +17,9 @@ router.post('/search/product', getSearch)
 
 // Route utilisateur
 
-router.get('/users', getAllUsers)
 
+router.get('/users', getAllUsers)
+router.get('/countUser', getNumberUser)
 router.post('/users/new', addUser)
 router.post('/users/login', connectUser)
 router.post('/users/search', userExist)

@@ -24,15 +24,21 @@ export const getAllUser = () => {
         })
     }
 }
+export const getUserNumber = () => {
+    return async (dispatch) => {
+        return axios.get('http://localhost:3001/countUser').then(res => {
+            dispatch({ type: NUMBER_OF_USER, payload: res.data.result })
+        })
+    }
+}
 
 export const addUser = (data) => {
     return async (dispatch) => {
         return axios.post('http://localhost:3001/users/new', data).then(res => { // J'envoie les données au serveur et je récupère la réponse
-            localStorage.setItem('token', res.data.token)
-            const token = localStorage.getItem('token')
-            const decodedToken = jwt_decode(token);
-            dispatch({ type: ADD_USER, payload: res.data})
-            dispatch({ type: SET_USER, payload: decodedToken})
+        console.log(res.data)
+            localStorage.setItem('token', res.data.tokenData.token)
+            dispatch({ type: ADD_USER, payload: res.data.tokenData})
+            dispatch({ type: SET_USER, payload: res.data.tokenData})
             dispatch({ type: SET_SESSION_TRUE, payload: {Authorization: true}})
         })
     }
@@ -40,10 +46,8 @@ export const addUser = (data) => {
 export const loginUser = (data) => {
     return async (dispatch) => {
         return axios.post('http://localhost:3001/users/login', data).then(async res => {
-            localStorage.setItem('token', res.data.token)
-            const token = localStorage.getItem('token')
-            const decodedToken = jwt_decode(token);
-            dispatch({ type: SET_USER, payload: decodedToken})
+            localStorage.setItem('token', res.data.tokenData.token)
+            dispatch({ type: SET_USER, payload: res.data.tokenData})
             dispatch({ type: SET_SESSION_TRUE, payload: {Authorization: true}})
         })
     }

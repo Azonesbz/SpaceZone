@@ -9,7 +9,7 @@ export default function Modal({ isOpen, onClose, height, width, children }) {
     <div className='fixed z-50 inset-0 overflow-y-auto'>
       <div className='relative flex items-center justify-center min-h-screen'>
         <div
-          className='fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity'
+          className='fixed inset-0 bg-transparent backdrop-blur-sm transition-opacity'
           aria-hidden='true'
           onClick={onClose}
         />

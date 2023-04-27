@@ -87,7 +87,7 @@ export default function Profil(){
                           src={`./uploads/profil/${currentUser.profil_picture}`}
                           onError={(e) => {
                             e.target.onerror = null; // empêche les boucles d'erreur infinies
-                            e.target.src = './uploads/default.jpg'; // charge une image alternative
+                            e.target.src = './uploads/profil/default.jpg'; // charge une image alternative
                           }}
                           alt="image de profil"
                           className="rounded-full mt-5 h-36 w-36"

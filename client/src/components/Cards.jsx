@@ -56,7 +56,7 @@ export default function Carts({page}){
                             <div className='font-roboto flex flex-col'>
                                 <div className="flex items-center">
                                     <img
-                                        src={`./uploads/profil/${product.user_id}.jpg`}
+                                        src={`./uploads/profil/${product.profil_picture}`}
                                         onError={(e) => {
                                             e.target.src = './uploads/profil/default.jpg';
                                         }}

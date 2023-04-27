@@ -9,15 +9,29 @@ export async function getAllUsers(req, res){
         }
     )
 }
+export async function getNumberUser(req, res){
+    users.total().then(
+        result => {
+            res.status(200).json({result: result[0].total_users})
+        }
+    )
+    .catch(err => res.status(404).json({err}))
+}
 
 export async function addUser(req, res) {
     const {username, email, password} = req.body
     const hashedPassword = await bcrypt.hash(password, 15)
-    
+    const now = new Date();
+    const mysqlDate = now.toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })
+    const datetimeString = mysqlDate.replace('à', ' ')
+    const last_connection = datetimeString.slice(6, 10) + '-' + datetimeString.slice(3, 5) + '-' + datetimeString.slice(0, 2) + ' ' + datetimeString.slice(11, 19)
+    const created_at = last_connection
     if(username, email, password){
-        users.add(username, email, hashedPassword)
+        users.add(username, email, hashedPassword, created_at, last_connection)
         .then(
             response => {
+                const created_at = new Date(response[0].created_at).toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })
+                const last_connection = new Date(response[0].last_connection).toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })
                 let tokenData = {
                     id: response[0].id,
                     username: response[0].username,
@@ -25,12 +39,17 @@ export async function addUser(req, res) {
                     first_name: response[0].first_name,
                     number_phone: response[0].number_phone,
                     permission: response[0].name,
-                    profil_picture: response[0].profil_picture
+                    profil_picture: response[0].profil_picture,
+                    created_at: created_at,
+                    last_connection: last_connection
                 }
                 const token = jwt.sign(tokenData, process.env.PRIVATE_KEY, {expiresIn: '1h'})
-    
+                tokenData = {
+                    ...tokenData,
+                    token: token
+                }
                 users.newToken(email, token)
-                .then(() => res.status(201).json({response, token}))
+                .then(() => res.status(201).json({tokenData: tokenData, token: token}))
                 .catch(() => res.status(300).send('Une erreur est survenue, veuillez réessayer.'))
             }
         )
@@ -49,12 +68,17 @@ export async function addUser(req, res) {
 
 export async function connectUser(req, res) {
     const {email, password} = req.body
+    const now = new Date();
+    const mysqlDate = now.toLocaleString('fr-FR', { timeZone: 'Europe/Paris' });
+    const datetimeString = mysqlDate.replace('à', ' '); //remplace le caractère "à" par un espace
+    const last_connection = datetimeString.slice(6, 10) + '-' + datetimeString.slice(3, 5) + '-' + datetimeString.slice(0, 2) + ' ' + datetimeString.slice(11, 19);
     users.login(email)
     .then(
         async response => {
             const verify = await bcrypt.compare(password, response[0].password)
             if(verify)
             {
+                const created_at = new Date(response[0].created_at).toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })
                 let tokenData = {
                     id: response[0].id,
                     username: response[0].username,
@@ -62,19 +86,18 @@ export async function connectUser(req, res) {
                     first_name: response[0].first_name,
                     number_phone: response[0].number_phone,
                     permission: response[0].name,
-                    profil_picture: response[0].profil_picture
+                    profil_picture: response[0].profil_picture,
+                    created_at: created_at
                 }
                 const token = jwt.sign(tokenData, process.env.PRIVATE_KEY, {expiresIn: '1h'})
-                users.newToken(email, JSON.stringify(token))
-                .then(() => {
-                    res.status(201).json({token, id: response[0].id, email});
-                    return;
-                })
-                .catch(err => {
-                    console.log(err)
-                    res.status(300).send('Une erreur est survenue, veuillez réessayer dans quelque instants.');
-                    return;
-                });
+                tokenData = {
+                    ...tokenData,
+                    token: token
+                }
+                await users.lastConnection(last_connection, response[0].id)
+                await users.newToken(JSON.stringify(token), response[0].id)
+                res.status(201).json({tokenData: tokenData, token: token});
+                return
             }
             else
             {
@@ -92,7 +115,7 @@ export async function connectUser(req, res) {
         
 export async function userLogout(req, res){
     const id = req.params.id
-    users.newToken(id, null).then(() => {
+    users.newToken(null, id).then(() => {
         res.status(200).send('OK')
     })
     .catch(err => {

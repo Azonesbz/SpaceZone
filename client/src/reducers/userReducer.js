@@ -5,9 +5,9 @@ const initialState = {}
 export function allUserReducer(state = initialState, action){
     switch(action.type){
         case GET_ALL_USERS:
-            return action.payload
+            return {...state, users: action.payload}
         case ADD_USER:
-            return [action.payload, ...state]
+            return [...state, action.payload]
         case LOGIN_USER:
             return [action.payload, ...state]
         case NUMBER_OF_USER:

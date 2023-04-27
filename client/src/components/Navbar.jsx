@@ -46,7 +46,7 @@ export default function Header(){
                         
                         {isLogged ? <li className="cursor-pointer">
                             <Link to="/carts" className="text-md font-karla rounded-md text-black">
-                                <svg width="30" height="30" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <svg width="30" height="30" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path d="m7 10 5-6 5 6"></path>
                                     <path d="m21 10-2 8c-.093.573-.345 1.087-.71 1.453-.366.365-.822.559-1.29.547H7c-.468.012-.924-.182-1.29-.547-.365-.366-.617-.88-.71-1.453l-2-8h18Z"></path>
                                     <path d="M12 17a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"></path>
@@ -58,7 +58,7 @@ export default function Header(){
                             className="flex items-center text-md font-karla rounded-md text-black"
                             onClick={handleLogout}
                             >
-                                <svg width="30" height="30" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <svg width="30" height="30" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M14 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-2"></path>
                                     <path d="M21 12H7"></path>
                                     <path d="m18 15 3-3-3-3"></path>
