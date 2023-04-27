@@ -34,7 +34,7 @@ export default function Search(){
 
     return(
         <>
-            <div className="flex flex-col w-full p-4 rounded-xl">
+            <div className="w-full p-4 rounded-xl hidden">
                 <form 
                 className="w-full"
                 action="" 

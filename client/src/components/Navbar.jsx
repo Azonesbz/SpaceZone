@@ -4,7 +4,7 @@ import { userLogout } from "../actions/user.action";
 import { useEffect } from "react";
 import { useState } from "react";
 
-export default function Header(){
+export default function Navbar(){
 
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => state.currentUserReducer)
@@ -18,7 +18,10 @@ export default function Header(){
     }
     return (
         <>
-            <header className="flex relative inset-0 z-50 h-20 w-full bg-gradient-to-br from-neutral-100 to-neutral-200">
+            <div className="flex fixed inset-0 z-50 h-20 w-full backdrop-blur-lg shadow-lg">
+                <div className="h-full w-full bg-slate-300 opacity-50"></div>
+            </div>
+            <header className="flex fixed inset-0 z-50 h-20 w-full bg-transparent">
                 <nav className="flex justify-between items-center h-full w-full">
                     <div className="flex items-center space-x-10">
                         <Link 

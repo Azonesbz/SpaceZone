@@ -6,28 +6,80 @@
 @tailwind components;
 @tailwind utilities;
 
-::-webkit-scrollbar {
-    width: 12px;
+.header {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.best-seller {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.title{
+  font-size: 4rem;
+  font-weight: 500;
+  font-family: 'karla', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.title-best-seller {
+  font-size: xx-large;
+  font-family: 'karla', Courier, monospace;
+  color: #010390;
+  margin-left: 0.6rem;
 }
 
-::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
+@keyframes rebond {
+  0%, 100% {
+      transform: translateY(-10%);
+      animation-timing-function: cubic-bezier(0,0.2,1,1);
+  }
+  50% {
+      transform: none;
+      animation-timing-function: cubic-bezier(0,1,1,1);
+  }
+}
+.arrow-box {
+  margin-top: 2rem;
+  cursor: pointer;
 }
 
-::-webkit-scrollbar-thumb {
-    background-color: #888;
-    border-radius: 6px;
+.arrow {
+  animation: rebond 1s infinite;
+}
+.background-bar {
+  display: flex;
+  position: relative;
+  min-height: 90vh;
+}
+.shape {
+
+    background-color: rgb(200, 207, 224); /* couleur de fond de de la forme */
+    clip-path: polygon(0 50%, 100% 0%, 100% 50%, 0% 100%);
+
+}
+.line {
+  width: 200px;
+  height: 10px;
+  border: 2px solid #000;
+  border-radius: 10px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background-color: #555;
+.line-start {
+  border-top-left-radius: 50% 100%;
+  border-bottom-left-radius: 50% 100%;
 }
 
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.line-end {
+  border-top-right-radius: 50% 100%;
+  border-bottom-right-radius: 50% 100%;
 }
-input[type=number] {
-  -moz-appearance: textfield;
-}
+
+/* flex flex-col min-w-[200rem] min-h-full relative */
