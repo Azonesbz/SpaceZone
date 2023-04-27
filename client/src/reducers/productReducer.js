@@ -1,13 +1,13 @@
-import { ADD_PRODUCTS, GET_PRODUCTS, GET_PRODUCT_BY_ID, NUMBER_OF_PRODUCTS } from "../actions/product.action";
+import { ADD_PRODUCTS, GET_PRODUCTS_PAGE, GET_PRODUCT_BY_ID, NUMBER_OF_PRODUCTS } from "../actions/product.action";
 
 const initialState = {}
 
 export default function productReducer(state = initialState, action){
     switch(action.type){
-        case GET_PRODUCTS:
-            return {...state, product: action.payload}
+        case GET_PRODUCTS_PAGE:
+            return {...state, productPage: action.payload}
         case ADD_PRODUCTS:
-            return [...state.product, action.payload]
+            return [...state.productPage, action.payload]
         case NUMBER_OF_PRODUCTS:
             return {...state, number: action.payload}
         case GET_PRODUCT_BY_ID:

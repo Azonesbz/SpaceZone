@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export const GET_PRODUCTS = "GET_PRODUCTS"
+export const GET_PRODUCTS_PAGE = "GET_PRODUCTS_PAGE"
 export const NUMBER_OF_PRODUCTS = "NUMBER_OF_PRODUCTS"
 export const ADD_PRODUCTS = "ADD_PRODUCT"
 export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS"
@@ -10,7 +10,7 @@ export const GET_PRODUCT_BY_ID = "GET_PRODUCT_BY_ID"
 export let getProduct = (data) => {
     return (dispatch) => {
         return axios.post('http://localhost:3001/product', data).then(res => {
-            dispatch({ type: GET_PRODUCTS, payload: res.data.product })
+            dispatch({ type: GET_PRODUCTS_PAGE, payload: res.data.product })
         })
     }
 }

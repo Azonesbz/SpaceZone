@@ -9,8 +9,14 @@ export default function Navbar(){
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => state.currentUserReducer)
     const isLogged = useSelector((state) => state.sessionReducer.Authorization)
-    const [isAdmin, setIsAdmin] = useState(currentUser.permission === 'ADMINISTRATOR' ? true : false)
+    const [isAdmin, setIsAdmin] = useState(false)
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if(currentUser.permission === "ADMINISTRATOR" || "MODARATOR"){
+            setIsAdmin(true)
+        }
+    }, [])
 
     let handleLogout = () => {
         dispatch(userLogout(currentUser.id))

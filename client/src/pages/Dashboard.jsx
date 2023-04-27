@@ -78,6 +78,7 @@ export default function Dashboard() {
     const countUser = useSelector((state) => state.allUserReducer.number)
     const currentUser = useSelector((state) => state.currentUserReducer)
     const numberProduct = useSelector((state) => state.productReducer.number)
+    const product = useSelector((state) => state.productReducer.product)
     const [editUser, setEditUser] = useState(false)
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -262,19 +263,19 @@ export default function Dashboard() {
                                                 </tr>
                                             </thead>
                                             <tbody className='font-light font-karla' onClick={handleUserManage}>
-                                                {!isEmpty(allUser) && allUser.map(user => (
-                                                    <tr className='text-black' key={user.id}>
+                                                {!isEmpty(product) && product.map(item => (
+                                                    <tr className='text-black' key={item.id}>
                                                         <td className='py-2 pr-14'>
-                                                            <h1>{user.username}</h1>
+                                                            <h1>{item.title}</h1>
                                                         </td>
                                                         <td className='py-2 pr-14'>
-                                                            <h1>{user.email}</h1>
+                                                            <h1>{item.username}</h1>
                                                         </td>
                                                         <td className='py-2 pr-14'>
-                                                            <h1>{user.name}</h1>
+                                                            <h1>{item.name}</h1>
                                                         </td>
                                                         <td className='flex items-center space-x-2 py-2 pr-20'>
-                                                            <button className=' bg-red-600 p-1 text-slate-200 rounded-lg active:scale-95 duration-200' id='delete-user' value={user.id}>
+                                                            <button className=' bg-red-600 p-1 text-slate-200 rounded-lg active:scale-95 duration-200' id='delete-user' value={item.id}>
                                                                 <svg width="30" height="30" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                                     <path d="M4 7h16"></path>
                                                                     <path d="M10 11v6"></path>
@@ -283,13 +284,13 @@ export default function Dashboard() {
                                                                     <path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path>
                                                                 </svg>
                                                             </button>
-                                                            <button className='bg-neutral-900 text-slate-200 p-1 rounded-lg active:scale-95 duration-200' id='update-user' value={user} onClick={() => setEditUser(user)}>
+                                                            <button className='bg-neutral-900 text-slate-200 p-1 rounded-lg active:scale-95 duration-200' id='update-user' value={item} onClick={() => setEditUser(user)}>
                                                                 <svg width="30" height="30" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                                     <path d="M4 20h4L18.5 9.5a2.829 2.829 0 0 0-4-4L4 16v4Z"></path>
                                                                     <path d="m13.5 6.5 4 4"></path>
                                                                 </svg>
                                                             </button>
-                                                            <button className='bg-neutral-900 text-slate-200 p-1 rounded-lg active:scale-95 duration-200' id='update-user' value={user} onClick={() => setEditUser(user)}>
+                                                            <button className='bg-neutral-900 text-slate-200 p-1 rounded-lg active:scale-95 duration-200' id='update-user' value={item} onClick={() => setEditUser(user)}>
                                                                 <svg width="30" height="30" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                                     <path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"></path>
                                                                     <path d="M22 12c-2.667 4.667-6 7-10 7s-7.333-2.333-10-7c2.667-4.667 6-7 10-7s7.333 2.333 10 7Z"></path>
