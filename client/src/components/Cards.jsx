@@ -9,7 +9,6 @@ export default function Carts({page}){
     
     const dispatch = useDispatch()
     const getProducts = useSelector((state) => state.productReducer.product)
-    const currentUser = useSelector((state) => state.currentUserReducer)
 
     const scrollToTop = () => {
         if (window.scrollY !== 0) {
@@ -27,11 +26,6 @@ export default function Carts({page}){
         }
         dispatch(getProduct(data))
     }, [page])
-
-    let handleCart = (e, idProduct, quantity) => {
-        e.preventDefault()
-        dispatch(addProductCart(id))
-    }
 
     return (
         <>

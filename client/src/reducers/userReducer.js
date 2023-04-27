@@ -7,7 +7,7 @@ export function allUserReducer(state = initialState, action){
         case GET_ALL_USERS:
             return {...state, users: action.payload}
         case ADD_USER:
-            return [...state, action.payload]
+            return [...state.users, action.payload]
         case LOGIN_USER:
             return [action.payload, ...state]
         case NUMBER_OF_USER:

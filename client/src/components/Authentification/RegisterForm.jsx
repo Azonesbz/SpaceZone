@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addUser, getAllUser } from "../../actions/user.action"
 import { useNavigate } from 'react-router-dom'
+import Confetti from 'react-confetti'
 
 export default function Register({
     emailValue, 
@@ -11,6 +12,7 @@ export default function Register({
     const [email, setEmail] = useState(emailValue)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [confetti, setConfetti] = useState(false)
     const form = useRef()
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -32,13 +34,21 @@ export default function Register({
             username: form.current[1].value,
             password: form.current[2].value,
         }
-        dispatch(addUser(data))
-        navigate('/home')
+        dispatch(addUser(data)).then(() => {
+            setConfetti(true)
+            setTimeout(() => {
+                setLoader(false)
+                navigate('/home')
+            }, 2000)
+            
+        })
+        
     }
 
     return(
         <>
             <section className="flex flex-col items-center justify-center bg-gradient-to-br from-neutral-800 to-neutral-700 min-h-screen p-10 text-slate-200">
+                {confetti ? <Confetti /> : "" }
                 <button 
                 className="absolute top-5 left-5 rounded-full active:scale-90 duration-200"
                 onClick={() => {

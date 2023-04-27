@@ -110,6 +110,25 @@ export default function Dashboard() {
 
     return (
       <>
+            <aside className='fixed flex items-center justify-center min-h-[100vh] bg-transparent w-16 right-2'>
+                <div className='flex flex-col justify-around h-96 w-20 bg-black rounded-full'>
+                    <div className='w-full h-16 rounded-full bg-white'>
+
+                    </div>
+                    <div className='w-full h-16 rounded-full bg-white'>
+
+                    </div>
+                    <div className='w-full h-16 rounded-full bg-white'>
+
+                    </div>
+                    <div className='w-full h-16 rounded-full bg-white'>
+
+                    </div>
+                    <div className='w-full h-16 rounded-full bg-white'>
+
+                    </div>
+                </div>
+            </aside>
             <div className='flex gap-5 min-h-screen p-10 container'>
 
                 <div className='w-2/3 bg-gradient-to-br from-slate-200 to-slate-300 rounded-xl text-black font-ubuntu shadow shadow-neutral-400'>
