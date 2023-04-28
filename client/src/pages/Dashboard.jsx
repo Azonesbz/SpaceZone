@@ -71,6 +71,71 @@ function EditUserModal({ user, isOpen, onClose }) {
         </Modal>
     );
 }
+function EditProductModal({ product, isOpen, onClose }) {
+    const [title, setTitle] = useState(product.title);
+    const [username, setUsername] = useState(product.username);
+    const [name, setName] = useState(product.name);
+    const editFormProduct = useRef()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        console.log(product)
+    }, [])
+    let data;
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        data = {
+            id: user.id,
+            username: editFormProduct.current[0].value,
+            email: editFormProduct.current[1].value,
+            permission: editFormProduct.current[2].value,
+        }
+        console.log(data)
+        dispatch(updateUser(data))
+        onClose();
+    };
+
+    return (
+        <Modal isOpen={isOpen} onClose={onClose} height={'h-[18rem]'} width={'w-full'}>
+            <form onSubmit={handleSubmit} className='h-full flex flex-col p-5 space-y-3 text-black' ref={editFormProduct}>
+                <label className='flex flex-col w-3/4'>
+                    Username:
+                    <input
+                        className='w-full py-[5px] px-2 rounded'
+                        type='text'
+                        value={title}
+                        onChange={(event) => setUsername(event.target.value)}
+                    />
+                </label>
+                <label className='flex flex-col w-3/4'>
+                    Email:
+                    <input
+                        className='w-full py-[5px] px-2 rounded'
+                        type='text'
+                        value={username}
+                        onChange={(event) => setEmail(event.target.value)}
+                    />
+                </label>
+                <label className='flex flex-col w-3/4'>
+                    Name:
+                    <select
+                        className='w-full py-[5px] px-2 rounded'
+                        id=""
+                        value={name}
+                        onChange={(event) => setName(event.target.value)}
+                    >
+                        <option value="1">Administrateur</option>
+                        <option value="2">Modérateur</option>
+                        <option value="3">Utilisateur</option>
+                    </select>
+                </label>
+                <div className='flex justify-center items-end h-full'>
+                    <button className='bg-indigo-700 font-raleway font-medium px-10 py-1 rounded-lg' type='submit'>Enregistrer</button>
+                </div>
+            </form>
+        </Modal>
+    );
+}
 
 export default function Dashboard() {
 
@@ -80,6 +145,7 @@ export default function Dashboard() {
     const numberProduct = useSelector((state) => state.productReducer.number)
     const product = useSelector((state) => state.productReducer.allProduct)
     const [editUser, setEditUser] = useState(false)
+    const [editProduct, setEditProduct] = useState(false)
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -90,7 +156,6 @@ export default function Dashboard() {
         dispatch(getUserNumber())
     }, [])
 
-    let data;
     let handleUserManage = (e) => {
         let parent = e.target
         for (let i = 0; i < 5; i++) {
@@ -203,7 +268,16 @@ export default function Dashboard() {
                                             <tbody className='font-light font-karla' onClick={handleUserManage}>
                                                 {!isEmpty(allUser) && allUser.map(user => (
                                                     <tr className='text-black' key={user.id}>
-                                                        <td className='py-2 pr-14'>
+                                                        <td className='py-2 pr-14 flex items-center'>
+                                                            <img
+                                                            className='h-8 w-8 rounded-full'
+                                                            src={`./uploads/profil/${user.profil_picture}`} 
+                                                            onError={(e) => {
+                                                                e.target.onerror = null; // empêche les boucles d'erreur infinies
+                                                                e.target.src = './uploads/profil/default.jpg'; // charge une image alternative
+                                                            }}  
+                                                            alt=""
+                                                            />
                                                             <h1>{user.username}</h1>
                                                         </td>
                                                         <td className='py-2 pr-14'>
@@ -235,7 +309,7 @@ export default function Dashboard() {
                                                                 </svg>
                                                             </button>
                                                         </td>
-                                                        <td>
+                                                        <td className='py-2 pr-14'>
                                                             {user.created_at}
                                                         </td>
                                                     </tr>
@@ -278,15 +352,15 @@ export default function Dashboard() {
                                                         <td className='py-2 pr-14'>
                                                             <h1>{item.title}</h1>
                                                         </td>
-                                                        <td className='flex items-center py-2 pr-14'>
-                                                            <img src={`./uploads/profil/${item.profil_picture}`} alt="image de profil" className='h-8 w-8 rounded-full' />
+                                                        <td className='flex py-2 pr-14 h-full'>
+                                                            <img src={`./uploads/profil/${item.profil_picture}`} alt="image de profil" className='h-full w-8 rounded-full' />
                                                             <h1 className='ml-2'>{item.username}</h1>
                                                         </td>
                                                         <td className='py-2 pr-14'>
                                                             <h1>{item.created_at}</h1>
                                                         </td>
                                                         <td className='flex items-center space-x-2 py-2 pr-20'>
-                                                            <button className=' bg-red-600 p-1 text-slate-200 rounded-lg active:scale-95 duration-200' id='delete-user' value={item.id}>
+                                                            <button className=' bg-red-600 p-1 text-slate-200 rounded-lg active:scale-95 duration-200' id='delete-product' value={item.id}>
                                                                 <svg width="30" height="30" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                                     <path d="M4 7h16"></path>
                                                                     <path d="M10 11v6"></path>
@@ -295,20 +369,20 @@ export default function Dashboard() {
                                                                     <path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path>
                                                                 </svg>
                                                             </button>
-                                                            <button className='bg-neutral-900 text-slate-200 p-1 rounded-lg active:scale-95 duration-200' id='update-user' value={item} onClick={() => setEditUser(user)}>
+                                                            <button className='bg-neutral-900 text-slate-200 p-1 rounded-lg active:scale-95 duration-200' id='update-product' value={item} onClick={() => setEditProduct(item)}>
                                                                 <svg width="30" height="30" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                                     <path d="M4 20h4L18.5 9.5a2.829 2.829 0 0 0-4-4L4 16v4Z"></path>
                                                                     <path d="m13.5 6.5 4 4"></path>
                                                                 </svg>
                                                             </button>
-                                                            <button className='bg-neutral-900 text-slate-200 p-1 rounded-lg active:scale-95 duration-200' id='update-user' value={item} onClick={() => setEditUser(user)}>
+                                                            <button className='bg-neutral-900 text-slate-200 p-1 rounded-lg active:scale-95 duration-200' id='update-user' value={item} onClick={() => setEditUser(item)}>
                                                                 <svg width="30" height="30" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                                     <path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"></path>
                                                                     <path d="M22 12c-2.667 4.667-6 7-10 7s-7.333-2.333-10-7c2.667-4.667 6-7 10-7s7.333 2.333 10 7Z"></path>
                                                                 </svg>
                                                             </button>
                                                         </td>
-                                                        <td><h1 className={`font-medium ${item.inventory <= 0 ? "text-red-600" : "text-black"}`}>{item.inventory <= 0 ? "Rupture de stock" : item.inventory}</h1></td>
+                                                        <td className='py-2 pr-14'><h1 className={`font-medium ${item.inventory <= 0 ? "text-red-600" : "text-black"}`}>{item.inventory <= 0 ? "Rupture de stock" : item.inventory}</h1></td>
                                                     </tr>
                                                 ))}
                                             </tbody>
@@ -321,7 +395,14 @@ export default function Dashboard() {
                                         isOpen={true}
                                         onClose={() => setEditUser(false)}
                                     />
-                                )}
+                                    )}
+                                    {editProduct && (
+                                        <EditProductModal
+                                        product={editProduct}
+                                        isOpen={true}
+                                        onClose={() => setEditProduct(false)}
+                                    />
+                                    )}
                             </div>
                         </div>
                     </div>
