@@ -19,7 +19,11 @@
 }
 .body-header {
   position: relative;
-  top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
 }
 .best-seller {
     display: flex;
@@ -29,14 +33,14 @@
 }
 .title{
 
-  font-size: 1.5rem/* 24px */;
-  line-height: 5rem/* 32px */;
+  font-size: 3rem/* 24px */;
+  line-height: 3.5rem/* 32px */;
   font-weight: 500;
   text-align: center;
   font-family: 'karla', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .title-best-seller {
-  font-size: medium;
+  font-size: 1.5rem;
   text-align: center;
   font-family: 'karla', Courier, monospace;
   color: #010390;
@@ -55,10 +59,10 @@
 }
 .arrow-box {
   display: flex;
+  position: absolute;
+  bottom: 0;
   justify-content: center;
-  margin-top: 20px;
   align-items: center;
-  margin: 0 auto;
   cursor: pointer;
 }
 
@@ -72,9 +76,8 @@
   overflow: hidden;
 }
 .shape {
-    background-color: rgb(200, 207, 224);
-    clip-path: polygon(0 50%, 100% 0%, 100% 50%, 0% 100%);
-
+    background-color: rgb(118, 124, 205);
+    clip-path: polygon(0 50%, 100% 30%, 100% 50%, 0% 80%);
 }
 .elementHidden {
     opacity: 0;

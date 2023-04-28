@@ -39,12 +39,12 @@ export default function Home({session}) {
 
           <Header session={session} />
 
-          <div className='mt-32 flex flex-col container md:flex-row lg:px-20 relative justify-center gap-5 elementHidden'>
+          <div className='mt-32 flex flex-col container md:flex-row lg:px-20 relative justify-center gap-5 elementHidden' id='product'>
 
             <section className='flex flex-col w-full'>
 
-              <div className='grid grid-cols-6 gap-3 mt-5'>
-                  <Cards page={page} />
+              <div className='grid grid-cols-6 gap-3 mt-5' >
+                  <Cards page={page}  />
               </div>
               <Pagination setPage={setPage} />
             </section>
