@@ -6,20 +6,17 @@ import { isEmpty } from '../utils/utils'
 import { getCarts } from "../actions/cart.action"
 
 export default function Carts(){
-    const currentUser = useSelector((state) => state.currentUserReducer)
     const [totalPrice, setTotalPrice] = useState(null)
-    const dispatch = useDispatch()
     const cartItem = useSelector((state) => state.cartReducer)
     let data;
     useEffect(() => {
-        dispatch(getCarts())
         const listItemPrice = cartItem.map(item => parseInt(item.price))
         setTotalPrice(listItemPrice.reduce((acc, val) => acc + val, 0))
     }, [])
     return (
         <>
             <Header />
-            <section className="p-10">
+            <section className="p-10 relative mt-20">
                 <div className="flex items-center justify-between border-b border-black pb-2">
                     <h1 className="uppercase font-karla font-medium text-3xl">Mon Panier</h1>
                     <h2 className="uppercase font-karla font-medium text-3xl">Prix total des articles: <span>{totalPrice}$</span></h2>

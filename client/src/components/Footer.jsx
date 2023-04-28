@@ -1,8 +1,8 @@
 export default function Footer(){
     return (
         <>
-            <footer className="flex flex-col">
-                <section className="flex flex-col bg-gray-950 text-white py-10">
+            <footer className="flex flex-col bg-gray-950">
+                <section className="flex flex-col  text-white py-10 container">
                     <h1 className="text-center p-8 font-karla text-3xl">Nos engagements envers nos clients</h1>
                     <div className="grid grid-cols-6 border-t w-5/6 mx-auto border-white">
                         <div className="p-5 col-span-6 sm:col-span-2">
@@ -76,7 +76,7 @@ export default function Footer(){
                     </div>
                 </section>
                 <div className="bg-gradient-to-b from-gray-950 via-gray-950 to-black h-2"></div>
-                <section className="flex flex-col items-center bg-black text-white h-full">
+                <section className="flex flex-col items-center bg-black text-white min-h-full">
                     <div className="grid grid-cols-6 gap-5 justify-center items-center p-10 font-karla text-2xl">
                         <div className="flex flex-col col-span-6 lg:col-span-2">
                             <h1 className="text-center">
