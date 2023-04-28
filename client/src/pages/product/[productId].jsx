@@ -42,19 +42,19 @@ export default function ProductId() {
             <div key={productId.id} className='w-full sm:w-1/2 lg:w-1/3 mx-2 my-4'>
               {/* Image of product */}
               <div className=''>
-                <h1 className='text-3xl font-raleway font-semibold'>{productId.title}</h1>
+                <h1 className='text-4xl font-raleway font-semibold'>{productId.title}</h1>
 
                 <img src='https://via.placeholder.com/1200x1200' alt='image du produit' />
               </div>
 
               {/* Description of product */}
               <div className={`flex flex-col duration-500`}>
-                <div className={`flex flex-col h-96 p-5 space-y-5 sm:rounded-lg lg:rounded-xl bg-slate-50 duration-500`}>
+                <div className={`flex flex-col p-5 space-y-5 sm:rounded-lg lg:rounded-xl bg-slate-50 duration-500`}>
                   <h2 className='text-xl font-kanit'>A propos de cet article</h2>
-                </div>
-                  <p className="">
+                  <p className="rounded font-roboto font-medium text-lg h-full overflow-hidden">
                     {productId.description}
                   </p>
+                </div>
 
                 <div className='flex flex-col h-full mt-5'>
                   <div className='flex items-center justify-between font-rajdhani font-bold box-content'>

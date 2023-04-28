@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { userLogout } from "../actions/user.action";
 import { useEffect } from "react";
 import { useState } from "react";
+import { Dropdown } from "flowbite-react";
 
 export default function Navbar(){
 
@@ -27,21 +28,52 @@ export default function Navbar(){
             <div className="flex fixed inset-0 z-50 h-20 w-full backdrop-blur-lg shadow-lg">
                 <div className="h-full w-full bg-slate-300 opacity-50"></div>
             </div>
-            <header className="flex fixed inset-0 z-50 h-20 w-full bg-transparent container">
+            <header className="flex fixed inset-0 z-50 h-20 w-full bg-transparent md:container">
                 <nav className="flex justify-between items-center h-full w-full">
-                    <div className="flex items-center space-x-10">
+                    <div className="flex items-center">
                         <Link 
-                        className="font-kanit text-4xl flex-grow ml-10"
+                        className="font-kanit text-4xl flex-grow ml-5 sm:ml-10"
                         to="/home"
                         >
                             SpaceZone
                         </Link>
-                        <select className="bg-neutral-900 text-slate-200 rounded-xl py-1 px-2 active:scale-95 duration-200" name="language">
-                            <option value="fr">Français</option>
-                            <option value="en">Anglais</option>
-                        </select>
                     </div>
-                    <ul className="flex items-center mr-10 space-x-10">
+                    <div className="md:hidden mr-5 sm:mr-10">
+                        {isLogged ?
+                        <Dropdown
+                            label={
+                                <img
+                                    src={`./uploads/profil/${currentUser.profil_picture}`}
+                                    alt="User profile image"
+                                    style={{ width: '40px', height: '40px', borderRadius: '50%' }}
+                                />
+                            }
+                            inline={true}
+                            dismissOnClick={true}
+                        >
+                            <Dropdown.Item>
+                                <Link to="/dashboard" className="text-slate-200">Dashboard</Link>
+                            </Dropdown.Item>
+                            <Dropdown.Item>
+                                <Link to="/dashboard" className="text-slate-200">Mon profil</Link>
+                            </Dropdown.Item>
+                            <Dropdown.Item>
+                                <Link to="/dashboard" className="text-slate-200">Panier</Link>
+                            </Dropdown.Item>
+                            <Dropdown.Item>
+                                <button 
+                                className="flex items-center font-karla rounded-md text-slate-200"
+                                onClick={handleLogout}
+                                >
+                                    <h3>Se déconnecter</h3>
+                                </button>
+                            </Dropdown.Item>
+                        </Dropdown>
+                        :
+                        <Link to="/" className="text-md font-karla font-medium rounded-md text-blue-700">S'identifier</Link>
+                    }
+                    </div>
+                    <ul className="md:flex items-center mr-10 space-x-10 hidden">
                         {!isLogged ? <li className="cursor-pointer">
                             <Link to="/" className="text-md font-karla font-medium rounded-md text-blue-700">S'identifier</Link>
                         </li> : "" }
