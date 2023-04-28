@@ -11,8 +11,12 @@ let getNumberProduct = async () => {
     return result
 }
 
-let getProducts = async (page) => {
+let getProductPage = async (page) => {
     const [products] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username, u.id AS user_id, u.profil_picture FROM products p INNER JOIN users u ON p.user_id = u.id LIMIT 6 OFFSET ?`, [page])
+    return products
+}
+let getAllProduct = async () => {
+    const [products] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username, u.id AS user_id, p.inventory, u.profil_picture, CONVERT_TZ(p.created_at, '+00:00', '+02:00') AS created_at FROM products p INNER JOIN users u ON p.user_id = u.id`)
     return products
 }
 let byId = async (id) => {
@@ -49,16 +53,18 @@ let searchProduct = async (vêtements, accessoires, divers, priceMin, priceMax) 
 
 // Add product
 
-let addProduct = async (id, title, price, description) => {
-    const [info] = await createPoolConnection().query(`INSERT INTO products (user_id, title, price, description, category_id) VALUES (?, ?, ?, ?, ?)`, [id, title, price, description, 3])
-    return info
+let addProduct = async (id, title, price, description, created_at, inventory) => {
+    const [info] = await createPoolConnection().query(`INSERT INTO products (user_id, title, price, description, category_id, created_at, inventory) VALUES (?, ?, ?, ?, ?, ?, ?)`, [id, title, price, description, 3, created_at, inventory])
+    const [result] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username, u.profil_picture, CONVERT_TZ(p.created_at, '+00:00', '+02:00') AS created_at FROM products p INNER JOIN users u ON p.user_id = u.id WHERE p.id = ?`, [info[0].insertId])
+    return result
 }
 
 export const products = {
-    all: getProducts,
+    all: getAllProduct,
     number: getNumberProduct,
     byId: byId,
     add: addProduct,
+    page: getProductPage,
     search: searchProduct,
     next: getNextProducts,
 }

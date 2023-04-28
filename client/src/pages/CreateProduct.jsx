@@ -19,6 +19,7 @@ export default function CreateProduct(){
             name: form.current[0].value,
             price: form.current[1].value,
             description: form.current[2].value,
+            inventory: form.current[3].value
         }
 
         dispatch(addProduct(productData))
@@ -35,27 +36,33 @@ export default function CreateProduct(){
     return (
         <>
             <Header />
-            <section className="min-h-screen p-10 w-3/4 m-auto">
+            <section className="min-h-screen p-10 w-3/4 mt-20">
                 <h1 className="text-5xl">Comment vendre un produit avec SpaceZone ?</h1>
                 <h2 className="text-xl">Je sais déjà comment faire<button className="bg-indigo-600 hover:bg-indigo-800 ml-5 py-2 px-4 rounded-md" onClick={handleStart}>Commencer maintenant</button></h2>
             </section>
             <div className="min-h-screen flex flex-col items-center mt-10" id="start-now">
                 <h1 className="text-2xl font-raleway font-medium">Vendre un produit</h1>
                 <h2 className="text-xl font-raleway font-medium">Commencer par renseigner les informations sur votre produit ci-dessous</h2>
-                <form action="" ref={form} onSubmit={handleForm} className="flex flex-col space-y-5">
-                    <label htmlFor="">
+                <form action="" ref={form} onSubmit={handleForm} encType="" className="flex flex-col space-y-5">
+                    <label>
+                        <h2 className="text-xl font-karla text-blue-600">Titre de la vente</h2>
                         <input type="text" placeholder="Nom de votre produit..." className="px-3 py-1"/>
-
                     </label>
-                    <label htmlFor="">
+                    <label>
+                    <h2 className="text-xl font-karla text-blue-600">Prix</h2>
                         <input type="text" placeholder="Prix" className="px-3 py-1"/>
-
                     </label>
-                    <label htmlFor="">
+                    <label>
+                    <h2 className="text-xl font-karla text-blue-600">Description de votre produit</h2>
                         <textarea type="text" placeholder="Description" className="px-3 py-1"></textarea>
-
                     </label>
+                    <label>
+                    <h2 className="text-xl font-karla text-blue-600">Quantité disponible</h2>
+                        <input className="px-3 py-1" type="number" />
+                    </label>
+                    <input type="file" />
                     <input type="submit" className="px-3 py-2 rounded-xl bg-gradient-to-r from-green-700 to bg-cyan-700 active:scale-95"/>
+
                 </form>
             </div>
             <Footer />

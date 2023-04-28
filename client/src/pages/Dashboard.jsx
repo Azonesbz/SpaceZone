@@ -78,7 +78,7 @@ export default function Dashboard() {
     const countUser = useSelector((state) => state.allUserReducer.number)
     const currentUser = useSelector((state) => state.currentUserReducer)
     const numberProduct = useSelector((state) => state.productReducer.number)
-    const product = useSelector((state) => state.productReducer.product)
+    const product = useSelector((state) => state.productReducer.allProduct)
     const [editUser, setEditUser] = useState(false)
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -189,14 +189,15 @@ export default function Dashboard() {
                                         Gestion des utilisateurs
                                     </h2>
 
-                                    <div className='bg-slate-200 h-96 mt-5 rounded-lg p-5 overflow-scroll relative shadow'>
-                                        <table className='table-auto w-full'>
+                                    <div className='bg-slate-200 h-96 mt-5 rounded-lg p-10 overflow-scroll relative shadow'>
+                                        <table className='table-auto w-full p-10'>
                                             <thead>
                                                 <tr className='text-left border-b'>
                                                     <th>Username</th>
                                                     <th>Email</th>
                                                     <th>Permission</th>
                                                     <th>Gérer l'utilisateur</th>
+                                                    <th>Date de création</th>
                                                 </tr>
                                             </thead>
                                             <tbody className='font-light font-karla' onClick={handleUserManage}>
@@ -234,15 +235,23 @@ export default function Dashboard() {
                                                                 </svg>
                                                             </button>
                                                         </td>
+                                                        <td>
+                                                            {user.created_at}
+                                                        </td>
                                                     </tr>
                                                 ))}
                                             </tbody>
                                         </table>
+                                        <button className='absolute top-0 hidden'>
+                                            <svg width="46" height="46" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" d="M7 10H5V5h5v2H7v3Zm-2 4h2v3h3v2H5v-5Zm12 3h-3v2h5v-5h-2v3ZM14 7V5h5v5h-2V7h-3Z" clip-rule="evenodd"></path>
+                                            </svg>
+                                        </button>
                                     </div>
 
                                 </div>
                                 <div>
-                                    <h2 className='flex items-center text-3xl font-light'>
+                                    <h2 className='flex items-center text-3xl font-light outline-none'>
                                         <svg width="40" height="40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M22 7 12 2 2 7v10l10 5 10-5V7Z"></path>
                                             <path d="m2 7 10 5"></path>
@@ -260,6 +269,7 @@ export default function Dashboard() {
                                                     <th>Vendeur</th>
                                                     <th>Date de publication</th>
                                                     <th>Gérer le produit</th>
+                                                    <th>Inventaire</th>
                                                 </tr>
                                             </thead>
                                             <tbody className='font-light font-karla' onClick={handleUserManage}>
@@ -268,11 +278,12 @@ export default function Dashboard() {
                                                         <td className='py-2 pr-14'>
                                                             <h1>{item.title}</h1>
                                                         </td>
-                                                        <td className='py-2 pr-14'>
-                                                            <h1>{item.username}</h1>
+                                                        <td className='flex items-center py-2 pr-14'>
+                                                            <img src={`./uploads/profil/${item.profil_picture}`} alt="image de profil" className='h-8 w-8 rounded-full' />
+                                                            <h1 className='ml-2'>{item.username}</h1>
                                                         </td>
                                                         <td className='py-2 pr-14'>
-                                                            <h1>{item.name}</h1>
+                                                            <h1>{item.created_at}</h1>
                                                         </td>
                                                         <td className='flex items-center space-x-2 py-2 pr-20'>
                                                             <button className=' bg-red-600 p-1 text-slate-200 rounded-lg active:scale-95 duration-200' id='delete-user' value={item.id}>
@@ -297,6 +308,7 @@ export default function Dashboard() {
                                                                 </svg>
                                                             </button>
                                                         </td>
+                                                        <td><h1 className={`font-medium ${item.inventory <= 0 ? "text-red-600" : "text-black"}`}>{item.inventory <= 0 ? "Rupture de stock" : item.inventory}</h1></td>
                                                     </tr>
                                                 ))}
                                             </tbody>

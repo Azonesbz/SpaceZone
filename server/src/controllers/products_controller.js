@@ -1,14 +1,20 @@
 import { products } from "../repository/products_repository.js";
+import { currentDate } from "../utils.js";
 
-export async function getProducts(req, res){
+export async function getProductPage(req, res){
     const currentPage = req.body.page
     const offset = (currentPage * 6 - 6) || 1
-    products.all(offset)
+    products.page(offset)
     .then(product => {
         res.status(201).json({product})
     })
     .catch(err => {
         res.status(404).json({message: `Aucun article pour le moment, revenez plus tard !`, err})
+    })
+}
+export async function getAllProduct(req, res){
+    products.all().then(products => {
+        res.status(201).json({products})
     })
 }
 export async function getNumberProduct(req, res){
@@ -41,10 +47,21 @@ export async function getNextProduct(req, res){
     })
 }
 export async function addProduct(req, res){
-    const {description, name, price, id} = req.body
-    products.add(id, name, price, description).then(
-        response => {
-            res.status(200).json({msg: 'Le produit à bien été créer', response})
+    const {description, name, price, inventory, id} = req.body
+    const created_at = currentDate()
+    console.log(created_at)
+    products.add(id, name, price, description, created_at, inventory).then(
+        (response) => {
+            let data = {
+                id: response[0],
+                name: response[0],
+                price: response[0],
+                description: response[0],
+                seller: response[0],
+                created_at: response[0].created_at,
+                profil_picture: response[0].profil_picture
+            }
+            res.status(200).json({newProduct: data})
         }
     )
     .catch(err => {

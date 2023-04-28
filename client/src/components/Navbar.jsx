@@ -45,7 +45,9 @@ export default function Navbar(){
                         {!isLogged ? <li className="cursor-pointer">
                             <Link to="/" className="text-md font-karla font-medium rounded-md text-blue-700">S'identifier</Link>
                         </li> : "" }
-
+                        {isLogged ? <li className="cursor-pointer">
+                            <Link to="/product/new">Vendre un produit</Link>
+                        </li> : "" }
                         {isLogged && isAdmin ? <li className="cursor-pointer">
                             <Link 
                             className="text-md font-karla rounded-md text-black"
@@ -74,6 +76,7 @@ export default function Navbar(){
                                 </svg>
                             </button>
                         </li> : "" }
+                        
                         {isLogged ? 
                         <li className="flex items-center cursor-pointer">
                             <Link to="/profil" className="flex items-center text-md font-karla font-medium rounded-md text-blue-700">
@@ -81,7 +84,7 @@ export default function Navbar(){
                                 src={`./uploads/profil/${currentUser.profil_picture}`}
                                 onError={(e) => {
                                     e.target.onerror = null; // empêche les boucles d'erreur infinies
-                                    e.target.src = './uploads/profil/default.jpg'; // charge une image alternative
+                                    e.target.src = '../uploads/profil/default.jpg'; // charge une image alternative
                                 }}
                                 alt="image de profil"
                                 className="rounded-full h-8 w-8"

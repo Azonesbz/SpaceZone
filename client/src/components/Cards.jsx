@@ -2,13 +2,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
 import { isEmpty } from "./Utils"
 import { useEffect, useState } from "react"
-import { getProduct } from "../actions/product.action"
-import { addProductCart } from "../actions/cart.action"
+import { getProductPage } from "../actions/product.action"
 
 export default function Carts({page}){
     
     const dispatch = useDispatch()
-    const getProducts = useSelector((state) => state.productReducer.product)
+    const getProducts = useSelector((state) => state.productReducer.productPage)
 
     const scrollToTop = () => {
         if (window.scrollY !== 0) {
@@ -24,7 +23,7 @@ export default function Carts({page}){
         let data = {
             page: page
         }
-        dispatch(getProduct(data))
+        dispatch(getProductPage(data))
     }, [page])
 
     return (

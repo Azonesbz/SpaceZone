@@ -20,13 +20,14 @@ export async function getNumberUser(req, res){
 
 export async function addUser(req, res) {
     const {username, email, password} = req.body
-    const hashedPassword = await bcrypt.hash(password, 15)
+    
     const now = new Date();
     const mysqlDate = now.toLocaleString('fr-FR', { timeZone: 'Europe/Paris' })
     const datetimeString = mysqlDate.replace('à', ' ')
     const last_connection = datetimeString.slice(6, 10) + '-' + datetimeString.slice(3, 5) + '-' + datetimeString.slice(0, 2) + ' ' + datetimeString.slice(11, 19)
     const created_at = last_connection
     if(username, email, password){
+        const hashedPassword = await bcrypt.hash(password, 15)
         users.add(username, email, hashedPassword, created_at, last_connection)
         .then(
             response => {
