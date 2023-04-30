@@ -1,7 +1,7 @@
 import express from 'express'
 import { addProduct, getAllProduct, getNumberProduct, getProductById, getProductPage, getSearch } from './controllers/products_controller.js'
 import { addUser, connectUser, deleteUser, editEmail, editFirstName, editNumberPhone, editUsername, getAllUsers, getNumberUser, sessionIsValid, updateUser, userExist, userLogout } from './controllers/user_controller.js'
-import { upload, uploadFile } from './controllers/uploadFile_controller.js'
+import { uploadProfil, uploadProduct, uploadProfilFile } from './controllers/uploadFile_controller.js'
 import getCarts, { addProductCart } from './controllers/cart_controller.js'
 
 const router = express.Router()
@@ -13,7 +13,7 @@ router.get('/product/:id', getProductById)
 router.get('/allProduct', getAllProduct)
 
 router.post('/productPage', getProductPage)
-router.post('/product/new', addProduct)
+router.post('/product/new', uploadProduct.array('files'), addProduct)
 router.post('/search/product', getSearch)
 
 // Route utilisateur
@@ -45,6 +45,6 @@ router.post('/api/session', sessionIsValid)
 
 // Upload de fichier
 
-router.put('/upload/:id', upload.single('file'), uploadFile)
+router.put('/upload/:id', uploadProfil.single('file'), uploadProfilFile)
 
 export default router

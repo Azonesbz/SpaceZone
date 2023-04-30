@@ -3,9 +3,10 @@ import { currentDate } from "../utils.js";
 
 export async function getProductPage(req, res){
     const currentPage = req.body.page
-    const offset = (currentPage * 6 - 6) || 1
+    const offset = (currentPage * 6 - 6)
     products.page(offset)
     .then(product => {
+        console.log(currentPage)
         res.status(201).json({product})
     })
     .catch(err => {
@@ -47,10 +48,11 @@ export async function getNextProduct(req, res){
     })
 }
 export async function addProduct(req, res){
-    const {description, name, price, inventory, id} = req.body
+    const {description, name, price, inventory, id} = JSON.parse(req.body.productData)
     const created_at = currentDate()
-    console.log(created_at)
-    products.add(id, name, price, description, created_at, inventory).then(
+    const files = req.files.map((file) => file.filename); // Récupération des noms de fichiers
+
+    products.add(id, name, price, description, created_at, inventory, JSON.stringify(files)).then(
         (response) => {
             let data = {
                 id: response[0],
@@ -59,7 +61,7 @@ export async function addProduct(req, res){
                 description: response[0],
                 seller: response[0],
                 created_at: response[0].created_at,
-                profil_picture: response[0].profil_picture
+                url_image: response[0].url_image
             }
             res.status(200).json({newProduct: data})
         }

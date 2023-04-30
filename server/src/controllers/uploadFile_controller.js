@@ -3,6 +3,8 @@ import path from 'path';
 import fs from 'node:fs'
 import { generateId } from '../../../client/src/utils/generateId.js';
 import { users } from '../repository/user_repository.js';
+import { v4 as uuidv4 } from 'uuid';
+
 
 let data; 
 
@@ -27,9 +29,32 @@ const storageProfil = multer.diskStorage({
     }
 });
 
-export const upload = multer({ storage: storageProfil });
+export const uploadProfil = multer({ storage: storageProfil });
 
-export async function uploadFile(req, res){
+const storageProduct = multer.diskStorage({
+    destination: function (req, file, cb) {
+        const uploadDir = '../client/uploads/product';
+        cb(null, uploadDir)
+    },
+    filename: function (req, file, cb) {
+        const fileName = uuidv4() + '-' + file.originalname;
+        cb(null, fileName);
+    },
+    fileFilter: function (req, file, cb) {
+        const filetypes = /jpeg|jpg|png/;
+        const mimetype = filetypes.test(file.mimetype);
+        const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+
+        if (mimetype && extname) {
+            return cb(null, true);
+        }
+        cb("Erreur : seuls les fichiers d'images sont autorisés (jpeg, jpg, png).");
+    }
+});
+
+export const uploadProduct = multer({ storage: storageProduct });
+
+export async function uploadProfilFile(req, res){
     try {
         if(!req.file) {
             res.status(400).send('No file uploaded.');

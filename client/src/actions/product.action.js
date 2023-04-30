@@ -42,7 +42,7 @@ export let getProductById = (id) => {
 export let addProduct = (data) => {
     return (dispatch) => {
         return axios.post('http://localhost:3001/product/new', data).then(res => {
-            dispatch({ type: ADD_PRODUCTS, payload: {...data, id: res.data.response.insertId}})
+            dispatch({ type: ADD_PRODUCTS, payload: res.data.newProduct})
         })
     }
 }

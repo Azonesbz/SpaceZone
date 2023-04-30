@@ -27,7 +27,7 @@ export default {
     },
   },
   plugins: [
-    scrollbar
-  ],
+    require('flowbite/plugin')
+]
 }
 

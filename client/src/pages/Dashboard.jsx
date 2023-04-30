@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { deleteUser, getAllUser, getUserNumber, updateUser } from '../actions/user.action'
 import Modal from '../components/modal/Modal'
 import { useRef } from 'react'
-import { Tooltip } from 'flowbite-react'
+import { Carousel, Tooltip } from 'flowbite-react'
 
 function EditUserModal({ user, isOpen, onClose }) {
     const [username, setUsername] = useState(user.username);
