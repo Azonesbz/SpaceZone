@@ -10,8 +10,9 @@ export default function Navbar(){
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => state.currentUserReducer)
     const isLogged = useSelector((state) => state.sessionReducer.Authorization)
+
     const [isAdmin, setIsAdmin] = useState(false)
-    const navigate = useNavigate()
+    const [scrollPosition, setScrollPosition] = useState(0)
 
     useEffect(() => {
         if(currentUser.permission === "ADMINISTRATOR" || "MODARATOR"){
@@ -19,14 +20,29 @@ export default function Navbar(){
         }
     }, [])
 
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    let handleScroll = () => {
+        const position = window.pageYOffset
+        setScrollPosition(position)
+    }
+    
+
     let handleLogout = () => {
         dispatch(userLogout(currentUser.id))
 
     }
+    
+
     return (
         <>
-            <div className="flex fixed inset-0 z-50 h-20 w-full backdrop-blur-lg shadow-lg">
-                <div className="h-full w-full bg-slate-300 opacity-50"></div>
+            <div className={`flex fixed inset-0 z-50 h-20 w-full backdrop-blur-lg duration-200 ${scrollPosition >= 20 ? "shadow" : ""}`}>
+                <div className={`h-full w-full opacity-75 duration-200 ${scrollPosition >= 20 ? "bg-slate-200" : ""}`}></div>
             </div>
             <header className="flex fixed inset-0 z-50 h-20 w-full bg-transparent md:container">
                 <nav className="flex justify-between items-center h-full w-full">

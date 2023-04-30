@@ -7,6 +7,7 @@ import { useState } from "react";
 import Dropzone from "../components/dropzone/Dropzone";
 import { addProduct } from "../actions/product.action";
 
+
 export default function CreateProduct(){
     const form = useRef()
     const dispatch = useDispatch()

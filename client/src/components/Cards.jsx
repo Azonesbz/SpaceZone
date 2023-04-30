@@ -1,9 +1,9 @@
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
 import { isEmpty } from "./Utils"
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { getProductPage } from "../actions/product.action"
-import { Carousel } from 'react-responsive-carousel';
+import Flickity from "react-flickity-component";
 
 export default function Carts({ page }) {
 
@@ -43,11 +43,25 @@ export default function Carts({ page }) {
                         >
                             <div className="w-20">
                                 
-                            {/* <Carousel>
+                                <Flickity
+                                    className='carousel p-2 max-w-7xl mx-auto w-full'
+                                    elementType='div'
+                                    options={{
+                                        prevNextButtons: false,
+                                        pageDots: false,
+                                        cellAlign: 'left',
+                                        contain: true,
+                                        freeScroll: true
+                                    }}
+                                    disableImagesLoaded={false}
+                                    static
+                                >
                                     {JSON.parse(product.url_image).map((file, index) => (
-                                        <img key={index} src={`../../uploads/product/${file}`} alt="product-image" />
+                                        <div key={index} onClick={(e) => e.preventDefault()}>
+                                            <img src={`../../uploads/product/${file}`} alt="product-image" />
+                                        </div>
                                     ))}
-                                </Carousel> */}
+                                </Flickity>
 
 
                             </div>
