@@ -156,13 +156,6 @@ export default function Dashboard() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        if (currentUser.permission !== 'ADMINISTRATOR') {
-            navigate('/home')
-        }
-        dispatch(getUserNumber())
-    }, [])
-
     let handleUserManage = (e) => {
         let parent = e.target
         for (let i = 0; i < 5; i++) {

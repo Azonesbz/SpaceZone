@@ -3,14 +3,17 @@ import { Link } from 'react-router-dom'
 import { isEmpty } from "./Utils"
 import { useEffect } from "react"
 import { getProductPage } from "../actions/product.action"
-import Flickity from "react-flickity-component";
+import Flickity from 'react-flickity-component';
+import Carousel from "./carousel/Carousel"
 
-export default function Carts({ page }) {
+
+export default function Cards({ 
+    page, 
+    
+}) {
 
     const dispatch = useDispatch()
     const getProducts = useSelector((state) => state.productReducer.productPage)
-
-
 
     const scrollToTop = () => {
         if (window.scrollY !== 0) {
@@ -35,12 +38,26 @@ export default function Carts({ page }) {
                 return (
                     <div
                         key={product.id}
-                        className='flex items-center bg-gradient-to-br from-white to-zinc-200 col-span-6 lg:col-span-3 shadow-xl rounded-xl 
+                        className='flex items-center bg-gradient-to-br from-white to-zinc-200 col-span-3 lg:col-span-2 shadow-xl rounded-xl 
                 w-full p-3 duration-200'>
                         <Link
-                            className='flex flex-col sm:flex-row bg-gradient-to-br w-full p-3'
+                            className='flex flex-col bg-gradient-to-br h-full p-3'
                             to={`/product/${product.id}`}
                         >
+                            <div className="max-w-lg" onClick={(e) => e.preventDefault(e)}>
+
+
+                                <Carousel autoSlide={false}>
+                                    {JSON.parse(product.url_image).map(image => {
+                                        console.log(image)
+                                        return(
+                                            <img src={`../../uploads/product/${image}`} alt="product image" className="min-w-full object-cover h-96 w-60" />
+                                        )
+                                    }
+                                    )}
+                                </Carousel>
+
+                            </div>
                             <div className='flex flex-col p-5 w-full'>
                                 <h2 className='font-raleway font-medium text-2xl'>{product.title}</h2>
                                 <span className='font-semibold font-rajdhani text-2xl'>{product.price}€</span>
@@ -62,11 +79,11 @@ export default function Carts({ page }) {
                                 </div>
                             </div>
                         </Link>
-                    
+
                     </div>
                 )
             })}
-            
+
         </>
     )
 }
