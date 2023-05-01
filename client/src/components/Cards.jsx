@@ -51,7 +51,7 @@ export default function Cards({
                                     {JSON.parse(product.url_image).map(image => {
                                         console.log(image)
                                         return(
-                                            <img src={`../../uploads/product/${image}`} alt="product image" className="min-w-full object-cover h-96 w-60" />
+                                            <img src={`./basket.png`} alt="product image" className="min-w-full object-cover h-96 w-60" />
                                         )
                                     }
                                     )}

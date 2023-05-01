@@ -48,45 +48,76 @@ export default function CreateProduct(){
     return (
         <>
             <Header />
-            <section className="min-h-screen p-10 w-3/4 mt-20">
-                <h1 className="text-5xl">Comment vendre un produit avec SpaceZone ?</h1>
-                <h2 className="text-xl">Je sais déjà comment faire<button className="bg-indigo-600 hover:bg-indigo-800 ml-5 py-2 px-4 rounded-md" onClick={handleStart}>Commencer maintenant</button></h2>
+            <section className="flex min-h-screen p-10 w-full mt-20 gap-5">
+                <div className="flex flex-col items-stretch w-3/5 space-y-10">
+                    <h1 className="text-5xl font-medium">Comment vendre un produit avec SpaceZone ?</h1>
+                    <div className="flex-flex-col shadow-md">
+                        <p className="text-xl leading-8 bg-neutral-900 text-slate-200 p-5 rounded-t-md">Vendez vos biens en quelque clic seulement ! Avec <span className="text-blue-700 font-medium">SpaceZone</span>, vous avez la possibilité de revendre en toute confiance grâce à notre communauté de confiance ! On garde l'oeil sur notre plateforme, et en cas de problème, notre assistance est disponible <span className="text-green-500 font-medium">24h/24.</span> Et en plus c'est <span className="text-green-500 font-medium">satisfait, ou remboursé.</span> Veuillez suivre les étapes pour commencer par vendre votre premier produit.</p>
+                        <div className="flex flex-col space-y-5">
+                            <button className="bg-indigo-600 hover:bg-indigo-700 py-2 rounded-b-md duration-200" onClick={handleStart}>
+                                <h2 className="text-lg font-ubuntu">Je sais déjà comment faire</h2>
+                                Commencer maintenant
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div className="flex flex-col p-5 justify-around">
+                    <div className="flex items-center">
+                        <div className="flex items-center justify-center vertical-center text-center h-16 w-16 p-8 bg-neutral-900 rounded-full text-slate-200 text-3xl">1</div>
+                        <h1 className="ml-5 text-xl">Commencer par vous inscrire ! Si vous n'avez pas encore de compte, cliquez ici</h1>
+                    </div>
+                    <div className="flex items-center">
+                        <div className="flex items-center justify-center vertical-center text-center h-16 w-16 p-8 bg-neutral-900 rounded-full text-slate-200 text-3xl">2</div>
+                        <h1 className="ml-5 text-xl">Une fois inscrit, remplissez tout les champs ci-dessous pour mettre une offre en ligne.</h1>
+                    </div>
+                    <div className="flex items-center">
+                        <div className="flex items-center justify-center vertical-center text-center h-16 w-16 p-8 bg-neutral-900 rounded-full text-slate-200 text-3xl">3</div>
+                        <h1 className="ml-5 text-xl">Une fois votre offre sur le catalogue, attendez que quelqu'un décide d'acheter votre bien.</h1>
+                    </div>
+                    <div className="flex items-center">
+                        <div className="flex items-center justify-center vertical-center text-center h-16 w-16 p-8 bg-neutral-900 rounded-full text-slate-200 text-3xl">4</div>
+                        <h1 className="ml-5 text-xl">Poster le colis à l'adresse indiqué, et empocher votre argent !</h1>
+                    </div>
+                </div>
             </section>
-            <div className="min-h-screen flex flex-col items-center mt-10" id="start-now">
-                <h1 className="text-2xl font-raleway font-medium">Vendre un produit</h1>
-                <h2 className="text-xl font-raleway font-medium">Commencer par renseigner les informations sur votre produit ci-dessous</h2>
-                <form action="" ref={form} onSubmit={handleForm} enctype="multipart/form-data" className="flex flex-col space-y-5">
-                    <label>
-                        <h2 className="text-xl font-karla text-blue-600">Titre de la vente</h2>
-                        <input type="text" placeholder="Nom de votre produit..." className="px-3 py-1"/>
-                    </label>
-                    <label>
-                    <h2 className="text-xl font-karla text-blue-600">Prix</h2>
-                        <input type="text" placeholder="Prix" className="px-3 py-1"/>
-                    </label>
-                    <label>
-                    <h2 className="text-xl font-karla text-blue-600">Description de votre produit</h2>
-                        <textarea type="text" placeholder="Description" className="px-3 py-1"></textarea>
-                    </label>
-                    <label>
-                    <h2 className="text-xl font-karla text-blue-600">Quantité disponible</h2>
-                        <input className="px-3 py-1" type="number" />
-                    </label>
-                    <Dropzone onFilesSelected={handleFilesSelected} />
-                    <div>
-                        {files.map((file) => (
-                            <p key={file.name}>{file.name}</p>
-                        ))}
-                    </div>
-                    <div className="flex items-center gap-5">
-                        {files.map((file, index) => (
-                            <img key={index} src={URL.createObjectURL(file)} width={150} height={150} alt={file.name} className="h-20 w-20 hover:scale-150 duration-200" />
-                        ))}
-                    </div>
-                    <input type="submit" className="px-3 py-2 rounded-xl bg-gradient-to-r from-green-700 to bg-cyan-700 active:scale-95"/>
+            <section className="flex min-h-screen mt-10 container" id="start-now">
+                <div>
 
-                </form>
-            </div>
+                    <h1 className="text-5xl font-raleway font-medium">Vendre un produit</h1>
+                    <h2 className="text-xl font-raleway font-medium bg-neutral-900 text-slate-200 py-2 px-2 rounded mt-3">Commencer par renseigner les informations sur votre produit ci-dessous</h2>
+                    <form action="" ref={form} onSubmit={handleForm} enctype="multipart/form-data" className="flex flex-col space-y-5 outline-none">
+                        <label className="w-full">
+                            <h2 className="text-xl font-karla">Titre de la vente</h2>
+                            <input type="text" placeholder="Nom de votre produit..." className="px-3 py-2 w-full rounded outline-none" />
+                        </label>
+                        <label>
+                            <h2 className="text-xl font-karla text-blue-600">Prix</h2>
+                            <input type="text" placeholder="Prix" className="px-3 py-1" />
+                        </label>
+                        <label>
+                            <h2 className="text-xl font-karla text-blue-600">Description de votre produit</h2>
+                            <textarea type="text" placeholder="Description" className="px-3 py-1"></textarea>
+                        </label>
+                        <label>
+                            <h2 className="text-xl font-karla text-blue-600">Quantité disponible</h2>
+                            <input className="px-3 py-1" type="number" />
+                        </label>
+                        <Dropzone onFilesSelected={handleFilesSelected} />
+                        <div>
+                            {files.map((file) => (
+                                <p key={file.name}>{file.name}</p>
+                            ))}
+                        </div>
+                        <div className="flex items-center gap-5">
+                            {files.map((file, index) => (
+                                <img key={index} src={URL.createObjectURL(file)} width={150} height={150} alt={file.name} className="h-20 w-20 hover:scale-150 duration-200" />
+                            ))}
+                        </div>
+                        <input type="submit" className="px-3 py-2 rounded-xl bg-gradient-to-r from-green-700 to bg-cyan-700 active:scale-95" />
+
+                    </form>
+                </div>
+            </section>
             <Footer />
         </>
     )
