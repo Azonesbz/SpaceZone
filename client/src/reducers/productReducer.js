@@ -15,9 +15,7 @@ export default function productReducer(state = initialState, action){
         case GET_PRODUCT_BY_ID:
             return {...state, productId: action.payload}
         case UPDATE_PRODUCT:
-            return state.allProduct.map((product) => {
-                console.log(product)
-                console.log(action.payload[0])
+            return [...state, state.allProduct.map((product) => {
                 if(product.id === action.payload[0].id){
                     return {
                     ...product,
@@ -27,7 +25,7 @@ export default function productReducer(state = initialState, action){
                     inventory: action.payload[0].inventory
                     }
                 }
-            })
+            })]
         default: 
             return state
     }

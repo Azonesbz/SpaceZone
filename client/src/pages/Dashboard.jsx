@@ -93,7 +93,6 @@ function EditProductModal({ product, isOpen, onClose }) {
             price: editFormProduct.current[2].value,
             inventory: editFormProduct.current[3].value,
         }
-        console.log(data)
         dispatch(updateProduct(data))
         dispatch(getAllProduct())
         onClose();
@@ -114,7 +113,7 @@ function EditProductModal({ product, isOpen, onClose }) {
                 <label className='flex flex-col w-3/4'>
                     Auteur
                     <select defaultValue={product.username}>
-                        <option value={product.username}>{product.username}</option>
+                        <option value={product.user_id}>{product.username}</option>
                         {!isEmpty(allUser) && allUser.map(user => (
                             <option key={user.id} value={user.id}>{user.username}</option>
                         ))}
@@ -339,17 +338,18 @@ export default function Dashboard() {
                                 <div className='bg-slate-200 h-96 mt-5 rounded-lg p-5 overflow-scroll relative shadow'>
                                     <table className='table-auto w-full'>
                                         <thead>
-                                            <tr className='text-left border-b'>
+                                            <tr className='text-left border-b m-3'>
                                                 <th>Nom du produit</th>
                                                 <th>Vendeur</th>
+                                                <th>Prix</th>
                                                 <th>Date de publication</th>
                                                 <th>Gérer le produit</th>
                                                 <th>Inventaire</th>
                                             </tr>
                                         </thead>
-                                        <tbody className='font-light font-karla' onClick={handleUserManage}>
+                                        <tbody className='font-light font-karla p-3' onClick={handleUserManage}>
                                             {!isEmpty(product) && product.map(item => (
-                                                <tr className='text-black' key={item.id}>
+                                                <tr className='text-black p-3' key={item.id}>
                                                     <td className='py-2 pr-14'>
                                                         <h1>{item.title}</h1>
                                                     </td>
@@ -364,6 +364,9 @@ export default function Dashboard() {
                                                         className='h-full w-8 rounded-full' 
                                                         />
                                                         <h1 className='ml-2'>{item.username}</h1>
+                                                    </td>
+                                                    <td className='py-2 pr-14'>
+                                                        <h1>{item.price}</h1>
                                                     </td>
                                                     <td className='py-2 pr-14'>
                                                         <h1>{item.created_at}</h1>
@@ -406,7 +409,7 @@ export default function Dashboard() {
                                                             </button>
                                                         </Tooltip>
                                                     </td>
-                                                    <td className='py-2 pr-14'>
+                                                    <td className='py-2 px-5'>
                                                         <h1 className={`font-medium whitespace-nowrap ${item.inventory <= 0 ? "text-red-600" : "text-black"}`}>
                                                             {item.inventory <= 0 ? "Rupture de stock" : item.inventory}
                                                         </h1>
