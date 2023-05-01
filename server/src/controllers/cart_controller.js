@@ -17,12 +17,20 @@ export default function getCarts(req, res){
     })
 }
 
+// Add product to cart
+
 export async function addProductCart(req, res){
     const {id, quantity, user_id, price} = req.body
-    console.log(quantity)
     cart.add(id, quantity, user_id, price).then(response => {
-        console.log(response)
-        res.status(200).json({response})
+        res.status(200).json({response: response.success})
+    })
+    .catch(err => console.error(err))
+}
+
+export async function deleteItemsCart(req, res){
+    const id = req.params.id
+    cart.delete(id).then(response => {
+        res.status(201).json({response})
     })
     .catch(err => console.error(err))
 }

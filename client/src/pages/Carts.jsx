@@ -3,13 +3,15 @@ import Header from "../components/Navbar"
 import Footer from "../components/Footer"
 import { useDispatch, useSelector } from "react-redux"
 import { isEmpty } from '../utils/utils'
-import { getCarts } from "../actions/cart.action"
+import { deleteCart, getCarts } from "../actions/cart.action"
 import Carousel from "../components/carousel/Carousel"
 import {Link} from 'react-router-dom'
+import { Tooltip } from "flowbite-react"
 
 export default function Carts(){
     const [totalPrice, setTotalPrice] = useState(null)
-    const cartItem = useSelector((state) => state.cartReducer)
+    const cartItem = useSelector((state) => state.cartReducer.cart)
+    const currentUser = useSelector((state) => state.currentUserReducer)
     const dispatch = useDispatch()
     let data;
     useEffect(() => {
@@ -19,29 +21,57 @@ export default function Carts(){
         }
         dispatch(getCarts())
     }, [cartItem])
+    let handleDeleteCart = () => {
+        dispatch(deleteCart(currentUser.id))
+        dispatch(getCarts())
+    }
     return (
         <>
             <Header />
             <section className="p-10 relative mt-20 container">
                 <div className="flex items-center justify-between pb-2">
-                    <h1 className="uppercase font-karla font-medium text-3xl">Mon Panier</h1>
-                    <div className="h-14 w-[2px] bg-black rounded-full"/>
+                    <div className="flex space-x-14">
+                        <h1 className="uppercase font-karla font-medium text-3xl">Mon Panier</h1>
+                        {!isEmpty(cartItem) ? 
+                        <button
+                        className="text-red-600"
+                        onClick={handleDeleteCart}
+                        >
+                            Supprimer mon panier
+                        </button> 
+                        : ""}
+                    </div>
                     <h2 className="uppercase font-karla font-medium text-3xl">Prix total des articles: <span>{totalPrice ? totalPrice + "€" : "Aucun article dans le panier"}</span></h2>
                 </div>
                 <div className="grid grid-cols-12 gap-5 mt-5" >
                 {!isEmpty(cartItem) ? cartItem.map((items, index) => (
-                    <div className="col-span-6 bg-neutral-300 rounded-xl text-blue-700 hover:underline font-rajhdani" key={index}>
-                        <div className="max-w-lg">
+                    <div className="col-span-6 bg-neutral-300 rounded-xl text-black hover:underline font-rajhdani" key={index}>
+                        <div className="min-w-full">
                             <Carousel>
                                 {JSON.parse(items.url_image).map((image, index) => (
-                                    <img src={`../uploads/product/${image}`} alt="" className="min-w-full object-cover h-96 w-60" />
+                                    <img key={index} src={`../uploads/product/${image}`} alt="" className="min-w-full object-cover h-96 rounded-t-xl" />
                                 ))}
                             </Carousel>
                         </div>
-                        <div>
-                            <h1 className="">{items.title}</h1>
-                            <h1 className="">Quantité: <span>{items.quantity}</span></h1>
-                            <h1 className="flex justify-between items-center">Prix total: <span className="text-3xl">{items? items.price : ""}</span></h1>
+                        <div className="p-5 relative">
+                            <button className="text-white absolute right-5 bg-red-600 p-1 rounded-xl">
+                                <svg width="30" height="30" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 7h16"></path>
+                                    <path d="M10 11v6"></path>
+                                    <path d="M14 11v6"></path>
+                                    <path d="m5 7 1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12"></path>
+                                    <path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path>
+                                </svg>
+                            </button>
+                            <button className="absolute right-16 bg-neutral-900 p-1 rounded-xl text-white">
+                                <svg width="30" height="30" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 20h4L18.5 9.5a2.829 2.829 0 0 0-4-4L4 16v4Z"></path>
+                                    <path d="m13.5 6.5 4 4"></path>
+                                </svg>
+                            </button>
+                            <h1 className="text-3xl">{items.title}</h1>
+                            <h1 className="text-xl">Quantité: <span>{items.quantity}</span></h1>
+                            <h1 className="flex justify-between items-center text-2xl">Prix total: <span className="text-3xl">{items? items.price + "€" : ""}</span></h1>
                         </div>
                     </div>
                 )) : 

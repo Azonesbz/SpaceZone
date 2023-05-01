@@ -30,7 +30,6 @@ export default function ProductId() {
       price: product[0].price * value
     }
     dispatch(addProductCart(data))
-    dispatch(getCarts())
   }
 
   return (
