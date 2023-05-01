@@ -15,8 +15,14 @@ export default function Navbar(){
     const [scrollPosition, setScrollPosition] = useState(0)
 
     useEffect(() => {
-        if(currentUser.permission === "ADMINISTRATOR" || "MODARATOR"){
-            setIsAdmin(true)
+        if(currentUser.permission === "ADMINISTRATOR" || "MODERATOR"){
+            return () => {
+                setIsAdmin(true)
+            }
+        } else {
+            return () => {
+                setIsAdmin(false)
+            }
         }
     }, [])
 
