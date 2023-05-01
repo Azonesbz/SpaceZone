@@ -82,30 +82,31 @@ export default function CreateProduct(){
             </section>
             <section className="flex min-h-screen mt-10 container" id="start-now">
                 <div>
-
-                    <h1 className="text-5xl font-raleway font-medium">Vendre un produit</h1>
-                    <h2 className="text-xl font-raleway font-medium bg-neutral-900 text-slate-200 py-2 px-2 rounded mt-3">Commencer par renseigner les informations sur votre produit ci-dessous</h2>
-                    <form action="" ref={form} onSubmit={handleForm} enctype="multipart/form-data" className="flex flex-col space-y-5 outline-none">
+                    <div>
+                        <h1 className="text-5xl font-raleway font-medium">Vendre un produit</h1>
+                        <h2 className="text-xl font-raleway font-medium text-blue-700 rounded mt-1">Commencer par renseigner les informations sur votre produit ci-dessous</h2>
+                    </div>
+                    <form action="" ref={form} onSubmit={handleForm} enctype="multipart/form-data" className="flex flex-col space-y-5 bg-neutral-900 mt-5 p-8 rounded-xl">
                         <label className="w-full">
-                            <h2 className="text-xl font-karla">Titre de la vente</h2>
+                            <h2 className="text-xl font-karla text-slate-200">Titre de la vente</h2>
                             <input type="text" placeholder="Nom de votre produit..." className="px-3 py-2 w-full rounded outline-none" />
                         </label>
                         <label>
-                            <h2 className="text-xl font-karla text-blue-600">Prix</h2>
-                            <input type="text" placeholder="Prix" className="px-3 py-1" />
+                            <h2 className="text-xl font-karla text-slate-200">Prix</h2>
+                            <input type="number" placeholder="Prix" className="px-3 py-2 w-full rounded" />
                         </label>
                         <label>
-                            <h2 className="text-xl font-karla text-blue-600">Description de votre produit</h2>
-                            <textarea type="text" placeholder="Description" className="px-3 py-1"></textarea>
+                            <h2 className="text-xl font-karla text-slate-200">Description de votre produit</h2>
+                            <textarea type="text" placeholder="Description" className="px-3 py-2 w-2/3 rounded"></textarea>
                         </label>
                         <label>
-                            <h2 className="text-xl font-karla text-blue-600">Quantité disponible</h2>
-                            <input className="px-3 py-1" type="number" />
+                            <h2 className="text-xl font-karla text-slate-200">Quantité disponible</h2>
+                            <input className="px-3 py-2 w-full rounded" type="number" />
                         </label>
                         <Dropzone onFilesSelected={handleFilesSelected} />
-                        <div>
+                        <div className="flex space-x-3">
                             {files.map((file) => (
-                                <p key={file.name}>{file.name}</p>
+                                <p className="text-slate-200 underline" key={file.name}>{file.name}</p>
                             ))}
                         </div>
                         <div className="flex items-center gap-5">
@@ -113,9 +114,14 @@ export default function CreateProduct(){
                                 <img key={index} src={URL.createObjectURL(file)} width={150} height={150} alt={file.name} className="h-20 w-20 hover:scale-150 duration-200" />
                             ))}
                         </div>
-                        <input type="submit" className="px-3 py-2 rounded-xl bg-gradient-to-r from-green-700 to bg-cyan-700 active:scale-95" />
+                        <div className="flex justify-center">
+                            <input type="submit" className="px-5 py-2 w-1/4 rounded-xl bg-slate-200 active:scale-95" />
+                        </div>
 
                     </form>
+                </div>
+                <div>
+                    <img src="./cards.png" alt="exemple d'un produit" />
                 </div>
             </section>
             <Footer />

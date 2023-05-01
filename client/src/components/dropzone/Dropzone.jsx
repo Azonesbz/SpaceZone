@@ -10,12 +10,20 @@ export default function Dropzone(props) {
       accept: 'image/*',
       multiple: true,
       onDrop,
+      className: 'border border-slate-200'
     });
   
     return (
-      <div {...getRootProps()}>
+      <div {...getRootProps()} >
         <input {...getInputProps()} />
-        <p>Glissez et déposez des fichiers ici ou cliquez pour sélectionner des fichiers</p>
+        <p className='flex items-center text-slate-200 border rounded-xl py-3 px-5 border-slate-200'>
+          <svg width="46" height="46" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"></path>
+            <path d="m7 9 5-5 5 5"></path>
+            <path d="M12 4v12"></path>
+          </svg>
+          Glissez et déposez des fichiers ici ou cliquez pour sélectionner des fichiers
+        </p>
       </div>
     );
   }
