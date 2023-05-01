@@ -1,4 +1,4 @@
-import { ADD_PRODUCTS, GET_PRODUCT_PAGE, GET_PRODUCT_BY_ID, NUMBER_OF_PRODUCTS, GET_ALL_PRODUCTS } from "../actions/product.action";
+import { ADD_PRODUCTS, GET_PRODUCT_PAGE, GET_PRODUCT_BY_ID, NUMBER_OF_PRODUCTS, GET_ALL_PRODUCTS, UPDATE_PRODUCT } from "../actions/product.action";
 
 const initialState = {}
 
@@ -14,6 +14,20 @@ export default function productReducer(state = initialState, action){
             return {...state, number: action.payload}
         case GET_PRODUCT_BY_ID:
             return {...state, productId: action.payload}
+        case UPDATE_PRODUCT:
+            return state.allProduct.map((product) => {
+                console.log(product)
+                console.log(action.payload[0])
+                if(product.id === action.payload[0].id){
+                    return {
+                    ...product,
+                    title: action.payload[0].title,
+                    username: action.payload[0].username,
+                    price: action.payload[0].price,
+                    inventory: action.payload[0].inventory
+                    }
+                }
+            })
         default: 
             return state
     }

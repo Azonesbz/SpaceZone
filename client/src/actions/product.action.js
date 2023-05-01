@@ -6,6 +6,7 @@ export const ADD_PRODUCTS = "ADD_PRODUCT"
 export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS"
 export const GET_PRODUCT_BY_ID = "GET_PRODUCT_BY_ID"
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
+export const UPDATE_PRODUCT = "UPDATE_PRODUCT"
 
 
 export let getProductPage = (data) => {
@@ -46,6 +47,16 @@ export let addProduct = (data) => {
         })
     }
 }
+
+export let updateProduct = (data) => {
+    return (dispatch) => {
+        return axios.put(`http://localhost:3001/updateProduct/${data.id}`, data).then(res => {
+            console.log(res.data)
+            dispatch({type: UPDATE_PRODUCT, payload: res.data.response})
+        })
+    }
+}
+
 export let searchProduct = (data) => {
     return (dispatch) => {
         return axios.post('http://localhost:3001/search/product', data).then(res => {

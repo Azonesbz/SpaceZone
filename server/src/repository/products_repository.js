@@ -59,12 +59,28 @@ let addProduct = async (id, title, price, description, created_at, inventory, pr
     return result
 }
 
+// Update product
+
+let updateProductDb = async (id, title, author, price, inventory) => {
+    await createPoolConnection().query(`
+    UPDATE products 
+    SET title = ?, user_id = ?, price = ?, inventory = ? 
+    WHERE id = ?`, [title, author, price, inventory, id])
+
+    const [info] = await createPoolConnection().query(`
+    SELECT p.id, p.title, p.price, p.description, u.username, p.user_id, p.inventory, u.profil_picture, CONVERT_TZ(p.created_at, '+00:00', '+02:00') AS created_at, p.url_image 
+    FROM products p
+    INNER JOIN users u ON p.user_id = u.id`)
+
+    return info;
+}
+
 export const products = {
     all: getAllProduct,
     number: getNumberProduct,
     byId: byId,
     add: addProduct,
     page: getProductPage,
-    search: searchProduct,
+    update: updateProductDb,
     next: getNextProducts,
 }

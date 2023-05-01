@@ -14,6 +14,7 @@ export default function CreateProduct(){
 
     const currentUser = useSelector((state) => state.currentUserReducer)
     const [files, setFiles] = useState([]);
+    const navigate = useNavigate()
 
     const handleFilesSelected = (selectedFiles) => {
         setFiles([...files, ...selectedFiles]);

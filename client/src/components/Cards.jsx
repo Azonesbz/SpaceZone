@@ -41,30 +41,6 @@ export default function Carts({ page }) {
                             className='flex flex-col sm:flex-row bg-gradient-to-br w-full p-3'
                             to={`/product/${product.id}`}
                         >
-                            <div className="w-20">
-                                
-                                <Flickity
-                                    className='carousel p-2 max-w-7xl mx-auto w-full'
-                                    elementType='div'
-                                    options={{
-                                        prevNextButtons: false,
-                                        pageDots: false,
-                                        cellAlign: 'left',
-                                        contain: true,
-                                        freeScroll: true
-                                    }}
-                                    disableImagesLoaded={false}
-                                    static
-                                >
-                                    {JSON.parse(product.url_image).map((file, index) => (
-                                        <div key={index} onClick={(e) => e.preventDefault()}>
-                                            <img src={`../../uploads/product/${file}`} alt="product-image" />
-                                        </div>
-                                    ))}
-                                </Flickity>
-
-
-                            </div>
                             <div className='flex flex-col p-5 w-full'>
                                 <h2 className='font-raleway font-medium text-2xl'>{product.title}</h2>
                                 <span className='font-semibold font-rajdhani text-2xl'>{product.price}€</span>

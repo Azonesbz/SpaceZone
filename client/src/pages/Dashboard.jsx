@@ -6,6 +6,7 @@ import { deleteUser, getAllUser, getUserNumber, updateUser } from '../actions/us
 import Modal from '../components/modal/Modal'
 import { useRef } from 'react'
 import { Tooltip } from 'flowbite-react'
+import { getAllProduct, updateProduct } from '../actions/product.action'
 
 function EditUserModal({ user, isOpen, onClose }) {
     const [username, setUsername] = useState(user.username);
@@ -73,6 +74,7 @@ function EditUserModal({ user, isOpen, onClose }) {
     );
 }
 function EditProductModal({ product, isOpen, onClose }) {
+    const allUser = useSelector((state) => state.allUserReducer.users)
     const [title, setTitle] = useState(product.title);
     const [author, setAuthor] = useState(product.username);
     const [price, setPrice] = useState(product.price);
@@ -81,20 +83,19 @@ function EditProductModal({ product, isOpen, onClose }) {
     const editFormProduct = useRef()
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        console.log(product)
-    }, [])
     let data;
     const handleSubmit = (event) => {
         event.preventDefault();
         data = {
-            id: user.id,
-            username: editFormProduct.current[0].value,
-            email: editFormProduct.current[1].value,
-            permission: editFormProduct.current[2].value,
+            id: product.id,
+            title: editFormProduct.current[0].value,
+            author: editFormProduct.current[1].value,
+            price: editFormProduct.current[2].value,
+            inventory: editFormProduct.current[3].value,
         }
         console.log(data)
-        dispatch(updateUser(data))
+        dispatch(updateProduct(data))
+        dispatch(getAllProduct())
         onClose();
     };
 
@@ -112,12 +113,13 @@ function EditProductModal({ product, isOpen, onClose }) {
                 </label>
                 <label className='flex flex-col w-3/4'>
                     Auteur
-                    <input
-                        className='w-full py-[5px] px-2 rounded'
-                        type='text'
-                        value={author}
-                        onChange={(event) => setAuthor(event.target.value)}
-                    />
+                    <select defaultValue={product.username}>
+                        <option value={product.username}>{product.username}</option>
+                        {!isEmpty(allUser) && allUser.map(user => (
+                            <option key={user.id} value={user.id}>{user.username}</option>
+                        ))}
+                    </select>
+
                 </label>
                 <label className='flex flex-col w-3/4'>
                     Prix
@@ -215,7 +217,7 @@ export default function Dashboard() {
                     </div>
 
                     <div className='flex flex-col px-10 py-5 overflow-scroll gap-5'>
-                        <div className='flex flex-col'>
+                        <div className='flex flex-col p-1'>
                             <h2 className='flex items-center text-3xl font-light'>
                                 <svg className='mr-5' width="40" height="40" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M3 12h4l3 8 4-16 3 8h4"></path>
@@ -228,21 +230,21 @@ export default function Dashboard() {
                                         <h2 className='text-4xl text-rajdhani text-slate-200'>{countUser}</h2>
                                     </div>
                                     <div className='h-[1px] w-full bg-neutral-800 mx-5'></div>
-                                    <h1 className='text-xl font-thin whitespace-nowrap'>Utilisateurs sont inscrit sur SpaceZone</h1>
+                                    <h1 className='text-xl font-thin whitespace-nowrap'>Utilisateurs inscrits sur SpaceZone</h1>
                                 </div>
                                 <div className='flex items-center space-x-5 mt-5'>
                                     <div className='flex items-center justify-center h-14 p-5 bg-gradient-to-br from-blue-700 to-blue-800 rounded-md'>
-                                        <h2 className='text-4xl text-rajdhani text-slate-200'>{numberProduct}</h2>
+                                        <h2 className='text-4xl text-rajdhani text-slate-200'>{numberProduct > 0 ? numberProduct : 0}</h2>
                                     </div>
                                     <div className='h-[1px] w-full bg-neutral-800 mx-5'></div>
-                                    <h1 className='text-xl font-thin whitespace-nowrap'>Articles sont en ventes</h1>
+                                    <h1 className='text-xl font-thin whitespace-nowrap'>Articles en ventes</h1>
                                 </div>
                             </div>
                         </div>
 
                         <div className='flex flex-col space-y-5'>
 
-                            <div className=''>
+                            <div className='p-1'>
                                 <h2 className='flex items-center text-3xl font-light'>
                                     <svg className='mr-5' width="40" height="40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"></path>
@@ -323,7 +325,7 @@ export default function Dashboard() {
                                 </div>
 
                             </div>
-                            <div>
+                            <div className="p-1">
                                 <h2 className='flex items-center text-3xl font-light outline-none'>
                                     <svg width="40" height="40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M22 7 12 2 2 7v10l10 5 10-5V7Z"></path>
@@ -352,7 +354,15 @@ export default function Dashboard() {
                                                         <h1>{item.title}</h1>
                                                     </td>
                                                     <td className='flex items-center py-2 pr-14'>
-                                                        <img src={`./uploads/profil/${item.profil_picture}`} alt="image de profil" className='h-full w-8 rounded-full' />
+                                                        <img 
+                                                        src={`./uploads/profil/${item.profil_picture}`} 
+                                                        onError={(e) => {
+                                                                e.target.onerror = null; // empêche les boucles d'erreur infinies
+                                                                e.target.src = './uploads/profil/default.jpg'; // charge une image alternative
+                                                            }} 
+                                                        alt="image de profil" 
+                                                        className='h-full w-8 rounded-full' 
+                                                        />
                                                         <h1 className='ml-2'>{item.username}</h1>
                                                     </td>
                                                     <td className='py-2 pr-14'>

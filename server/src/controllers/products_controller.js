@@ -70,7 +70,17 @@ export async function addProduct(req, res){
         res.status(500).json({msg:`Une erreur est survenue, veuillez réessayer dans quelques instants`, err})
     })
 }
-export async function getSearch(req, res){
+
+export async function updateProduct(req, res){
+    const {inventory, author, title, price} = req.body
+    const id = req.params.id
+    products.update(id, title, author, price, inventory).then(response => {
+        res.status(201).json({response})
+    })
+}
+
+
+/** export async function getSearch(req, res){
     const {divers, accessoires, vêtements, priceMin, priceMax} = req.body
     if(divers === false && accessoires === false && vêtements === false){
         res.status(300).json({msg: 'Veuillez sélectionner au moins un critères de recherche.'})
@@ -86,4 +96,4 @@ export async function getSearch(req, res){
         console.log(err)
         res.status(500).json({err})
     })
-}
+} */
