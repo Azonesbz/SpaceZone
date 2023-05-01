@@ -167,11 +167,25 @@ export default function Dashboard() {
         let parent = e.target
         for (let i = 0; i < 5; i++) {
             if (parent.id === 'delete-user') {
+                dispatch(deleteUser(parent.value))
+                dispatch(getAllUser())
+                break;
+            } else {
+                parent = parent.parentNode
+                console.log(parent)
+            }
+        }
+
+    }
+    let handleProductManage = (e) => {
+        let parent = e.target
+        for (let i = 0; i < 5; i++) {
+            if (parent.id === 'delete-product') {
                 data = {
                     id: parent.value
                 }
-                dispatch(deleteUser(parent.value))
-                dispatch(getAllUser())
+                dispatch(deleteProduct(parent.value))
+                dispatch(getAllProduct())
                 break;
             } else {
                 parent = parent.parentNode
@@ -296,13 +310,13 @@ export default function Dashboard() {
                                                                 <path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path>
                                                             </svg>
                                                         </button>
-                                                        <button className='bg-neutral-900 text-slate-200 p-1 rounded-lg active:scale-95 duration-200' id='update-user' value={user} onClick={() => setEditUser(user)}>
+                                                        <button className='bg-neutral-900 text-slate-200 p-1 rounded-lg active:scale-95 duration-200' value={user} onClick={() => setEditUser(user)}>
                                                             <svg width="30" height="30" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                                 <path d="M4 20h4L18.5 9.5a2.829 2.829 0 0 0-4-4L4 16v4Z"></path>
                                                                 <path d="m13.5 6.5 4 4"></path>
                                                             </svg>
                                                         </button>
-                                                        <button className='bg-neutral-900 text-slate-200 p-1 rounded-lg active:scale-95 duration-200' id='update-user' value={user} onClick={() => setEditUser(user)}>
+                                                        <button className='bg-neutral-900 text-slate-200 p-1 rounded-lg active:scale-95 duration-200' value={user} onClick={() => setEditUser(user)}>
                                                             <svg width="30" height="30" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                                 <path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"></path>
                                                                 <path d="M22 12c-2.667 4.667-6 7-10 7s-7.333-2.333-10-7c2.667-4.667 6-7 10-7s7.333 2.333 10 7Z"></path>

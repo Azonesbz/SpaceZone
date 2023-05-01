@@ -7,7 +7,7 @@ import { isEmpty } from '../../components/Utils';
 import mondialRelay from '/LogoMondialRelay.png'
 import ups from '/ups.svg'
 import fedex from '/fedex-express-6.svg'
-import { addProductCart } from '../../actions/cart.action';
+import { addProductCart, getCarts } from '../../actions/cart.action';
 import Counter from '../../components/Counter';
 import { getProductById } from '../../actions/product.action';
 
@@ -30,6 +30,7 @@ export default function ProductId() {
       price: product[0].price * value
     }
     dispatch(addProductCart(data))
+    dispatch(getCarts())
   }
 
   return (

@@ -8,18 +8,22 @@ import { getCarts } from "../actions/cart.action"
 export default function Carts(){
     const [totalPrice, setTotalPrice] = useState(null)
     const cartItem = useSelector((state) => state.cartReducer)
+    const dispatch = useDispatch()
     let data;
     useEffect(() => {
-        const listItemPrice = cartItem.map(item => parseInt(item.price))
-        setTotalPrice(listItemPrice.reduce((acc, val) => acc + val, 0))
-    }, [])
+        if(!isEmpty(cartItem)){
+            const listItemPrice = cartItem.map(item => parseInt(item.price))
+            setTotalPrice(listItemPrice.reduce((acc, val) => acc + val, 0))
+        }
+        dispatch(getCarts())
+    }, [cartItem])
     return (
         <>
             <Header />
             <section className="p-10 relative mt-20">
                 <div className="flex items-center justify-between border-b border-black pb-2">
                     <h1 className="uppercase font-karla font-medium text-3xl">Mon Panier</h1>
-                    <h2 className="uppercase font-karla font-medium text-3xl">Prix total des articles: <span>{totalPrice}$</span></h2>
+                    <h2 className="uppercase font-karla font-medium text-3xl">Prix total des articles: <span>{totalPrice}€</span></h2>
                 </div>
                 <div className="grid grid-cols-12 gap-5 mt-5" >
                 {!isEmpty(cartItem) && cartItem.map((items, index) => (
