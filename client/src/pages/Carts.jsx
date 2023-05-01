@@ -16,7 +16,7 @@ export default function Carts(){
     let data;
     useEffect(() => {
         if(!isEmpty(cartItem)){
-            const listItemPrice = cartItem.map(item => parseInt(item.price))
+            const listItemPrice = cartItem.map(item => parseInt(item.price * item.quantity))
             setTotalPrice(listItemPrice.reduce((acc, val) => acc + val, 0))
         }
         dispatch(getCarts())
