@@ -14,17 +14,17 @@ export default function Navbar(){
     const [isAdmin, setIsAdmin] = useState(false)
     const [scrollPosition, setScrollPosition] = useState(0)
 
-    useEffect(() => {
-        if(currentUser.permission == "ADMINISTRATOR" || "MODERATOR"){
-            return () => {
-                setIsAdmin(true)
-            }
-        } else {
-            return () => {
-                setIsAdmin(false)
-            }
-        }
-    }, [])
+    // useEffect(() => {
+    //     if(currentUser.permission == "ADMINISTRATOR" || "MODERATOR"){
+    //         return () => {
+    //             setIsAdmin(true)
+    //         }
+    //     } else {
+    //         return () => {
+    //             setIsAdmin(false)
+    //         }
+    //     }
+    // }, [])
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll, { passive: true });
@@ -102,7 +102,7 @@ export default function Navbar(){
                         {isLogged ? <li className="cursor-pointer">
                             <Link to="/product/new">Vendre un produit</Link>
                         </li> : "" }
-                        {isLogged && isAdmin ? <li className="cursor-pointer">
+                        {isLogged && (currentUser.permission == 'ADMINISTRATOR' ) || (currentUser.permission == 'MODERATOR') ? <li className="cursor-pointer">
                             <Link 
                             className="text-md font-karla rounded-md text-black"
                             to="/dashboard"

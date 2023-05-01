@@ -6,7 +6,7 @@ import Register from '../components/Authentification/RegisterForm'
 import Login from '../components/Authentification/LoginForm'
 import { useEffect } from 'react'
 import axios from 'axios'
-
+import jwtDecode from 'jwt-decode'
 
 export default function Welcome() {
 
@@ -20,6 +20,22 @@ export default function Welcome() {
   const navigate = useNavigate()
   const form = useRef()
   const currentUser = useSelector((state) => state.currentUserReducer)
+
+  function handleCallbackResponse(response){
+    localStorage.setItem('token', response.credential)
+    navigate('/home')
+  }
+
+  useEffect(() => {
+    google.accounts.id.initialize({
+      client_id: "282365506653-iv392l34vb1k9au7nqenivoql2nv6mcm.apps.googleusercontent.com",
+      callback: handleCallbackResponse
+    })
+    google.accounts.id.renderButton(
+      document.getElementById("signInDiv"),
+      {theme: "outline", size: "large"}
+    )
+  }, [])
 
   useEffect(() => {
     if(currentUser){
@@ -77,8 +93,9 @@ export default function Welcome() {
                   <button className='whitespace-nowrap px-4 py-4 ml-5 rounded-md text-slate-200 text-xl font-medium bg-gradient-to-tr from-blue-700 to-blue-900' type='submit'>Commencer</button>
               </form>
               <h3 className={`${emailInvalid ? "" : "hidden" } text-red-600 font-semibold`}>Cette adresse email est invalide, renseigner une adresse email valide ou continuer en tant qu'invité</h3>
-              <div className='mt-5'>
-                <Link className='whitespace-nowrap px-4 py-2 rounded-md text-slate-200 text-xl font-medium bg-gradient-to-tr from-blue-700 to-blue-900' to="/home">Continuer en tant qu'invité</Link>
+              <div className='flex mt-5 gap-5'>
+                <div id='signInDiv'></div>                
+                <Link className='whitespace-nowrap px-4 py-2 rounded-sm text-slate-200 text-xl font-medium bg-blue-700' to="/home">Continuer en tant qu'invité</Link>
               </div>
           </div> 
         </div> : ""}

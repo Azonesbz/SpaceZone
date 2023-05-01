@@ -3,7 +3,7 @@ import { createPoolConnection } from "../lib/db.js";
 const pool = createPoolConnection();
 
 export async function getUserItemsCart(id){
-    const [cartItems] = await pool.query(`SELECT c.quantity, u.username, p.price, p.title, category.name FROM carts_items c 
+    const [cartItems] = await pool.query(`SELECT c.quantity, u.username, p.price, p.title, category.name, p.url_image FROM carts_items c 
     INNER JOIN carts ON c.cart_id = carts.id 
     INNER JOIN users u ON carts.user_id = u.id
     INNER JOIN products p ON c.product_id = p.id

@@ -32,6 +32,7 @@
     "react-feather": "^2.0.10",
     "react-flickity": "^1.0.8",
     "react-flickity-component": "^4.0.5",
+    "react-google-login": "^5.2.2",
     "react-redux": "^8.0.5",
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.10.0",
