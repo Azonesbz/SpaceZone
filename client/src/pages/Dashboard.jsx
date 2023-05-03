@@ -93,7 +93,6 @@ function EditProductModal({ product, isOpen, onClose }) {
             price: editFormProduct.current[2].value,
             inventory: editFormProduct.current[3].value,
         }
-        console.log(data)
         dispatch(updateProduct(data))
         dispatch(getAllProduct())
         onClose();
@@ -148,12 +147,10 @@ export default function Dashboard() {
 
     const allUser = useSelector((state) => state.allUserReducer.users)
     const countUser = useSelector((state) => state.allUserReducer.number)
-    const currentUser = useSelector((state) => state.currentUserReducer)
     const numberProduct = useSelector((state) => state.productReducer.number)
     const product = useSelector((state) => state.productReducer.allProduct)
     const [editUser, setEditUser] = useState(false)
     const [editProduct, setEditProduct] = useState(false)
-    const navigate = useNavigate()
     const dispatch = useDispatch()
 
     let handleUserManage = (e) => {
@@ -209,9 +206,9 @@ export default function Dashboard() {
                     </div>
                 </div>
             </aside>
-            <div className='flex gap-5 min-h-screen p-10 container'>
+            <section className='flex gap-5 min-h-screen p-10 container'>
 
-                <div className='w-2/3 bg-gradient-to-br from-slate-200 to-slate-300 rounded-xl text-black font-ubuntu shadow shadow-neutral-400'>
+                <div className='bg-gradient-to-br w-full from-slate-200 to-slate-300 rounded-xl text-black font-ubuntu shadow shadow-neutral-400'>
 
                     <div className='flex items-center justify-between space-x-5 w-full h-[5rem] px-10 bg-slate-300'>
                         <div className='flex items-center space-x-5'>
@@ -219,7 +216,7 @@ export default function Dashboard() {
                             <div className='w-[1px] bg-neutral-900 h-10'></div>
                             <h2 className='text-2xl'>Azones</h2>
                         </div>
-                        <Link to="/home">Revenir à l'acceuil</Link>
+                        <Link className='text-2xl' to="/home">Revenir à l'acceuil</Link>
                     </div>
 
                     <div className='flex flex-col px-10 py-5 overflow-scroll gap-5'>
@@ -235,14 +232,14 @@ export default function Dashboard() {
                                     <div className='flex items-center justify-center h-14 p-5 bg-gradient-to-br from-blue-700 to-blue-800 rounded-md'>
                                         <h2 className='text-4xl text-rajdhani text-slate-200'>{countUser}</h2>
                                     </div>
-                                    <div className='h-[1px] w-full bg-neutral-800 mx-5'></div>
+                                    <div className='h-[1px] w-full bg-neutral-300 mx-5'></div>
                                     <h1 className='text-xl font-thin whitespace-nowrap'>Utilisateurs inscrits sur SpaceZone</h1>
                                 </div>
                                 <div className='flex items-center space-x-5 mt-5'>
                                     <div className='flex items-center justify-center h-14 p-5 bg-gradient-to-br from-blue-700 to-blue-800 rounded-md'>
                                         <h2 className='text-4xl text-rajdhani text-slate-200'>{numberProduct > 0 ? numberProduct : 0}</h2>
                                     </div>
-                                    <div className='h-[1px] w-full bg-neutral-800 mx-5'></div>
+                                    <div className='h-[1px] w-full bg-neutral-400 mx-5'></div>
                                     <h1 className='text-xl font-thin whitespace-nowrap'>Articles en ventes</h1>
                                 </div>
                             </div>
@@ -283,7 +280,7 @@ export default function Dashboard() {
                                                                 e.target.onerror = null; // empêche les boucles d'erreur infinies
                                                                 e.target.src = './uploads/profil/default.jpg'; // charge une image alternative
                                                             }}
-                                                            alt=""
+                                                            alt="image de profil"
                                                         />
                                                         <h1>{user.username}</h1>
                                                     </td>
@@ -444,14 +441,8 @@ export default function Dashboard() {
                         </div>
                     </div>
                 </div>
-                <div className='w-1/3'>
-                    <div className='sticky top-5 flex flex-col h-[100vh] gap-5'>
-                        <article className='h-2/4 bg-gradient-to-br from-neutral-900 to-neutral-950 rounded-xl'></article>
-                        <article className='h-2/4 bg-gradient-to-br from-neutral-900 to-neutral-950 rounded-xl'></article>
-                    </div>
-                </div>
-            </div>
-            <div className='flex gap-5 min-h-screen p-10 bg-neutral-900'>
+            </section>
+            <section className='flex gap-5 min-h-screen p-10 bg-neutral-900'>
                 <div className='h-full bg-neutral-900 w-full'>
                     <h1 className='text-5xl text-slate-200'>Finance de SpaceZone</h1>
                     <Tooltip
@@ -463,12 +454,12 @@ export default function Dashboard() {
                         </button>
                     </Tooltip>
                 </div>
-            </div>
-            <div className='flex gap-5 min-h-screen p-10 bg-neutral-900'>
+            </section>
+            <section className='flex gap-5 min-h-screen p-10 bg-neutral-900'>
                 <div className='h-full bg-neutral-900 w-full'>
                     <h1 className='text-5xl text-slate-200'>Gestion des stocks</h1>
                 </div>
-            </div>
+            </section>
         </>
     )
 }

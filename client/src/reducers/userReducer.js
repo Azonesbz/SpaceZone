@@ -1,4 +1,4 @@
-import { ADD_USER, LOGIN_USER, GET_ALL_USERS, SET_USER, SET_USER_PSEUDO, NUMBER_OF_USER, EDIT_USER_PROFIL, DELETE_USER } from "../actions/user.action"
+import { ADD_USER, LOGIN_USER, GET_ALL_USERS, SET_USER, SET_USER_PSEUDO, NUMBER_OF_USER, EDIT_USER_PROFIL, DELETE_USER, UPDATE_USER } from "../actions/user.action"
 
 const initialState = {}
 
@@ -14,6 +14,22 @@ export function allUserReducer(state = initialState, action){
             return {...state, users: state.users.filter((user) => user.id !== action.payload)}
         case NUMBER_OF_USER:
             return {...state, number: action.payload}
+        case UPDATE_USER:
+            return {
+                ...state,
+                users: state.users.map((user) => {
+                    if(user.id === action.payload[0].id){
+                        return {
+                        ...user,
+                        username: action.payload[0].username,
+                        email: action.payload[0].email,
+                        name: action.payload[0].name,
+                        };
+                    } else {
+                        return user;
+                    }
+                })
+            };
         default: 
             return state
     }

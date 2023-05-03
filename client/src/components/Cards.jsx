@@ -38,20 +38,19 @@ export default function Cards({
                 return (
                     <div
                         key={product.id}
-                        className='flex items-center bg-gradient-to-br from-white to-zinc-200 col-span-3 lg:col-span-2 shadow-xl rounded-xl 
-                w-full p-3 duration-200'>
+                        className='flex items-center bg-gradient-to-br from-white to-zinc-200 col-span-6 lg:col-span-2 shadow-xl rounded-xl w-full p-3 duration-200'>
                         <Link
                             className='flex flex-col bg-gradient-to-br h-full p-3'
                             to={`/product/${product.id}`}
                         >
-                            <div className="max-w-lg" onClick={(e) => e.preventDefault(e)}>
+                            <div className="max-w-xl" onClick={(e) => e.preventDefault(e)}>
 
 
                                 <Carousel autoSlide={false}>
                                     {JSON.parse(product.url_image).map(image => {
                                         console.log(image)
                                         return(
-                                            <img src={`./basket.png`} alt="product image" className="min-w-full object-cover h-96 w-60" />
+                                            <img src={`./uploads/product/${image}`} alt="product image" className="min-w-full object-cover h-96 w-60" />
                                         )
                                     }
                                     )}

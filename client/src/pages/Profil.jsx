@@ -80,7 +80,7 @@ export default function Profil(){
     return (
         <>
             <Header />
-            <section className="grid grid-rows-3 grid-cols-12 gap-5 p-10 px-40 relative top-20">
+            <section className="grid grid-rows-3 grid-cols-12 gap-5 p-10 px-40 relative mt-20">
                 <aside className="sticky bg-gradient-to-br col-span-4 from-slate-400 to-neutral-400 text-black shadow rounded-xl row-span-3">
                     <header className="flex flex-col items-center bg-gradient-to-tl from-slate-200 to-slate-300 p-5 rounded-t-xl">
                         <img

@@ -27,6 +27,7 @@ export const getAllUser = () => {
 export const getUserNumber = () => {
     return async (dispatch) => {
         return axios.get('http://localhost:3001/countUser').then(res => {
+            console.log(res)
             dispatch({ type: NUMBER_OF_USER, payload: res.data.result })
         })
     }
@@ -80,7 +81,7 @@ export const updateUser = (data) => {
     return (dispatch) => {
         return axios.put(`http://localhost:3001/updateUser/${data.id}`, data).then(res => {
             console.log(res)
-            dispatch({ type: UPDATE_USER, payload: res.data})
+            dispatch({ type: UPDATE_USER, payload: res.data.response})
         })
     }
 }
