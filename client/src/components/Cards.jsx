@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 import { isEmpty } from "./Utils"
 import { useEffect } from "react"
 import { getProductPage } from "../actions/product.action"
-import Flickity from 'react-flickity-component';
 import Carousel from "./carousel/Carousel"
+import { useState } from "react"
 
 
 export default function Cards({ 
@@ -14,7 +14,7 @@ export default function Cards({
 
     const dispatch = useDispatch()
     const getProducts = useSelector((state) => state.productReducer.productPage)
-
+    const [liked, setLiked] = useState(false)
     const scrollToTop = () => {
         if (window.scrollY !== 0) {
             window.scrollTo({
@@ -32,16 +32,21 @@ export default function Cards({
         dispatch(getProductPage(data))
     }, [page])
 
+    let handleLikeProduct = () => {
+        
+    }
+
     return (
         <>
             {!isEmpty(getProducts) && getProducts.map(product => {
                 return (
                     <div
-                        key={product.id}
-                        className='flex items-center bg-gradient-to-br from-white to-zinc-200 col-span-6 lg:col-span-2 shadow-xl rounded-xl w-full p-3 duration-200'>
+                    className='flex items-center bg-gradient-to-br from-white to-zinc-200 col-span-6 lg:col-span-2 shadow-xl rounded-xl w-full p-3 duration-200'
+                    key={product.id}
+                    >
                         <Link
-                            className='flex flex-col bg-gradient-to-br h-full p-3'
-                            to={`/product/${product.id}`}
+                        className='flex relative flex-col bg-gradient-to-br h-full p-3'
+                        to={`/product/${product.id}`}
                         >
                             <div className="max-w-xl" onClick={(e) => e.preventDefault(e)}>
 
@@ -72,9 +77,16 @@ export default function Cards({
                                             alt="image de profil"
                                             className="rounded-full h-8 w-8 mr-2"
                                         />
-                                        <p className='text-md'>A vendre par <span className="font-semibold">{product.username}</span></p>
+                                        <p className='text-md'>A vendre par <Link className="font-semibold hover:text-indigo-800">{product.username}</Link></p>
+                                        <button 
+                                        className="absolute right-5 border-2 border-black rounded-full p-1"
+                                        onClick={handleLikeProduct}
+                                        >
+                                            <svg className="" width="30" height="30" fill={liked ? "red" : "none"} stroke={liked ? "red" : "currentColor"} stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M19.5 13.576a4.976 4.976 0 0 0 1.495-3.704A5 5 0 0 0 12 7.01a5 5 0 1 0-7.5 6.566l7.5 7.428 7.5-7.428Z"></path>
+                                            </svg>
+                                        </button>
                                     </div>
-                                    <button className='underline text-indigo-800 underline-offset-2 text-left'><p>Contacter le vendeur</p></button>
                                 </div>
                             </div>
                         </Link>

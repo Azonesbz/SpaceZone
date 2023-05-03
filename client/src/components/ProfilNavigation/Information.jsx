@@ -1,7 +1,7 @@
 import { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Modal from "../modal/Modal"
-import { editEmail, editFirstName, editNumberPhone, editUsername } from "../../actions/user.action"
+import { editEmail, editFirstName, editNumberPhone, editPicture, editUsername } from "../../actions/user.action"
 import axios from "axios"
 
 function UsernameModal({currentUser, isOpen, onClose}){
@@ -120,6 +120,7 @@ export default function Information() {
     const [showFormNumber, setShowFormNumber] = useState(false)
     const [showFormName, setShowFormName] = useState(false)
     const [file, setFile] = useState(null);
+    const dispatch = useDispatch()
 
     const currentUser = useSelector((state) => state.currentUserReducer)
 
@@ -132,7 +133,7 @@ export default function Information() {
         e.preventDefault()
         const formData = new FormData();
         formData.append("file", file);
-        dispatch(uploadFile())
+        dispatch(editPicture(formData))
             
     }
     let handleCloseUsername = () => {
