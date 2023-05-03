@@ -11,7 +11,7 @@ export function allUserReducer(state = initialState, action){
         case LOGIN_USER:
             return [action.payload, ...state]
         case DELETE_USER:
-            return {users: state.users.filter((user) => user.id !== action.payload)}
+            return {...state, users: state.users.filter((user) => user.id !== action.payload)}
         case NUMBER_OF_USER:
             return {...state, number: action.payload}
         default: 

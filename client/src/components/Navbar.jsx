@@ -74,17 +74,17 @@ export default function Navbar(){
                             dismissOnClick={true}
                         >
                             <Dropdown.Item>
-                                <Link to="/dashboard" className="text-slate-200">Dashboard</Link>
+                                <Link to="/dashboard" className="">Dashboard</Link>
                             </Dropdown.Item>
                             <Dropdown.Item>
-                                <Link to="/dashboard" className="text-slate-200">Mon profil</Link>
+                                <Link to="/profil" className="">Mon profil</Link>
                             </Dropdown.Item>
                             <Dropdown.Item>
-                                <Link to="/dashboard" className="text-slate-200">Panier</Link>
+                                <Link to="/carts" className="">Panier</Link>
                             </Dropdown.Item>
                             <Dropdown.Item>
                                 <button 
-                                className="flex items-center font-karla rounded-md text-slate-200"
+                                className="flex items-center font-karla rounded-md"
                                 onClick={handleLogout}
                                 >
                                     <h3>Se déconnecter</h3>
@@ -98,9 +98,6 @@ export default function Navbar(){
                     <ul className="md:flex items-center mr-10 space-x-10 hidden">
                         {!isLogged ? <li className="cursor-pointer">
                             <Link to="/" className="text-md font-karla font-medium rounded-md text-blue-700">S'identifier</Link>
-                        </li> : "" }
-                        {isLogged ? <li className="cursor-pointer">
-                            <Link to="/product/new">Vendre un produit</Link>
                         </li> : "" }
                         {isLogged && (currentUser.permission == 'ADMINISTRATOR' ) || (currentUser.permission == 'MODERATOR') ? <li className="cursor-pointer">
                             <Link 

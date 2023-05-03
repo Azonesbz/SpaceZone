@@ -93,6 +93,7 @@ function EditProductModal({ product, isOpen, onClose }) {
             price: editFormProduct.current[2].value,
             inventory: editFormProduct.current[3].value,
         }
+        console.log(data)
         dispatch(updateProduct(data))
         dispatch(getAllProduct())
         onClose();
@@ -113,7 +114,6 @@ function EditProductModal({ product, isOpen, onClose }) {
                 <label className='flex flex-col w-3/4'>
                     Auteur
                     <select defaultValue={product.username}>
-                        <option value={product.user_id}>{product.username}</option>
                         {!isEmpty(allUser) && allUser.map(user => (
                             <option key={user.id} value={user.id}>{user.username}</option>
                         ))}

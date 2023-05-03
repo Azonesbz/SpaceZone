@@ -1,4 +1,4 @@
-import { ADD_PRODUCTS, GET_PRODUCT_PAGE, GET_PRODUCT_BY_ID, NUMBER_OF_PRODUCTS, GET_ALL_PRODUCTS, UPDATE_PRODUCT } from "../actions/product.action";
+import { ADD_PRODUCTS, GET_PRODUCT_PAGE, GET_PRODUCT_BY_ID, NUMBER_OF_PRODUCTS, GET_ALL_PRODUCTS, UPDATE_PRODUCT, DELETE_PRODUCT_ID } from "../actions/product.action";
 
 const initialState = {}
 
@@ -15,7 +15,9 @@ export default function productReducer(state = initialState, action){
         case GET_PRODUCT_BY_ID:
             return {...state, productId: action.payload}
         case UPDATE_PRODUCT:
-            return [...state, state.allProduct.map((product) => {
+            return {
+                ...state,
+                allProduct: state.allProduct.map((product) => {
                 if(product.id === action.payload[0].id){
                     return {
                     ...product,
@@ -23,9 +25,14 @@ export default function productReducer(state = initialState, action){
                     username: action.payload[0].username,
                     price: action.payload[0].price,
                     inventory: action.payload[0].inventory
-                    }
+                    };
+                } else {
+                    return product;
                 }
-            })]
+                })
+            };
+        case DELETE_PRODUCT_ID:
+            return {...state, allProduct: state.allProduct.filter((product) => product.id !== action.payload)}
         default: 
             return state
     }

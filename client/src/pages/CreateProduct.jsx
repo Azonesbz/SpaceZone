@@ -121,7 +121,7 @@ export default function CreateProduct(){
                     </form>
                 </div>
                 <div>
-                    <img src="./cards.png" alt="exemple d'un produit" />
+                    <img src="./public/cards.png" alt="exemple d'un produit" />
                 </div>
             </section>
             <Footer />

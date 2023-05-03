@@ -76,6 +76,9 @@ export async function updateProduct(req, res){
     const id = req.params.id
     products.update(id, title, author, price, inventory).then(response => {
         res.status(201).json({response})
+    }).catch(err => {
+        console.error(err)
+        res.status(400).json({err})
     })
 }
 

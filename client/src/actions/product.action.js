@@ -7,6 +7,7 @@ export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS"
 export const GET_PRODUCT_BY_ID = "GET_PRODUCT_BY_ID"
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT"
+export const DELETE_PRODUCT_ID = "DELETE_PRODUCT_ID"
 
 
 export let getProductPage = (data) => {
