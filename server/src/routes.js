@@ -1,5 +1,5 @@
 import express from 'express'
-import { addProduct, getAllProduct, getNumberProduct, getProductById, getProductPage, updateProduct } from './controllers/products_controller.js'
+import { addProduct, deleteProductId, getAllProduct, getNumberProduct, getProductById, getProductPage, updateProduct } from './controllers/products_controller.js'
 import { addUser, connectUser, deleteUser, editEmail, editFirstName, editNumberPhone, editUsername, getAllUsers, getNumberUser, sessionIsValid, updateUser, userExist, userLogout } from './controllers/user_controller.js'
 import { uploadProfil, uploadProduct, uploadProfilFile } from './controllers/uploadFile_controller.js'
 import getCarts, { addProductCart, deleteItemsCart } from './controllers/cart_controller.js'
@@ -33,6 +33,8 @@ router.post('/productPage', getProductPage)
 router.post('/product/new', uploadProduct.array('files'), addProduct)
 
 router.put('/updateProduct/:id', updateProduct)
+
+router.delete(`/deleteProduct/:id`, deleteProductId)
 
 // Cart router
 

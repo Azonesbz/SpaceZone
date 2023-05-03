@@ -75,12 +75,19 @@ let updateProductDb = async (id, title, author, price, inventory) => {
     return info;
 }
 
+let deleteProductDb = async (id) => {
+    const [info] = await createPoolConnection().query(`DELETE FROM products WHERE id = ?`, [id]);
+    console.log(info)
+    return info
+}
+
 export const products = {
     all: getAllProduct,
-    number: getNumberProduct,
     byId: byId,
     add: addProduct,
-    page: getProductPage,
     update: updateProductDb,
+    delete: deleteProductDb,
+    page: getProductPage,
+    number: getNumberProduct,
     next: getNextProducts,
 }

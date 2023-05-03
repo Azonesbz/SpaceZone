@@ -93,7 +93,7 @@ export default function CreateProduct(){
                         </label>
                         <label>
                             <h2 className="text-xl font-karla text-slate-200">Prix</h2>
-                            <input type="number" placeholder="Prix" className="px-3 py-2 w-full rounded" />
+                            <input type="text" placeholder="Prix" className="px-3 py-2 w-full rounded" />
                         </label>
                         <label>
                             <h2 className="text-xl font-karla text-slate-200">Description de votre produit</h2>
@@ -121,7 +121,7 @@ export default function CreateProduct(){
                     </form>
                 </div>
                 <div>
-                    <img src="./public/cards.png" alt="exemple d'un produit" />
+                    <img src="./cards.png" alt="exemple d'un produit" />
                 </div>
             </section>
             <Footer />

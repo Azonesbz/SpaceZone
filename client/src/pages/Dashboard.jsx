@@ -6,7 +6,7 @@ import { deleteUser, getAllUser, getUserNumber, updateUser } from '../actions/us
 import Modal from '../components/modal/Modal'
 import { useRef } from 'react'
 import { Tooltip } from 'flowbite-react'
-import { getAllProduct, updateProduct } from '../actions/product.action'
+import { deleteProduct, getAllProduct, updateProduct } from '../actions/product.action'
 
 function EditUserModal({ user, isOpen, onClose }) {
     const [username, setUsername] = useState(user.username);
@@ -171,9 +171,6 @@ export default function Dashboard() {
         let parent = e.target
         for (let i = 0; i < 5; i++) {
             if (parent.id === 'delete-product') {
-                data = {
-                    id: parent.value
-                }
                 dispatch(deleteProduct(parent.value))
                 dispatch(getAllProduct())
                 break;
@@ -388,7 +385,7 @@ export default function Dashboard() {
                                                 <th>Inventaire</th>
                                             </tr>
                                         </thead>
-                                        <tbody className='font-light font-karla p-3' onClick={handleUserManage}>
+                                        <tbody className='font-light font-karla p-3' onClick={handleProductManage}>
                                             {!isEmpty(product) && product.map(item => (
                                                 <tr className='text-black p-3' key={item.id}>
                                                     <td className='py-2 pr-14'>

@@ -32,7 +32,7 @@ export default function productReducer(state = initialState, action){
                 })
             };
         case DELETE_PRODUCT_ID:
-            return {...state, allProduct: state.allProduct.filter((product) => product.id !== action.payload)}
+            return {...state, allProduct: state.allProduct.filter((product) => product.id != action.payload)}
         default: 
             return state
     }

@@ -65,3 +65,10 @@ export let searchProduct = (data) => {
         })
     }
 }
+export let deleteProduct = (id) => {
+    return (dispatch) => {
+        return axios.delete(`http://localhost:3001/deleteProduct/${id}`).then(res => {
+            dispatch({ type: DELETE_PRODUCT_ID, payload: id})
+        })
+    }
+}

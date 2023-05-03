@@ -81,6 +81,15 @@ export async function updateProduct(req, res){
         res.status(400).json({err})
     })
 }
+export async function deleteProductId(req, res){
+    const id = req.params.id
+    products.delete(id)
+    .then(response => res.status(201).json({response}))
+    .catch(err => {
+        console.error(err)
+        res.status(500).json({err})
+    })
+}
 
 
 /** export async function getSearch(req, res){
