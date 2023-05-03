@@ -11,7 +11,7 @@ export default function cartReducer(state = initialState, action){
         case GET_CARTS_PRODUCT:
             return {...state, cart: action.payload}
         case DELETE_CART:
-            return action.payload
+            return {...state, cart: action.payload}
         default: 
             return state
     }
