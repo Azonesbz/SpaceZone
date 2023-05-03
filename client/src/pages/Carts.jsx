@@ -11,7 +11,7 @@ import { Tooltip } from "flowbite-react"
 export default function Carts(){
     const [totalPrice, setTotalPrice] = useState(null)
     const cartItem = useSelector((state) => state.cartReducer.cart)
-    const currentUser = useSelector((state) => state.currentUserReducer)
+    const currentUser = useSelector((state) => state.currentUserReducer.user)
     const dispatch = useDispatch()
     let data;
     useEffect(() => {

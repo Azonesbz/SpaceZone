@@ -1,4 +1,4 @@
-import { ADD_USER, LOGIN_USER, GET_ALL_USERS, SET_USER, SET_USER_PSEUDO, NUMBER_OF_USER, EDIT_USER_PROFIL, DELETE_USER, UPDATE_USER } from "../actions/user.action"
+import { ADD_USER, LOGIN_USER, GET_ALL_USERS, SET_USER, NUMBER_OF_USER, EDIT_USER_PROFIL, DELETE_USER, UPDATE_USER } from "../actions/user.action"
 
 const initialState = {}
 
@@ -38,14 +38,8 @@ export function allUserReducer(state = initialState, action){
 export function currentUserReducer(state = initialState, action){
     switch(action.type){
         case SET_USER:
-            return action.payload
-        case SET_USER_PSEUDO:
-            return {
-                ...state,
-                user_id: action.payload
-            }
+            return {...state, user: action.payload}
         case EDIT_USER_PROFIL:
-            console.log(action.payload)
             if(action.payload.username){
                 return {
                     ...state,
@@ -57,7 +51,6 @@ export function currentUserReducer(state = initialState, action){
                     email: action.payload.email
                 }
             }else if(action.payload.number_phone){
-                console.log(action.payload)
                 return {
                     ...state,
                     number_phone: action.payload.number_phone

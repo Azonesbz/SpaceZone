@@ -12,7 +12,6 @@ import { useRef } from 'react'
 export default function Home({session}) {
 
   const [page, setPage] = useState(1)
-  const hiddenElementsRef = useRef();
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {

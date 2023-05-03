@@ -8,6 +8,7 @@ export const GET_PRODUCT_BY_ID = "GET_PRODUCT_BY_ID"
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT"
 export const DELETE_PRODUCT_ID = "DELETE_PRODUCT_ID"
+export const LIKE_PRODUCT = "LIKE_PRODUCT"
 
 
 export let getProductPage = (data) => {
@@ -69,6 +70,17 @@ export let deleteProduct = (id) => {
     return (dispatch) => {
         return axios.delete(`http://localhost:3001/deleteProduct/${id}`).then(res => {
             dispatch({ type: DELETE_PRODUCT_ID, payload: id})
+        })
+    }
+}
+export let likeProduct = (data) => {
+    return (dispatch) => {
+        return axios.post(`http://localhost:3001/likeProduct`, data).then(res => {
+            if(res.data.deleted){
+                console.log(res.data.deleted)
+                dispatch({type: DELETE_LIKE_PRODUCT, payload: res.data.deleted})
+            }
+            // dispatch({ type: LIKE_PRODUCT, payload: id})
         })
     }
 }

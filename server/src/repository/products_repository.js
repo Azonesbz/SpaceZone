@@ -58,6 +58,17 @@ let addProduct = async (id, title, price, description, created_at, inventory, pr
     const [result] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username, u.profil_picture, CONVERT_TZ(p.created_at, '+00:00', '+02:00') AS created_at, p.url_image FROM products p INNER JOIN users u ON p.user_id = u.id WHERE p.id = ?`, [info[0].insertId])
     return result
 }
+let likeProductDb = async (userId, productId) => {
+    const [verify] = await createPoolConnection().query(`SELECT * FROM products_likes WHERE product_id = ? AND user_id = ?`, [productId, userId])
+    if(verify.length){
+        const [info] = await createPoolConnection().query(`DELETE FROM products_likes WHERE product_id = ? AND user_id = ?`, [productId, userId])
+        return info
+    } else {
+        const [info] = await createPoolConnection().query(`INSERT INTO products_likes (product_id, user_id) VALUES (?, ?)`, [productId, userId])
+        const [result] = await createPoolConnection().query(`SELECT * FROM products_likes p INNER JOIN users u ON p.user_id = u.id WHERE u.id = ?`, [userId])
+        return result
+    }
+}
 
 // Update product
 
@@ -90,4 +101,5 @@ export const products = {
     page: getProductPage,
     number: getNumberProduct,
     next: getNextProducts,
+    like: likeProductDb,
 }

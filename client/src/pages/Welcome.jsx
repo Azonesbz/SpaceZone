@@ -19,7 +19,7 @@ export default function Welcome() {
 
   const navigate = useNavigate()
   const form = useRef()
-  const currentUser = useSelector((state) => state.currentUserReducer)
+  const currentUser = useSelector((state) => state.currentUserReducer.user)
 
   function handleCallbackResponse(response){
     localStorage.setItem('token', response.credential)

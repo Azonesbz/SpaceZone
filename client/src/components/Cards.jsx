@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
 import { isEmpty } from "./Utils"
 import { useEffect } from "react"
-import { getProductPage } from "../actions/product.action"
+import { getProductPage, likeProduct } from "../actions/product.action"
 import Carousel from "./carousel/Carousel"
 import { useState } from "react"
 
@@ -14,6 +14,7 @@ export default function Cards({
 
     const dispatch = useDispatch()
     const getProducts = useSelector((state) => state.productReducer.productPage)
+    const currentUser = useSelector((state) => state.currentUserReducer.user)
     const [liked, setLiked] = useState(false)
     const scrollToTop = () => {
         if (window.scrollY !== 0) {
@@ -32,10 +33,6 @@ export default function Cards({
         dispatch(getProductPage(data))
     }, [page])
 
-    let handleLikeProduct = () => {
-        
-    }
-
     return (
         <>
             {!isEmpty(getProducts) && getProducts.map(product => {
@@ -53,7 +50,6 @@ export default function Cards({
 
                                 <Carousel autoSlide={false}>
                                     {JSON.parse(product.url_image).map(image => {
-                                        console.log(image)
                                         return(
                                             <img src={`./uploads/product/${image}`} alt="product image" className="min-w-full object-cover h-96 w-60" />
                                         )
@@ -80,7 +76,14 @@ export default function Cards({
                                         <p className='text-md'>A vendre par <Link className="font-semibold hover:text-indigo-800">{product.username}</Link></p>
                                         <button 
                                         className="absolute right-5 border-2 border-black rounded-full p-1"
-                                        onClick={handleLikeProduct}
+                                        onClick={(e) => {
+                                            e.preventDefault()
+                                            let data = {
+                                                productId: product.id,
+                                                userId: currentUser.id
+                                            }
+                                            dispatch(likeProduct(data))
+                                        }}
                                         >
                                             <svg className="" width="30" height="30" fill={liked ? "red" : "none"} stroke={liked ? "red" : "currentColor"} stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M19.5 13.576a4.976 4.976 0 0 0 1.495-3.704A5 5 0 0 0 12 7.01a5 5 0 1 0-7.5 6.566l7.5 7.428 7.5-7.428Z"></path>

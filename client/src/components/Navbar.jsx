@@ -4,11 +4,12 @@ import { userLogout } from "../actions/user.action";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Dropdown } from "flowbite-react";
+import { isEmpty } from "./Utils";
 
 export default function Navbar(){
 
     const dispatch = useDispatch()
-    const currentUser = useSelector((state) => state.currentUserReducer)
+    const currentUser = useSelector((state) => state.currentUserReducer.user)
     const isLogged = useSelector((state) => state.sessionReducer.Authorization)
 
     const [isAdmin, setIsAdmin] = useState(false)
@@ -99,7 +100,7 @@ export default function Navbar(){
                         {!isLogged ? <li className="cursor-pointer">
                             <Link to="/" className="text-md font-karla font-medium rounded-md text-blue-700">S'identifier</Link>
                         </li> : "" }
-                        {isLogged && (currentUser.permission == 'ADMINISTRATOR' ) || (currentUser.permission == 'MODERATOR') ? <li className="cursor-pointer">
+                        {isLogged && (!isEmpty(currentUser) && currentUser.permission == 'ADMINISTRATOR' ) || (!isEmpty(currentUser) && currentUser.permission == 'MODERATOR') ? <li className="cursor-pointer">
                             <Link 
                             className="text-md font-karla rounded-md text-black"
                             to="/dashboard"

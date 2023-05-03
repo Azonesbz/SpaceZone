@@ -10,7 +10,6 @@ export const LOGIN_USER = "LOGIN_USER"
 export const UPDATE_USER = "UPDATE_USER"
 export const DELETE_USER = "DELETE_USER"
 export const SET_USER = "SET_USER"
-export const SET_USER_PSEUDO = "SET_USER_PSEUDO"
 export const NUMBER_OF_USER = "NUMBER_OF_USER"
 export const EDIT_USER_PROFIL = "EDIT_USER_PROFIL"
 

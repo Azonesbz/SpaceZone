@@ -12,7 +12,7 @@ export default function CreateProduct(){
     const form = useRef()
     const dispatch = useDispatch()
 
-    const currentUser = useSelector((state) => state.currentUserReducer)
+    const currentUser = useSelector((state) => state.currentUserReducer.user)
     const [files, setFiles] = useState([]);
     const navigate = useNavigate()
 

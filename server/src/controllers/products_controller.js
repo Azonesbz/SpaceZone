@@ -90,6 +90,21 @@ export async function deleteProductId(req, res){
         res.status(500).json({err})
     })
 }
+export async function likeProduct(req, res){
+    const { userId, productId } = req.body
+    products.like(userId, productId)
+    .then(response => {
+        if(response){
+            res.status(201).json({response})
+        } else {
+            res.status(201).json({deleted: response[0].insertId})
+        }
+    })
+    .catch(err => {
+        console.error(err)
+        res.status(500).json({err})
+    })
+}
 
 
 /** export async function getSearch(req, res){

@@ -2,6 +2,7 @@ import { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Modal from "../modal/Modal"
 import { editEmail, editFirstName, editNumberPhone, editPicture, editUsername } from "../../actions/user.action"
+import { isEmpty } from "../../utils/utils"
 
 function UsernameModal({currentUser, isOpen, onClose}){
 
@@ -122,7 +123,7 @@ export default function Information() {
     const [file, setFile] = useState(null);
     const dispatch = useDispatch()
 
-    const currentUser = useSelector((state) => state.currentUserReducer)
+    const currentUser = useSelector((state) => state.currentUserReducer.user)
 
     const handleChangeFile = (e) => {
         const file = e.target.files[0]
@@ -163,28 +164,28 @@ export default function Information() {
                             <h2 className="text-2xl font-thin font-ubuntu text-white">Pseudonyme</h2>
                             <button onClick={() => setShowFormUsername(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
                         </div>
-                        <h3>{currentUser.username}</h3>
+                        <h3>{!isEmpty(currentUser) ? currentUser.username : ""}</h3>
                     </div>
                     <div className="flex flex-col mt-5 duration-200">
                         <div className="flex justify-between items-center">
                             <h2 className="text-2xl font-thin font-ubuntu text-white">Email</h2>
                             <button onClick={() => setShowFormEmail(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
                         </div>
-                        <h3>{currentUser.email}</h3>
+                        <h3>{!isEmpty(currentUser) ? currentUser.email : ""}</h3>
                     </div>
                     <div className="flex flex-col mt-5 duration-200">
                         <div className="flex justify-between items-center">
                             <h2 className="text-2xl font-thin font-ubuntu text-white">Numéro de téléphone</h2>
                             <button onClick={() => setShowFormNumber(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
                         </div>
-                        <h3>{currentUser.number_phone ? currentUser.number_phone : "Aucun numéro de téléphone"}</h3>
+                        <h3>{!isEmpty(currentUser) ? (currentUser.number_phone ? currentUser.number_phone : "Aucun numéro de téléphone") : ""}</h3>
                     </div>
                     <div className="flex flex-col mt-5 duration-200">
                         <div className="flex justify-between items-center">
                             <h2 className="text-2xl font-thin font-ubuntu text-white">Prénom</h2>
                             <button onClick={() => setShowFormName(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
                         </div>
-                        <h3 className="text-lg font-ubuntu font-thin">{currentUser.first_name ? currentUser.first_name : "Aucun prénom définie"}</h3>
+                        <h3 className="text-lg font-ubuntu font-thin">{ !isEmpty(currentUser) ? (currentUser.first_name ? currentUser.first_name : "Aucun prénom définie") : ""}</h3>
                     </div>
 
                 </div>
@@ -192,7 +193,7 @@ export default function Information() {
                     <div className="flex flex-col justify-center items-center m-auto">
                         <h2 className="text-slate-200 font-ubuntu text-xl font-thin">Image de profil</h2>
                         <img
-                            src={`./uploads/profil/${currentUser.profil_picture}`}
+                            src={`./uploads/profil/${!isEmpty(currentUser) ? currentUser.profil_picture : ""}`}
                             onError={(e) => {
                                 e.target.onerror = null; // empêche les boucles d'erreur infinies
                                 e.target.src = './uploads/profil/default.jpg'; // charge une image alternative
@@ -212,10 +213,10 @@ export default function Information() {
                         <button type="submit" className="bg-gray-700 text-white px-2 py-1 rounded">Envoyer</button>
                     </form>
                 </div>
-                <UsernameModal currentUser={currentUser} isOpen={showFormUsername} onClose={handleCloseUsername} />
-                <EmailModal currentUser={currentUser} isOpen={showFormEmail} onClose={handleCloseEmail} />
-                <PhoneNumberModal currentUser={currentUser} isOpen={showFormNumber} onClose={handleCloseNumber} />
-                <FirstNameModal currentUser={currentUser} isOpen={showFormName} onClose={handleCloseName} />
+                <UsernameModal currentUser={!isEmpty(currentUser) ? currentUser : ""} isOpen={showFormUsername} onClose={handleCloseUsername} />
+                <EmailModal currentUser={!isEmpty(currentUser) ? currentUser : ""} isOpen={showFormEmail} onClose={handleCloseEmail} />
+                <PhoneNumberModal currentUser={!isEmpty(currentUser) ? currentUser : ""} isOpen={showFormNumber} onClose={handleCloseNumber} />
+                <FirstNameModal currentUser={!isEmpty(currentUser) ? currentUser : ""} isOpen={showFormName} onClose={handleCloseName} />
             </div>
         </>
     )

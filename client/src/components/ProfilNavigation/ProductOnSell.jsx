@@ -6,7 +6,7 @@ export default function ProductOnSell(){
 const [getMyProduct, setGetMyProduct] = useState([])
 
     const product = useSelector((state) => state.productReducer.product)
-    const currentUser = useSelector((state) => state.currentUserReducer)
+    const currentUser = useSelector((state) => state.currentUserReducer.user)
 
     useEffect(() => {
         const myProduct = product.filter(allproduct => allproduct.user_id === currentUser.user_id)
