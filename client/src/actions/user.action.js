@@ -88,6 +88,8 @@ export const updateUser = (data) => {
 export let editUsername = (data) => {
     return (dispatch) => {
         return axios.put(`http://localhost:3001/editUsername/${data.id}`, data).then(res => {
+            localStorage.removeItem('token')
+            localStorage.setItem('token', res.data.token)
             dispatch({type: EDIT_USER_PROFIL, payload: {username: res.data.username}})
         })
     }
@@ -95,6 +97,8 @@ export let editUsername = (data) => {
 export let editEmail = (data) => {
     return (dispatch) => {
         return axios.put(`http://localhost:3001/editEmail/${data.id}`, data).then(res => {
+            localStorage.removeItem('token')
+            localStorage.setItem('token', res.data.token)
             dispatch({type: EDIT_USER_PROFIL, payload: {email: res.data.email}})
         })
     }
@@ -102,6 +106,8 @@ export let editEmail = (data) => {
 export let editNumberPhone = (data) => {
     return (dispatch) => {
         return axios.put(`http://localhost:3001/editNumberPhone/${data.id}`, data).then(res => {
+            localStorage.removeItem('token')
+            localStorage.setItem('token', res.data.token)
             dispatch({type: EDIT_USER_PROFIL, payload: {number_phone: res.data.numberPhone}})
         })
     }
@@ -109,13 +115,17 @@ export let editNumberPhone = (data) => {
 export let editFirstName = (data) => {
     return (dispatch) => {
         return axios.put(`http://localhost:3001/editFirstName/${data.id}`, data).then(res => {
+            localStorage.removeItem('token')
+            localStorage.setItem('token', res.data.token)
             dispatch({type: EDIT_USER_PROFIL, payload: {first_name: res.data.firstName}})
         })
     }
 }
 export let editPicture = (data) => {
     return (dispatch) => {
-        return axios.put(`http://localhost:3001/upload/${data.id}`, data).then(res => {
+        return axios.put(`http://localhost:3001/upload`, data).then(res => {
+            localStorage.removeItem('token')
+            localStorage.setItem('token', res.data.token)
             dispatch({type: EDIT_USER_PROFIL, payload: {url: res.data.url}})
         })
     }

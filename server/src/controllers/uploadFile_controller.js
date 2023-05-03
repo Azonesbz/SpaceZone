@@ -4,6 +4,7 @@ import fs from 'node:fs'
 import { generateId } from '../../../client/src/utils/generateId.js';
 import { users } from '../repository/user_repository.js';
 import { v4 as uuidv4 } from 'uuid';
+import jwt from 'jsonwebtoken';
 
 
 let data; 
@@ -55,31 +56,32 @@ const storageProduct = multer.diskStorage({
 export const uploadProduct = multer({ storage: storageProduct });
 
 export async function uploadProfilFile(req, res){
+    const userId = req.body.id
     try {
         if(!req.file) {
             res.status(400).send('No file uploaded.');
             return;
         }
-        const userId = req.params.id
+        
         const id = generateId()
         const mimetype = req.file.mimetype
         const oldPath = req.file.path;
 
         let url = null
         let newFileName;
-        console.log(mimetype == 'image/jpeg')
 
         if(mimetype === 'image/png'){
             newFileName = path.join(path.dirname(oldPath), id + '.png');
             url = id + '.png'
-            users.picture(userId, url).then(() => {
+            users.picture(userId, url).then(user => {
+                const token = jwt.sign(user[0], process.env.PRIVATE_KEY, {expiresIn: '1h'})
                 fs.rename(oldPath, path.join(process.cwd(), newFileName), (err) => {
                     if (err) {
                     console.log(err);
                     return res.status(500).send(err);
                     }
                     console.log('File renamed successfully.');
-                    return res.status(200).json({msg: 'File renamed successfully.', url});
+                    return res.status(200).json({msg: 'File renamed successfully.', url, token: token});
                 });
             })
             .catch(err => {
@@ -89,7 +91,8 @@ export async function uploadProfilFile(req, res){
         } else if(mimetype === 'image/jpeg') {
             newFileName = path.join(path.dirname(oldPath), id + '.jpg');
             url = id + '.jpg'
-            users.picture(userId, url).then(() => {
+            users.picture(userId, url).then(user => {
+                const token = jwt.sign(user[0], process.env.PRIVATE_KEY, {expiresIn: '1h'})
                 fs.rename(oldPath, path.join(process.cwd(), newFileName), (err) => {
                     if (err) {
                     console.log(err);
@@ -97,7 +100,7 @@ export async function uploadProfilFile(req, res){
                     }
                 
                     console.log('File renamed successfully.');
-                    return res.status(200).json({msg: 'File renamed successfully.', url});
+                    return res.status(200).json({msg: 'File renamed successfully.', url, token: token});
                 });
             })
         }

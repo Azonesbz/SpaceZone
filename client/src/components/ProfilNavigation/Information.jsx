@@ -2,7 +2,6 @@ import { useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Modal from "../modal/Modal"
 import { editEmail, editFirstName, editNumberPhone, editPicture, editUsername } from "../../actions/user.action"
-import axios from "axios"
 
 function UsernameModal({currentUser, isOpen, onClose}){
 
@@ -12,6 +11,7 @@ function UsernameModal({currentUser, isOpen, onClose}){
     let data;
     let handleSubmitPseudo = (e) => {
         e.preventDefault()
+        console.log(currentUser.id)
         data = {
             id: currentUser.id,
             username: formData.current[0].value
@@ -133,6 +133,7 @@ export default function Information() {
         e.preventDefault()
         const formData = new FormData();
         formData.append("file", file);
+        formData.append("id", currentUser.id)
         dispatch(editPicture(formData))
             
     }

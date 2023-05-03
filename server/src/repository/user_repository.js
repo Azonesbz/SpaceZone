@@ -86,7 +86,8 @@ async function updateUserDb(id, username, email, permission) {
 async function editUsernameDb(id, username) {
     try {
         await createPoolConnection().query(`UPDATE users SET username = ? WHERE id = ?`, [username, id])
-        return username
+        const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.username, users.email, users.first_name, users.number_phone, users.profil_picture, CONVERT_TZ(users.created_at, '+00:00', '+02:00') AS created_at, CONVERT_TZ(users.last_connection, '+00:00', '+02:00') AS last_connection, roles.name FROM users INNER JOIN roles ON users.role_id = roles.id WHERE users.id = ?`, [id])
+        return info
     } catch (err) {
         console.log('Une erreur lors de la modification' + err)
         return
@@ -97,7 +98,8 @@ async function editUsernameDb(id, username) {
 async function editEmailDb(id, email){
     try {
         await createPoolConnection().query(`UPDATE users SET email = ? WHERE id = ?`, [email, id])
-        return email
+        const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.username, users.email, users.first_name, users.number_phone, users.profil_picture, CONVERT_TZ(users.created_at, '+00:00', '+02:00') AS created_at, CONVERT_TZ(users.last_connection, '+00:00', '+02:00') AS last_connection, roles.name FROM users INNER JOIN roles ON users.role_id = roles.id WHERE users.id = ?`, [id])
+        return info
     } catch (err) {
         console.log('Une erreur lors de la modification' + err)
         return
@@ -107,7 +109,8 @@ async function editNumberDb(id, number){
     JSON.stringify(number)
     try {
         await createPoolConnection().query(`UPDATE users SET number_phone = ? WHERE id = ?`, [number, id])
-        return number
+        const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.username, users.email, users.first_name, users.number_phone, users.profil_picture, CONVERT_TZ(users.created_at, '+00:00', '+02:00') AS created_at, CONVERT_TZ(users.last_connection, '+00:00', '+02:00') AS last_connection, roles.name FROM users INNER JOIN roles ON users.role_id = roles.id WHERE users.id = ?`, [id])
+        return info
     } catch (err) {
         console.log('Une erreur lors de la modification' + err)
         return
@@ -116,17 +119,18 @@ async function editNumberDb(id, number){
 async function editFirstNameDb(id, firstName){
     try {
         await createPoolConnection().query(`UPDATE users SET first_name = ? WHERE id = ?`, [firstName, id])
-        return firstName
+        const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.username, users.email, users.first_name, users.number_phone, users.profil_picture, CONVERT_TZ(users.created_at, '+00:00', '+02:00') AS created_at, CONVERT_TZ(users.last_connection, '+00:00', '+02:00') AS last_connection, roles.name FROM users INNER JOIN roles ON users.role_id = roles.id WHERE users.id = ?`, [id])
+        return info
     } catch (err) {
         console.log('Une erreur lors de la modification' + err)
         return
     }
 }
 async function editPictureDb(id, picture){
-    console.log(picture)
     try {
         await createPoolConnection().query(`UPDATE users SET profil_picture = ? WHERE id = ?`, [picture, id])
-        return
+        const [info] = await createPoolConnection().query(`SELECT users.id, users.password, users.username, users.email, users.first_name, users.number_phone, users.profil_picture, CONVERT_TZ(users.created_at, '+00:00', '+02:00') AS created_at, CONVERT_TZ(users.last_connection, '+00:00', '+02:00') AS last_connection, roles.name FROM users INNER JOIN roles ON users.role_id = roles.id WHERE users.id = ?`, [id])
+        return info
     } catch (err) {
         console.log('Une erreur lors de la modification' + err)
         return

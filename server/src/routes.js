@@ -20,6 +20,7 @@ router.put('/editUsername/:id', editUsername)
 router.put('/editEmail/:id', editEmail)
 router.put('/editNumberPhone/:id', editNumberPhone)
 router.put('/editFirstName/:id', editFirstName)
+router.put('/editPicture/:id', editFirstName)
 
 router.delete('/deleteUser/:id', deleteUser)
 
@@ -49,7 +50,7 @@ router.post('/api/session', sessionIsValid)
 
 // Upload de fichier
 
-router.put('/upload/:id', uploadProfil.single('file'), uploadProfilFile)
+router.put('/upload', uploadProfil.single('file'), uploadProfilFile)
 
 
 

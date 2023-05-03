@@ -137,21 +137,23 @@ export async function updateUser(req, res){
 }
 export async function editUsername(req, res){
     const id = req.params.id
-    console.log(req.body)
     const {username} = req.body
-    users.username(id, username).then(() => {
-        res.status(200).json({username: username})
+    users.username(id, username).then(user => {
+        const token = jwt.sign(user[0], process.env.PRIVATE_KEY, {expiresIn: '1h'})
+        res.status(200).json({username: username, token: token})
     })
     .catch(err => {
         console.log(err)
         res.status(500).json({err})
     }) 
 }
+
 export async function editEmail(req, res){
     const id = req.params.id
     const {email} = req.body
-    users.email(id, email).then(() => {
-        res.status(200).json({email: email})
+    users.email(id, email).then(user => {
+        const token = jwt.sign(user[0], process.env.PRIVATE_KEY, {expiresIn: '1h'})
+        res.status(200).json({email: email, token: token})
     })
     .catch(err => {
         console.log(err)
@@ -161,8 +163,9 @@ export async function editEmail(req, res){
 export async function editNumberPhone(req, res){
     const id = req.params.id
     const {numberphone} = req.body
-    users.number(id, numberphone).then(() => {
-        res.status(200).json({numberPhone: numberphone})
+    users.number(id, numberphone).then(user => {
+        const token = jwt.sign(user[0], process.env.PRIVATE_KEY, {expiresIn: '1h'})
+        res.status(200).json({numberPhone: numberphone, token: token})
     })
     .catch(err => {
         console.log(err)
@@ -172,8 +175,9 @@ export async function editNumberPhone(req, res){
 export async function editFirstName(req, res){
     const id = req.params.id
     const {firstName} = req.body
-    users.firstName(id, firstName).then(() => {
-        res.status(200).json({firstName: firstName})
+    users.firstName(id, firstName).then(user => {
+        const token = jwt.sign(user[0], process.env.PRIVATE_KEY, {expiresIn: '1h'})
+        res.status(200).json({firstName: firstName, token: token})
     })
     .catch(err => {
         console.log(err)
