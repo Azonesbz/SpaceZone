@@ -94,11 +94,24 @@ export async function likeProduct(req, res){
     const { userId, productId } = req.body
     products.like(userId, productId)
     .then(response => {
-        if(response){
-            res.status(201).json({response})
-        } else {
-            res.status(201).json({deleted: response[0].insertId})
+        console.log(response)
+        if(response.success){
+            res.status(201).json({success: response.success[0]})
+        } else if (response.deleted) {
+            res.status(201).json({deleted: response.deleted[0]})
         }
+    })
+    .catch(err => {
+        console.error(err)
+        res.status(500).json({err})
+    })
+}
+export async function getLikeProduct(req, res){
+    const id = req.params.id
+    console.log('id ' + id)
+    products.getLike(id)
+    .then(response => {
+        res.status(201).json({response})
     })
     .catch(err => {
         console.error(err)

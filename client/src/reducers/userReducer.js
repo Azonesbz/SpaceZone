@@ -1,3 +1,4 @@
+import { GET_LIKE_PRODUCTS, LIKE_PRODUCT } from "../actions/product.action"
 import { ADD_USER, LOGIN_USER, GET_ALL_USERS, SET_USER, NUMBER_OF_USER, EDIT_USER_PROFIL, DELETE_USER, UPDATE_USER } from "../actions/user.action"
 
 const initialState = {}
@@ -66,7 +67,13 @@ export function currentUserReducer(state = initialState, action){
                     profil_picture: action.payload.url
                 }
             }
-
+        case GET_LIKE_PRODUCTS:
+            return {...state, liked: action.payload}
+        case LIKE_PRODUCT:
+            return {
+                ...state,
+                liked: [...state.liked, action.payload]
+            }
         default:
             return state
     }

@@ -12,12 +12,16 @@ import { useLocation } from "react-router-dom";
 import { sessionIsValid } from "./actions/session.action";
 import { getAllUser } from "./actions/user.action";
 import Error from "./pages/404";
+import { getLikeProduct } from "./actions/product.action";
+import { isEmpty } from "./utils/utils";
 
 
 function RouteWrapper({ children }) {
   
+  const currentUser = useSelector((state) => state.currentUserReducer.user)
   const dispatch = useDispatch()
   const location = useLocation();
+
 
   const scrollToTop = () => {
     const scrollStep = -window.scrollY / (200 / 15); // 500 est la durée de l'animation en millisecondes
@@ -35,6 +39,10 @@ function RouteWrapper({ children }) {
     dispatch(sessionIsValid());
     dispatch(getAllUser())
   }, [location]);
+  
+  useEffect(() => {
+    !isEmpty(currentUser) ? dispatch(getLikeProduct(currentUser.id)) : console.log(currentUser)
+  }, [currentUser])
 
   return <>{children}</>;
 }

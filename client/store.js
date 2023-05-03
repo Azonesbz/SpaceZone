@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import rootReducer from './src/reducers'
 import { getAllUser, getUserNumber } from './src/actions/user.action'
 import { sessionIsValid } from './src/actions/session.action'
-import { getAllProduct, getProductNumber } from './src/actions/product.action'
+import { getAllProduct, getLikeProduct, getProductNumber } from './src/actions/product.action'
 import { getCarts } from './src/actions/cart.action'
 // import { getCarts } from './src/actions/cart.action'
 
@@ -18,4 +18,5 @@ store.dispatch(getProductNumber())
 store.dispatch(getUserNumber())
 store.dispatch(getAllProduct())
 store.dispatch(getCarts())
+store.dispatch(getLikeProduct())
 // store.dispatch(getCarts())

@@ -66,7 +66,7 @@ export default function Navbar(){
                         <Dropdown
                             label={
                                 <img
-                                    src={`./uploads/profil/${currentUser.profil_picture}`}
+                                    src={`./uploads/profil/${!isEmpty(currentUser) ? currentUser.profil_picture : ""}`}
                                     alt="User profile image"
                                     style={{ width: '40px', height: '40px', borderRadius: '50%' }}
                                 />
@@ -133,7 +133,7 @@ export default function Navbar(){
                         <li className="flex items-center cursor-pointer">
                             <Link to="/profil" className="flex items-center text-md font-karla font-medium rounded-md text-blue-700">
                             <img
-                                src={`./uploads/profil/${currentUser.profil_picture}`}
+                                src={`./uploads/profil/${!isEmpty(currentUser) ? currentUser.profil_picture : ""}`}
                                 onError={(e) => {
                                     e.target.onerror = null; // empêche les boucles d'erreur infinies
                                     e.target.src = '../uploads/profil/default.jpg'; // charge une image alternative
