@@ -184,29 +184,66 @@ export default function Dashboard() {
         }
 
     }
+    let handleScrollDashboard = () => {
+        const balise = document.querySelector("#dashboard");
+        const position = balise.offsetTop;
+        window.scrollTo({
+            top: position,
+            behavior: "smooth"
+        });
+    }
+    let handleScrollFinance = () => {
+        const balise = document.querySelector("#finance");
+        const position = balise.offsetTop;
+        window.scrollTo({
+            top: position,
+            behavior: "smooth"
+        });
+    }
 
     return (
         <>
             <aside className='fixed flex items-center justify-center min-h-[100vh] bg-transparent w-16 right-2'>
-                <div className='flex flex-col justify-around h-96 w-20 bg-black rounded-full'>
-                    <div className='w-full h-16 rounded-full bg-white'>
+                <div className='flex flex-col justify-around h-96 w-20'>
+                    <Link 
+                    className='flex items-center justify-center w-full h-16 rounded-full bg-white hover:bg-neutral-900 hover:text-white duration-300 border-[2px] border-neutral-900'
+                    to="/home"
+                    >
+                        <svg width="40" height="40" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.75 9.938V21a.75.75 0 0 0 .75.75H9v-6.375a1.125 1.125 0 0 1 1.125-1.125h3.75A1.125 1.125 0 0 1 15 15.375v6.375h4.5a.75.75 0 0 0 .75-.75V9.937"></path>
+                            <path d="m22.5 12-9.99-9.563c-.234-.248-.782-.25-1.02 0L1.5 11.999"></path>
+                            <path d="M18.75 8.39V3H16.5v3.234"></path>
+                        </svg>
+                    </Link>
+                    <button
+                        className='flex items-center justify-center w-full h-16 rounded-full bg-white hover:bg-neutral-900 hover:text-white duration-300 border-[2px] border-neutral-900'
+                        onClick={handleScrollDashboard}
+                    >
+                        <svg width="40" height="40" fill="currentColor" stroke="currentColor" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.75 3h1.5a2.25 2.25 0 0 1 2.25 2.25v15a2.25 2.25 0 0 1-2.25 2.25H6.75a2.25 2.25 0 0 1-2.25-2.25v-15A2.25 2.25 0 0 1 6.75 3h1.5"></path>
+                            <path d="M14.525 1.5h-5.05c-.677 0-1.225.548-1.225 1.225v.55c0 .677.548 1.225 1.225 1.225h5.05c.677 0 1.225-.548 1.225-1.225v-.55c0-.677-.548-1.225-1.225-1.225Z"></path>
+                        </svg>
+                    </button>
+                    <button
+                        className='flex items-center justify-center w-full h-16 rounded-full bg-white hover:bg-neutral-900 hover:text-white duration-300 border-[2px] border-neutral-900'
+                        onClick={handleScrollFinance}
+                    >
+                        <svg width="40" height="40" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.875 23.25h-1.5a1.125 1.125 0 0 1-1.125-1.125v-6.75a1.125 1.125 0 0 1 1.125-1.125h1.5A1.125 1.125 0 0 1 6 15.375v6.75a1.125 1.125 0 0 1-1.125 1.125Z"></path>
+                            <path d="M15.375 23.25h-1.5a1.125 1.125 0 0 1-1.125-1.125v-11.25a1.125 1.125 0 0 1 1.125-1.125h1.5a1.125 1.125 0 0 1 1.125 1.125v11.25a1.125 1.125 0 0 1-1.125 1.125Z"></path>
+                            <path d="M20.625 23.25h-1.5A1.125 1.125 0 0 1 18 22.125v-16.5A1.125 1.125 0 0 1 19.125 4.5h1.5a1.125 1.125 0 0 1 1.125 1.125v16.5a1.125 1.125 0 0 1-1.125 1.125Z"></path>
+                            <path d="M10.125 23.25h-1.5A1.125 1.125 0 0 1 7.5 22.125V1.875A1.125 1.125 0 0 1 8.625.75h1.5a1.125 1.125 0 0 1 1.125 1.125v20.25a1.125 1.125 0 0 1-1.125 1.125Z"></path>
+                        </svg>
+                    </button>
+                    <Link className='w-full h-16 rounded-full bg-white hover:bg-neutral-900 duration-300'>
 
-                    </div>
-                    <div className='w-full h-16 rounded-full bg-white'>
+                    </Link>
+                    <Link className='w-full h-16 rounded-full bg-white hover:bg-neutral-900 duration-300'>
 
-                    </div>
-                    <div className='w-full h-16 rounded-full bg-white'>
-
-                    </div>
-                    <div className='w-full h-16 rounded-full bg-white'>
-
-                    </div>
-                    <div className='w-full h-16 rounded-full bg-white'>
-
-                    </div>
+                    </Link>
                 </div>
             </aside>
-            <section className='flex gap-5 min-h-screen p-10 container'>
+            <section className='flex gap-5 min-h-screen p-10 container' id='dashboard'>
 
                 <div className='bg-gradient-to-br w-full from-slate-200 to-slate-300 rounded-xl text-black font-ubuntu shadow shadow-neutral-400'>
 
@@ -216,7 +253,7 @@ export default function Dashboard() {
                             <div className='w-[1px] bg-neutral-900 h-10'></div>
                             <h2 className='text-2xl'>Azones</h2>
                         </div>
-                        <Link className='text-2xl' to="/home">Revenir à l'acceuil</Link>
+                        <Link className='text-2xl hover:underline hover:text-indigo-800 duration-200' to="/home">Revenir à l'acceuil</Link>
                     </div>
 
                     <div className='flex flex-col px-10 py-5 overflow-scroll gap-5'>
@@ -228,7 +265,7 @@ export default function Dashboard() {
                                 Statistique générals
                             </h2>
                             <div className='bg-slate-200 mt-5 rounded-lg p-5 overflow-scroll relative shadow'>
-                                <div className='flex items-center space-x-5 mt-5'>
+                                <div className='flex items-center space-x-5'>
                                     <div className='flex items-center justify-center h-14 p-5 bg-gradient-to-br from-blue-700 to-blue-800 rounded-md'>
                                         <h2 className='text-4xl text-rajdhani text-slate-200'>{countUser}</h2>
                                     </div>
@@ -442,7 +479,7 @@ export default function Dashboard() {
                     </div>
                 </div>
             </section>
-            <section className='flex gap-5 min-h-screen p-10 bg-neutral-900'>
+            <section className='flex gap-5 min-h-screen p-10 bg-neutral-900' id='finance'>
                 <div className='h-full bg-neutral-900 w-full'>
                     <h1 className='text-5xl text-slate-200'>Finance de SpaceZone</h1>
                     <Tooltip

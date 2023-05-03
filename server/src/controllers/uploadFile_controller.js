@@ -78,10 +78,13 @@ export async function uploadProfilFile(req, res){
                     console.log(err);
                     return res.status(500).send(err);
                     }
-                
                     console.log('File renamed successfully.');
                     return res.status(200).json({msg: 'File renamed successfully.', url});
                 });
+            })
+            .catch(err => {
+                console.log(err)
+                res.status(500).json({err})
             })
         } else if(mimetype === 'image/jpeg') {
             newFileName = path.join(path.dirname(oldPath), id + '.jpg');

@@ -19,7 +19,19 @@ function RouteWrapper({ children }) {
   const dispatch = useDispatch()
   const location = useLocation();
 
+  const scrollToTop = () => {
+    const scrollStep = -window.scrollY / (200 / 15); // 500 est la durée de l'animation en millisecondes
+    const scrollInterval = setInterval(() => {
+      if (window.scrollY !== 0) {
+        window.scrollBy(0, scrollStep);
+      } else {
+        clearInterval(scrollInterval);
+      }
+    }, 15);
+  }
+
   useEffect(() => {
+    scrollToTop()
     dispatch(sessionIsValid());
     dispatch(getAllUser())
   }, [location]);
@@ -28,7 +40,6 @@ function RouteWrapper({ children }) {
 }
 
 export default function App() {
-
   return (
     <>
       <BrowserRouter>
