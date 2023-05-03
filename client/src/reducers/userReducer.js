@@ -40,33 +40,18 @@ export function currentUserReducer(state = initialState, action){
     switch(action.type){
         case SET_USER:
             return {...state, user: action.payload}
-        case EDIT_USER_PROFIL:
-            if(action.payload.username){
+            case EDIT_USER_PROFIL:
                 return {
-                    ...state,
-                    username: action.payload.username
+                  ...state,
+                  user: {
+                    ...state.user,
+                    username: action.payload.username || state.user.username,
+                    email: action.payload.email || state.user.email,
+                    number_phone: action.payload.number_phone || state.user.number_phone,
+                    first_name: action.payload.first_name || state.user.first_name,
+                    profil_picture: action.payload.url || state.user.profil_picture,
+                  }
                 }
-            } else if(action.payload.email){
-                return {
-                    ...state,
-                    email: action.payload.email
-                }
-            }else if(action.payload.number_phone){
-                return {
-                    ...state,
-                    number_phone: action.payload.number_phone
-                }
-            }else if(action.payload.first_name){
-                return {
-                    ...state,
-                    first_name: action.payload.first_name
-                }
-            } else if(action.payload.url){
-                return {
-                    ...state,
-                    profil_picture: action.payload.url
-                }
-            }
         case GET_LIKE_PRODUCTS:
             return {...state, liked: action.payload}
         case LIKE_PRODUCT:
@@ -75,7 +60,8 @@ export function currentUserReducer(state = initialState, action){
                 liked: [...state.liked, action.payload]
             }
         case DELETE_LIKE_PRODUCT:
-            return {...state, liked: state.liked.filter((productLike) => productLike.id != action.payload.id)}
+            return {...state, 
+                liked: state.liked.filter((productLike) => productLike.id != action.payload.id)}
         default:
             return state
     }
