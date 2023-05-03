@@ -1,4 +1,4 @@
-import { GET_LIKE_PRODUCTS, LIKE_PRODUCT } from "../actions/product.action"
+import { DELETE_LIKE_PRODUCT, GET_LIKE_PRODUCTS, LIKE_PRODUCT } from "../actions/product.action"
 import { ADD_USER, LOGIN_USER, GET_ALL_USERS, SET_USER, NUMBER_OF_USER, EDIT_USER_PROFIL, DELETE_USER, UPDATE_USER } from "../actions/user.action"
 
 const initialState = {}
@@ -74,6 +74,8 @@ export function currentUserReducer(state = initialState, action){
                 ...state,
                 liked: [...state.liked, action.payload]
             }
+        case DELETE_LIKE_PRODUCT:
+            return {...state, liked: state.liked.filter((productLike) => productLike.id != action.payload.id)}
         default:
             return state
     }

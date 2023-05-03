@@ -98,7 +98,8 @@ export async function likeProduct(req, res){
         if(response.success){
             res.status(201).json({success: response.success[0]})
         } else if (response.deleted) {
-            res.status(201).json({deleted: response.deleted[0]})
+            console.log(response)
+            res.status(201).json({deleted: response})
         }
     })
     .catch(err => {

@@ -59,18 +59,17 @@ let addProduct = async (id, title, price, description, created_at, inventory, pr
     return result
 }
 let getLikeProductDb = async (id) => {
-    const [result] = await createPoolConnection().query(`SELECT p.user_id, p.product_id, p.id, u.username FROM products_likes p INNER JOIN users u ON p.user_id = u.id WHERE p.user_id = ?`, [id])
+    const [result] = await createPoolConnection().query(`SELECT p.id, p.user_id, p.product_id, u.username FROM products_likes p INNER JOIN users u ON p.user_id = u.id WHERE p.user_id = ?`, [id])
     if(result.length){
         return result
     }
     return
 }
 let likeProductDb = async (userId, productId) => {
-    const [verify] = await createPoolConnection().query(`SELECT * FROM products_likes WHERE product_id = ? AND user_id = ?`, [productId, userId])
+    const [verify] = await createPoolConnection().query(`SELECT id FROM products_likes WHERE product_id = ? AND user_id = ?`, [productId, userId])
     if(verify.length){
         await createPoolConnection().query(`DELETE FROM products_likes WHERE product_id = ? AND user_id = ?`, [productId, userId])
-        const id = verify.id
-        return {deleted: id}
+        return {deleted: verify}
     } else {
         await createPoolConnection().query(`INSERT INTO products_likes (product_id, user_id) VALUES (?, ?)`, [productId, userId])
         const [result] = await createPoolConnection().query(`SELECT p.id, p.user_id, p.product_id, u.username FROM products_likes p INNER JOIN users u ON p.user_id = u.id WHERE p.user_id = ?`, [userId])

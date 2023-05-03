@@ -80,8 +80,8 @@ export let likeProduct = (data) => {
         return axios.post(`http://localhost:3001/likeProduct`, data).then(res => {
             console.log(res.data)
             if(res.data.deleted){
-                console.log(res.data.deleted)
-                dispatch({type: DELETE_LIKE_PRODUCT, payload: res.data.deleted})
+                console.log(res.data.deleted.deleted)
+                dispatch({type: DELETE_LIKE_PRODUCT, payload: res.data.deleted.deleted[0]})
             } else {
                 dispatch({ type: LIKE_PRODUCT, payload: res.data.success})
             }

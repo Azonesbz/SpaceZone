@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
 import { isEmpty } from "./Utils"
 import { useEffect } from "react"
-import { getProductPage, likeProduct } from "../actions/product.action"
+import { getLikeProduct, getProductPage, likeProduct } from "../actions/product.action"
 import Carousel from "./carousel/Carousel"
 import { useState } from "react"
 
@@ -15,7 +15,7 @@ export default function Cards({
     const dispatch = useDispatch()
     const getProducts = useSelector((state) => state.productReducer.productPage)
     const currentUser = useSelector((state) => state.currentUserReducer.user)
-    const [liked, setLiked] = useState(false)
+    const likedProduct = useSelector((state) => state.currentUserReducer.liked)
     const scrollToTop = () => {
         if (window.scrollY !== 0) {
             window.scrollTo({
@@ -83,9 +83,10 @@ export default function Cards({
                                                 userId: currentUser.id
                                             }
                                             dispatch(likeProduct(data))
+                                            dispatch(getLikeProduct(currentUser.id))
                                         }}
                                         >
-                                            <svg className="" width="30" height="30" fill={liked ? "red" : "none"} stroke={liked ? "red" : "currentColor"} stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <svg className="" width="30" height="30" fill={!isEmpty(likedProduct) ? (likedProduct.find(liked => liked.product_id === product.id) ? "red" : "none") : "none"} stroke={!isEmpty(likedProduct) ? (likedProduct.find(liked => liked.product_id === product.id) ? "red" : "currentColor") : "currentColor"} stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M19.5 13.576a4.976 4.976 0 0 0 1.495-3.704A5 5 0 0 0 12 7.01a5 5 0 1 0-7.5 6.566l7.5 7.428 7.5-7.428Z"></path>
                                             </svg>
                                         </button>
