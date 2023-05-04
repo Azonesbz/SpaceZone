@@ -15,16 +15,15 @@ export default function Carousel({
     let next = () => 
         setCurr(curr => (curr === slides.length - 1 ? 0 : curr + 1));
 
-    // useEffect(() => {
-    //     if(!autoSlide) return
-    //     const slideInterval = setInterval(next, autoSlideInterval)
-    //     return () => clearInterval(slideInterval)
-    // }, [])
+    useEffect(() => {
+        console.log(slides)
+    }, [])
 
     return(
         <>
             <div className="overflow-hidden relative">
                 <div className="flex transition-transform ease-out duration-500" style={{ transform: `translateX(-${curr * 100}%)`}}>{slides}</div>
+                {slides.length > 1 ?
                 <div className='absolute inset-0 flex items-center justify-between p-4'>
                     <button className='p-1 rounded-full shadow bg-slate-200' onClick={prev}>
                         <svg width={arrowSize || '30'} height={arrowSize || '30'} fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -41,6 +40,8 @@ export default function Carousel({
                         </svg>
                     </button>
                 </div>
+                : null }
+                {slides.length > 1 ?
                 <div className='absolute bottom-4 right-0 left-0'>
                     <div className='flex items-center justify-center gap-2'>
                         {slides.map((_, i) => (
@@ -48,6 +49,7 @@ export default function Carousel({
                         ))}
                     </div>
                 </div>
+                : null }
             </div>
         </>
     )
