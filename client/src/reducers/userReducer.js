@@ -60,8 +60,10 @@ export function currentUserReducer(state = initialState, action){
                 liked: [...state.liked, action.payload]
             }
         case DELETE_LIKE_PRODUCT:
-            return {...state, 
-                liked: state.liked.filter((productLike) => productLike.id != action.payload.id)}
+            return {
+                ...state, 
+                liked: state.liked.filter((productLike) => productLike.id != action.payload.id)
+            }
         default:
             return state
     }

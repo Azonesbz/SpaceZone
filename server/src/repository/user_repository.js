@@ -65,6 +65,8 @@ async function deleteUserDb(id){
     // Supprimer tous les enregistrements de la table products qui appartiennent à l'utilisateur
     await createPoolConnection().query(`DELETE FROM products WHERE user_id = ?`, [id]);
 
+    await createPoolConnection().query(`DELETE FROM products_likes WHERE user_id = ?`, [id]);
+
     // Supprimer l'utilisateur
     const [info] = await createPoolConnection().query(`DELETE FROM users WHERE id = ?`, [id]);
     return info;
