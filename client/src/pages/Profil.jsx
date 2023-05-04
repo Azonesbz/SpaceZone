@@ -1,14 +1,13 @@
-import { useState } from "react";
 import Header from "../components/Navbar";
 import Information from "../components/ProfilNavigation/Information";
 import ProductOnSell from "../components/ProfilNavigation/ProductOnSell";
 import Purshases from "../components/ProfilNavigation/Purshases";
 import About from "../components/ProfilNavigation/About";
 import Footer from "../components/Footer";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
-import ProfilePicture from "../components/picture/ProfilPicture";
 import { isEmpty } from "../utils/utils";
+import { Badge } from "flowbite-react";
 
 export default function Profil(){
 
@@ -81,9 +80,9 @@ export default function Profil(){
     return (
         <>
             <Header />
-            <section className="grid grid-rows-3 grid-cols-12 gap-5 p-10 px-40 relative mt-20">
-                <aside className="sticky bg-gradient-to-br col-span-4 from-slate-400 to-neutral-400 text-black shadow rounded-xl row-span-3">
-                    <header className="flex flex-col items-center bg-gradient-to-tl from-slate-200 to-slate-300 p-5 rounded-t-xl">
+            <section className="grid grid-cols-12 gap-5 p-10 px-40 relative mt-20">
+                <aside className="bg-neutral-900 col-span-4 text-black shadow rounded-xl">
+                    <header className="flex flex-col items-center bg-slate-300 p-5 rounded-t-lg">
                         <img
                           src={`./uploads/profil/${!isEmpty(currentUser) ? currentUser.profil_picture : ""}`}
                           onError={(e) => {
@@ -105,14 +104,17 @@ export default function Profil(){
                         <button className={`flex w-full h-12 p-3 hover:p-5 rounded items-center bg-slate-200 cursor-pointer duration-100 ${productOnSellNav ? "border-[2px] border-neutral-900" : ""}`} id="productOnSell">
                             <h1 className="text-xl font-thin font-ubuntu">- Produits en ventes</h1>
                         </button>
-                        <button className={`flex w-full h-12 p-3 hover:p-5 rounded items-center bg-slate-200 cursor-pointer duration-100 ${purshaseNav ? "border-[2px] border-neutral-900" : ""}`} id="purshases">
+                        <button className={`flex justify-between w-full h-12 p-3 hover:p-5 rounded items-center bg-slate-200 cursor-pointer duration-100 ${purshaseNav ? "border-[2px] border-neutral-900" : ""}`} id="purshases">
                             <h1 className="text-xl font-thin font-ubuntu">- Mes achats</h1>
-                        </button>
-                        <button className={`flex w-full h-12 p-3 hover:p-5 rounded items-center bg-slate-200 cursor-pointer duration-100 ${aboutNav ? "border-[2px] border-neutral-900" : ""}`} id="about">
-                            <h1 className="text-xl font-thin font-ubuntu">- A propos</h1>
+                            <i className="text-sm text-yellow-800 opacity-85 bg-yellow-200 px-3 py-[1px] rounded-full">
+                              En développement
+                            </i>
                         </button>
                         <button className={`flex w-full h-12 p-3 hover:p-5 rounded items-center bg-slate-200 cursor-pointer duration-100 ${aboutNav ? "border-[2px] border-neutral-900" : ""}`} id="about">
                             <h1 className="text-xl font-thin font-ubuntu">- Mes coups de coeur</h1>
+                        </button>
+                        <button className={`flex w-full h-12 p-3 hover:p-5 rounded items-center bg-slate-200 cursor-pointer duration-100 ${aboutNav ? "border-[2px] border-neutral-900" : ""}`} id="about">
+                            <h1 className="text-xl font-thin font-ubuntu">- A propos</h1>
                         </button>
                     </div>
                 </aside>

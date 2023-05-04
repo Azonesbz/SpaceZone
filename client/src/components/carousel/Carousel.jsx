@@ -5,7 +5,8 @@ import {ChevronLeft, ChevronRight} from 'react-feather'
 export default function Carousel({
     children: slides, 
     autoSlide = false, 
-    autoSlideInterval = 3000 
+    autoSlideInterval = 3000,
+    arrowSize
 }){
     const [curr, setCurr] = useState(0)
 
@@ -26,10 +27,18 @@ export default function Carousel({
                 <div className="flex transition-transform ease-out duration-500" style={{ transform: `translateX(-${curr * 100}%)`}}>{slides}</div>
                 <div className='absolute inset-0 flex items-center justify-between p-4'>
                     <button className='p-1 rounded-full shadow bg-slate-200' onClick={prev}>
-                        <ChevronLeft />
+                        <svg width={arrowSize || '30'} height={arrowSize || '30'} fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12h14"></path>
+                            <path d="m5 12 6 6"></path>
+                            <path d="m5 12 6-6"></path>
+                        </svg>
                     </button>
                     <button className='p-1 rounded-full shadow bg-slate-200' onClick={next}>
-                        <ChevronRight />
+                        <svg width={arrowSize || '30'}  height={arrowSize || '30'} fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 12h14"></path>
+                            <path d="m13 18 6-6"></path>
+                            <path d="m13 6 6 6"></path>
+                        </svg>
                     </button>
                 </div>
                 <div className='absolute bottom-4 right-0 left-0'>

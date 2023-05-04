@@ -24,7 +24,7 @@ export default function ProductId() {
   let handleCart = async () => {
     const product = allProduct.filter(productId => productId.id)
     data = {
-      user_id: currentUser.id,
+      user_id: currentUser.user.id,
       id: id,
       quantity: JSON.stringify(value),
       price: product[0].price * value

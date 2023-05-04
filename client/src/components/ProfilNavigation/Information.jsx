@@ -155,7 +155,7 @@ export default function Information() {
         <>
             <div className="bg-gradient-to-br from-gray-500 to-gray-600 rounded-xl col-span-7 row-span-3 p-5">
                 <header>
-                    <h1 className="text-4xl font-thin font-ubuntu text-white border-b-[1px] border-neutral-400 pb-5 mt-3">Information</h1>
+                    <h1 className="text-4xl font-thin font-ubuntu text-white border-b-[1px] border-neutral-400 pb-5 mt-3 uppercase italic">Information</h1>
                 </header>
                 <div className="bg-gray-600 mt-5 p-5 rounded-xl">
 
