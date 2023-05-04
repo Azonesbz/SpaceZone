@@ -94,8 +94,13 @@ let updateProductDb = async (id, title, author, price, inventory) => {
 }
 
 let deleteProductDb = async (id) => {
+    const [productIsLike] = await createPoolConnection().query(`SELECT pl.user_id FROM products p INNER JOIN products_likes pl ON p.id = pl.product_id WHERE p.id = ?`, [id])
+    console.log(productIsLike)
+    if(productIsLike.length){
+        console.log('ok')
+        await createPoolConnection().query(`DELETE FROM products_likes WHERE user_id = ?`, [productIsLike[0].user_id]);
+    }
     const [info] = await createPoolConnection().query(`DELETE FROM products WHERE id = ?`, [id]);
-    console.log(info)
     return info
 }
 
