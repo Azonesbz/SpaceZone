@@ -7,6 +7,26 @@ export default function Footer() {
                 <section className="flex flex-col items-center bg-black text-white min-h-full">
                     <div className="grid grid-cols-6 justify-between items-center py-10 font-karla">
                         <div className="flex flex-col col-span-6 lg:col-span-2">
+                            <h1 className='text-center text-2xl'>
+                                SpaceZone
+                            </h1>
+                            <ul className="flex flex-col gap-2 items-center justify-center uppercase text-sm mt-5">
+                                <li><Link to="/privacy-policy">Politique de protection de la vie privée</Link></li>
+                                <li><Link to="/product/new">Commencer à vendre avec spacezone</Link></li>
+                            </ul>
+                        </div>
+
+
+                        <div className="flex flex-col col-span-6 lg:col-span-2">
+                            <h1 className="text-center text-2xl">
+                                Support
+                            </h1>
+                            <ul className="flex flex-col gap-2 items-center justify-center uppercase text-sm mt-5">
+                                <li><Link to="">Centre d'assistance</Link></li>
+                                <li><Link to="">Blog</Link></li>
+                            </ul>
+                        </div>
+                        <div className="flex flex-col col-span-6 lg:col-span-2">
                             <h1 className="text-center text-2xl">
                                 Nous retrouver
                             </h1>
@@ -47,26 +67,6 @@ export default function Footer() {
                                         </svg>
                                     </Link>
                                 </li>
-                            </ul>
-                        </div>
-                        <div className="flex flex-col col-span-6 lg:col-span-2">
-                            <h1 className='text-center text-2xl'>
-                                SpaceZone
-                            </h1>
-                            <ul className="flex flex-col gap-2 items-center justify-center uppercase text-sm mt-5">
-                                <li><Link to="/privacy-policy">Politique de protection de la vie privée</Link></li>
-                                <li><Link to="/product/new">Commencer à vendre avec spacezone</Link></li>
-                            </ul>
-                        </div>
-
-
-                        <div className="flex flex-col col-span-6 lg:col-span-2">
-                            <h1 className="text-center text-2xl">
-                                Support
-                            </h1>
-                            <ul className="flex flex-col gap-2 items-center justify-center uppercase text-sm mt-5">
-                                <li><Link to="">Centre d'assistance</Link></li>
-                                <li><Link to="">Blog</Link></li>
                             </ul>
                         </div>
                     </div>

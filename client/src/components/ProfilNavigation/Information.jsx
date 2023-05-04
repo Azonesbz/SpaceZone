@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import Modal from "../modal/Modal"
 import { editEmail, editFirstName, editNumberPhone, editPicture, editUsername } from "../../actions/user.action"
 import { isEmpty } from "../../utils/utils"
+import { Tooltip } from "flowbite-react"
 
 function UsernameModal({currentUser, isOpen, onClose}){
 
@@ -153,9 +154,18 @@ export default function Information() {
 
     return (
         <>
-            <div className="bg-gradient-to-br from-gray-500 to-gray-600 rounded-xl col-span-7 row-span-3 p-5">
-                <header>
-                    <h1 className="text-4xl font-thin font-ubuntu text-white border-b-[1px] border-neutral-400 pb-5 mt-3 uppercase italic">Information</h1>
+            <div className="bg-neutral-900 rounded-xl col-span-7 row-span-3">
+                <header className="flex justify-between items-center bg-slate-300 p-5 rounded-t-lg">
+                    <h1 className="text-4xl font-thin font-ubuntu bg-slate-300 uppercase italic">Information</h1>
+                    <Tooltip
+                        content="Les produits affichés ici sont vos articles en cours de ventes"
+                    >
+                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"></path>
+                            <path d="M12 8h.01"></path>
+                            <path d="M11 12h1v4h1"></path>
+                        </svg>
+                    </Tooltip>
                 </header>
                 <div className="bg-gray-600 mt-5 p-5 rounded-xl">
 

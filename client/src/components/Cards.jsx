@@ -42,7 +42,7 @@ export default function Cards({
                     key={product.id}
                     >
                         <Link
-                        className='flex relative flex-col bg-gradient-to-br h-full p-3'
+                        className='flex relative flex-col bg-gradient-to-br h-full w-full p-3'
                         to={`/product/${product.id}`}
                         >
                             <div className="max-w-xl" onClick={(e) => e.preventDefault(e)}>
