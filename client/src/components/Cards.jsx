@@ -83,7 +83,6 @@ export default function Cards({
                                                 userId: currentUser.id
                                             }
                                             dispatch(likeProduct(data))
-                                            dispatch(getLikeProduct(currentUser.id))
                                         }}
                                         >
                                             <svg className="" width="30" height="30" fill={!isEmpty(likedProduct) ? (likedProduct.find(liked => liked.product_id === product.id) ? "red" : "none") : "none"} stroke={!isEmpty(likedProduct) ? (likedProduct.find(liked => liked.product_id === product.id) ? "red" : "currentColor") : "currentColor"} stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
