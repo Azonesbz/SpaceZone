@@ -203,7 +203,7 @@ export default function Dashboard() {
 
     return (
         <>
-            <aside className='fixed flex items-center justify-center min-h-[100vh] bg-transparent w-16 right-2'>
+            {/* <aside className='fixed flex items-center justify-center min-h-[100vh] bg-transparent w-16 right-2'>
                 <div className='flex flex-col justify-around h-96 w-20'>
                     <Link
                         className='flex items-center justify-center w-full h-16 rounded-full bg-white hover:bg-neutral-900 hover:text-white duration-300 border-[2px] border-neutral-900'
@@ -242,23 +242,30 @@ export default function Dashboard() {
 
                     </Link>
                 </div>
-            </aside>
-            <section className='flex gap-5 min-h-screen p-10 container' id='dashboard'>
+            </aside> */}
+            <section className='flex gap-5 min-h-screen sm:p-10 container font-Lato' id='dashboard'>
 
                 <div className='bg-gradient-to-br w-full from-slate-200 to-slate-300 rounded-xl text-black font-ubuntu shadow shadow-neutral-400'>
 
-                    <div className='flex items-center justify-between space-x-5 w-full h-[5rem] px-10 bg-slate-300'>
+                    <div className='flex items-center w-full h-[5rem] sm:px-10 bg-slate-300'>
+                        <Link className='text-2xl hover:underline hover:text-indigo-800 duration-200 mx-3' to="/home">
+                            <svg width="40" height="40" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3.75 9.938V21a.75.75 0 0 0 .75.75H9v-6.375a1.125 1.125 0 0 1 1.125-1.125h3.75A1.125 1.125 0 0 1 15 15.375v6.375h4.5a.75.75 0 0 0 .75-.75V9.937"></path>
+                                <path d="m22.5 12-9.99-9.563c-.234-.248-.782-.25-1.02 0L1.5 11.999"></path>
+                                <path d="M18.75 8.39V3H16.5v3.234"></path>
+                            </svg>
+                        </Link>
                         <div className='flex items-center space-x-5'>
-                            <h1 className='font-karla text-4xl text-blue-600 whitespace-nowrap'>Tableau de bord</h1>
+                            <h1 className='text-2xl text-blue-600 whitespace-nowrap'>Tableau de bord</h1>
                             <div className='w-[1px] bg-neutral-900 h-10'></div>
-                            <h2 className='text-2xl'>Azones</h2>
+                            <h2 className='text-xl'>Azones</h2>
                         </div>
-                        <Link className='text-2xl hover:underline hover:text-indigo-800 duration-200' to="/home">Revenir à l'acceuil</Link>
+                        
                     </div>
 
-                    <div className='flex flex-col px-10 py-5 overflow-scroll gap-5'>
+                    <div className='flex flex-col sm:px-10 py-5 overflow-scroll gap-5'>
                         <div className='flex flex-col p-1'>
-                            <h2 className='flex items-center text-3xl font-light'>
+                            <h2 className='flex items-center text-xl whitespace-nowrap'>
                                 <svg className='mr-5' width="40" height="40" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M3 12h4l3 8 4-16 3 8h4"></path>
                                 </svg>
@@ -266,18 +273,18 @@ export default function Dashboard() {
                             </h2>
                             <div className='bg-slate-200 mt-5 rounded-lg p-5 overflow-scroll relative shadow'>
                                 <div className='flex items-center space-x-5'>
-                                    <div className='flex items-center justify-center h-14 p-5 bg-gradient-to-br from-blue-700 to-blue-800 rounded-md'>
-                                        <h2 className='text-4xl text-rajdhani text-slate-200'>{countUser}</h2>
-                                    </div>
-                                    <div className='h-[1px] w-full bg-neutral-300 mx-5'></div>
-                                    <h1 className='text-xl font-thin whitespace-nowrap'>Utilisateurs inscrits sur SpaceZone</h1>
-                                </div>
-                                <div className='flex items-center space-x-5 mt-5'>
-                                    <div className='flex items-center justify-center h-14 p-5 bg-gradient-to-br from-blue-700 to-blue-800 rounded-md'>
-                                        <h2 className='text-4xl text-rajdhani text-slate-200'>{numberProduct > 0 ? numberProduct : 0}</h2>
+                                    <div className='flex items-center justify-center h-8 p-5 bg-gradient-to-br from-blue-700 to-blue-800 rounded-md'>
+                                        <h2 className='text-2xl text-rajdhani text-slate-200'>{countUser}</h2>
                                     </div>
                                     <div className='h-[1px] w-full bg-neutral-400 mx-5'></div>
-                                    <h1 className='text-xl font-thin whitespace-nowrap'>Articles en ventes</h1>
+                                    <h1 className='text-lg font-thin whitespace-nowrap'>Utilisateurs inscrits sur <br/>SpaceZone</h1>
+                                </div>
+                                <div className='flex items-center space-x-5 mt-5'>
+                                    <div className='flex items-center justify-center h-8 p-5 bg-gradient-to-br from-blue-700 to-blue-800 rounded-md'>
+                                        <h2 className='text-2xl text-rajdhani text-slate-200'>{numberProduct > 0 ? numberProduct : 0}</h2>
+                                    </div>
+                                    <div className='h-[1px] w-full bg-neutral-400 mx-5'></div>
+                                    <h1 className='text-lg font-thin whitespace-nowrap'>Articles en ventes</h1>
                                 </div>
                             </div>
                         </div>
