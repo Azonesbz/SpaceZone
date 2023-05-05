@@ -51,7 +51,7 @@ export default function Navbar(){
             <div className={`flex fixed inset-0 z-50 h-20 w-full backdrop-blur-lg duration-200 ${scrollPosition >= 20 ? "shadow" : ""}`}>
                 <div className={`h-full w-full opacity-75 duration-200 ${scrollPosition >= 20 ? "bg-slate-200" : ""}`}></div>
             </div>
-            <header className="flex fixed inset-0 z-50 h-20 w-full bg-transparent md:container">
+            <header className="flex fixed inset-0 z-50 h-20 w-full bg-transparent container">
                 <nav className="flex justify-between items-center h-full w-full">
                     <div className="flex items-center">
                         <Link 
@@ -61,14 +61,17 @@ export default function Navbar(){
                             SpaceZone
                         </Link>
                     </div>
-                    <div className="md:hidden mr-5 sm:mr-10">
+                    <div className="md:hidden mr-5 sm:mr-10 text-white">
                         {isLogged ?
                         <Dropdown
                             label={
                                 <img
                                     src={`./uploads/profil/${!isEmpty(currentUser) ? currentUser.profil_picture : ""}`}
+                                    onError={(e) => {
+                                        e.target.src = './uploads/profil/default.jpg';
+                                    }}
                                     alt="User profile image"
-                                    style={{ width: '40px', height: '40px', borderRadius: '50%' }}
+                                    style={{ width: '40px', height: '40px', borderRadius: '100%' }}
                                 />
                             }
                             inline={true}

@@ -21,6 +21,7 @@ paragraphe font-
   width: 75%;
   min-height: 100vh;
   display: flex;
+  align-items: center;
   flex-direction: column;
   justify-content: center;
 }
@@ -68,6 +69,7 @@ paragraphe font-
   display: flex;
   position: absolute;
   bottom: 0;
+  margin: 10px auto;
   justify-content: center;
   align-items: center;
   cursor: pointer;

@@ -19,21 +19,21 @@ export default function Filter(){
 
     return (
         <>
-            <div className="flex space-x-10 bg-neutral-900 p-8 rounded text-slate-200">
-                <h3 className="whitespace-nowrap">Trier par: </h3>
-                <form action="" className="flex items-center justify-between w-full" onSubmit={handleFilterSubmit} ref={form}>
-                    <div className="flex space-x-5 items-center">
-                        <label htmlFor="decreasing">
+            <div className="flex flex-col sm:space-x-10 bg-neutral-900 sm:rounded-xl text-slate-200 font-Lato items-center p-5">
+                <h3 className="whitespace-nowrap text-2xl">Trier par: </h3>
+                <form action="" className="flex flex-col items-center justify-between w-full mt-5" onSubmit={handleFilterSubmit} ref={form}>
+                    <div className="flex flex-col sm:space-x-20 sm:items-center w-full space-y-5">
+                        <label htmlFor="decreasing" className="flex items-center w-full sm:space-x-3 justify-between">
                             <h1>Prix décroissant</h1>
-                            <input type="radio" id="decreasing" name="option" />
+                            <input type="radio" id="decreasing" name="option" className="h-8 w-8" />
 
                         </label>
-                        <label htmlFor="crescent">
+                        <label htmlFor="crescent" className="flex items-center sm:space-x-3 justify-between">
                             <h1>Prix croissant</h1>
-                            <input type="radio" id="crescent" name="option" />
+                            <input type="radio" id="crescent" name="option" className="h-8 w-8" />
                         </label>
-                        <label htmlFor="">
-                            <select className="text-black">
+                        <label htmlFor="" className="w-full">
+                            <select className="text-black py-3 px-3 w-full rounded">
                                 <option value="0" className="font-FlowCircular"></option>
                                 <option value="1">Vêtements</option>
                                 <option value="3">Accessoires</option>
@@ -41,7 +41,12 @@ export default function Filter(){
                             </select>
                         </label>
                     </div>
-                    <button className="py-2 px-5 bg-slate-300 text-black rounded-xl text-lg font-Lato" type="submit">Rechercher</button>
+                    <button className="flex items-center justify-center space-x-2 py-1 px-3 bg-slate-300 text-black rounded text-lg font-Lato mt-5 w-full" type="submit">
+                        <h2>Rechercher</h2>
+                        <svg width="35" height="35" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.755 14.255h-.79l-.28-.27a6.471 6.471 0 0 0 1.57-4.23 6.5 6.5 0 1 0-6.5 6.5c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99 1.49-1.49-4.99-5Zm-6 0c-2.49 0-4.5-2.01-4.5-4.5s2.01-4.5 4.5-4.5 4.5 2.01 4.5 4.5-2.01 4.5-4.5 4.5Z"></path>
+                        </svg>
+                    </button>
                 </form>
             </div>
         </>

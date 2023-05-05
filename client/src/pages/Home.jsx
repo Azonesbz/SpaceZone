@@ -39,8 +39,10 @@ export default function Home({session}) {
           <Header session={session} />
 
             <section className='mt-32 flex flex-col container relative justify-center gap-5 elementHidden' id='product'>
-              <h1 className='text-5xl font-Lato'>Notre catalogue</h1>
-              <p className='text-xl font-SourceSansPro'>Naviguez à travers notre sélection de produit vendu par la communauté ! Vous pouvez rechercher un produit sous différente catégorie de produit.</p>
+              <div className='flex flex-col text-center items-center justify-center p-5'>
+                <h1 className='text-5xl font-Lato text-center whitespace-nowrap'>Notre catalogue</h1>
+                <p className='text-xl font-SourceSansPro mt-5'>Naviguez à travers notre sélection de produit vendu par la communauté ! Vous pouvez rechercher un produit sous différente catégorie de produit.</p>
+              </div>
               <div>
                   <Filter />
               </div>
