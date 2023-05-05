@@ -27,31 +27,34 @@ export default function Carts(){
     }
     return (
         <>
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen font-Lato">
 
             <Navbar />
-            <section className="p-10 container flex flex-col justify-center min-h-screen">
-                <div className="flex items-center justify-between pb-2">
-                    <div className="flex space-x-14">
-                        <h1 className="uppercase font-karla font-medium text-3xl">Mon Panier</h1>
-                        {!isEmpty(cartItem) ? 
-                        <button
-                        className="text-red-600"
-                        onClick={handleDeleteCart}
-                        >
-                            Supprimer mon panier
-                        </button> 
-                        : ""}
+            <section className="sm:p-10 container flex flex-col justify-center min-h-screen">
+                <div className="flex items-center justify-between pb-2 mt-20">
+                    <div className="flex justify-between items-end w-full">
+                        <div className="flex flex-col">
+                            <h1 className="uppercase font-karla font-medium text-3xl whitespace-nowrap">Mon Panier</h1>
+                            {!isEmpty(cartItem) ? 
+                            <button
+                            className="text-red-600 whitespace-nowrap"
+                            onClick={handleDeleteCart}
+                            >
+                                <h1 className="text-left font-bold">Supprimer mon panier</h1>
+                            
+                            </button> 
+                            : ""}
+                        </div>
+                        <h2 className="flex font-karla font-medium text-xl sm:text-2xl md:text-3xl whitespace-nowrap duration-200">Prix total:<span>{totalPrice ? totalPrice + "€" : "Aucun article dans le panier"}</span></h2>
                     </div>
-                    <h2 className="font-karla font-medium text-3xl">Prix total: <span>{totalPrice ? totalPrice + "€" : "Aucun article dans le panier"}</span></h2>
                 </div>
-                <div className="grid grid-cols-12 gap-5 mt-5" >
+                <div className="grid grid-cols-12 gap-5" >
                 {!isEmpty(cartItem) ? cartItem.map((items, index) => (
-                    <div className="col-span-6 bg-neutral-300 rounded-xl text-black hover:underline font-rajhdani" key={index}>
+                    <div className="col-span-12 sm:col-span-6 bg-neutral-300 sm:rounded-xl text-black hover:underline font-rajhdani" key={index}>
                         <div className="min-w-full">
                             <Carousel>
                                 {JSON.parse(items.url_image).map((image, index) => (
-                                    <img key={index} src={`../uploads/product/${image}`} alt="" className="min-w-full object-cover h-96 rounded-t-xl" />
+                                    <img key={index} src={`../uploads/product/${image}`} alt="" className="min-w-full object-cover h-96 w-full sm:rounded-t-xl" />
                                 ))}
                             </Carousel>
                         </div>
