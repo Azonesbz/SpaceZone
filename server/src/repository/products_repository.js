@@ -98,51 +98,58 @@ let filterProductDb = async (decreasing, crescent, category) => {
 
     if(decreasing && category != 0){ // If price parameter is decreasing and category value is different of 0
 
-        const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username, u.id AS user_id, u.profil_picture, p.url_image 
+        const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, c.name AS category, u.username, u.id AS user_id, u.profil_picture, p.url_image 
         FROM products p 
         INNER JOIN users u ON p.user_id = u.id
+        INNER JOIN category c ON p.category_id = c.id 
         WHERE p.category_id = ?
         ORDER BY p.price DESC`, [category])
         return product
 
     } else if(crescent && category != 0){ // If price parameter is crescent and category value is different of 0
 
-        const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username, u.id AS user_id, u.profil_picture, p.url_image 
+        const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, c.name AS category, u.username, u.id AS user_id, u.profil_picture, p.url_image 
         FROM products p 
         INNER JOIN users u ON p.user_id = u.id
+        INNER JOIN category c ON p.category_id = c.id 
         WHERE p.category_id = ?
         ORDER BY p.price ASC`, [category])
         return product
 
     } else if(decreasing){ // If price parameter is decreasing
 
-        const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username, u.id AS user_id, u.profil_picture, p.url_image 
+        const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, c.name AS category, u.username, u.id AS user_id, u.profil_picture, p.url_image 
         FROM products p 
-        INNER JOIN users u ON p.user_id = u.id 
+        INNER JOIN users u ON p.user_id = u.id
+        INNER JOIN category c ON p.category_id = c.id  
         ORDER BY p.price DESC`)
         return product
 
     } else if(crescent){ // If price paramater is crescent
 
-        const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username, u.id AS user_id, u.profil_picture, p.url_image 
+        const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, c.name AS category, u.username, u.id AS user_id, u.profil_picture, p.url_image 
         FROM products p 
         INNER JOIN users u ON p.user_id = u.id 
+        INNER JOIN category c ON p.category_id = c.id 
         ORDER BY p.price ASC`)
         return product
 
     }else if(category){ // Only filter with category
 
-        const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username, u.id AS user_id, u.profil_picture, p.url_image 
+        const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, c.name AS category, u.username, u.id AS user_id, u.profil_picture, p.url_image 
         FROM products p 
         INNER JOIN users u ON p.user_id = u.id
+        INNER JOIN category c ON p.category_id = c.id 
         WHERE p.category_id = ?`,[category])
         return product
 
     } else { // Else if no price parameter and category selected, just return all product
 
-        const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username, u.id AS user_id, u.profil_picture, p.url_image 
+        const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, c.name AS category, u.username, u.id AS user_id, u.profil_picture, p.url_image 
         FROM products p 
-        INNER JOIN users u ON p.user_id = u.id`)
+        INNER JOIN users u ON p.user_id = u.id
+        INNER JOIN category c ON p.category_id = c.id 
+        `)
         return product
 
     }
