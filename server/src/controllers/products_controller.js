@@ -48,17 +48,18 @@ export async function getNextProduct(req, res){
     })
 }
 export async function addProduct(req, res){
-    const {description, name, price, inventory, id} = JSON.parse(req.body.productData)
+    const {description, name, price, inventory, id, category} = JSON.parse(req.body.productData)
     const created_at = currentDate()
     const files = req.files.map((file) => file.filename); // Récupération des noms de fichiers
 
-    products.add(id, name, price, description, created_at, inventory, JSON.stringify(files)).then(
+    products.add(id, name, price, description, category, created_at, inventory, JSON.stringify(files)).then(
         (response) => {
             let data = {
                 id: response[0],
                 name: response[0],
                 price: response[0],
                 description: response[0],
+                category: response[0],
                 seller: response[0],
                 created_at: response[0].created_at,
                 url_image: response[0].url_image
@@ -94,7 +95,6 @@ export async function likeProduct(req, res){
     const { userId, productId } = req.body
     products.like(userId, productId)
     .then(response => {
-        console.log(response)
         if(response.success){
             res.status(201).json({success: response.success[0]})
         } else if (response.deleted) {

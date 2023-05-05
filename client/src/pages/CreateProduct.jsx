@@ -27,13 +27,14 @@ export default function CreateProduct(){
             name: form.current[0].value,
             price: form.current[1].value,
             description: form.current[2].value,
-            inventory: form.current[3].value
+            category: form.current[3].value,
+            inventory: form.current[4].value
         }
+        console.log(productData)
         formData.append('productData', JSON.stringify(productData));
         files.forEach((file) => {
             formData.append('files', file);
         });
-        console.log(formData)
         dispatch(addProduct(formData))
         navigate('/home')
     }
@@ -98,6 +99,14 @@ export default function CreateProduct(){
                         <label>
                             <h2 className="text-xl font-karla text-slate-200">Description de votre produit</h2>
                             <textarea type="text" placeholder="Description" className="px-3 py-2 w-2/3 rounded"></textarea>
+                        </label>
+                        <label>
+                            <h2 className="text-xl font-karla text-slate-200">Veuillez choisir une catégorie</h2>
+                            <select>
+                                <option value="1">Vêtements</option>
+                                <option value="2">Divers</option>
+                                <option value="3">Accessoires</option>
+                            </select>
                         </label>
                         <label>
                             <h2 className="text-xl font-karla text-slate-200">Quantité disponible</h2>
