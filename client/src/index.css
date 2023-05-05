@@ -45,14 +45,14 @@ paragraphe font-
   line-height: 3.5rem/* 32px */;
   font-weight: 500;
   text-align: center;
-  font-family: 'karla', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'Lato', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .title-best-seller {
   font-size: 1.5rem;
   text-align: center;
-  font-family: 'karla', Courier, monospace;
+  font-family: 'Lato', Courier, monospace;
   color: #010390;
-  margin-left: 0.6rem;
+  margin-top: 1em;
 }
 
 @keyframes rebond {
@@ -92,7 +92,7 @@ paragraphe font-
 .elementHidden {
     opacity: 0;
     transform: translateX(-100%);
-    transition: all 0.5s;
+    transition: all 1s;
 }
 
 .elementShow {

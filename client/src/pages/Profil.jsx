@@ -80,9 +80,9 @@ export default function Profil(){
     return (
         <>
             <Header />
-            <section className="grid grid-cols-12 gap-2 relative mt-20 lg:p-10">
-                <aside className="bg-neutral-900 col-span-12 sm:col-span-4 text-black shadow-xl md:rounded-xl">
-                    <header className="flex flex-col items-center bg-slate-300 p-5 md:rounded-t-lg">
+            <section className="grid grid-cols-12 gap-2 relative mt-20 lg:p-10 duration-200">
+                <aside className="bg-neutral-900 col-span-12 sm:col-span-4 text-black shadow-xl lg:rounded-xl">
+                    <header className="flex flex-col items-center bg-slate-300 p-5 lg:rounded-t-lg">
                         <img
                           src={`./uploads/profil/${!isEmpty(currentUser) ? currentUser.profil_picture : ""}`}
                           onError={(e) => {
@@ -95,25 +95,25 @@ export default function Profil(){
                         <h1 className="mt-3 text-2xl text-center font-semibold font-raleway first-letter:uppercase">{!isEmpty(currentUser) ? currentUser.username : ""}</h1>
                     </header>
                     <div className="flex flex-col p-3 space-y-2 font-Lato" onClick={handleNav}>
-                        <button className={`flex w-full h-12 p-1 hover:p-5 rounded-lg items-center bg-slate-200 cursor-pointer duration-100 ${informationNav ? "scale-95" : ""}`}
+                        <button className={`flex w-full h-12 p-1 hover:p-5 rounded-lg items-center bg-slate-200 cursor-pointer duration-100`}
                         id="informations"
                         >
                             <h1 className="text-xl sm:text-lg whitespace-nowrap">- Mes informations</h1>
                         </button>
 
-                        <button className={`flex w-full h-12 p-1 hover:p-5 rounded-lg items-center bg-slate-200 cursor-pointer duration-100 ${productOnSellNav ? "scale-95" : ""}`} id="productOnSell">
+                        <button className={`flex w-full h-12 p-1 hover:p-5 rounded-lg items-center bg-slate-200 cursor-pointer duration-100`} id="productOnSell">
                             <h1 className="text-xl sm:text-lg whitespace-nowrap">- Produits en ventes</h1>
                         </button>
-                        <button className={`flex justify-between w-full h-12 p-1 hover:p-5 rounded space-x-1 items-center bg-slate-200 cursor-pointer duration-100 ${purshaseNav ? "scale-95" : ""}`} id="purshases">
+                        <button className={`flex justify-between w-full h-12 p-1 hover:p-5 rounded-lg space-x-1 items-center bg-slate-200 cursor-pointer duration-100`} id="purshases">
                             <h1 className="text-xl sm:text-lg whitespace-nowrap">- Mes achats</h1>
-                            <i className="text-yellow-800 text-[0.6rem] md:text-sm opacity-85 bg-yellow-200 px-1 py-[1px] rounded-full whitespace-nowrap">
+                            <i className="text-yellow-800 sm:text-[0.6rem] text-sm md:text-sm opacity-85 bg-yellow-200 px-1 py-[1px] rounded-full whitespace-nowrap duration-200">
                               En développement
                             </i>
                         </button>
-                        <button className={`flex w-full h-12 p-1 hover:p-5 rounded items-center bg-slate-200 cursor-pointer duration-100 ${aboutNav ? "scale-95" : ""}`} id="about">
+                        <button className={`flex w-full h-12 p-1 hover:p-5 rounded-lg items-center bg-slate-200 cursor-pointer duration-100`} id="about">
                             <h1 className="text-xl sm:text-lg whitespace-nowrap">- Mes coups de coeur</h1>
                         </button>
-                        <button className={`flex w-full h-12 p-1 hover:p-5 rounded items-center bg-slate-200 cursor-pointer duration-100 ${aboutNav ? "scale-95" : ""}`} id="about">
+                        <button className={`flex w-full h-12 p-1 hover:p-5 rounded-lg items-center bg-slate-200 cursor-pointer duration-100`} id="about">
                             <h1 className="text-xl sm:text-lg whitespace-nowrap">- A propos</h1>
                         </button>
                     </div>

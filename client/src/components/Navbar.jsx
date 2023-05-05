@@ -55,7 +55,7 @@ export default function Navbar(){
                 <nav className="flex justify-between items-center h-full w-full">
                     <div className="flex items-center">
                         <Link 
-                        className="font-kanit text-4xl flex-grow ml-5 sm:ml-10"
+                        className="text-4xl font-PlayfairDisplay font-medium flex-grow ml-5 sm:ml-10"
                         to="/home"
                         >
                             SpaceZone
@@ -66,8 +66,9 @@ export default function Navbar(){
                         <Dropdown
                             label={
                                 <img
-                                    src={`./uploads/profil/${!isEmpty(currentUser) ? currentUser.profil_picture : ""}`}
+                                    src={`./uploads/profil/${currentUser.profil_picture || "default.jpg"}`}
                                     onError={(e) => {
+                                        e.target.onerror = null; // empêche les boucles d'erreur infinies
                                         e.target.src = './uploads/profil/default.jpg';
                                     }}
                                     alt="User profile image"
@@ -78,20 +79,20 @@ export default function Navbar(){
                             dismissOnClick={true}
                         >
                             <Dropdown.Item>
-                                <Link to="/dashboard" className="">Dashboard</Link>
+                                <Link to="/dashboard" className="text-white font-Lato">Dashboard</Link>
                             </Dropdown.Item>
                             <Dropdown.Item>
-                                <Link to="/profil" className="">Mon profil</Link>
+                                <Link to="/profil" className="text-white font-Lato">Mon profil</Link>
                             </Dropdown.Item>
                             <Dropdown.Item>
-                                <Link to="/carts" className="">Panier</Link>
+                                <Link to="/carts" className="text-white font-Lato">Panier</Link>
                             </Dropdown.Item>
                             <Dropdown.Item>
                                 <button 
                                 className="flex items-center font-karla rounded-md"
                                 onClick={handleLogout}
                                 >
-                                    <h3>Se déconnecter</h3>
+                                    <h3 className="text-white font-Lato">Se déconnecter</h3>
                                 </button>
                             </Dropdown.Item>
                         </Dropdown>

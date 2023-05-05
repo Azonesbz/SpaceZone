@@ -38,14 +38,14 @@ export default function Cards({
             {!isEmpty(getProducts) && getProducts.map(product => {
                 return (
                     <div
-                        className='flex items-center bg-gradient-to-br from-white to-zinc-200 col-span-6 lg:col-span-2 shadow-xl rounded-xl w-full p-3 duration-200 font-Lato'
+                        className='flex items-center bg-gradient-to-br from-white to-zinc-200 col-span-6 lg:col-span-3 shadow-xl rounded-xl w-full p-3 duration-200 font-Lato'
                         key={product.id}
                     >
                         <Link
                             className='flex relative flex-col bg-gradient-to-br h-full w-full p-3'
                             to={`/product/${product.id}`}
                         >
-                            <div className="max-w-xl" onClick={(e) => e.preventDefault(e)}>
+                            <div className="max-w-xxl" onClick={(e) => e.preventDefault(e)}>
 
 
                                 <Carousel autoSlide={false}>

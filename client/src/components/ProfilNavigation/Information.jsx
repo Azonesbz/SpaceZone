@@ -154,8 +154,8 @@ export default function Information() {
 
     return (
         <>
-            <div className="bg-neutral-900 md:rounded-xl col-span-12 sm:col-span-8 font-Lato">
-                <header className="flex justify-between items-center bg-slate-300 p-5 md:rounded-t-lg">
+            <div className="bg-neutral-900 lg:rounded-xl col-span-12 sm:col-span-8 font-Lato">
+                <header className="flex justify-between items-center bg-slate-300 p-5 lg:rounded-t-lg">
                     <h1 className="text-3xl">Vos informations</h1>
                     <Tooltip
                         content="Les produits affichés ici sont vos articles en cours de ventes"
@@ -202,7 +202,7 @@ export default function Information() {
 
                 </section>
                 <section className="flex flex-col sm:flex-row justify-center gap-5 sm:p-5">
-                    <div className="flex flex-col justify-center items-center">
+                    <div className="flex flex-col justify-center items-center w-2/3">
                         <h2 className="text-slate-200 font-LAto text-xl">Image de profil</h2>
                         <img
                             src={`./uploads/profil/${!isEmpty(currentUser) ? currentUser.profil_picture : ""}`}
@@ -214,7 +214,7 @@ export default function Information() {
                             className="rounded-full mt-5 h-24 w-24"
                         />
                     </div>
-                    <form onSubmit={handleSubmitFile} encType="multipart/form-data" className="flex justify-around items-center bg-slate-200 p-5 h-48 sm:rounded-xl">
+                    <form onSubmit={handleSubmitFile} encType="multipart/form-data" className="flex justify-around items-center bg-slate-200 p-5 sm:rounded-xl sm:w-2/3">
                         <input
                             className="file:py-2 file:flex "
                             type="file"

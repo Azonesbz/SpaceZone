@@ -1,9 +1,7 @@
 import Navbar from '../components/Navbar'
 import Header from '../components/Header'
-import Search from '../components/Search'
 import Cards from '../components/Cards'
 import Footer from '../components/Footer'
-import { Link } from 'react-router-dom'
 import React, { useEffect } from 'react'
 import Pagination from '../components/Pagination'
 import { useState } from 'react'
@@ -38,15 +36,15 @@ export default function Home({session}) {
 
           <Header session={session} />
 
-            <section className='mt-32 flex flex-col container relative justify-center gap-5 elementHidden' id='product'>
+            <section className='mt-32 flex flex-col container relative justify-center gap-5' id='product'>
               <div className='flex flex-col text-center items-center justify-center p-5'>
-                <h1 className='text-5xl font-Lato text-center whitespace-nowrap'>Notre catalogue</h1>
-                <p className='text-xl font-SourceSansPro mt-5'>Naviguez à travers notre sélection de produit vendu par la communauté ! Vous pouvez rechercher un produit sous différente catégorie de produit.</p>
+                <h1 className='text-5xl font-Lato text-center whitespace-nowrap elementHidden'>Notre catalogue</h1>
+                <p className='text-xl font-SourceSansPro mt-5 elementHidden'>Naviguez à travers notre sélection de produit vendu par la communauté ! Vous pouvez rechercher un produit sous différente catégorie de produit.</p>
               </div>
-              <div>
-                  <Filter />
+              <div className='elementHidden'>
+                <Filter />
               </div>
-              <div className='grid grid-cols-6 gap-3 mt-5' >
+              <div className='grid grid-cols-6 gap-3 mt-5 elementHidden' >
                   <Cards page={page}  />
               </div>
               <Pagination setPage={setPage} />

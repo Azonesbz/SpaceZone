@@ -13,8 +13,8 @@ export default function ProductOnSell() {
 
     return (
         <>
-            <div className="flex flex-col bg-neutral-900 rounded-xl min-h-screen col-span-12 sm:col-span-7 font-Lato">
-                <header className="flex justify-between items-center bg-slate-300 p-5 sm:rounded-t-lg">
+            <div className="flex flex-col bg-neutral-900 lg:rounded-xl min-h-screen col-span-12 sm:col-span-8 font-Lato">
+                <header className="flex justify-between items-center bg-slate-300 p-5 lg:rounded-t-lg">
                     <h1 className="text-4xl">Mes ventes en cours</h1>
                     <Tooltip
                         content="Les produits affichés ici sont vos articles en cours de ventes"
