@@ -25,9 +25,9 @@ function UsernameModal({currentUser, isOpen, onClose}){
     return(
         <Modal isOpen={isOpen} onClose={onClose} height={'h-40'} width={'w-full'}>
             <form action="" className="flex flex-col h-full duration-200 py-7 px-8" onSubmit={handleSubmitPseudo} ref={formData}>
-                <h2 className="text-3xl font-karla text-black">Pseudonyme</h2>
+                <h2 className="text-3xl font-Lato text-black">Pseudonyme</h2>
                 <label htmlFor="" className="flex items-center mt-3">
-                    <input type="text" defaultValue={currentUser.username} className="py-2 px-2 rounded-md" />
+                    <input type="text" defaultValue={currentUser.username} className="py-2 px-3 rounded-md font-Quicksand font-medium text-xl" />
                     <button className="bg-gray-800 px-5 py-2 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
                 </label>
             </form>
@@ -50,11 +50,11 @@ function EmailModal({currentUser, isOpen, onClose}){
     }
     return(
         <Modal isOpen={isOpen} onClose={onClose} height={'h-40'} width={'w-full'}>
-            <form action="" className="flex flex-col duration-200 mt-5" onSubmit={handleEditEmail} ref={formData}>
-                <h2 className="text-2xl font-thin font-ubuntu text-white">Email</h2>
-                <label htmlFor="" className="flex items-center">
-                    <input type="text" defaultValue={currentUser.email} className="py-2 px-2 rounded-md" />
-                    <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
+            <form action="" className="flex flex-col h-full duration-200 py-7 px-8" onSubmit={handleEditEmail} ref={formData}>
+                <h2 className="text-3xl font-Lato text-black">Email</h2>
+                <label htmlFor="" className="flex items-center mt-3">
+                    <input type="text" defaultValue={currentUser.email} className="py-2 px-3 rounded-md font-Quicksand font-medium text-xl" />
+                    <button className="bg-gray-800 px-5 py-2 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
                 </label>
             </form>
         </Modal>
@@ -77,10 +77,10 @@ function PhoneNumberModal({currentUser, isOpen, onClose}){
     
     return(
         <Modal isOpen={isOpen} onClose={onClose} height={'h-40'} width={'w-full'}>
-            <form action="" className="flex flex-col duration-200 mt-5" onSubmit={handleEditPhoneNumber} ref={formData}>
-                <h2 className="text-2xl font-thin font-ubuntu text-white">Numéro de téléphone</h2>
-                <label htmlFor="" className="flex items-center">
-                    <input type="text" defaultValue={currentUser.number_phone} className="py-2 px-2 rounded-md" />
+            <form action="" className="flex flex-col h-full duration-200 py-7 px-8" onSubmit={handleEditPhoneNumber} ref={formData}>
+                <h2 className="text-3xl font-Lato text-black">Numéro de téléphone</h2>
+                <label htmlFor="" className="flex items-center mt-3">
+                    <input type="text" defaultValue={currentUser.number_phone} className="py-2 px-3 rounded-md font-Quicksand font-medium text-xl"/>
                     <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
                 </label>
             </form>
@@ -104,10 +104,10 @@ function FirstNameModal({currentUser, isOpen, onClose}){
 
     return(
         <Modal isOpen={isOpen} onClose={onClose} height={'h-40'} width={'w-full'}>
-            <form action="" className="flex flex-col duration-200 mt-5" onSubmit={handleEditFirstName} ref={formData}>
-                <h2 className="text-2xl font-thin font-ubuntu text-white">Pseudonyme</h2>
-                <label htmlFor="" className="flex items-center">
-                    <input type="text" defaultValue={currentUser.first_name} className="py-2 px-2 rounded-md" />
+            <form action="" className="flex flex-col h-full duration-200 py-7 px-8" onSubmit={handleEditFirstName} ref={formData}>
+                <h2 className="text-3xl font-Lato text-black">Prénom</h2>
+                <label htmlFor="" className="flex items-center mt-3">
+                    <input type="text" defaultValue={currentUser.first_name} className="py-2 px-3 rounded-md font-Quicksand font-medium text-xl" />
                     <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
                 </label>
             </form>
@@ -156,52 +156,54 @@ export default function Information() {
         <>
             <div className="bg-neutral-900 rounded-xl col-span-7 row-span-3">
                 <header className="flex justify-between items-center bg-slate-300 p-5 rounded-t-lg">
-                    <h1 className="text-4xl font-thin font-ubuntu bg-slate-300 uppercase italic">Information</h1>
+                    <h1 className="text-3xl font-Lato bg-slate-300">Vos informations</h1>
                     <Tooltip
                         content="Les produits affichés ici sont vos articles en cours de ventes"
                     >
-                        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="25" height="25" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"></path>
                             <path d="M12 8h.01"></path>
                             <path d="M11 12h1v4h1"></path>
                         </svg>
                     </Tooltip>
                 </header>
-                <div className="bg-gray-600 mt-5 p-5 rounded-xl">
+                <section className="p-5">
+                    <div className="flex flex-col gap-5 bg-slate-300 rounded-xl relative shadow w-full p-5 font-Lato text-lg">
 
-                    <div className="flex flex-col duration-200">
-                        <div className="flex justify-between items-center">
-                            <h2 className="text-2xl font-thin font-ubuntu text-white">Pseudonyme</h2>
-                            <button onClick={() => setShowFormUsername(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
+                        <div className="flex flex-col duration-200">
+                            <div className="flex justify-between items-center">
+                                <h2 className="text-2xl">Pseudonyme</h2>
+                                <button onClick={() => setShowFormUsername(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
+                            </div>
+                            <h3 className="text-indigo-900">{!isEmpty(currentUser) ? currentUser.username : ""}</h3>
                         </div>
-                        <h3>{!isEmpty(currentUser) ? currentUser.username : ""}</h3>
-                    </div>
-                    <div className="flex flex-col mt-5 duration-200">
-                        <div className="flex justify-between items-center">
-                            <h2 className="text-2xl font-thin font-ubuntu text-white">Email</h2>
-                            <button onClick={() => setShowFormEmail(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
+                        <div className="flex flex-col mt-5 duration-200">
+                            <div className="flex justify-between items-center">
+                                <h2 className="text-2xl">Email</h2>
+                                <button onClick={() => setShowFormEmail(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
+                            </div>
+                            <h3 className="text-indigo-900">{!isEmpty(currentUser) ? currentUser.email : ""}</h3>
                         </div>
-                        <h3>{!isEmpty(currentUser) ? currentUser.email : ""}</h3>
-                    </div>
-                    <div className="flex flex-col mt-5 duration-200">
-                        <div className="flex justify-between items-center">
-                            <h2 className="text-2xl font-thin font-ubuntu text-white">Numéro de téléphone</h2>
-                            <button onClick={() => setShowFormNumber(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
+                        <div className="flex flex-col mt-5 duration-200">
+                            <div className="flex justify-between items-center">
+                                <h2 className="text-2xl">Numéro de téléphone</h2>
+                                <button onClick={() => setShowFormNumber(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
+                            </div>
+                            <h3 className="text-indigo-900">{!isEmpty(currentUser) ? (currentUser.number_phone ? currentUser.number_phone : "Aucun numéro de téléphone") : ""}</h3>
                         </div>
-                        <h3>{!isEmpty(currentUser) ? (currentUser.number_phone ? currentUser.number_phone : "Aucun numéro de téléphone") : ""}</h3>
-                    </div>
-                    <div className="flex flex-col mt-5 duration-200">
-                        <div className="flex justify-between items-center">
-                            <h2 className="text-2xl font-thin font-ubuntu text-white">Prénom</h2>
-                            <button onClick={() => setShowFormName(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
+                        <div className="flex flex-col mt-5 duration-200">
+                            <div className="flex justify-between items-center">
+                                <h2 className="text-2xl">Prénom</h2>
+                                <button onClick={() => setShowFormName(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
+                            </div>
+                            <h3 className="text-indigo-900">{ !isEmpty(currentUser) ? (currentUser.first_name ? currentUser.first_name : "Aucun prénom définie") : ""}</h3>
                         </div>
-                        <h3 className="text-lg font-ubuntu font-thin">{ !isEmpty(currentUser) ? (currentUser.first_name ? currentUser.first_name : "Aucun prénom définie") : ""}</h3>
                     </div>
 
-                </div>
-                <div className="flex mt-5 justify-between">
-                    <div className="flex flex-col justify-center items-center m-auto">
-                        <h2 className="text-slate-200 font-ubuntu text-xl font-thin">Image de profil</h2>
+                </section>
+                <section className="flex p-5 justify-center space-x-20">
+                    <div className="flex flex-col justify-center items-center">
+                        <h2 className="text-slate-200 font-LAto text-xl">Image de profil</h2>
                         <img
                             src={`./uploads/profil/${!isEmpty(currentUser) ? currentUser.profil_picture : ""}`}
                             onError={(e) => {
@@ -222,7 +224,7 @@ export default function Information() {
                             onChange={handleChangeFile} />
                         <button type="submit" className="bg-gray-700 text-white px-2 py-1 rounded">Envoyer</button>
                     </form>
-                </div>
+                </section>
                 <UsernameModal currentUser={!isEmpty(currentUser) ? currentUser : ""} isOpen={showFormUsername} onClose={handleCloseUsername} />
                 <EmailModal currentUser={!isEmpty(currentUser) ? currentUser : ""} isOpen={showFormEmail} onClose={handleCloseEmail} />
                 <PhoneNumberModal currentUser={!isEmpty(currentUser) ? currentUser : ""} isOpen={showFormNumber} onClose={handleCloseNumber} />

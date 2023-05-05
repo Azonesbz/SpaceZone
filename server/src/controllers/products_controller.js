@@ -118,7 +118,12 @@ export async function getLikeProduct(req, res){
         res.status(500).json({err})
     })
 }
-
+export async function filterProduct(req, res){
+    const {decreasing, crescent, category} = req.body
+    products.filter(decreasing, crescent, category).then(response => {
+        res.status(201).json({product: response})
+    })
+}
 
 /** export async function getSearch(req, res){
     const {divers, accessoires, vêtements, priceMin, priceMax} = req.body

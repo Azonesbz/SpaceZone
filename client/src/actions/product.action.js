@@ -96,3 +96,10 @@ export let getLikeProduct = (id) => {
         })
     }
 }
+export let filterProduct = (data) => {
+    return (dispatch) => {
+        return axios.post(`http://localhost:3001/getFilterProduct`, data).then(res => {
+            dispatch({type: GET_PRODUCT_PAGE, payload: res.data.product})
+        })
+    }
+}

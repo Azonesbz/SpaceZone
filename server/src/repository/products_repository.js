@@ -53,8 +53,8 @@ let searchProduct = async (vêtements, accessoires, divers, priceMin, priceMax) 
 
 // Add product
 
-let addProduct = async (id, title, price, description, created_at, inventory, product_image) => {
-    const [info] = await createPoolConnection().query(`INSERT INTO products (user_id, title, price, description, category_id, created_at, inventory, url_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, [id, title, price, description, 3, created_at, inventory, product_image])
+let addProduct = async (id, title, price, description, category, created_at, inventory, product_image) => {
+    const [info] = await createPoolConnection().query(`INSERT INTO products (user_id, title, price, description, category_id, created_at, inventory, url_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, [id, title, price, description, category, created_at, inventory, product_image])
     const [result] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username, u.profil_picture, CONVERT_TZ(p.created_at, '+00:00', '+02:00') AS created_at, p.url_image FROM products p INNER JOIN users u ON p.user_id = u.id WHERE p.id = ?`, [info[0].insertId])
     return result
 }
@@ -104,6 +104,49 @@ let deleteProductDb = async (id) => {
     const [info] = await createPoolConnection().query(`DELETE FROM products WHERE id = ?`, [id]);
     return info
 }
+let filterProductDb = async (decreasing, crescent, category) => {
+    console.log(decreasing, crescent, category)
+    if(decreasing && category != 0){
+        console.log("🚀 ~ file: products_repository.js:110 ~ filterProductDb ~ category:", category)
+        const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username, u.id AS user_id, u.profil_picture, p.url_image 
+        FROM products p 
+        INNER JOIN users u ON p.user_id = u.id
+        WHERE p.category_id = ?
+        ORDER BY p.price DESC`, [category])
+        return product
+    } else if(crescent && category != 0){
+    console.log("🚀 ~ file: products_repository.js:113 ~ filterProductDb ~ category:", category)
+        const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username, u.id AS user_id, u.profil_picture, p.url_image 
+        FROM products p 
+        INNER JOIN users u ON p.user_id = u.id
+        WHERE p.category_id = ?
+        ORDER BY p.price ASC`, [category])
+        return product
+    } else if(decreasing){
+        const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username, u.id AS user_id, u.profil_picture, p.url_image 
+        FROM products p 
+        INNER JOIN users u ON p.user_id = u.id 
+        ORDER BY p.price DESC`)
+        return product
+    } else if(crescent){
+        const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username, u.id AS user_id, u.profil_picture, p.url_image 
+        FROM products p 
+        INNER JOIN users u ON p.user_id = u.id 
+        ORDER BY p.price ASC`)
+        return product
+    }else if(category){
+        const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username, u.id AS user_id, u.profil_picture, p.url_image 
+        FROM products p 
+        INNER JOIN users u ON p.user_id = u.id
+        WHERE p.category_id = ?`,[category])
+        return product
+    } else {
+        const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username, u.id AS user_id, u.profil_picture, p.url_image 
+        FROM products p 
+        INNER JOIN users u ON p.user_id = u.id`)
+        return product
+    }
+}
 
 export const products = {
     all: getAllProduct,
@@ -116,4 +159,5 @@ export const products = {
     next: getNextProducts,
     like: likeProductDb,
     getLike: getLikeProductDb,
+    filter: filterProductDb,
 }

@@ -29,6 +29,7 @@
     "react-confetti": "^6.1.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
+    "react-easy-crop": "^4.7.4",
     "react-feather": "^2.0.10",
     "react-flickity": "^1.0.8",
     "react-flickity-component": "^4.0.5",

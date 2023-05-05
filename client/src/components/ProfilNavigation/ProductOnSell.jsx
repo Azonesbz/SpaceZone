@@ -3,6 +3,7 @@ import { useSelector } from "react-redux"
 import { isEmpty } from '../Utils'
 import Carousel from '../carousel/Carousel'
 import { Tooltip } from "flowbite-react"
+import { Link } from "react-router-dom"
 
 export default function ProductOnSell() {
 
@@ -25,12 +26,12 @@ export default function ProductOnSell() {
                         </svg>
                     </Tooltip>
                 </header>
-                <section className="bg-neutral-900 p-5 rounded-b-xl">
+                <section className="flex flex-col items-center bg-neutral-900 p-5 rounded-b-xl h-full gap-5">
                     {!isEmpty(allProduct) && !isEmpty(currentUser) ? (
                         allProduct.filter((product) => product.user_id === currentUser.id).length > 0 ? (
                             allProduct.filter((product) => product.user_id === currentUser.id).map((product, index) => {
                                 return (
-                                    <div className="grid grid-cols-12 gap-5 bg-slate-300 mt-5 rounded relative shadow" key={index}>
+                                    <div className="grid grid-cols-12 gap-5 bg-slate-300 mt-5 rounded-xl relative shadow w-full" key={index}>
                                         <div className="col-span-8 p-5">
                                             <h1 className="text-xl">{product.title}</h1>
                                             <p>{product.description}</p>
@@ -66,6 +67,7 @@ export default function ProductOnSell() {
                             <h1>Loading...</h1>
                         </div>
                     )}
+                    <Link className="bg-slate-300 py-2 px-5 text-xl rounded opacity-80 hover:opacity-100 active:scale-95" to="/product/new">Créer une nouvelle annonce</Link>
                 </section>
             </div>
         </>

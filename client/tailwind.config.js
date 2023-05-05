@@ -16,6 +16,15 @@ export default {
       roboto: ['Roboto', 'sans-serif'],
       rajdhani: ['Rajdhani', 'sans-serif'],
       ubuntu: ['Ubuntu', 'sans-serif'],
+      Comfortaa: ['Comfortaa', 'cursive'],
+      Comfortaa: ['Comfortaa', 'cursive'],
+      Exo2: ['Exo 2', 'sans-serif'],
+      FlowCircular: ['Flow Circular', 'cursive'],
+      Lato: ['Lato', 'sans-serif'],
+      Montserrat: ['Montserrat', 'sans-serif'],
+      PlayfairDisplay: ['Playfair Display', 'serif'],
+      Quicksand: ['Quicksand', 'sans-serif'],
+      SourceSansPro: ['Source Sans Pro', 'sans-serif']
     },
     scrollbar: {
       width: '12px',

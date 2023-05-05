@@ -7,6 +7,9 @@ import Modal from '../components/modal/Modal'
 import { useRef } from 'react'
 import { Tooltip } from 'flowbite-react'
 import { deleteProduct, getAllProduct, updateProduct } from '../actions/product.action'
+import { getCroppedImg } from '../components/Utils'
+import Cropper from 'react-easy-crop';
+import defaultImage from '../../public/profil.jpg';
 
 function EditUserModal({ user, isOpen, onClose }) {
     const [username, setUsername] = useState(user.username);
@@ -176,7 +179,6 @@ export default function Dashboard() {
                 break;
             } else {
                 parent = parent.parentNode
-                console.log(parent)
             }
         }
 
@@ -198,13 +200,14 @@ export default function Dashboard() {
         });
     }
 
+
     return (
         <>
             <aside className='fixed flex items-center justify-center min-h-[100vh] bg-transparent w-16 right-2'>
                 <div className='flex flex-col justify-around h-96 w-20'>
-                    <Link 
-                    className='flex items-center justify-center w-full h-16 rounded-full bg-white hover:bg-neutral-900 hover:text-white duration-300 border-[2px] border-neutral-900'
-                    to="/home"
+                    <Link
+                        className='flex items-center justify-center w-full h-16 rounded-full bg-white hover:bg-neutral-900 hover:text-white duration-300 border-[2px] border-neutral-900'
+                        to="/home"
                     >
                         <svg width="40" height="40" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M3.75 9.938V21a.75.75 0 0 0 .75.75H9v-6.375a1.125 1.125 0 0 1 1.125-1.125h3.75A1.125 1.125 0 0 1 15 15.375v6.375h4.5a.75.75 0 0 0 .75-.75V9.937"></path>
@@ -392,14 +395,14 @@ export default function Dashboard() {
                                                         <h1>{item.title}</h1>
                                                     </td>
                                                     <td className='flex items-center py-2 pr-14'>
-                                                        <img 
-                                                        src={`./uploads/profil/${item.profil_picture}`} 
-                                                        onError={(e) => {
+                                                        <img
+                                                            src={`./uploads/profil/${item.profil_picture}`}
+                                                            onError={(e) => {
                                                                 e.target.onerror = null; // empêche les boucles d'erreur infinies
                                                                 e.target.src = './uploads/profil/default.jpg'; // charge une image alternative
-                                                            }} 
-                                                        alt="image de profil" 
-                                                        className='h-full w-8 rounded-full' 
+                                                            }}
+                                                            alt="image de profil"
+                                                            className='h-full w-8 rounded-full'
                                                         />
                                                         <h1 className='ml-2'>{item.username}</h1>
                                                     </td>
@@ -474,24 +477,6 @@ export default function Dashboard() {
                             )}
                         </div>
                     </div>
-                </div>
-            </section>
-            <section className='flex gap-5 min-h-screen p-10 bg-neutral-900' id='finance'>
-                <div className='h-full bg-neutral-900 w-full'>
-                    <h1 className='text-5xl text-slate-200'>Finance de SpaceZone</h1>
-                    <Tooltip
-                        content="Tooltip content"
-                        trigger="hover"
-                    >
-                        <button>
-                            Tooltip hover
-                        </button>
-                    </Tooltip>
-                </div>
-            </section>
-            <section className='flex gap-5 min-h-screen p-10 bg-neutral-900'>
-                <div className='h-full bg-neutral-900 w-full'>
-                    <h1 className='text-5xl text-slate-200'>Gestion des stocks</h1>
                 </div>
             </section>
         </>

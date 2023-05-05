@@ -8,6 +8,7 @@ import React, { useEffect } from 'react'
 import Pagination from '../components/Pagination'
 import { useState } from 'react'
 import { useRef } from 'react'
+import Filter from '../components/Filter'
 
 export default function Home({session}) {
 
@@ -38,16 +39,17 @@ export default function Home({session}) {
 
           <Header session={session} />
 
-          <div className='mt-32 flex flex-col container md:flex-row relative justify-center gap-5 elementHidden' id='product'>
-
-            <section className='flex flex-col w-full'>
-
+            <section className='mt-32 flex flex-col container relative justify-center gap-5 elementHidden' id='product'>
+              <h1 className='text-5xl font-Lato'>Notre catalogue</h1>
+              <p className='text-xl font-SourceSansPro'>Naviguez à travers notre sélection de produit vendu par la communauté ! Vous pouvez rechercher un produit sous différente catégorie de produit.</p>
+              <div>
+                  <Filter />
+              </div>
               <div className='grid grid-cols-6 gap-3 mt-5' >
                   <Cards page={page}  />
               </div>
               <Pagination setPage={setPage} />
             </section>
-          </div>
           <Footer />
         </div>
       </>
