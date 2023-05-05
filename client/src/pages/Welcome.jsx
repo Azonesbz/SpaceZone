@@ -16,12 +16,13 @@ export default function Welcome() {
   const [register, setRegister] = useState(false)
   const [emailInvalid, setEmailInvalid] = useState(false)
   const [loader, setLoader] = useState(false)
+  const [username, setUsername] = useState('')
 
   const navigate = useNavigate()
   const form = useRef()
   const currentUser = useSelector((state) => state.currentUserReducer.user)
 
-  function handleCallbackResponse(response){
+  function handleCallbackResponse(response) {
     localStorage.setItem('token', response.credential)
     navigate('/home')
   }
@@ -33,13 +34,13 @@ export default function Welcome() {
     })
     google.accounts.id.renderButton(
       document.getElementById("signInDiv"),
-      {theme: "outline", size: "large"}
+      { theme: "outline", size: "large" }
     )
   }, [])
 
   useEffect(() => {
-    if(currentUser){
-      navigate('/home')
+    if(currentUser) {
+      return () => navigate('/home')
     }
   }, [currentUser])
 
@@ -53,67 +54,85 @@ export default function Welcome() {
     setIdentify(data.email)
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
-    if(emailRegex.test(data.email)){
+    if (emailRegex.test(data.email)) {
       return axios.post('http://localhost:3001/users/search', data)
-      .then(
-      res => {
-        if(res.status === 200){
+        .then(
+          res => {
+            if (res.status === 200) {
+              setUsername(res.data.user[0].username)
+              setIdentifierValid(true)
+              setLogin(true)
+              setLoader(false)
+            }
+          })
+        .catch(err => {
           setIdentifierValid(true)
-          setLogin(true)
+          setRegister(true)
           setLoader(false)
-        }
-      })
-      .catch(err => {
-        setIdentifierValid(true)
-        setRegister(true)
-        setLoader(false)
-      })
+        })
     } else {
       setEmailInvalid(true)
       setLoader(false)
     }
   }
 
-    return (
-      <>
-        {!identifierValid ? <Header /> : "" }
-        {!identifierValid ? <div className='flex flex-col absolute inset-0 items-center justify-center min-h-screen min-w-screen'>
-          <div className='flex flex-col '>
-              <h1 className='text-7xl font-raleway font-bold'>Achetez, vendez, où que <br/>vous soyez !</h1>
-              <h2 className='text-3xl font-raleway mt-10'>Commencer maintenant par vous inscrire.</h2>
-              <form 
-              className='flex justify-between'
-              action=""
-              ref={form}
-              onSubmit={handleForm}
-              >
-                  <label htmlFor="" className='w-full border-[1px] border-gray-500 rounded-md'>
-                      <input type="email" placeholder='Votre adresse email' className='py-4 px-4 w-full text-xl font-roboto outline-none rounded-md'/>
-                  </label>
-                  <button className='whitespace-nowrap px-4 py-4 ml-5 rounded-md text-slate-200 text-xl font-medium bg-gradient-to-tr from-blue-700 to-blue-900' type='submit'>Commencer</button>
-              </form>
-              <h3 className={`${emailInvalid ? "" : "hidden" } text-red-600 font-semibold`}>Cette adresse email est invalide, renseigner une adresse email valide ou continuer en tant qu'invité</h3>
-              <div className='flex mt-5 gap-5'>
-                <div id='signInDiv'></div>                
-                <Link className='whitespace-nowrap px-4 py-2 rounded-sm text-slate-200 text-xl font-medium bg-blue-700' to="/home">Continuer en tant qu'invité</Link>
+  return (
+    <>
+      {!identifierValid ? <Header /> : ""}
+      {!identifierValid ?
+        <div className='min-h-screen min-w-screen overflow-hidden'>
+          <div className='h-[100vh]'>
+            <div className='flex flex-col justify-center sm:space-y-24 items-center h-full gap-5'>
+              <div className='h-full sm:h-auto pt-48 sm:pt-0'>
+                  <h1 className='text-5xl sm:text-6xl lg:text-7xl font-bold text-center'>Achetez, vendez, où que <br />vous soyez !</h1>
+                  <h2 className='text-3xl sm:text-4xl md:text-5xl text-center mt-5'>Commencer maintenant par vous inscrire.</h2>
               </div>
-          </div> 
+              <div className='flex flex-col w-full  absolute inset-0 sm:justify-center justify-end sm:static'>
+              <form
+                className='flex flex-col w-full sm:items-center'
+                action=""
+                ref={form}
+                onSubmit={handleForm}
+              >
+                <div className='flex flex-col sm:w-2/3 sm:gap-2'>
+                  <div className='w-full flex flex-col sm:flex-row sm:gap-2'>
+                    <label className='sm:border border-neutral-900 sm:rounded-md sm:w-3/4 lg:w-5/6'>
+                      <input type="email" placeholder='Votre adresse email' className='py-4 px-4 text-xl font-roboto outline-none w-full sm:rounded-md' />
+                    </label>
+                    <button className='whitespace-nowrap px-4 py-4 sm:rounded-md text-slate-200 text-xl sm:text-lg sm:w-1/4 lg:w-1/6 font-medium bg-blue-700' type='submit'>Continuer</button>
+                  </div>
+                  <Link className='whitespace-nowrap px-4 py-4 sm:rounded-md text-slate-200 text-xl font-medium bg-blue-800 w-full text-center' to="/home">Continuer en tant qu'invité</Link>
+                </div>
+
+              </form>
+            </div>
+            </div>
+           
+          </div>
+
+          <h3 className={`${emailInvalid ? "" : "hidden"} text-red-600 font-semibold`}>Cette adresse email est invalide, renseigner une adresse email valide ou continuer en tant qu'invité</h3>
+          {/* <div className='flex flex-col mt-5 gap-5'>
+                <div id='signInDiv' className='w-full'></div>                
+              </div> */}
+
         </div> : ""}
-        {login ? <Login
+      
+      {login ? <Login
         login={login}
+        username={username}
         identifierValid={identifierValid}
         setLogin={setLogin}
-        setIdentifierValid={setIdentifierValid} 
-        identify={identify}
-        /> : ""}
-        {register ? 
-        <Register 
-        emailValue={identify}
-        register={register}
-        identifierValid={identifierValid}
-        setRegister={setRegister}
         setIdentifierValid={setIdentifierValid}
+        identify={identify}
+      /> : ""}
+      {register ?
+        <Register
+          emailValue={identify}
+          register={register}
+          identifierValid={identifierValid}
+          setRegister={setRegister}
+          setIdentifierValid={setIdentifierValid}
         /> : ""}
-      </>
-    )
+    </>
+  )
 }
