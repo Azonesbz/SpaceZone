@@ -1,9 +1,12 @@
 import { useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { filterProduct } from "../actions/product.action"
+import { useState } from "react"
+import Modal from "./modal/Modal"
 
-export default function Filter(){
 
+
+export default function Filter({setErrorFilter}){
     const form = useRef()
     const dispatch = useDispatch()
 
@@ -14,7 +17,11 @@ export default function Filter(){
             crescent: form.current[1].checked,
             category: form.current[2].value,
         }
-        dispatch(filterProduct(data))
+        if ((data.decreasing == false && data.crescent == false) && (data.category == 0)) {
+            setErrorFilter(true)
+        } else {
+            dispatch(filterProduct(data))
+        }
     }
 
     return (
@@ -51,6 +58,7 @@ export default function Filter(){
                     </button>
                 </form>
             </div>
+
         </>
     )
 }

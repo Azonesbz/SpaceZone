@@ -7,7 +7,6 @@ import Footer from "../components/Footer";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { isEmpty } from "../utils/utils";
-import { Badge } from "flowbite-react";
 
 export default function Profil(){
 
@@ -90,7 +89,7 @@ export default function Profil(){
                             e.target.src = './uploads/profil/default.jpg'; // charge une image alternative
                           }}
                           alt="image de profil"
-                          className="rounded-full mt-5 h-36 w-36"
+                          className="rounded-full mt-5 h-36 w-36 shadow skew-y-0"
                         />
                         <h1 className="mt-3 text-2xl text-center font-semibold font-raleway first-letter:uppercase">{!isEmpty(currentUser) ? currentUser.username : ""}</h1>
                     </header>

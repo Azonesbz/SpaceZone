@@ -33,11 +33,15 @@ export default function ProductOnSell() {
                                 return (
                                     <div className="grid grid-cols-12 gap-5 bg-slate-300 mt-5 rounded-xl relative shadow w-full" key={index}>
                                         <div className="col-span-8 p-5">
-                                            <h1 className="text-xl">{product.title}</h1>
+                                            <div className="flex justify-between items-start">
+                                                <h1 className="text-3xl">{product.title}</h1>
+                                                <p className={`lowercase first-letter:uppercase px-3 py-1 font-SourceSansPro text-center opacity-95 rounded-full text-sm ${product.category == "DIVERS" ? "bg-red-300" : product.category == "ACCESSOIRES" ? "bg-green-300" : product.category == "VÊTEMENTS" ? "bg-sky-300" : ""}`}>{product.category}</p>
+
+                                            </div>
                                             <p>{product.description}</p>
                                             <div className="absolute bottom-5">
                                                 <h1 className="text-lg">Vous vendez ce produit à
-                                                    <span className="text-xl"> {product.price}€</span>
+                                                    <span className="text-xl font-bold"> {product.price}€</span>
                                                 </h1>
                                             </div>
                                         </div>
