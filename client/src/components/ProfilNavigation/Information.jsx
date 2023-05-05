@@ -154,9 +154,9 @@ export default function Information() {
 
     return (
         <>
-            <div className="bg-neutral-900 rounded-xl col-span-7 row-span-3">
+            <div className="bg-neutral-900 rounded-xl col-span-7 font-Lato">
                 <header className="flex justify-between items-center bg-slate-300 p-5 rounded-t-lg">
-                    <h1 className="text-3xl font-Lato bg-slate-300">Vos informations</h1>
+                    <h1 className="text-3xl">Vos informations</h1>
                     <Tooltip
                         content="Les produits affichés ici sont vos articles en cours de ventes"
                     >

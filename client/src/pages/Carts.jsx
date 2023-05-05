@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import Header from "../components/Navbar"
+import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import { useDispatch, useSelector } from "react-redux"
 import { isEmpty } from '../utils/utils'
@@ -27,8 +27,10 @@ export default function Carts(){
     }
     return (
         <>
-            <Header />
-            <section className="p-10 relative mt-20 container">
+        <div className="flex flex-col min-h-screen">
+
+            <Navbar />
+            <section className="p-10 container flex flex-col justify-center min-h-screen">
                 <div className="flex items-center justify-between pb-2">
                     <div className="flex space-x-14">
                         <h1 className="uppercase font-karla font-medium text-3xl">Mon Panier</h1>
@@ -41,7 +43,7 @@ export default function Carts(){
                         </button> 
                         : ""}
                     </div>
-                    <h2 className="uppercase font-karla font-medium text-3xl">Prix total des articles: <span>{totalPrice ? totalPrice + "€" : "Aucun article dans le panier"}</span></h2>
+                    <h2 className="font-karla font-medium text-3xl">Prix total: <span>{totalPrice ? totalPrice + "€" : "Aucun article dans le panier"}</span></h2>
                 </div>
                 <div className="grid grid-cols-12 gap-5 mt-5" >
                 {!isEmpty(cartItem) ? cartItem.map((items, index) => (
@@ -75,9 +77,9 @@ export default function Carts(){
                         </div>
                     </div>
                 )) : 
-                <div className="col-span-12 justify-center min-h-full p-10">
+                <div className="flex col-span-12 justify-center p-10 w-full bg-neutral-900">
                             <h1 className="flex flex-col items-center justify-center h-full
-                            text-center text-3xl space-y-20 bg-neutral-900 text-white p-10 rounded-xl shadow-md">
+                            text-center text-3xl space-y-20 text-white p-10 rounded-xl shadow-md">
                                 <svg width="100" height="100" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M6 21a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"></path>
                                     <path d="M17 17a2 2 0 1 0 2 2"></path>
@@ -94,6 +96,7 @@ export default function Carts(){
                 </div>
             </section>
             <Footer />
+        </div>
         </>
     )
 }

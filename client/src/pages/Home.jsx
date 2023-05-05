@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 import React, { useEffect } from 'react'
 import Pagination from '../components/Pagination'
 import { useState } from 'react'
-import { useRef } from 'react'
 import Filter from '../components/Filter'
 
 export default function Home({session}) {

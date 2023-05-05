@@ -59,7 +59,10 @@ export default function Cards({
 
                             </div>
                             <div className='flex flex-col p-5 w-full'>
-                                <h2 className='font-raleway font-medium text-2xl'>{product.title}</h2>
+                                <div className="flex justify-between items-start">
+                                    <h2 className='font-raleway font-medium text-2xl'>{product.title} svsdvvsdvvs fsd</h2>
+                                    <p className={`lowercase first-letter:uppercase px-3 py-1 font-SourceSansPro text-center ml-5 opacity-95 rounded-full text-sm ${product.category == "DIVERS" ? "bg-red-300" : product.category == "ACCESSOIRES" ? "bg-green-300" : product.category == "VÊTEMENTS" ? "bg-sky-300" : ""}`}>{product.category}</p>
+                                </div>
                                 <span className='font-semibold font-rajdhani text-2xl'>{product.price}€</span>
 
 
@@ -75,7 +78,7 @@ export default function Cards({
                                         />
                                         <p className='text-md'>A vendre par <Link className="font-semibold hover:text-indigo-800">{product.username}</Link></p>
                                         <button 
-                                        className="absolute right-5 border-2 border-black rounded-full p-1"
+                                        className="absolute right-5 rounded-full p-1 active:scale-90 duration-100"
                                         onClick={(e) => {
                                             e.preventDefault()
                                             let data = {
