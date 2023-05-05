@@ -154,8 +154,8 @@ export default function Information() {
 
     return (
         <>
-            <div className="bg-neutral-900 rounded-xl col-span-7 font-Lato">
-                <header className="flex justify-between items-center bg-slate-300 p-5 rounded-t-lg">
+            <div className="bg-neutral-900 md:rounded-xl col-span-12 sm:col-span-8 font-Lato">
+                <header className="flex justify-between items-center bg-slate-300 p-5 md:rounded-t-lg">
                     <h1 className="text-3xl">Vos informations</h1>
                     <Tooltip
                         content="Les produits affichés ici sont vos articles en cours de ventes"
@@ -167,7 +167,7 @@ export default function Information() {
                         </svg>
                     </Tooltip>
                 </header>
-                <section className="p-5">
+                <section className="p-5 pb-0">
                     <div className="flex flex-col gap-5 bg-slate-300 rounded-xl relative shadow w-full p-5 font-Lato text-lg">
 
                         <div className="flex flex-col duration-200">
@@ -201,7 +201,7 @@ export default function Information() {
                     </div>
 
                 </section>
-                <section className="flex p-5 justify-center space-x-20">
+                <section className="flex flex-col sm:flex-row justify-center gap-5 sm:p-5">
                     <div className="flex flex-col justify-center items-center">
                         <h2 className="text-slate-200 font-LAto text-xl">Image de profil</h2>
                         <img
@@ -214,7 +214,7 @@ export default function Information() {
                             className="rounded-full mt-5 h-24 w-24"
                         />
                     </div>
-                    <form onSubmit={handleSubmitFile} encType="multipart/form-data" className="flex items-center bg-slate-200 p-5 h-48 rounded-xl border-[2px] border-gray-700">
+                    <form onSubmit={handleSubmitFile} encType="multipart/form-data" className="flex justify-around items-center bg-slate-200 p-5 h-48 sm:rounded-xl">
                         <input
                             className="file:py-2 file:flex "
                             type="file"
@@ -222,7 +222,7 @@ export default function Information() {
                             placeholder="Glisser pour déposer un fichier"
                             accept="image/png, image/jpeg"
                             onChange={handleChangeFile} />
-                        <button type="submit" className="bg-gray-700 text-white px-2 py-1 rounded">Envoyer</button>
+                        <button type="submit" className="bg-gray-700 text-white px-5 py-2 rounded">Envoyer</button>
                     </form>
                 </section>
                 <UsernameModal currentUser={!isEmpty(currentUser) ? currentUser : ""} isOpen={showFormUsername} onClose={handleCloseUsername} />
