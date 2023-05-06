@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { isEmpty } from "../utils/utils";
+import LikedProduct from "../components/ProfilNavigation/LikeProduct";
 
 export default function Profil(){
 
@@ -109,7 +110,7 @@ export default function Profil(){
                               En développement
                             </i>
                         </button>
-                        <button className={`flex w-full h-12 p-1 hover:p-5 rounded-lg items-center bg-slate-200 cursor-pointer duration-100`} id="about">
+                        <button className={`flex w-full h-12 p-1 hover:p-5 rounded-lg items-center bg-slate-200 cursor-pointer duration-100`} id="like">
                             <h1 className="text-xl sm:text-lg whitespace-nowrap">- Mes coups de coeur</h1>
                         </button>
                         <button className={`flex w-full h-12 p-1 hover:p-5 rounded-lg items-center bg-slate-200 cursor-pointer duration-100`} id="about">

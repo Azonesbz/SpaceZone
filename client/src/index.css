@@ -13,7 +13,7 @@ paragraphe font-
 @tailwind utilities;
 
 .header {
-  position: absolute;
+  position: relative;
   inset: 0;
   z-index: 2;
   margin-left: auto;
@@ -28,6 +28,8 @@ paragraphe font-
 .body-header {
   position: relative;
   display: flex;
+  background-color: rgb(226 232 240);
+  padding: 50px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -80,13 +82,18 @@ paragraphe font-
 }
 .background-bar {
   display: flex;
-  position: relative;
+  position: absolute;
+  inset: 0;
   min-height: 90vh;
   overflow: hidden;
 }
-.shape {
+.shapeOne {
     background-color: rgb(31, 99, 234);
-    clip-path: polygon(0% 70%, 100% 90%, 100% 95%, 0% 75%);
+    clip-path: polygon(0% 50%, 100% 90%, 100% 95%, 0% 55%);
+}
+.shapeTwo {
+    background-color: rgb(0, 0, 0);
+    clip-path: polygon(80% 84%, 95% 90%, 95% 95%, 80% 89%);
 }
 .elementHidden {
     opacity: 0;

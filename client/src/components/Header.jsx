@@ -9,7 +9,8 @@ export default function Header(){
     }
     return (
         <>
-            <div className="background-bar shape shadow"></div>
+            <div className="background-bar shapeOne"></div>
+            <div className="background-bar shapeTwo"></div>
             <header className="header">
                 <div className="body-header">
                     <h1 className="title">SpaceZone, le meilleur site de commerce 3.0</h1>
