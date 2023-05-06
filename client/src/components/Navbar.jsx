@@ -69,7 +69,7 @@ export default function Navbar(){
                                     src={`./uploads/profil/${currentUser.profil_picture || "default.jpg"}`}
                                     onError={(e) => {
                                         e.target.onerror = null; // empêche les boucles d'erreur infinies
-                                        e.target.src = './uploads/profil/default.jpg';
+                                        e.target.src = '/profil.jpg' ;
                                     }}
                                     alt="User profile image"
                                     style={{ width: '40px', height: '40px', borderRadius: '100%' }}

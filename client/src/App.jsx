@@ -47,7 +47,7 @@ function RouteWrapper({ children }) {
   }, [location]);
   
   useEffect(() => {
-    !isEmpty(currentUser) ? dispatch(getLikeProduct(currentUser.id)) : console.log(currentUser)
+    !isEmpty(currentUser) ? dispatch(getLikeProduct(currentUser.id)) : null
   }, [currentUser])
 
   return <>{children}</>;
