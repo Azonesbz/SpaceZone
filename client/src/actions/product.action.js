@@ -23,7 +23,6 @@ export let getProductPage = (data) => {
 export let getAllProduct = () => {
     return (dispatch) => {
         return axios.get('http://localhost:3001/allProduct').then(res => {
-            console.log(res)
             dispatch({ type: GET_ALL_PRODUCTS, payload: res.data.products })
         })
     }
@@ -31,7 +30,6 @@ export let getAllProduct = () => {
 export let getProductNumber = () => {
     return (dispatch) => {
         return axios.get('http://localhost:3001/productNumber').then(res => {
-            console.log(res.data)
             dispatch({ type: NUMBER_OF_PRODUCTS, payload: res.data.result })
         })
     }
@@ -55,7 +53,6 @@ export let addProduct = (data) => {
 export let updateProduct = (data) => {
     return (dispatch) => {
         return axios.put(`http://localhost:3001/updateProduct/${data.id}`, data).then(res => {
-            console.log(res.data)
             dispatch({type: UPDATE_PRODUCT, payload: res.data.response})
         })
     }
@@ -78,9 +75,7 @@ export let deleteProduct = (id) => {
 export let likeProduct = (data) => {
     return (dispatch) => {
         return axios.post(`http://localhost:3001/likeProduct`, data).then(res => {
-            console.log(res.data)
             if(res.data.deleted){
-                console.log(res.data.deleted.deleted)
                 dispatch({type: DELETE_LIKE_PRODUCT, payload: res.data.deleted.deleted[0]})
             } else {
                 dispatch({ type: LIKE_PRODUCT, payload: res.data.success})

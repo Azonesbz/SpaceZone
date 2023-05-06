@@ -18,7 +18,7 @@ export default function Header(){
                     </div>
                 </div>
                 <div className="arrow-box" onClick={handleScrollProduct}>
-                    <svg className="arrow" width="50" height="50" fill="black" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <svg className="arrow" width="50" height="50" fill="black" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15 4v8h3.586a1 1 0 0 1 .707 1.707l-6.586 6.586a1 1 0 0 1-1.414 0l-6.586-6.586A1 1 0 0 1 5.414 12H9V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v0Z"></path>
                     </svg>
                 </div>

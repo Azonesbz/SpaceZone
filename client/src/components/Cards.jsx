@@ -2,9 +2,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link } from 'react-router-dom'
 import { isEmpty } from "./Utils"
 import { useEffect } from "react"
-import { getLikeProduct, getProductPage, likeProduct } from "../actions/product.action"
+import { getProductPage, likeProduct } from "../actions/product.action"
 import Carousel from "./carousel/Carousel"
-import { useState } from "react"
 
 
 export default function Cards({
@@ -49,9 +48,9 @@ export default function Cards({
 
 
                                 <Carousel autoSlide={false}>
-                                    {JSON.parse(product.url_image).map(image => {
+                                    {JSON.parse(product.url_image).map((image, index) => {
                                         return (
-                                            <img src={`./uploads/product/${image}`} alt="product image" className="min-w-full object-cover h-96 w-60 rounded" />
+                                            <img key={index} src={`./uploads/product/${image}`} alt="product image" className="min-w-full object-cover h-96 w-60 rounded" />
                                         )
                                     }
                                     )}
@@ -78,7 +77,7 @@ export default function Cards({
                                         alt="image de profil"
                                         className="rounded-full h-8 w-8 mr-2"
                                     />
-                                    <p className='text-md font-Lato'>A vendre par <Link className="font-semibold hover:text-indigo-800">{product.username}</Link></p>
+                                    <p className='text-md font-Lato'>A vendre par <span className="font-semibold hover:text-indigo-800">{product.username}</span></p>
                                     <button
                                         className="absolute right-5 rounded-full p-1 active:scale-90 duration-100"
                                         onClick={(e) => {
@@ -90,7 +89,7 @@ export default function Cards({
                                             dispatch(likeProduct(data))
                                         }}
                                     >
-                                        <svg className="" width="30" height="30" fill={!isEmpty(likedProduct) ? (likedProduct.find(liked => liked.product_id === product.id) ? "red" : "none") : "none"} stroke={!isEmpty(likedProduct) ? (likedProduct.find(liked => liked.product_id === product.id) ? "red" : "currentColor") : "currentColor"} stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <svg className="" width="30" height="30" fill={!isEmpty(likedProduct) ? (likedProduct.find(liked => liked.product_id === product.id) ? "red" : "none") : "none"} stroke={!isEmpty(likedProduct) ? (likedProduct.find(liked => liked.product_id === product.id) ? "red" : "currentColor") : "currentColor"} strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M19.5 13.576a4.976 4.976 0 0 0 1.495-3.704A5 5 0 0 0 12 7.01a5 5 0 1 0-7.5 6.566l7.5 7.428 7.5-7.428Z"></path>
                                         </svg>
                                     </button>

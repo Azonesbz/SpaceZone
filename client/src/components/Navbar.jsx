@@ -66,9 +66,9 @@ export default function Navbar(){
                         <Dropdown
                             label={
                                 <img
-                                    src={`./uploads/profil/${currentUser.profil_picture || "default.jpg"}`}
+                                    src={`./uploads/profil/${currentUser.profil_picture || "default.jpg"}` || `../uploads/profil/${currentUser.profil_picture || "default.jpg"}`}
                                     onError={(e) => {
-                                        e.target.onerror = null; // empêche les boucles d'erreur infinies
+                                        e.target.onerror = '/profil.jpg'; // empêche les boucles d'erreur infinies
                                         e.target.src = '/profil.jpg' ;
                                     }}
                                     alt="User profile image"

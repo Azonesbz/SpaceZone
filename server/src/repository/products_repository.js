@@ -20,7 +20,6 @@ let getAllProduct = async () => {
     return products
 }
 let byId = async (id) => {
-    console.log(id)
     const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username, p.url_image FROM products p INNER JOIN users u ON p.user_id = u.id WHERE p.id = ?`, [id])
     if(product.length){
         return product
@@ -59,7 +58,6 @@ let likeProductDb = async (userId, productId) => {
         return {deleted: verify}
     } else {
         const [info] = await createPoolConnection().query(`INSERT INTO products_likes (product_id, user_id) VALUES (?, ?)`, [productId, userId])
-        console.log(info)
         const [result] = await createPoolConnection().query(`SELECT p.id, p.user_id, p.product_id, u.username FROM products_likes p INNER JOIN users u ON p.user_id = u.id WHERE p.id = ?`, [info.insertId])
         return {success: result}
     }

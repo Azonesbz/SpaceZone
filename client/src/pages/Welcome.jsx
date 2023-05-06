@@ -6,7 +6,7 @@ import Register from '../components/Authentification/RegisterForm'
 import Login from '../components/Authentification/LoginForm'
 import { useEffect } from 'react'
 import axios from 'axios'
-import jwtDecode from 'jwt-decode'
+
 
 export default function Welcome() {
 
@@ -21,22 +21,6 @@ export default function Welcome() {
   const navigate = useNavigate()
   const form = useRef()
   const currentUser = useSelector((state) => state.currentUserReducer.user)
-
-  function handleCallbackResponse(response) {
-    localStorage.setItem('token', response.credential)
-    navigate('/home')
-  }
-
-  useEffect(() => {
-    google.accounts.id.initialize({
-      client_id: "282365506653-iv392l34vb1k9au7nqenivoql2nv6mcm.apps.googleusercontent.com",
-      callback: handleCallbackResponse
-    })
-    google.accounts.id.renderButton(
-      document.getElementById("signInDiv"),
-      { theme: "outline", size: "large" }
-    )
-  }, [])
 
   useEffect(() => {
     if(currentUser) {
@@ -111,9 +95,6 @@ export default function Welcome() {
           </div>
 
           <h3 className={`${emailInvalid ? "" : "hidden"} text-red-600 font-semibold`}>Cette adresse email est invalide, renseigner une adresse email valide ou continuer en tant qu'invité</h3>
-          {/* <div className='flex flex-col mt-5 gap-5'>
-                <div id='signInDiv' className='w-full'></div>                
-              </div> */}
 
         </div> : ""}
       

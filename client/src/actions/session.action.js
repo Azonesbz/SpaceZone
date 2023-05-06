@@ -7,7 +7,6 @@ export const SET_SESSION_TRUE = "SET_SESSION_TRUE"
 export const sessionIsValid = () => {
     return (dispatch) => {
         const token = window.localStorage.getItem('token')
-        console.log(token)
         if(!token){
             dispatch({ type: SET_SESSION_FALSE, payload: {Authorization: false}})
             dispatch({ type: SET_USER, payload: ""})
@@ -24,7 +23,6 @@ export const sessionIsValid = () => {
         )
         .catch(err => {
             if (err.response.status === 401){
-                console.error('ok')
                 localStorage.removeItem('token')
                 dispatch({ type: SET_SESSION_FALSE, payload: {Authorization: false}})
             }

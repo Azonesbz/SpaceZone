@@ -27,7 +27,6 @@ export let getCarts = () => {
 export let addProductCart = (data) => {
     return (dispatch) => {
         return axios.post('http://localhost:3001/cart/newItem', data).then(res => {
-            console.log(res.data)
             dispatch({ type: ADD_PRODUCTS_CART, payload: res.data.response[0] })
         })
     }

@@ -13,7 +13,6 @@ function UsernameModal({currentUser, isOpen, onClose}){
     let data;
     let handleSubmitPseudo = (e) => {
         e.preventDefault()
-        console.log(currentUser.id)
         data = {
             id: currentUser.id,
             username: formData.current[0].value
@@ -24,9 +23,9 @@ function UsernameModal({currentUser, isOpen, onClose}){
     
     return(
         <Modal isOpen={isOpen} onClose={onClose} height={'h-40'} width={'w-full'}>
-            <form action="" className="flex flex-col h-full duration-200 py-7 px-8" onSubmit={handleSubmitPseudo} ref={formData}>
+            <form className="flex flex-col h-full duration-200 py-7 px-8" onSubmit={handleSubmitPseudo} ref={formData}>
                 <h2 className="text-3xl font-Lato text-black">Pseudonyme</h2>
-                <label htmlFor="" className="flex items-center mt-3">
+                <label className="flex items-center mt-3">
                     <input type="text" defaultValue={currentUser.username} className="py-2 px-3 rounded-md font-Quicksand font-medium text-xl" />
                     <button className="bg-gray-800 px-5 py-2 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
                 </label>
@@ -50,9 +49,9 @@ function EmailModal({currentUser, isOpen, onClose}){
     }
     return(
         <Modal isOpen={isOpen} onClose={onClose} height={'h-40'} width={'w-full'}>
-            <form action="" className="flex flex-col h-full duration-200 py-7 px-8" onSubmit={handleEditEmail} ref={formData}>
+            <form className="flex flex-col h-full duration-200 py-7 px-8" onSubmit={handleEditEmail} ref={formData}>
                 <h2 className="text-3xl font-Lato text-black">Email</h2>
-                <label htmlFor="" className="flex items-center mt-3">
+                <label className="flex items-center mt-3">
                     <input type="text" defaultValue={currentUser.email} className="py-2 px-3 rounded-md font-Quicksand font-medium text-xl" />
                     <button className="bg-gray-800 px-5 py-2 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
                 </label>
@@ -77,9 +76,9 @@ function PhoneNumberModal({currentUser, isOpen, onClose}){
     
     return(
         <Modal isOpen={isOpen} onClose={onClose} height={'h-40'} width={'w-full'}>
-            <form action="" className="flex flex-col h-full duration-200 py-7 px-8" onSubmit={handleEditPhoneNumber} ref={formData}>
+            <form className="flex flex-col h-full duration-200 py-7 px-8" onSubmit={handleEditPhoneNumber} ref={formData}>
                 <h2 className="text-3xl font-Lato text-black">Numéro de téléphone</h2>
-                <label htmlFor="" className="flex items-center mt-3">
+                <label className="flex items-center mt-3">
                     <input type="text" defaultValue={currentUser.number_phone} className="py-2 px-3 rounded-md font-Quicksand font-medium text-xl"/>
                     <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
                 </label>
@@ -104,9 +103,9 @@ function FirstNameModal({currentUser, isOpen, onClose}){
 
     return(
         <Modal isOpen={isOpen} onClose={onClose} height={'h-40'} width={'w-full'}>
-            <form action="" className="flex flex-col h-full duration-200 py-7 px-8" onSubmit={handleEditFirstName} ref={formData}>
+            <form className="flex flex-col h-full duration-200 py-7 px-8" onSubmit={handleEditFirstName} ref={formData}>
                 <h2 className="text-3xl font-Lato text-black">Prénom</h2>
-                <label htmlFor="" className="flex items-center mt-3">
+                <label className="flex items-center mt-3">
                     <input type="text" defaultValue={currentUser.first_name} className="py-2 px-3 rounded-md font-Quicksand font-medium text-xl" />
                     <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
                 </label>
@@ -160,7 +159,7 @@ export default function Information() {
                     <Tooltip
                         content="Les produits affichés ici sont vos articles en cours de ventes"
                     >
-                        <svg width="25" height="25" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="25" height="25" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"></path>
                             <path d="M12 8h.01"></path>
                             <path d="M11 12h1v4h1"></path>

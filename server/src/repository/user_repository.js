@@ -77,7 +77,6 @@ async function updateUserDb(id, username, email, permission) {
     try{
         await createPoolConnection().query(`UPDATE users SET username = ?, email = ?, role_id = ? WHERE id = ?`, [username, email, permission, id])
         const [info] = await createPoolConnection().query(`SELECT u.id, u.username, u.email, u.first_name, u.number_phone, u.profil_picture, CONVERT_TZ(u.created_at, '+00:00', '+02:00') AS created_at , u.last_connection, r.name FROM users u INNER JOIN roles r ON u.role_id = r.id WHERE u.id = ?`, [id])
-        console.log(info)
         return info
     } catch(err) {
         console.log('Une erreur lors de la modification' + err)

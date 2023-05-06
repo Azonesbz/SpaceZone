@@ -18,7 +18,6 @@ export default function Register({
     const navigate = useNavigate()
 
     useEffect(() => {
-        console.log(email)
         const clearPassword = setTimeout(() => {
             setPassword('')
             clearTimeout(clearPassword)

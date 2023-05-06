@@ -47,9 +47,9 @@ export default function ProductOnSell() {
                                         </div>
                                         <div className="col-span-4 w-full">
                                             <Carousel arrowSize={'20'}>
-                                                {JSON.parse(product.url_image).map(image => {
+                                                {JSON.parse(product.url_image).map((image, index) => {
                                                     return (
-                                                        <img src={`../../uploads/product/${image}`} alt="product image" className="min-w-full object-cover h-48 w-16 rounded-r-xl" />
+                                                        <img key={index} src={`../../uploads/product/${image}`} alt="product image" className="min-w-full object-cover h-48 w-16 rounded-r-xl" />
                                                     )
                                                 }
                                                 )}

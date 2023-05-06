@@ -6,7 +6,6 @@ export async function getProductPage(req, res){
     const offset = (currentPage * 6 - 6)
     products.page(offset)
     .then(product => {
-        console.log(currentPage)
         res.status(201).json({product})
     })
     .catch(err => {
@@ -108,7 +107,6 @@ export async function likeProduct(req, res){
 }
 export async function getLikeProduct(req, res){
     const id = req.params.id
-    console.log('id ' + id)
     products.getLike(id)
     .then(response => {
         res.status(201).json({response})

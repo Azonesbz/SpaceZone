@@ -18,9 +18,6 @@ function EditUserModal({ user, isOpen, onClose }) {
     const editFormUser = useRef()
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        console.log(user)
-    }, [])
     let data;
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -30,7 +27,6 @@ function EditUserModal({ user, isOpen, onClose }) {
             email: editFormUser.current[1].value,
             permission: editFormUser.current[2].value,
         }
-        console.log(data)
         dispatch(updateUser(data))
         onClose();
     };
@@ -60,7 +56,6 @@ function EditUserModal({ user, isOpen, onClose }) {
                     Name:
                     <select
                         className='w-full py-[5px] px-2 rounded'
-                        id=""
                         value={name}
                         onChange={(event) => setName(event.target.value)}
                     >
@@ -165,7 +160,6 @@ export default function Dashboard() {
                 break;
             } else {
                 parent = parent.parentNode
-                console.log(parent)
             }
         }
 
@@ -209,7 +203,7 @@ export default function Dashboard() {
                         className='flex items-center justify-center w-full h-16 rounded-full bg-white hover:bg-neutral-900 hover:text-white duration-300 border-[2px] border-neutral-900'
                         to="/home"
                     >
-                        <svg width="40" height="40" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="40" height="40" fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M3.75 9.938V21a.75.75 0 0 0 .75.75H9v-6.375a1.125 1.125 0 0 1 1.125-1.125h3.75A1.125 1.125 0 0 1 15 15.375v6.375h4.5a.75.75 0 0 0 .75-.75V9.937"></path>
                             <path d="m22.5 12-9.99-9.563c-.234-.248-.782-.25-1.02 0L1.5 11.999"></path>
                             <path d="M18.75 8.39V3H16.5v3.234"></path>
@@ -219,7 +213,7 @@ export default function Dashboard() {
                         className='flex items-center justify-center w-full h-16 rounded-full bg-white hover:bg-neutral-900 hover:text-white duration-300 border-[2px] border-neutral-900'
                         onClick={handleScrollDashboard}
                     >
-                        <svg width="40" height="40" fill="currentColor" stroke="currentColor" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="40" height="40" fill="currentColor" stroke="currentColor" strokeLinejoin="round" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15.75 3h1.5a2.25 2.25 0 0 1 2.25 2.25v15a2.25 2.25 0 0 1-2.25 2.25H6.75a2.25 2.25 0 0 1-2.25-2.25v-15A2.25 2.25 0 0 1 6.75 3h1.5"></path>
                             <path d="M14.525 1.5h-5.05c-.677 0-1.225.548-1.225 1.225v.55c0 .677.548 1.225 1.225 1.225h5.05c.677 0 1.225-.548 1.225-1.225v-.55c0-.677-.548-1.225-1.225-1.225Z"></path>
                         </svg>
@@ -249,7 +243,7 @@ export default function Dashboard() {
 
                     <div className='flex items-center w-full h-[5rem] sm:px-10 bg-slate-300'>
                         <Link className='text-2xl hover:underline hover:text-indigo-800 duration-200 mx-3' to="/home">
-                            <svg width="40" height="40" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <svg width="40" height="40" fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M3.75 9.938V21a.75.75 0 0 0 .75.75H9v-6.375a1.125 1.125 0 0 1 1.125-1.125h3.75A1.125 1.125 0 0 1 15 15.375v6.375h4.5a.75.75 0 0 0 .75-.75V9.937"></path>
                                 <path d="m22.5 12-9.99-9.563c-.234-.248-.782-.25-1.02 0L1.5 11.999"></path>
                                 <path d="M18.75 8.39V3H16.5v3.234"></path>
@@ -293,7 +287,7 @@ export default function Dashboard() {
 
                             <div className='p-1'>
                                 <h2 className='flex items-center text-3xl font-light'>
-                                    <svg className='mr-5' width="40" height="40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <svg className='mr-5' width="40" height="40" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"></path>
                                         <path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"></path>
                                         <path d="M16 3.133a4 4 0 0 1 0 7.75"></path>
@@ -366,7 +360,7 @@ export default function Dashboard() {
                                     </table>
                                     <button className='absolute top-0 hidden'>
                                         <svg width="46" height="46" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" d="M7 10H5V5h5v2H7v3Zm-2 4h2v3h3v2H5v-5Zm12 3h-3v2h5v-5h-2v3ZM14 7V5h5v5h-2V7h-3Z" clip-rule="evenodd"></path>
+                                            <path fillRule="evenodd" d="M7 10H5V5h5v2H7v3Zm-2 4h2v3h3v2H5v-5Zm12 3h-3v2h5v-5h-2v3ZM14 7V5h5v5h-2V7h-3Z" clipRule="evenodd"></path>
                                         </svg>
                                     </button>
                                 </div>
@@ -374,7 +368,7 @@ export default function Dashboard() {
                             </div>
                             <div className="p-1">
                                 <h2 className='flex items-center text-3xl font-light outline-none'>
-                                    <svg width="40" height="40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <svg width="40" height="40" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M22 7 12 2 2 7v10l10 5 10-5V7Z"></path>
                                         <path d="m2 7 10 5"></path>
                                         <path d="M12 22V12"></path>

@@ -41,7 +41,7 @@ export default function Filter({setErrorFilter}){
                             <div className="h-[1px] bg-neutral-700 w-full mx-5"/>
                             <input type="radio" id="crescent" name="option" className="h-8 w-12" />
                         </label>
-                        <label htmlFor="" className="w-full">
+                        <label className="w-full">
                             <select className="text-black py-3 pl-2 w-full rounded">
                                 <option value="0" className="font-FlowCircular"></option>
                                 <option value="1">Vêtements</option>

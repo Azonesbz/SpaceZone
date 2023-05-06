@@ -14,19 +14,48 @@ export const NUMBER_OF_USER = "NUMBER_OF_USER"
 export const EDIT_USER_PROFIL = "EDIT_USER_PROFIL"
 
 
+const listeners = {}
 
+// Fonction pour ajouter une fonction d'écoute pour un événement
+export const subscribe = (eventType, listener) => {
+  if (!listeners[eventType]) {
+    listeners[eventType] = []
+  }
+  listeners[eventType].push(listener)
+}
+
+// Fonction pour supprimer une fonction d'écoute pour un événement
+export const unsubscribe = (eventType, listener) => {
+  if (!listeners[eventType]) {
+    return
+  }
+  const index = listeners[eventType].indexOf(listener)
+  if (index !== -1) {
+    listeners[eventType].splice(index, 1)
+  }
+}
+
+// Fonction pour appeler toutes les fonctions d'écoute pour un événement
+const notifyListeners = (eventType, payload) => {
+  if (!listeners[eventType]) {
+    return
+  }
+  listeners[eventType].forEach(listener => {
+    listener(payload)
+  })
+}
 
 export const getAllUser = () => {
     return async (dispatch) => {
         return axios.get('http://localhost:3001/users').then(res => {
             dispatch({ type: GET_ALL_USERS, payload: res.data.response })
+            notifyListeners(GET_ALL_USERS, res.data.response)
         })
     }
 }
 export const getUserNumber = () => {
     return async (dispatch) => {
         return axios.get('http://localhost:3001/countUser').then(res => {
-            console.log(res)
             dispatch({ type: NUMBER_OF_USER, payload: res.data.result })
         })
     }
@@ -79,7 +108,6 @@ export const deleteUser = (id) => {
 export const updateUser = (data) => {
     return (dispatch) => {
         return axios.put(`http://localhost:3001/updateUser/${data.id}`, data).then(res => {
-            console.log(res)
             dispatch({ type: UPDATE_USER, payload: res.data.response})
         })
     }

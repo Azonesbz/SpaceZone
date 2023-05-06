@@ -108,7 +108,7 @@ export async function connectUser(req, res) {
     )
     .catch(
         err => {
-            console.log(err + 'ok')
+            console.log(err)
             res.status(300).json({err})
         }
     )

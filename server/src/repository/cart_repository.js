@@ -57,9 +57,7 @@ export async function addToCart(productId, quantity, userId, price) {
 }
 
 let deleteItemsCartDb = async (id) => {
-    console.log(id)
     const [deleteCart] = await createPoolConnection().query(`DELETE FROM carts_items WHERE cart_id IN (SELECT id FROM carts WHERE user_id = ?)`, [id]);
-    console.log(deleteCart)
     return deleteCart;
 }
 
