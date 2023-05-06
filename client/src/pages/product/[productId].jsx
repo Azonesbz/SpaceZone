@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,13 +10,21 @@ import fedex from '/fedex-express-6.svg'
 import { addProductCart } from '../../actions/cart.action';
 import Counter from '../../components/Counter';
 import { getProductById } from '../../actions/product.action';
+import StripeCheckout from 'react-stripe-checkout'
+import { payNowWithCard } from '../../actions/payement.action';
+import Confetti from 'react-confetti'
 
 export default function ProductId() {
+  const maxWidth = window.innerWidth;
+  const maxHeight = window.innerHeight;
+  const publishKey = "pk_test_51N0C7gCSNhox8wvTlRTdCCNg7A0IK9bOd3MNPIRXPNOWNe98vQpfa4AJtmlIiYTiZ0UNi3GWBMsDlXHzztaay5cZ00vlIgtEA9"
   const [value, setValue] = useState(1)
   const { id } = useParams()
   const allProduct = useSelector((state) => state.productReducer.productId)
   const currentUser = useSelector((state) => state.currentUserReducer)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [payementValid, setPaymentValid] = useState(false)
   useEffect(() => {
     dispatch(getProductById(id))
   }, []);
@@ -68,8 +76,52 @@ export default function ProductId() {
                     </div>
                   </div>
 
-                  <div className='flex font-rajdhani font-bold mt-2'>
-                    <button className='py-2 px-5 rounded-xl bg-neutral-900 text-white font-karla shadow-md'>Acheter immédiatement</button>
+                  <div className='flex items-center font-rajdhani font-bold mt-2 w-full'>
+                    <StripeCheckout
+                      stripeKey={publishKey}
+                      name='SpaceZone'
+                      description={productId.title + ' | A vendre par ' + productId.username}
+                      amount={(productId.price * value) * 100}
+                      locale='auto'
+                      currency='eur'
+                      billingAddress={true}
+                      zipCode={true}
+                      token={(token) => {
+                        let data = {
+                          amount: productId.price * 100,
+                          token
+                        }
+                        dispatch(payNowWithCard(data)).then(res => {
+                          if (res.status === 200) {
+                            setPaymentValid(true)
+                            const timerConfetti = setInterval(() => {
+                              setPaymentValid(false)
+                              clearInterval(timerConfetti)
+                              navigate('/home')
+                            }, 5000) 
+                            timerConfetti()
+                          }
+                        })
+                      }}
+                      stripeOptions={{
+                        style: {
+                          base: {
+                            fontSize: '16px',
+                            color: '#fff',
+                            backgroundColor: '#4285f4',
+                            '::placeholder': {
+                              color: '#87bbfd',
+                            },
+                          },
+                          invalid: {
+                            color: '#dc3545',
+                          },
+                        },
+                        className: 'flex items-center',
+                      }}
+                    >
+                      <button className='font-Lato'>Acheter maintenant</button>
+                    </StripeCheckout>
                     <button className='py-2 px-5 rounded-xl border border-neutral-900 text-black font-karla shadow-md ml-5' onClick={handleCart}>Ajouter au panier</button>
                   </div>
                   <h2>Vendu par {productId.username}</h2>
@@ -145,6 +197,13 @@ export default function ProductId() {
 
       <div className="bg-gradient-to-b from-slate-50 to-gray-950 h-1"></div>
       <Footer />
+      {payementValid ? <Confetti
+        width={maxHeight}
+        height={5000}
+        colors={['#000000', '#ffffff', '#0000ff']}
+        numberOfPieces={1000}
+        recycle={false}
+      /> : null}
     </>
   )
 }

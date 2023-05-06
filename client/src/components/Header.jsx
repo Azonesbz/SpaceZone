@@ -12,7 +12,7 @@ export default function Header(){
             <div className="background-bar shape shadow"></div>
             <header className="header">
                 <div className="body-header">
-                    <h1 className="title">SpaceZone, spécialisé dans la vente en ligne</h1>
+                    <h1 className="title">SpaceZone, le meilleur site de commerce 3.0</h1>
                     <div className="best-seller">
                         <h2 className="title-best-seller">Meilleures ventes : Découvrez les produits les plus populaires parmi notre communauté de clients satisfaits.</h2>
                     </div>

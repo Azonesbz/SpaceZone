@@ -3,6 +3,7 @@ import { addProduct, deleteProductId, filterProduct, getAllProduct, getLikeProdu
 import { addUser, connectUser, deleteUser, editEmail, editFirstName, editNumberPhone, editUsername, getAllUsers, getNumberUser, sessionIsValid, updateUser, userExist, userLogout } from './controllers/user_controller.js'
 import { uploadProfil, uploadProduct, uploadProfilFile } from './controllers/uploadFile_controller.js'
 import getCarts, { addProductCart, deleteItemsCart } from './controllers/cart_controller.js'
+import { paymentCardNow } from './controllers/payement_controller.js'
 
 const router = express.Router()
 
@@ -55,6 +56,8 @@ router.post('/api/session', sessionIsValid)
 
 router.put('/upload', uploadProfil.single('file'), uploadProfilFile)
 
+// Payement
 
+router.post('/payNow', paymentCardNow)
 
 export default router

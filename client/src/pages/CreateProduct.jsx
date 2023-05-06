@@ -80,7 +80,10 @@ export default function CreateProduct(){
                 <div className="flex flex-col col-span-12 md:col-span-8 justify-center sm:w-2/3 space-y-10">
                     <h1 className="text-5xl font-medium text-center">Comment vendre un produit avec SpaceZone ?</h1>
                     <div className="flex-flex-col shadow-md">
-                        <p className="text-xl leading-8 bg-neutral-900 text-slate-200 p-5 sm:rounded-t-md">Vendez vos biens en quelque clic seulement ! Avec <span className="text-blue-700 font-medium">SpaceZone</span>, vous avez la possibilité de revendre en toute confiance grâce à notre communauté de confiance ! On garde l'oeil sur notre plateforme, et en cas de problème, notre assistance est disponible <span className="text-green-500 font-medium">24h/24.</span> Et en plus c'est <span className="text-green-500 font-medium">satisfait, ou remboursé.</span> Veuillez suivre les étapes pour commencer par vendre votre premier produit.</p>
+                        <div className="text-xl leading-8 bg-neutral-900">
+                            <p className="text-slate-200 p-5 sm:rounded-t-md">Vendez vos biens en quelque clic seulement ! Avec <span className="text-blue-700 font-medium">SpaceZone</span>, vous avez la possibilité de revendre en toute confiance, garder vos transactions confidentiels !</p>
+                            <p className="text-slate-200 p-5 sm:rounded-t-md"> On garde l'oeil sur notre plateforme, et en cas de problème, notre assistance est disponible <span className="text-green-500 font-medium">24h/24.</span> Et en plus c'est <span className="text-green-500 font-medium">satisfait, ou remboursé.</span> Veuillez suivre les étapes pour commencer par vendre votre premier produit.</p>
+                        </div>
                         <div className="flex flex-col space-y-5">
                             <button className="bg-indigo-600 hover:bg-indigo-700 py-2 sm:rounded-b-md duration-200" onClick={handleStart}>
                                 <h2 className="text-lg font-ubuntu">Je sais déjà comment faire</h2>
@@ -116,7 +119,7 @@ export default function CreateProduct(){
                     </div>
                     <form action="" ref={form} onSubmit={handleForm} enctype="multipart/form-data" className="flex flex-col space-y-5 bg-neutral-900 mt-5 p-8 sm:rounded-xl">
                         <label className="w-full">
-                            <h2 className="text-xl text-slate-200">Titre de la vente</h2>
+                            <h2 className="text-xl text-slate-200">Que vendez-vous ?</h2>
                             <input type="text" placeholder="Nom de votre produit..." className="px-3 py-2 w-full rounded outline-none" />
                         </label>
                         <label>
