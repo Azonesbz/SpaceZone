@@ -13,18 +13,6 @@ export default function Navbar(){
     const isLogged = useSelector((state) => state.sessionReducer.Authorization)
     const [scrollPosition, setScrollPosition] = useState(0)
 
-    // useEffect(() => {
-    //     if(currentUser.permission == "ADMINISTRATOR" || "MODERATOR"){
-    //         return () => {
-    //             setIsAdmin(true)
-    //         }
-    //     } else {
-    //         return () => {
-    //             setIsAdmin(false)
-    //         }
-    //     }
-    // }, [])
-
     useEffect(() => {
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => {
@@ -64,7 +52,7 @@ export default function Navbar(){
                         <Dropdown
                             label={
                                 <img
-                                    className="h-8 w-8 object-cover object-center"
+                                    className="h-8 w-8 object-cover object-center rounded-full"
                                     src={`./uploads/profil/${currentUser.profil_picture || "default.jpg"}` || `../uploads/profil/${currentUser.profil_picture || "default.jpg"}`}
                                     onError={(e) => {
                                         e.target.onerror = '/profil.jpg'; // empêche les boucles d'erreur infinies
