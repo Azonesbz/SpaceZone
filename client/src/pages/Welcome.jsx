@@ -6,16 +6,19 @@ import Register from '../components/Authentification/RegisterForm'
 import Login from '../components/Authentification/LoginForm'
 import { useEffect } from 'react'
 import axios from 'axios'
+import Confetti from 'react-confetti'
 
 
 export default function Welcome() {
-
+  const maxWidth = window.innerWidth;
+  const maxHeight = window.innerHeight;
   const [identifierValid, setIdentifierValid] = useState(false)
   const [identify, setIdentify] = useState({})
   const [login, setLogin] = useState(false)
   const [register, setRegister] = useState(false)
   const [emailInvalid, setEmailInvalid] = useState(false)
   const [username, setUsername] = useState('')
+  const [confetti, setConfetti] = useState(false)
 
   const navigate = useNavigate()
   const form = useRef()
@@ -100,6 +103,7 @@ export default function Welcome() {
         setLogin={setLogin}
         setIdentifierValid={setIdentifierValid}
         identify={identify}
+        setConfetti={setConfetti}
       /> : ""}
       {register ?
         <Register
@@ -108,6 +112,11 @@ export default function Welcome() {
           identifierValid={identifierValid}
           setRegister={setRegister}
           setIdentifierValid={setIdentifierValid}
+          setConfetti={setConfetti}
+        /> : ""}
+        {confetti ? <Confetti
+        width={maxWidth}
+        height={maxHeight}
         /> : ""}
     </>
   )

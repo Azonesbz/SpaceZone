@@ -13,7 +13,7 @@ export default function productReducer(state = initialState, action){
         case NUMBER_OF_PRODUCTS:
             return {...state, number: action.payload}
         case GET_PRODUCT_BY_ID:
-            return {...state, productId: action.payload}
+            return {...state, productId: action.payload[0]}
         case UPDATE_PRODUCT:
             return {
                 ...state,

@@ -64,19 +64,26 @@ export const getUserNumber = () => {
 export const addUser = (data) => {
     return async (dispatch) => {
         return axios.post('http://localhost:3001/users/new', data).then(res => { // J'envoie les données au serveur et je récupère la réponse
+            console.log(res)
             localStorage.setItem('token', res.data.tokenData.token)
             dispatch({ type: ADD_USER, payload: res.data.tokenData})
             dispatch({ type: SET_USER, payload: res.data.tokenData})
             dispatch({ type: SET_SESSION_TRUE, payload: {Authorization: true}})
+            return res
+        })
+        .catch(error => {
+            console.log(error)
+            return error
         })
     }
 }
 export const loginUser = (data) => {
     return async (dispatch) => {
-        return axios.post('http://localhost:3001/users/login', data).then(async res => {
+        return axios.post('http://localhost:3001/users/login', data).then(res => {
             localStorage.setItem('token', res.data.tokenData.token)
             dispatch({ type: SET_USER, payload: res.data.tokenData})
             dispatch({ type: SET_SESSION_TRUE, payload: {Authorization: true}})
+            return res
         })
     }
 }

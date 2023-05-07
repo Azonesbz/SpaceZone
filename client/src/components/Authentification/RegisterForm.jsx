@@ -8,10 +8,12 @@ export default function Register({
     emailValue, 
     setRegister, 
     setIdentifierValid,
+    setConfetti
 }){
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-    const [confetti, setConfetti] = useState(false)
+    const [loader, setLoader] = useState(false)
+    
     const form = useRef()
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -32,21 +34,24 @@ export default function Register({
             username: form.current[1].value,
             password: form.current[2].value,
         }
-        dispatch(addUser(data)).then(() => {
-            setConfetti(true)
-            setTimeout(() => {
-                setLoader(false)
-                navigate('/home')
-            }, 2000)
-            
+        dispatch(addUser(data)).then(res => {
+            console.log(res)
+            if(res.status === 201){
+                setConfetti(true)
+                setTimeout(() => {
+                    setConfetti(false)
+                    setLoader(false)
+                    navigate('/home')
+                }, 3000)
+            } else if (res.status === 401){
+                setPasswordIncorrect(true)
+            }
         })
-        
     }
 
     return(
         <>
-            <section className="flex flex-col items-center justify-center bg-gradient-to-br from-neutral-800 to-neutral-700 min-h-screen p-10 text-slate-200">
-                {confetti ? <Confetti /> : "" }
+            <section className="flex flex-col items-center justify-center bg-gradient-to-br from-neutral-800 to-neutral-700 min-h-screen p-2 lg:p-10 text-slate-200">
                 <button 
                 className="absolute top-5 left-5 rounded-full active:scale-90 duration-200"
                 onClick={() => {
@@ -63,19 +68,19 @@ export default function Register({
                 </button>
                 <div className="flex flex-col space-y-5">
                     <div className="flex flex-col">
-                        <h1 className="text-6xl font-fine font-semibold text-center"><span className="text-6xl text-blue-800">SpaceZone</span>, aller toujours plus loin,<br /> aller toujours plus vite.</h1>
+                        <h1 className="text-4xl lg:text-6xl font-fine font-semibold text-center"><span className="text-5xl text-blue-800">SpaceZone</span>, aller toujours plus loin, aller toujours plus vite.</h1>
                     </div>
                     <form
-                    className="flex flex-col p-5 rounded-xl space-y-5"
+                    className="flex flex-col p-5 rounded-xl gap-2 lg:space-y-5"
                     action=""
                     onSubmit={handleSubmit}
                     ref={form}
                     >
-                        <div className="flex space-x-14">
+                        <div className="flex flex-col lg:flex-row lg:space-x-14">
                             <label htmlFor="username">
                                 <h2>Email</h2>
                                 <input
-                                className="py-2 pl-3 pr-1 rounded-sm outline-none text-black"
+                                className="py-2 pl-3 pr-1 rounded-sm outline-none text-black w-full"
                                 type="email" 
                                 name="email" 
                                 placeholder="Email"
@@ -86,7 +91,7 @@ export default function Register({
                             <label htmlFor="username">
                                 <h2>Username</h2>
                                 <input
-                                className="py-2 pl-3 pr-1 rounded-sm outline-none text-black"
+                                className="py-2 pl-3 pr-1 rounded-sm outline-none text-black w-full"
                                 type="text" 
                                 name="username" 
                                 placeholder="Username" 
@@ -97,7 +102,7 @@ export default function Register({
                             <label htmlFor="password">
                                 <h2>Password</h2>
                                 <input
-                                className="py-2 pl-3 pr-1 rounded-sm outline-none text-black"
+                                className="py-2 pl-3 pr-1 rounded-sm outline-none text-black w-full"
                                 type="password" 
                                 name="password" 
                                 placeholder="Password" 

@@ -97,12 +97,12 @@ export async function connectUser(req, res) {
                 }
                 await users.lastConnection(last_connection, response[0].id)
                 await users.newToken(JSON.stringify(token), response[0].id)
-                res.status(201).json({tokenData: tokenData, token: token});
+                res.status(200).json({tokenData: tokenData, token: token});
                 return
             }
             else
             {
-                res.status(401).send('Mot de passe incorrect')
+                res.status(401).json({error: 'Failure'})
             }
         }
     )

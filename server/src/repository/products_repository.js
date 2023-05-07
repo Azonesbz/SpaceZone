@@ -20,7 +20,7 @@ let getAllProduct = async () => {
     return products
 }
 let byId = async (id) => {
-    const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username, p.url_image FROM products p INNER JOIN users u ON p.user_id = u.id WHERE p.id = ?`, [id])
+    const [product] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, c.name AS category, u.username, u.id AS user_id, p.inventory, u.profil_picture, CONVERT_TZ(p.created_at, '+00:00', '+02:00') AS created_at, p.url_image FROM products p INNER JOIN users u ON p.user_id = u.id INNER JOIN category c ON p.category_id = c.id WHERE p.id = ?`, [id])
     if(product.length){
         return product
     }

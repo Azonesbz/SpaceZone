@@ -8,16 +8,19 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { isEmpty } from "../utils/utils";
 import LikedProduct from "../components/ProfilNavigation/LikeProduct";
+import { useNavigate } from "react-router-dom";
 
 export default function Profil(){
 
-
+    const navigate = useNavigate()
     const currentUser = useSelector((state) => state.currentUserReducer.user)
+    const isLogged = useSelector((state) => state.sessionReducer.Authorization)
     const [aboutNav, setAboutNav] = useState(false)
     const [purshaseNav, setPurshaseNav] = useState(false)
     const [informationNav, setInformationNav] = useState(true)
     const [productLike, setProductLike] = useState(false)
     const [productOnSellNav, setProductOnSellNav] = useState(false)
+    const [userIsLogged, setUserIsLogged] = useState(false)
 
     const scrollToTop = () => {
       const scrollStep = -window.scrollY / (500 / 15); // 500 est la durée de l'animation en millisecondes
@@ -32,6 +35,11 @@ export default function Profil(){
     useEffect(() => {
       scrollToTop()
     }, [aboutNav, purshaseNav, informationNav, productOnSellNav])
+
+    useEffect(() => {
+      isLogged ? "" : navigate('/*')
+      setUserIsLogged(true)
+    }, [isLogged])
 
     const handleNav = (e) => {
         let parent = e.target;
@@ -79,8 +87,8 @@ export default function Profil(){
 
     return (
         <>
-            <Header />
-            <section className="grid grid-cols-12 gap-2 relative mt-20 lg:p-10 duration-200">
+            {userIsLogged ? <Header /> : null }
+            {userIsLogged ? <section className="grid grid-cols-12 gap-2 relative mt-20 lg:p-10 duration-200">
                 <aside className="bg-neutral-900 col-span-12 sm:col-span-4 text-black shadow-xl lg:rounded-xl">
                     <header className="flex flex-col items-center bg-slate-300 p-5 lg:rounded-t-lg">
                         <img
@@ -90,7 +98,7 @@ export default function Profil(){
                             e.target.src = './uploads/profil/default.jpg'; // charge une image alternative
                           }}
                           alt="image de profil"
-                          className="rounded-full mt-5 h-36 w-36 shadow skew-y-0"
+                          className="rounded-full mt-5 h-36 w-36 shadow skew-y-0 object-center object-cover"
                         />
                         <h1 className="mt-3 text-2xl text-center font-semibold font-raleway first-letter:uppercase">{!isEmpty(currentUser) ? currentUser.username : ""}</h1>
                     </header>
@@ -123,8 +131,8 @@ export default function Profil(){
                 {purshaseNav ? <Purshases /> : ""} 
                 {aboutNav ? <About /> : ""}
                 {productLike ? <LikedProduct /> : ""}
-            </section>
-            <Footer />
+            </section> : null }
+            {userIsLogged ? <Footer /> : null}
         </>
     )
 }

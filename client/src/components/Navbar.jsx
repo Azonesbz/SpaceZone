@@ -64,13 +64,13 @@ export default function Navbar(){
                         <Dropdown
                             label={
                                 <img
+                                    className="h-8 w-8 object-cover object-center"
                                     src={`./uploads/profil/${currentUser.profil_picture || "default.jpg"}` || `../uploads/profil/${currentUser.profil_picture || "default.jpg"}`}
                                     onError={(e) => {
                                         e.target.onerror = '/profil.jpg'; // empêche les boucles d'erreur infinies
                                         e.target.src = '/profil.jpg' ;
                                     }}
                                     alt="User profile image"
-                                    style={{ width: '40px', height: '40px', borderRadius: '100%' }}
                                 />
                             }
                             inline={true}
@@ -89,7 +89,6 @@ export default function Navbar(){
                                 <button 
                                 className="flex items-center font-karla rounded-md"
                                 onClick={handleLogout}
-                                id="logout"
                                 >
                                     <h3 className="text-white font-Lato">Se déconnecter</h3>
                                 </button>
@@ -123,7 +122,6 @@ export default function Navbar(){
                             <button 
                             className="flex items-center text-md font-karla rounded-md text-black"
                             onClick={handleLogout}
-                            id="logout"
                             >
                                 <svg width="30" height="30" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M14 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-2"></path>
@@ -143,7 +141,7 @@ export default function Navbar(){
                                     e.target.src = '../uploads/profil/default.jpg'; // charge une image alternative
                                 }}
                                 alt="image de profil"
-                                className="rounded-full h-8 w-8"
+                                className="rounded-full object-fill object-center h-8 w-8"
                             />
                             </Link>
                         </li> : "" }

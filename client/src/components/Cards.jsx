@@ -49,7 +49,7 @@ export default function Cards({
                                 <Carousel autoSlide={false}>
                                     {JSON.parse(product.url_image).map((image, index) => {
                                         return (
-                                            <img key={index} src={`./uploads/product/${image}`} alt="product image" className="min-w-full object-cover h-96 w-60 rounded" />
+                                            <img key={index} src={`./uploads/product/${image}`} alt="product image" className="min-w-full object-contain object-center h-96 w-60 rounded" />
                                         )
                                     }
                                     )}

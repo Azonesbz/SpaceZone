@@ -167,7 +167,7 @@ export default function Information() {
                     </Tooltip>
                 </header>
                 <section className="p-5 pb-0">
-                    <div className="flex flex-col gap-5 bg-slate-300 rounded-xl relative shadow w-full p-5 font-Lato text-lg">
+                    <div className="flex flex-col gap-5 bg-slate-300 rounded relative shadow w-full p-5 font-Lato text-lg">
 
                         <div className="flex flex-col duration-200">
                             <div className="flex justify-between items-center">
@@ -201,7 +201,7 @@ export default function Information() {
 
                 </section>
                 <section className="flex flex-col sm:flex-row justify-center gap-5 sm:p-5">
-                    <div className="flex flex-col justify-center items-center w-2/3">
+                    <div className="flex flex-col justify-between items-center w-full">
                         <h2 className="text-slate-200 font-LAto text-xl">Image de profil</h2>
                         <img
                             src={`./uploads/profil/${!isEmpty(currentUser) ? currentUser.profil_picture : ""}`}
@@ -210,10 +210,10 @@ export default function Information() {
                                 e.target.src = './uploads/profil/default.jpg'; // charge une image alternative
                             }}
                             alt="image de profil"
-                            className="rounded-full mt-5 h-24 w-24"
+                            className="rounded-full h-24 w-24 object-cover"
                         />
                     </div>
-                    <form onSubmit={handleSubmitFile} encType="multipart/form-data" className="flex justify-around items-center bg-slate-200 p-5 sm:rounded-xl sm:w-2/3">
+                    <form onSubmit={handleSubmitFile} encType="multipart/form-data" className="flex justify-around items-center bg-slate-200 p-5 sm:rounded sm:w-2/3">
                         <input
                             className="file:py-2 file:flex "
                             type="file"
