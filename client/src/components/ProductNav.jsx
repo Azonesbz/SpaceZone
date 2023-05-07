@@ -2,7 +2,6 @@ import { useState } from "react"
 
 export default function ProductNav(){
     const [counter, setCounter] = useState(0)
-    const [nextProduct, setNextProduct] = useState([])
     const handlePage = () => {
         setCounter(counter => counter + 3)
         fetch('http://localhost:3001/product', {
@@ -24,6 +23,7 @@ export default function ProductNav(){
                 <button 
                 className="py-2 px-5 bg-slate-400 w-28 ml-[5px] hover:scale-95 rounded-r-full uppercase font-kanit font-light text-center"
                 onClick={handlePage}
+                id="previous"
                 >
                     Next
                 </button>

@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const isEmpty = (value) => {
     return (
         value === undefined ||

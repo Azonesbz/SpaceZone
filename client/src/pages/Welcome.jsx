@@ -15,7 +15,6 @@ export default function Welcome() {
   const [login, setLogin] = useState(false)
   const [register, setRegister] = useState(false)
   const [emailInvalid, setEmailInvalid] = useState(false)
-  const [loader, setLoader] = useState(false)
   const [username, setUsername] = useState('')
 
   const navigate = useNavigate()
@@ -30,7 +29,6 @@ export default function Welcome() {
 
   let data;
   let handleForm = async (e) => {
-    setLoader(true)
     e.preventDefault()
     data = {
       email: form.current[0].value
@@ -46,17 +44,14 @@ export default function Welcome() {
               setUsername(res.data.user[0].username)
               setIdentifierValid(true)
               setLogin(true)
-              setLoader(false)
             }
           })
         .catch(err => {
           setIdentifierValid(true)
           setRegister(true)
-          setLoader(false)
         })
     } else {
       setEmailInvalid(true)
-      setLoader(false)
     }
   }
 

@@ -8,7 +8,6 @@ import Carousel from "./carousel/Carousel"
 
 export default function Cards({
     page,
-
 }) {
 
     const dispatch = useDispatch()
@@ -88,8 +87,9 @@ export default function Cards({
                                             }
                                             dispatch(likeProduct(data))
                                         }}
+                                        aria-label="Like"
                                     >
-                                        <svg className="" width="30" height="30" fill={!isEmpty(likedProduct) ? (likedProduct.find(liked => liked.product_id === product.id) ? "red" : "none") : "none"} stroke={!isEmpty(likedProduct) ? (likedProduct.find(liked => liked.product_id === product.id) ? "red" : "currentColor") : "currentColor"} strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <svg width="30" height="30" fill={!isEmpty(likedProduct) ? (likedProduct.find(liked => liked.product_id === product.id) ? "red" : "none") : "none"} stroke={!isEmpty(likedProduct) ? (likedProduct.find(liked => liked.product_id === product.id) ? "red" : "currentColor") : "currentColor"} strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M19.5 13.576a4.976 4.976 0 0 0 1.495-3.704A5 5 0 0 0 12 7.01a5 5 0 1 0-7.5 6.566l7.5 7.428 7.5-7.428Z"></path>
                                         </svg>
                                     </button>

@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { isEmpty } from '../utils/utils'
-import { Link, useNavigate } from 'react-router-dom'
-import { deleteUser, getAllUser, getUserNumber, updateUser } from '../actions/user.action'
+import { Link } from 'react-router-dom'
+import { deleteUser, getAllUser, updateUser } from '../actions/user.action'
 import Modal from '../components/modal/Modal'
 import { useRef } from 'react'
 import { Tooltip } from 'flowbite-react'
 import { deleteProduct, getAllProduct, updateProduct } from '../actions/product.action'
-import { getCroppedImg } from '../components/Utils'
-import Cropper from 'react-easy-crop';
-import defaultImage from '../../public/profil.jpg';
+
 
 function EditUserModal({ user, isOpen, onClose }) {
     const [username, setUsername] = useState(user.username);
@@ -74,7 +72,6 @@ function EditUserModal({ user, isOpen, onClose }) {
 function EditProductModal({ product, isOpen, onClose }) {
     const allUser = useSelector((state) => state.allUserReducer.users)
     const [title, setTitle] = useState(product.title);
-    const [author, setAuthor] = useState(product.username);
     const [price, setPrice] = useState(product.price);
     const [quantity, setQuantity] = useState(product.inventory);
 

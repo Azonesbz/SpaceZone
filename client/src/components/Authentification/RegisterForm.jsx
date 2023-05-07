@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { addUser, getAllUser } from "../../actions/user.action"
+import { useDispatch } from "react-redux"
+import { addUser } from "../../actions/user.action"
 import { useNavigate } from 'react-router-dom'
 import Confetti from 'react-confetti'
 
@@ -9,7 +9,6 @@ export default function Register({
     setRegister, 
     setIdentifierValid,
 }){
-    const [email, setEmail] = useState(emailValue)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [confetti, setConfetti] = useState(false)
@@ -54,6 +53,7 @@ export default function Register({
                     setRegister(false)
                     setIdentifierValid(false)
                 }}
+                id="back"
                 >
                     <svg className="text-slate-100" width="46" height="46" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20z"></path>
@@ -106,7 +106,7 @@ export default function Register({
                                 />
                             </label>
                         </div>
-                        <button className="py-2 px-5 bg-gradient-to-br from-blue-600 to-blue-700 text-white">S'inscrire</button>
+                        <button className="py-2 px-5 bg-gradient-to-br from-blue-600 to-blue-700 text-white" id="register">S'inscrire</button>
                     </form>
                 </div>
             </section>

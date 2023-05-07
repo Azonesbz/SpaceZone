@@ -27,7 +27,7 @@ function UsernameModal({currentUser, isOpen, onClose}){
                 <h2 className="text-3xl font-Lato text-black">Pseudonyme</h2>
                 <label className="flex items-center mt-3">
                     <input type="text" defaultValue={currentUser.username} className="py-2 px-3 rounded-md font-Quicksand font-medium text-xl" />
-                    <button className="bg-gray-800 px-5 py-2 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
+                    <button className="bg-gray-800 px-5 py-2 text-slate-200 rounded-md ml-5" type="submit" id="validate">Valider</button>
                 </label>
             </form>
         </Modal>
@@ -53,7 +53,7 @@ function EmailModal({currentUser, isOpen, onClose}){
                 <h2 className="text-3xl font-Lato text-black">Email</h2>
                 <label className="flex items-center mt-3">
                     <input type="text" defaultValue={currentUser.email} className="py-2 px-3 rounded-md font-Quicksand font-medium text-xl" />
-                    <button className="bg-gray-800 px-5 py-2 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
+                    <button className="bg-gray-800 px-5 py-2 text-slate-200 rounded-md ml-5" type="submit" id="validate">Valider</button>
                 </label>
             </form>
         </Modal>
@@ -80,7 +80,7 @@ function PhoneNumberModal({currentUser, isOpen, onClose}){
                 <h2 className="text-3xl font-Lato text-black">Numéro de téléphone</h2>
                 <label className="flex items-center mt-3">
                     <input type="text" defaultValue={currentUser.number_phone} className="py-2 px-3 rounded-md font-Quicksand font-medium text-xl"/>
-                    <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
+                    <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit" id="validate">Valider</button>
                 </label>
             </form>
         </Modal>
@@ -107,7 +107,7 @@ function FirstNameModal({currentUser, isOpen, onClose}){
                 <h2 className="text-3xl font-Lato text-black">Prénom</h2>
                 <label className="flex items-center mt-3">
                     <input type="text" defaultValue={currentUser.first_name} className="py-2 px-3 rounded-md font-Quicksand font-medium text-xl" />
-                    <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit">Valider</button>
+                    <button className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md ml-5" type="submit" id="validate">Valider</button>
                 </label>
             </form>
         </Modal>
@@ -172,28 +172,28 @@ export default function Information() {
                         <div className="flex flex-col duration-200">
                             <div className="flex justify-between items-center">
                                 <h2 className="text-2xl">Pseudonyme</h2>
-                                <button onClick={() => setShowFormUsername(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
+                                <button onClick={() => setShowFormUsername(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md" id="edit-username">Modifier</button>
                             </div>
                             <h3 className="text-indigo-900">{!isEmpty(currentUser) ? currentUser.username : ""}</h3>
                         </div>
                         <div className="flex flex-col mt-5 duration-200">
                             <div className="flex justify-between items-center">
                                 <h2 className="text-2xl">Email</h2>
-                                <button onClick={() => setShowFormEmail(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
+                                <button onClick={() => setShowFormEmail(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md" id="edit-email">Modifier</button>
                             </div>
                             <h3 className="text-indigo-900">{!isEmpty(currentUser) ? currentUser.email : ""}</h3>
                         </div>
                         <div className="flex flex-col mt-5 duration-200">
                             <div className="flex justify-between items-center">
                                 <h2 className="text-2xl">Numéro de téléphone</h2>
-                                <button onClick={() => setShowFormNumber(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
+                                <button onClick={() => setShowFormNumber(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md" id="edit-phone">Modifier</button>
                             </div>
                             <h3 className="text-indigo-900">{!isEmpty(currentUser) ? (currentUser.number_phone ? currentUser.number_phone : "Aucun numéro de téléphone") : ""}</h3>
                         </div>
                         <div className="flex flex-col mt-5 duration-200">
                             <div className="flex justify-between items-center">
                                 <h2 className="text-2xl">Prénom</h2>
-                                <button onClick={() => setShowFormName(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md">Modifier</button>
+                                <button onClick={() => setShowFormName(true)} className="bg-gray-800 px-3 py-1 text-slate-200 rounded-md" id="edit-name">Modifier</button>
                             </div>
                             <h3 className="text-indigo-900">{ !isEmpty(currentUser) ? (currentUser.first_name ? currentUser.first_name : "Aucun prénom définie") : ""}</h3>
                         </div>

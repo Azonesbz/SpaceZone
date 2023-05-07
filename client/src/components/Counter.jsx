@@ -1,5 +1,3 @@
-import { useState } from "react"
-
 export default function Counter({setValue, value}){
     
 
@@ -27,13 +25,13 @@ export default function Counter({setValue, value}){
             <div onClick={(e) => e.preventDefault()} className="flex items-center bg-slate-300 border border-neutral-900 rounded-md">
  
                 
-                <button onClick={decrementValue} className="bg-neutral-900 text-white rounded-l">
+                <button onClick={decrementValue} className="bg-neutral-900 text-white rounded-l" id="add">
                     <svg width="30" height="30" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5 12h14"></path>
                     </svg>
                 </button>
                 <span className="px-3">{value}</span>                
-                <button onClick={incrementValue} className="bg-neutral-900 text-white rounded-r">
+                <button onClick={incrementValue} className="bg-neutral-900 text-white rounded-r" id="less">
                     <svg width="30" height="30" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 5v14"></path>
                         <path d="M5 12h14"></path>

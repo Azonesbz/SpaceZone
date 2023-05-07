@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { userLogout } from "../actions/user.action";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -11,8 +11,6 @@ export default function Navbar(){
     const dispatch = useDispatch()
     const currentUser = useSelector((state) => state.currentUserReducer.user)
     const isLogged = useSelector((state) => state.sessionReducer.Authorization)
-
-    const [isAdmin, setIsAdmin] = useState(false)
     const [scrollPosition, setScrollPosition] = useState(0)
 
     // useEffect(() => {
@@ -91,6 +89,7 @@ export default function Navbar(){
                                 <button 
                                 className="flex items-center font-karla rounded-md"
                                 onClick={handleLogout}
+                                id="logout"
                                 >
                                     <h3 className="text-white font-Lato">Se déconnecter</h3>
                                 </button>
@@ -124,6 +123,7 @@ export default function Navbar(){
                             <button 
                             className="flex items-center text-md font-karla rounded-md text-black"
                             onClick={handleLogout}
+                            id="logout"
                             >
                                 <svg width="30" height="30" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M14 8V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-2"></path>

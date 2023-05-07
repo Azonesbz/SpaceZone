@@ -6,14 +6,12 @@ import { isEmpty } from '../utils/utils'
 import { deleteCart, getCarts } from "../actions/cart.action"
 import Carousel from "../components/carousel/Carousel"
 import {Link} from 'react-router-dom'
-import { Tooltip } from "flowbite-react"
 
 export default function Carts(){
     const [totalPrice, setTotalPrice] = useState(null)
     const cartItem = useSelector((state) => state.cartReducer.cart)
     const currentUser = useSelector((state) => state.currentUserReducer.user)
     const dispatch = useDispatch()
-    let data;
     useEffect(() => {
         if(!isEmpty(cartItem)){
             const listItemPrice = cartItem.map(item => parseInt(item.price * item.quantity))
@@ -39,6 +37,7 @@ export default function Carts(){
                             <button
                             className="text-red-600 whitespace-nowrap"
                             onClick={handleDeleteCart}
+                            id="delete-cart"
                             >
                                 <h1 className="text-left font-bold">Supprimer mon panier</h1>
                             
@@ -59,7 +58,7 @@ export default function Carts(){
                             </Carousel>
                         </div>
                         <div className="p-5 relative">
-                            <button className="text-white absolute right-5 bg-red-600 p-1 rounded-xl">
+                            <button className="text-white absolute right-5 bg-red-600 p-1 rounded-xl" id="deleteItemCart">
                                 <svg width="30" height="30" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4 7h16"></path>
                                     <path d="M10 11v6"></path>
@@ -68,7 +67,7 @@ export default function Carts(){
                                     <path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path>
                                 </svg>
                             </button>
-                            <button className="absolute right-16 bg-neutral-900 p-1 rounded-xl text-white">
+                            <button className="absolute right-16 bg-neutral-900 p-1 rounded-xl text-white" id="setItemCart">
                                 <svg width="30" height="30" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M4 20h4L18.5 9.5a2.829 2.829 0 0 0-4-4L4 16v4Z"></path>
                                     <path d="m13.5 6.5 4 4"></path>

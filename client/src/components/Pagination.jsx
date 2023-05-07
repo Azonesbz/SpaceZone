@@ -18,6 +18,7 @@ export default function Pagination ({setPage}){
                         key={i}
                         className="flex items-center justify-center h-10 w-10 bg-neutral-900 text-white rounded"
                         onClick={(e) => handleNextProduct(e, i)}
+                        id={i}
                     >
                         <span value={i + 1}>{i + 1}</span>
                     </button>

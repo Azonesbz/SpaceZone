@@ -21,14 +21,14 @@ export default function Carousel({
                 <div className="flex transition-transform ease-out duration-500" style={{ transform: `translateX(-${curr * 100}%)`}}>{slides}</div>
                 {slides.length > 1 ?
                 <div className='absolute inset-0 flex items-center justify-between p-4'>
-                    <button className='p-1 rounded-full shadow bg-slate-200' onClick={prev}>
+                    <button className='p-1 rounded-full shadow bg-slate-200' onClick={prev} id='previous'>
                         <svg width={arrowSize || '30'} height={arrowSize || '30'} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5 12h14"></path>
                             <path d="m5 12 6 6"></path>
                             <path d="m5 12 6-6"></path>
                         </svg>
                     </button>
-                    <button className='p-1 rounded-full shadow bg-slate-200' onClick={next}>
+                    <button className='p-1 rounded-full shadow bg-slate-200' onClick={next} id='next'>
                         <svg width={arrowSize || '30'}  height={arrowSize || '30'} fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5 12h14"></path>
                             <path d="m13 18 6-6"></path>

@@ -35,6 +35,7 @@ export default function Login({
                 setLogin(false)
                 setIdentifierValid(false)
             }}
+            id="back"
         >
             <svg className="text-slate-100" width="46" height="46" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20z"></path>
@@ -63,7 +64,7 @@ export default function Login({
                         value={password}
                         onChange={(e) => setPassword(e.currentTarget.value)} 
                         />
-                        <button className="py-2 w-full bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-sm text-center">Connexion</button>
+                        <button className="py-2 w-full bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-sm text-center" id="login">Connexion</button>
                     </div>
                 </label>
             </form>
