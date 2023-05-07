@@ -61,8 +61,7 @@ export async function addUser(req, res) {
             }
         )
     } else {
-        const err = "Tout les champs doivent être rempli avant de soumettre le formulaire."
-        throw err
+        res.status(404).json({failure: "Un champ n'a pas été rempli"})
     }
 }
 

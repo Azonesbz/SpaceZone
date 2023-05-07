@@ -71,10 +71,6 @@ export const addUser = (data) => {
             dispatch({ type: SET_SESSION_TRUE, payload: {Authorization: true}})
             return res
         })
-        .catch(error => {
-            console.log(error)
-            return error
-        })
     }
 }
 export const loginUser = (data) => {
