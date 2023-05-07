@@ -45,9 +45,9 @@ export default function ProductId() {
       <Header />
       <div className='container mt-20'>
 
-        <section className='flex relative min-w-full container items-center mt-24 flex-col sm:flex-row'>
-            <div className='grid grid-cols-12 items-center w-full mx-2 my-4 p-2'>
-              <div className='lg:col-span-4 h-full'>
+        <section className='flex relative min-w-full container items-center mt-28 flex-col sm:flex-row'>
+            <div className='grid grid-cols-12 items-center w-full'>
+              <div className='col-span-12 lg:col-span-4 h-full'>
                 <Carousel autoSlide={false}>
                   {!isEmpty(productId) && JSON.parse(productId.url_image).map((image, index) => {
                     return (
@@ -57,9 +57,9 @@ export default function ProductId() {
                   )}
                 </Carousel>
               </div>
-              <div className={`lg:col-span-8 flex flex-col justify-between p-20 bg-slate-50 duration-500 font-Lato h-full shadow`}>
+              <div className={`col-span-12 lg:col-span-8 flex flex-col justify-between mt-5 sm:mt-0 sm:p-10 md:p-14 bg-slate-50 duration-500 font-Lato h-full shadow`}>
                 <div className='flex flex-col space-y-10'>
-                  <h1 className='text-5xl'>{!isEmpty(productId) && productId.title}</h1>
+                  <h1 className='text-4xl p-3 sm:text-5xl'>{!isEmpty(productId) && productId.title}</h1>
                   <div>
                     <h2 className='text-3xl bg-neutral-900 text-slate-200 p-2 rounded'>A propos de cet article</h2>
                     <p className="font-medium text-xl h-full overflow-auto font-SourceSansPro p-5">
@@ -70,7 +70,7 @@ export default function ProductId() {
               
 
                 <div className='flex flex-col h-full mt-5 justify-end space-y-5'>
-                  <div className='flex items-center justify-between font-Lato font-bold box-content'>
+                  <div className='flex flex-col sm:flex-row space-y-5 sm:space-y-0 items-start sm:items-center justify-between font-Lato font-bold box-content'>
                     <div className='flex items-center w-full'>
                       <h2 className='text-4xl border-r-[1px] border-black mr-2 pr-2 h-10'>{!isEmpty(productId) && productId.price * value}$</h2>
                       <p className='text-lg'>Livraison à partir de 5$</p>
@@ -144,7 +144,7 @@ export default function ProductId() {
             </div>
         </section>
 
-        <section className='bg-neutral-900 px-24 py-10 text-white min-w-screen rounded-lg shadow'>
+        <section className='bg-neutral-900 px-24 py-10 text-white min-w-screen rounded shadow'>
           <div className='flex flex-col col-span-1'>
             <h1 className='text-white text-3xl'>
               Critères
@@ -200,7 +200,7 @@ export default function ProductId() {
           </div>
         </section>
 
-        <section className='px-24 py-10 text-gray-950 min-w-screen'>
+        <section className='my-10 py-10 text-gray-950 min-w-screen'>
           <div className='flex flex-col w-3/4'>
             <h1 className='text-3xl font-rajdhani font-semibold'>La livraison</h1>
             <div className='flex flex-col space-y-5 mt-5 border-b-[1px] border-black pb-5 mb-5'>
@@ -219,13 +219,13 @@ export default function ProductId() {
                   <h2 className='font-karla text-xl'>Mondial Relay</h2>
                   <img src={mondialRelay} alt='logo mondial relay' width={100} className='hover:scale-110 duration-200' />
                   <div className='w-full h-[1px] bg-neutral-300'></div>
-                  <span className='font-rajdhani text-xl font-semibold'>5.30$</span>
+                  <span className='font-rajdhani text-xl font-semibold'>5.30€</span>
                 </div>
                 <div className='flex items-center space-x-5'>
                   <h2 className='text-center font-karla text-xl'>Fedex</h2>
                   <img src={fedex} alt='logo mondial relay' width={100} className='hover:scale-110 duration-200' />
                   <div className='w-full h-[1px] bg-neutral-300'></div>
-                  <span className='font-rajdhani text-xl font-semibold'>5.30$</span>
+                  <span className='font-rajdhani text-xl font-semibold'>3.89€</span>
                 </div>
               </div>
             </div>

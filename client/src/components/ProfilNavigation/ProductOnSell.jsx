@@ -13,42 +13,44 @@ export default function ProductOnSell() {
     return (
         <>
             <div className="flex flex-col bg-neutral-900 lg:rounded-xl min-h-screen col-span-12 sm:col-span-8 font-Lato">
-                <header className="flex justify-between items-center bg-slate-300 p-5 lg:rounded-t-lg">
-                    <h1 className="text-4xl">Mes ventes en cours</h1>
+                <header className="flex justify-between items-center bg-slate-300 p-5 rounded-t-sm">
+                    <h1 className="text-3xl">Mes ventes en cours</h1>
                     <Tooltip
                         content="Les produits affichés ici sont vos articles en cours de ventes"
                     >
-                        <svg width="20" height="20" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="25" height="25" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"></path>
                             <path d="M12 8h.01"></path>
                             <path d="M11 12h1v4h1"></path>
                         </svg>
                     </Tooltip>
                 </header>
-                <section className="flex flex-col items-center bg-neutral-900 p-5 sm:rounded-b-xl h-full gap-5">
+                <section className="flex flex-col items-center bg-neutral-900 p-5 sm:rounded-b-sm h-full gap-5">
                     {!isEmpty(allProduct) && !isEmpty(currentUser) ? (
                         allProduct.filter((product) => product.user_id === currentUser.id).length > 0 ? (
                             allProduct.filter((product) => product.user_id === currentUser.id).map((product, index) => {
                                 return (
-                                    <div className="grid grid-cols-12 gap-5 bg-slate-300 mt-5 rounded-xl relative shadow w-full" key={index}>
-                                        <div className="col-span-8 p-5">
-                                            <div className="flex justify-between items-start">
-                                                <h1 className="text-3xl">{product.title}</h1>
-                                                <p className={`lowercase first-letter:uppercase px-3 py-1 font-SourceSansPro text-center opacity-95 rounded-full text-sm ${product.category == "DIVERS" ? "bg-red-300" : product.category == "ACCESSOIRES" ? "bg-green-300" : product.category == "VÊTEMENTS" ? "bg-sky-300" : ""}`}>{product.category}</p>
+                                    <div className="grid grid-cols-12 gap-5 bg-slate-300 relative shadow w-full" key={index}>
+                                        <div className="col-span-12 sm:col-span-8 p-3 md:p-5 w-full">
+                                            <div className="flex flex-col justify-between items-start w-full">
+                                                <div className="flex justify-between items-start w-full">
+                                                    <h1 className="text-2xl sm:text-xl md:text-3xl">{product.title}</h1>
+                                                    <p className={`lowercase first-letter:uppercase px-3 py-1 font-SourceSansPro text-center opacity-95 rounded-full text-sm ${product.category == "DIVERS" ? "bg-red-300" : product.category == "ACCESSOIRES" ? "bg-green-300" : product.category == "VÊTEMENTS" ? "bg-sky-300" : ""}`}>{product.category}</p>
+                                                </div>
+                                                <p>{product.description}</p>
 
                                             </div>
-                                            <p>{product.description}</p>
-                                            <div className="absolute bottom-5">
-                                                <h1 className="text-lg">Vous vendez ce produit à
+                                            <div className="flex h-full">
+                                                <h1 className="text-md md:text:lg">Vous vendez ce produit à
                                                     <span className="text-xl font-bold"> {product.price}€</span>
                                                 </h1>
                                             </div>
                                         </div>
-                                        <div className="col-span-4 w-full">
+                                        <div className="col-span-12 sm:col-span-4 w-full bg-slate-300">
                                             <Carousel arrowSize={'20'}>
                                                 {JSON.parse(product.url_image).map((image, index) => {
                                                     return (
-                                                        <img key={index} src={`../../uploads/product/${image}`} alt="product image" className="min-w-full object-cover h-48 w-16 rounded-r-xl" />
+                                                        <img key={index} src={`../../uploads/product/${image}`} alt="product image" className="min-w-full object-contain object-center" />
                                                     )
                                                 }
                                                 )}

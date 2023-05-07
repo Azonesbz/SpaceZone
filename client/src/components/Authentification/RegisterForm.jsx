@@ -57,7 +57,7 @@ export default function Register({
 
     return(
         <>
-            <section className="flex flex-col items-center justify-center min-h-screen sm:p-10">
+            <section className="flex flex-col items-center min-h-screen sm:p-10">
                 {fieldError ? 
                 <div className="flex flex-col items-center absolute z-50 inset-0 h-28 w-full bg-slate-200 p-2 shadow">
                     <h3 className="text-red-600 font-semibold text-center mt-2">
@@ -100,13 +100,11 @@ export default function Register({
                         Continuer en tant qu'invité
                     </Link>
                 </div>
-                <div className="absolute top-28">
-                    <h1 className="text-5xl lg:text-6xl font-fine font-semibold text-center">
-                        <span className="text-5xl text-blue-800">SpaceZone</span>
+                <h1 className="text-6xl lg:text-6xl font-fine font-semibold text-center mt-48">
+                        <span className="text-6xl text-blue-800">SpaceZone</span>
                         , aller toujours plus loin, aller toujours plus vite.
                     </h1>
-                </div>
-                <div className="flex flex-col space-y-5 sm:w-2/4 md:w-2/5 lg:w-2/6">
+                <div className="flex flex-col sm:w-2/4 md:w-2/5 lg:w-2/6 mt-5">
                     
                     <form
                     className="flex flex-col lg:p-5 rounded-xl gap-2 w-full lg:w-full absolute bottom-0 left-0 justify-end sm:static"
@@ -114,7 +112,7 @@ export default function Register({
                     onSubmit={handleSubmit}
                     ref={form}
                     >
-                        <div className="flex flex-col lg:justify-between lg:gap-2 font-Lato space-y-4 w-full">
+                        <div className="flex flex-col lg:justify-between lg:gap-2 font-Lato w-full">
                             <label htmlFor="username" className="w-full">
                                 <h2 className="text-xl p-1">Email</h2>
                                 <input
