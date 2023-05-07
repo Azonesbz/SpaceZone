@@ -28,12 +28,12 @@ export default function Login({
             password: form.current[0].value,
         }
         dispatch(loginUser(data)).then(res => {
+            setConfetti(true)
             if (res.status === 200) {
-                setConfetti(true)
-                dispatch(sessionIsValid())
                 setTimeout(() => {
                     setConfetti(false)
                     setLoader(false)
+                    dispatch(sessionIsValid())
                     navigate('/home')
                 }, 3000)
             }

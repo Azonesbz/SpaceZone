@@ -25,7 +25,7 @@ export default function Filter({setErrorFilter}){
 
     return (
         <>
-            <div className="flex flex-col sm:flex-row sm:space-x-10 bg-neutral-900 sm:rounded-xl text-slate-200 font-Lato items-start p-5">
+            <div className="flex flex-col sm:flex-row sm:space-x-10 bg-neutral-900 sm:rounded-md text-slate-200 font-Lato items-start p-5">
                 <h3 className="whitespace-nowrap text-2xl">Trier par: </h3>
                 <form action="" className="flex flex-col items-center justify-between w-full mt-5 sm:mt-0" onSubmit={handleFilterSubmit} ref={form}>
                     <div className="flex flex-col sm:flex-row sm:space-x-2 sm:items-center w-full space-y-5 sm:space-y-0">

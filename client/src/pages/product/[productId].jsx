@@ -46,7 +46,7 @@ export default function ProductId() {
       <div className='container mt-20'>
 
         <section className='flex relative min-w-full container items-center mt-24 flex-col sm:flex-row'>
-            <div className='grid grid-cols-12 items-center w-full mx-2 my-4 shadow p-2'>
+            <div className='grid grid-cols-12 items-center w-full mx-2 my-4 p-2'>
               <div className='lg:col-span-4 h-full'>
                 <Carousel autoSlide={false}>
                   {!isEmpty(productId) && JSON.parse(productId.url_image).map((image, index) => {
@@ -57,7 +57,7 @@ export default function ProductId() {
                   )}
                 </Carousel>
               </div>
-              <div className={`lg:col-span-8 flex flex-col justify-between p-20 bg-slate-50 duration-500 font-Lato h-full`}>
+              <div className={`lg:col-span-8 flex flex-col justify-between p-20 bg-slate-50 duration-500 font-Lato h-full shadow`}>
                 <div className='flex flex-col space-y-10'>
                   <h1 className='text-5xl'>{!isEmpty(productId) && productId.title}</h1>
                   <div>
@@ -144,7 +144,7 @@ export default function ProductId() {
             </div>
         </section>
 
-        <section className='bg-gray-950 px-24 py-10 text-white min-w-screen rounded-lg shadow'>
+        <section className='bg-neutral-900 px-24 py-10 text-white min-w-screen rounded-lg shadow'>
           <div className='flex flex-col col-span-1'>
             <h1 className='text-white text-3xl'>
               Critères
@@ -164,7 +164,8 @@ export default function ProductId() {
                 xmlns="http://www.w3.org/2000/svg"
                 >
                   <path fill="currentColor" d="M8.5 9.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"></path>
-                  <path d="M4 7v3.859c0 .537.213 1.052.593 1.432l8.116 8.116a2.023 2.023 0 0 0 2.864 0l4.834-4.834a2.023 2.023 0 0 0 0-2.864L12.29 4.593A2.025 2.025 0 0 0 10.859 4H7a3 3 0 0 0-3 3v0Z"></path>
+                  <path d="M4 7v3.859c0 .537.213 1.052.593 1.432l8.116 8.116a2.023 2.023 0 0 0 2.864 0l4.834-4.834a2.023 2.023 0 0 0
+                   0-2.864L12.29 4.593A2.025 2.025 0 0 0 10.859 4H7a3 3 0 0 0-3 3v0Z"></path>
                 </svg>
                 <h2 className='flex flex-col text-lg ml-5 text-slate-300'>
                   Catégorie: 
@@ -208,7 +209,8 @@ export default function ProductId() {
                 pas satisfait, un remboursement vous sera du dans les meilleurs délais.
               </p>
               <p className='text-xl font-SourceSansPro font-medium'>
-                De plus, si le produit ne vous plaît pas, il est de notre devoir de vous rembourser l'intégralité de la somme sauf si et seulement si le produit est rendu en mauvaise état.
+                De plus, si le produit ne vous plaît pas, il est de notre devoir de vous rembourser l'intégralité de la somme sauf si et seulement si le 
+                produit est rendu en mauvaise état.
               </p>
             </div>
             <div className='flex items-center'>

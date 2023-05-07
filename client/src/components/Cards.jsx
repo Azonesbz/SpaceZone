@@ -36,7 +36,8 @@ export default function Cards({
             {!isEmpty(getProducts) && getProducts.map(product => {
                 return (
                     <div
-                        className='flex items-center bg-gradient-to-br from-white to-zinc-200 col-span-6 lg:col-span-3 shadow-xl rounded-xl w-full p-3 duration-200 font-Lato'
+                        className='flex items-center bg-gradient-to-br from-white to-zinc-200 col-span-6 lg:col-span-3 shadow-xl 
+                        rounded-xl w-full p-3 duration-200 font-Lato'
                         key={product.id}
                     >
                         <Link
@@ -49,7 +50,13 @@ export default function Cards({
                                 <Carousel autoSlide={false}>
                                     {JSON.parse(product.url_image).map((image, index) => {
                                         return (
-                                            <img key={index} src={`./uploads/product/${image}`} alt="product image" className="min-w-full object-contain object-center h-96 w-60 rounded" />
+                                            <img
+                                                className="min-w-full object-cover 
+                                            object-center sm:h-[30rem] md:h-[30rem] lg:h-[40rem] rounded"
+                                                key={index}
+                                                src={`./uploads/product/${image}`}
+                                                alt="product image"
+                                            />
                                         )
                                     }
                                     )}
@@ -61,10 +68,12 @@ export default function Cards({
                                     <h2 className='font-Lato text-3xl'>{product.title}</h2>
                                     <div className="flex flex-col space-y-1">
                                         <span className='font-semibold font-SourceSansPro text-2xl text-right'>{product.price}€</span>
-                                        <p className={`lowercase first-letter:uppercase px-3 py-1 font-SourceSansPro text-center ml-5 opacity-95 rounded-full text-sm ${product.category == "DIVERS" ? "bg-red-300" : product.category == "ACCESSOIRES" ? "bg-green-300" : product.category == "VÊTEMENTS" ? "bg-sky-300" : ""}`}>{product.category}</p>
+                                        <p className={`lowercase first-letter:uppercase px-3 py-1 font-SourceSansPro text-center ml-5 opacity-95
+                                        rounded-full text-sm ${product.category == "DIVERS" ? "bg-red-300" : product.category == "ACCESSOIRES" ? "bg-green-300"
+                                                : product.category == "VÊTEMENTS" ? "bg-sky-300" : ""}`}>{product.category}</p>
                                     </div>
                                 </div>
-                                
+
 
 
                                 <div className="flex items-center">
@@ -76,7 +85,11 @@ export default function Cards({
                                         alt="image de profil"
                                         className="rounded-full h-8 w-8 mr-2"
                                     />
-                                    <p className='text-md font-Lato'>A vendre par <span className="font-semibold hover:text-indigo-800">{product.username}</span></p>
+                                    <p className='text-md font-Lato'>A vendre par
+                                        <span className="font-semibold hover:text-indigo-800">
+                                            {product.username}
+                                        </span>
+                                    </p>
                                     <button
                                         className="absolute right-5 rounded-full p-1 active:scale-90 duration-100"
                                         onClick={(e) => {
@@ -89,7 +102,15 @@ export default function Cards({
                                         }}
                                         aria-label="Like"
                                     >
-                                        <svg width="30" height="30" fill={!isEmpty(likedProduct) ? (likedProduct.find(liked => liked.product_id === product.id) ? "red" : "none") : "none"} stroke={!isEmpty(likedProduct) ? (likedProduct.find(liked => liked.product_id === product.id) ? "red" : "currentColor") : "currentColor"} strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <svg
+                                            width="30"
+                                            height="30"
+                                            fill={!isEmpty(likedProduct) ?
+                                                (likedProduct.find(liked => liked.product_id === product.id) ? "red" : "none") : "none"}
+                                            stroke={!isEmpty(likedProduct)
+                                                ? (likedProduct.find(liked => liked.product_id === product.id) ? "red" : "currentColor") : "currentColor"}
+                                            strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                        >
                                             <path d="M19.5 13.576a4.976 4.976 0 0 0 1.495-3.704A5 5 0 0 0 12 7.01a5 5 0 1 0-7.5 6.566l7.5 7.428 7.5-7.428Z"></path>
                                         </svg>
                                     </button>

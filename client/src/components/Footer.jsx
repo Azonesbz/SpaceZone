@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 export default function Footer() {
     return (
         <>
-            <footer className="flex flex-col bg-gray-950">
-                <section className="flex flex-col items-center bg-black text-white min-h-full">
+            <footer className="flex flex-col bg-neutral-900">
+                <section className="flex flex-col items-center text-white min-h-full">
                     <div className="grid grid-cols-6 justify-between items-center py-10 font-karla gap-16">
                         <div className="flex flex-col col-span-6 lg:col-span-2">
                             <h1 className='text-center text-2xl'>
