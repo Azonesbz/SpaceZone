@@ -1,6 +1,6 @@
 import express from 'express'
 import { addProduct, deleteProductId, filterProduct, getAllProduct, getLikeProduct, getNumberProduct, getProductById, getProductPage, likeProduct, updateProduct } from './controllers/products_controller.js'
-import { addUser, connectUser, deleteUser, editEmail, editFirstName, editNumberPhone, editUsername, getAllUsers, getNumberUser, sessionIsValid, updateUser, userExist, userLogout } from './controllers/user_controller.js'
+import { addUser, connectUser, deleteUser, editEmail, editFirstName, editNumberPhone, editUsername, getAllUsers, sessionIsValid, updateUser, userExist, userLogout } from './controllers/user_controller.js'
 import { uploadProfil, uploadProduct, uploadProfilFile } from './controllers/uploadFile_controller.js'
 import getCarts, { addProductCart, deleteItemsCart } from './controllers/cart_controller.js'
 import { paymentCardNow } from './controllers/payement_controller.js'
@@ -10,7 +10,7 @@ const router = express.Router()
 // Route utilisateur
 
 router.get('/users', getAllUsers)
-router.get('/countUser', getNumberUser)
+
 router.post('/users/new', addUser)
 router.post('/users/login', connectUser)
 router.post('/users/search', userExist)
@@ -34,8 +34,8 @@ router.get(`/getLikedProducts/:id`, getLikeProduct)
 
 router.post('/productPage', getProductPage)
 router.post('/likeProduct', likeProduct)
-router.post('/product/new', uploadProduct.array('files'), addProduct)
 router.post('/getFilterProduct', filterProduct)
+router.post('/product/new', uploadProduct.array('files'), addProduct)
 
 router.put('/updateProduct/:id', updateProduct)
 

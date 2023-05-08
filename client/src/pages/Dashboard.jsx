@@ -23,7 +23,7 @@ function EditUserModal({ user, isOpen, onClose }) {
             id: user.id,
             username: editFormUser.current[0].value,
             email: editFormUser.current[1].value,
-            permission: editFormUser.current[2].value,
+            permission: parseInt(editFormUser.current[2].value),
         }
         dispatch(updateUser(data))
         onClose();

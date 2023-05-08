@@ -154,13 +154,7 @@ export async function likeProduct(req, res){
     })
 }
 export async function getLikeProduct(req, res){
-    const id = parseInt(req.params.id)
-
-    if(typeof id !== "number")
-    {
-        res.status(400).json({err: "Les données entrantes sont invalides."})
-        return;
-    }
+    const id = req.params.id
 
     products.getLike(id)
     .then(response => {

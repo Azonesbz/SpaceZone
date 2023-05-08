@@ -48,15 +48,9 @@ const notifyListeners = (eventType, payload) => {
 export const getAllUser = () => {
     return async (dispatch) => {
         return axios.get('http://localhost:3001/users').then(res => {
-            dispatch({ type: GET_ALL_USERS, payload: res.data.response })
-            notifyListeners(GET_ALL_USERS, res.data.response)
-        })
-    }
-}
-export const getUserNumber = () => {
-    return async (dispatch) => {
-        return axios.get('http://localhost:3001/countUser').then(res => {
-            dispatch({ type: NUMBER_OF_USER, payload: res.data.result })
+            dispatch({ type: GET_ALL_USERS, payload: res.data.allUsers })
+            dispatch({ type: NUMBER_OF_USER, payload: res.data.count })
+            notifyListeners(GET_ALL_USERS, res.data.allUsers)
         })
     }
 }
@@ -111,7 +105,7 @@ export const deleteUser = (id) => {
 export const updateUser = (data) => {
     return (dispatch) => {
         return axios.put(`http://localhost:3001/updateUser/${data.id}`, data).then(res => {
-            dispatch({ type: UPDATE_USER, payload: res.data.response})
+            dispatch({ type: UPDATE_USER, payload: res.data.success})
         })
     }
 }
@@ -120,7 +114,7 @@ export let editUsername = (data) => {
         return axios.put(`http://localhost:3001/editUsername/${data.id}`, data).then(res => {
             localStorage.removeItem('token')
             localStorage.setItem('token', res.data.token)
-            dispatch({type: EDIT_USER_PROFIL, payload: {username: res.data.username}})
+            dispatch({type: EDIT_USER_PROFIL, payload: {username: res.data.success}})
         })
     }
 }
@@ -129,7 +123,7 @@ export let editEmail = (data) => {
         return axios.put(`http://localhost:3001/editEmail/${data.id}`, data).then(res => {
             localStorage.removeItem('token')
             localStorage.setItem('token', res.data.token)
-            dispatch({type: EDIT_USER_PROFIL, payload: {email: res.data.email}})
+            dispatch({type: EDIT_USER_PROFIL, payload: {email: res.data.success}})
         })
     }
 }
@@ -138,7 +132,7 @@ export let editNumberPhone = (data) => {
         return axios.put(`http://localhost:3001/editNumberPhone/${data.id}`, data).then(res => {
             localStorage.removeItem('token')
             localStorage.setItem('token', res.data.token)
-            dispatch({type: EDIT_USER_PROFIL, payload: {number_phone: res.data.numberPhone}})
+            dispatch({type: EDIT_USER_PROFIL, payload: {number_phone: res.data.success}})
         })
     }
 }
@@ -147,7 +141,7 @@ export let editFirstName = (data) => {
         return axios.put(`http://localhost:3001/editFirstName/${data.id}`, data).then(res => {
             localStorage.removeItem('token')
             localStorage.setItem('token', res.data.token)
-            dispatch({type: EDIT_USER_PROFIL, payload: {first_name: res.data.firstName}})
+            dispatch({type: EDIT_USER_PROFIL, payload: {first_name: res.data.success}})
         })
     }
 }

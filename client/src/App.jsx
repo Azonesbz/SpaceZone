@@ -10,7 +10,7 @@ import ProductId from "./pages/product/[productId]";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { sessionIsValid } from "./actions/session.action";
-import { getAllUser, getUserNumber } from "./actions/user.action";
+import { getAllUser } from "./actions/user.action";
 import Error from "./pages/404";
 import { getAllProduct, getLikeProduct, getProductNumber } from "./actions/product.action";
 import { isEmpty } from "./utils/utils";
@@ -40,7 +40,7 @@ function RouteWrapper({ children }) {
     dispatch(sessionIsValid())
     dispatch(getAllUser())
     dispatch(getProductNumber())
-    dispatch(getUserNumber())
+    // dispatch(getUserNumber())
     dispatch(getAllProduct())
     dispatch(getCarts())
     dispatch(getLikeProduct())

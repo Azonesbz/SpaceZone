@@ -44,7 +44,7 @@ export default function Welcome() {
         .then(
           res => {
             if (res.status === 200) {
-              setUsername(res.data.user[0].username)
+              setUsername(res.data.success[0].username)
               setIdentifierValid(true)
               setLogin(true)
             }
