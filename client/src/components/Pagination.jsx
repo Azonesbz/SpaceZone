@@ -2,7 +2,6 @@ import { useSelector } from "react-redux"
 
 export default function Pagination ({setPage}){
     const totalProduct = useSelector((state) => state.productReducer)
-
     
     let handleNextProduct = (e) => {
         const pageValue = e.currentTarget.querySelector('span').getAttribute('value')

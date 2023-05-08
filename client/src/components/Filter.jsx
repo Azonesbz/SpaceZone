@@ -14,7 +14,7 @@ export default function Filter({setErrorFilter}){
         let data = {
             decreasing: form.current[0].checked,
             crescent: form.current[1].checked,
-            category: form.current[2].value,
+            category: parseInt(form.current[2].value),
         }
         if ((data.decreasing == false && data.crescent == false) && (data.category == 0)) {
             setErrorFilter(true)
@@ -32,13 +32,13 @@ export default function Filter({setErrorFilter}){
                         <label htmlFor="decreasing" className="flex items-center w-full sm:space-x-3 justify-between">
                             <h1 className="whitespace-nowrap">Prix décroissant</h1>
                             <div className="h-[1px] bg-neutral-700 w-full mx-5"/>
-                            <input type="radio" id="decreasing" name="option" className="h-8 w-12" />
+                            <input type="radio" id="decreasing" name="option" className="h-8 w-8" />
 
                         </label>
                         <label htmlFor="crescent" className="flex items-center w-full sm:space-x-3 justify-between">
                             <h1 className="whitespace-nowrap">Prix croissant</h1>
                             <div className="h-[1px] bg-neutral-700 w-full mx-5"/>
-                            <input type="radio" id="crescent" name="option" className="h-8 w-12" />
+                            <input type="radio" id="crescent" name="option" className="h-8 w-8" />
                         </label>
                         <label className="w-full">
                             <select className="text-black py-3 pl-2 w-full rounded">

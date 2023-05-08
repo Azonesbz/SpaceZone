@@ -16,7 +16,7 @@ export let getCarts = () => {
             token: token
         }
         return axios.post(`http://localhost:3001/carts`, data).then(response => {
-            dispatch({ type: GET_CARTS_PRODUCT, payload: response.data.cartItem })
+            dispatch({ type: GET_CARTS_PRODUCT, payload: response.data.success })
         })
         .catch(err => {
             console.error(err)
@@ -27,7 +27,7 @@ export let getCarts = () => {
 export let addProductCart = (data) => {
     return (dispatch) => {
         return axios.post('http://localhost:3001/cart/newItem', data).then(res => {
-            dispatch({ type: ADD_PRODUCTS_CART, payload: res.data.response[0] })
+            dispatch({ type: ADD_PRODUCTS_CART, payload: res.data.success[0] })
         })
     }
 }

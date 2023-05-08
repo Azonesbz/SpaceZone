@@ -23,46 +23,61 @@ export let getProductPage = (data) => {
 export let getAllProduct = () => {
     return (dispatch) => {
         return axios.get('http://localhost:3001/allProduct').then(res => {
-            dispatch({ type: GET_ALL_PRODUCTS, payload: res.data.products })
+            dispatch({ type: GET_ALL_PRODUCTS, payload: res.data.product })
         })
     }
 }
 export let getProductNumber = () => {
     return (dispatch) => {
-        return axios.get('http://localhost:3001/productNumber').then(res => {
-            dispatch({ type: NUMBER_OF_PRODUCTS, payload: res.data.result })
-        })
+        return axios.get('http://localhost:3001/productNumber')
+        .then(
+            res => {
+                dispatch({ type: NUMBER_OF_PRODUCTS, payload: res.data.number })
+            }
+        )
     }
 }
 export let getProductById = (id) => {
     return (dispatch) => {
-        return axios.get(`http://localhost:3001/product/${id}`).then(res => {
-            dispatch({ type: GET_PRODUCT_BY_ID, payload: res.data.product})
-        })
+        return axios.get(`http://localhost:3001/product/${id}`)
+        .then(
+            res => {
+                dispatch({ type: GET_PRODUCT_BY_ID, payload: res.data.success})
+            }
+        )
     }
 }
 
 export let addProduct = (data) => {
     return (dispatch) => {
-        return axios.post('http://localhost:3001/product/new', data).then(res => {
-            dispatch({ type: ADD_PRODUCTS, payload: res.data.newProduct})
-        })
+        return axios.post('http://localhost:3001/product/new', data)
+        .then(
+            res => {
+                dispatch({ type: ADD_PRODUCTS, payload: res.data.success})
+            }
+        )
     }
 }
 
 export let updateProduct = (data) => {
     return (dispatch) => {
-        return axios.put(`http://localhost:3001/updateProduct/${data.id}`, data).then(res => {
-            dispatch({type: UPDATE_PRODUCT, payload: res.data.response})
-        })
+        return axios.put(`http://localhost:3001/updateProduct/${data.id}`, data)
+        .then(
+            res => {
+                dispatch({type: UPDATE_PRODUCT, payload: res.data.response})
+            }
+        )
     }
 }
 
 export let searchProduct = (data) => {
     return (dispatch) => {
-        return axios.post('http://localhost:3001/search/product', data).then(res => {
-            dispatch({ type: SEARCH_PRODUCTS, payload: res.data.product})
-        })
+        return axios.post('http://localhost:3001/search/product', data)
+        .then(
+            res => {
+                dispatch({ type: SEARCH_PRODUCTS, payload: res.data.product})
+            }
+        )
     }
 }
 export let deleteProduct = (id) => {
@@ -87,14 +102,14 @@ export let getLikeProduct = (id) => {
     return (dispatch) => {
         localStorage.getItem('token')
         return axios.get(`http://localhost:3001/getLikedProducts/${id}`).then(res => {
-            dispatch({type: GET_LIKE_PRODUCTS, payload: res.data.response})
+            dispatch({type: GET_LIKE_PRODUCTS, payload: res.data.success})
         })
     }
 }
 export let filterProduct = (data) => {
     return (dispatch) => {
         return axios.post(`http://localhost:3001/getFilterProduct`, data).then(res => {
-            dispatch({type: GET_PRODUCT_PAGE, payload: res.data.product})
+            dispatch({type: GET_PRODUCT_PAGE, payload: res.data.success})
         })
     }
 }

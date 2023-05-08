@@ -11,8 +11,8 @@ let getNumberProduct = async () => {
     return result
 }
 
-let getProductPage = async (page) => {
-    const [products] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, c.name AS category, u.username, u.id AS user_id, u.profil_picture, p.url_image FROM products p INNER JOIN users u ON p.user_id = u.id INNER JOIN category c ON p.category_id = c.id LIMIT 6 OFFSET ?`, [page])
+let getProductPage = async (offset, limit) => {
+    const [products] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, c.name AS category, u.username, u.id AS user_id, u.profil_picture, p.url_image FROM products p INNER JOIN users u ON p.user_id = u.id INNER JOIN category c ON p.category_id = c.id LIMIT ? OFFSET ?`, [limit, offset])
     return products
 }
 let getAllProduct = async () => {

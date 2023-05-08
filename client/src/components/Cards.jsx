@@ -95,8 +95,8 @@ export default function Cards({
                                         onClick={(e) => {
                                             e.preventDefault()
                                             let data = {
-                                                productId: product.id,
-                                                userId: currentUser.id
+                                                productId: parseInt(product.id),
+                                                userId: parseInt(currentUser.id)
                                             }
                                             dispatch(likeProduct(data))
                                         }}

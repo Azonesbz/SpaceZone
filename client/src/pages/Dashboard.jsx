@@ -82,11 +82,11 @@ function EditProductModal({ product, isOpen, onClose }) {
     const handleSubmit = (event) => {
         event.preventDefault();
         data = {
-            id: product.id,
+            id: parseInt(product.id),
             title: editFormProduct.current[0].value,
-            author: editFormProduct.current[1].value,
-            price: editFormProduct.current[2].value,
-            inventory: editFormProduct.current[3].value,
+            author: parseInt(editFormProduct.current[1].value),
+            price: parseInt(editFormProduct.current[2].value),
+            inventory: parseInt(editFormProduct.current[3].value),
         }
         dispatch(updateProduct(data))
         dispatch(getAllProduct())
@@ -107,7 +107,7 @@ function EditProductModal({ product, isOpen, onClose }) {
                 </label>
                 <label className='flex flex-col w-3/4'>
                     Auteur
-                    <select defaultValue={product.username}>
+                    <select className='py-2 rounded bg-white px-2' defaultValue={product.username}>
                         {!isEmpty(allUser) && allUser.map(user => (
                             <option key={user.id} value={user.id}>{user.username}</option>
                         ))}
@@ -118,7 +118,7 @@ function EditProductModal({ product, isOpen, onClose }) {
                     Prix
                     <input
                         className='w-full py-[5px] px-2 rounded'
-                        type="number"
+                        type="text"
                         value={price}
                         onChange={(e) => setPrice(e.currentTarget.value)} />
                 </label>

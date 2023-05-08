@@ -1,53 +1,83 @@
 import { products } from "../repository/products_repository.js";
 import { currentDate } from "../utils.js";
 
+// Function to get product according to the page
+
 export async function getProductPage(req, res){
-    const currentPage = req.body.page
-    const offset = (currentPage * 6 - 6)
-    products.page(offset)
+    const currentPage = parseInt(req.body.page);
+    const limit = 6; // Number of article to return
+    let offset;
+    if (currentPage > 1)
+    {
+        offset = (currentPage * 6 - 6)
+    }
+    else 
+    {
+        offset = 1
+    }
+    if (isNaN(offset) || offset < 1)
+    {
+        res.status(400).json({err: 'Le numéro de page doit être un entier positif'});
+        return;
+    }
+
+    products.page(offset, limit) // Enter database with offset and limit
     .then(product => {
-        res.status(201).json({product})
+        res.status(200).json({product}) // Send product to response
     })
     .catch(err => {
-        res.status(404).json({message: `Aucun article pour le moment, revenez plus tard !`, err})
+        res.status(500).json({failure: `Erreur lors de la récupération des articles`, err})
     })
 }
 export async function getAllProduct(req, res){
-    products.all().then(products => {
-        res.status(201).json({products})
-    })
+    try {
+        const product = await products.all()
+        const count = products.length
+        res.status(201).json({ success: "Tous les produits ont été récupérés avec succès.", count, product })
+      } catch (err) {
+        console.error(err)
+        res.status(500).json({ failure: "Erreur lors de la récupération de tous les produits", err })
+      }
 }
 export async function getNumberProduct(req, res){
-    products.number().then(
-        result => {
-            res.status(200).json({result: result[0].total_produits})
-        }
-    )
-    .catch(err => res.status(404).json({err}))
+    try {
+        const productNumber = await products.number()
+        res.status(201).json({ success: "Le nombre de produits à été récupérer avec succès.", number: productNumber[0].total_produits})
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ failure: "Erreur lors de la récupération de tous les produits", err });
+    }
 }
 export async function getProductById(req, res){
-    const id = req.params.id
+    const id = parseInt(req.params.id)
+
+    if(typeof id !== "number"){
+        res.status(400).json({err: "Les données entrantes sont invalides."})
+        return;
+    }
+
     products.byId(id)
     .then(
         product => {
-            res.status(201).json({product})
+            res.status(201).json({success: product})
         }
     )
     .catch(
         err => {
             console.log(err)
-            res.status(404).json({message: `Page introuvable, redirection vers la page d'acceuil.`, err})
+            res.status(404).json({failure: `Page introuvable, redirection vers la page d'acceuil.`, err})
         }
     )
 }
-export async function getNextProduct(req, res){
-    const page = req.body.page
-    products.next(page).then(productNext => {
-        res.json({productNext})
-    })
-}
 export async function addProduct(req, res){
     const {description, name, price, inventory, id, category} = JSON.parse(req.body.productData)
+
+    if(typeof description !== "string" || typeof name !== "string" || typeof price !== "number" || typeof inventory !== "number" || typeof id !== "number" || typeof category !== "number")
+    {
+        res.status(400).json({err: "Les données entrantes sont invalides."})
+        return;
+    }
+
     const created_at = currentDate()
     const files = req.files.map((file) => file.filename); // Récupération des noms de fichiers
 
@@ -63,7 +93,7 @@ export async function addProduct(req, res){
                 created_at: response[0].created_at,
                 url_image: response[0].url_image
             }
-            res.status(200).json({newProduct: data})
+            res.status(200).json({success: data})
         }
     )
     .catch(err => {
@@ -73,16 +103,29 @@ export async function addProduct(req, res){
 
 export async function updateProduct(req, res){
     const {inventory, author, title, price} = req.body
-    const id = req.params.id
+    const id = parseInt(req.params.id)
+
+    if(typeof inventory !== "number" || typeof author !== "number" || typeof title !== "string" || typeof price !== "number" || typeof id !== "number")
+    {
+        res.status(400).json({err: "Les données entrantes sont invalides."})
+        return;
+    }
+
+    
     products.update(id, title, author, price, inventory).then(response => {
-        res.status(201).json({response})
+        res.status(201).json({success: response})
     }).catch(err => {
         console.error(err)
         res.status(400).json({err})
     })
 }
 export async function deleteProductId(req, res){
-    const id = req.params.id
+    const id = parseInt(req.params.id)
+    if(typeof id !== "number")
+    {
+        res.status(400).json({err: "Les données entrantes sont invalides."})
+        return;
+    }
     products.delete(id)
     .then(response => res.status(201).json({response}))
     .catch(err => {
@@ -92,6 +135,11 @@ export async function deleteProductId(req, res){
 }
 export async function likeProduct(req, res){
     const { userId, productId } = req.body
+    if(typeof userId !== "number" || typeof productId !== "number")
+    {
+        res.status(400).json({err: "Les données entrantes sont invalides."})
+        return;
+    }
     products.like(userId, productId)
     .then(response => {
         if(response.success){
@@ -102,14 +150,21 @@ export async function likeProduct(req, res){
     })
     .catch(err => {
         console.error(err)
-        res.status(500).json({err})
+        res.status(500).json({failure: err})
     })
 }
 export async function getLikeProduct(req, res){
-    const id = req.params.id
+    const id = parseInt(req.params.id)
+
+    if(typeof id !== "number")
+    {
+        res.status(400).json({err: "Les données entrantes sont invalides."})
+        return;
+    }
+
     products.getLike(id)
     .then(response => {
-        res.status(201).json({response})
+        res.status(201).json({success: response})
     })
     .catch(err => {
         console.error(err)
@@ -118,25 +173,17 @@ export async function getLikeProduct(req, res){
 }
 export async function filterProduct(req, res){
     const {decreasing, crescent, category} = req.body
-    products.filter(decreasing, crescent, category).then(response => {
-        res.status(201).json({product: response})
-    })
-}
-
-/** export async function getSearch(req, res){
-    const {divers, accessoires, vêtements, priceMin, priceMax} = req.body
-    if(divers === false && accessoires === false && vêtements === false){
-        res.status(300).json({msg: 'Veuillez sélectionner au moins un critères de recherche.'})
+    console.table(typeof decreasing)
+    if(typeof decreasing !== "boolean" || typeof crescent !== "boolean" || typeof category !== "number")
+    {
+        res.status(400).json({err: "Les données entrantes sont invalides."})
         return;
     }
-    console.log(accessoires)
-    products.search(divers, accessoires, vêtements, priceMin, priceMax)
-    .then(result => {
-        console.log(result)
-        res.status(200).json({result})
+    products.filter(decreasing, crescent, category).then(response => {
+        res.status(201).json({success: response})
     })
     .catch(err => {
-        console.log(err)
-        res.status(500).json({err})
+        console.error(err)
+        res.status(500).json({failure: err})
     })
-} */
+}

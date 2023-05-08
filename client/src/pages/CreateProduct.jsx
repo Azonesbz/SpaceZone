@@ -51,10 +51,10 @@ export default function CreateProduct(){
         const productData = {
             id: currentUser.id,
             name: form.current[0].value,
-            price: form.current[1].value,
+            price: parseInt(form.current[1].value),
             description: form.current[2].value,
-            category: form.current[3].value,
-            inventory: form.current[4].value
+            category: parseInt(form.current[3].value),
+            inventory: parseInt(form.current[4].value)
         }
 
         formData.append('productData', JSON.stringify(productData));
