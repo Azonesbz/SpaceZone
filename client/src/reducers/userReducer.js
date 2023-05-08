@@ -1,7 +1,9 @@
 import { DELETE_LIKE_PRODUCT, GET_LIKE_PRODUCTS, LIKE_PRODUCT } from "../actions/product.action"
 import { ADD_USER, LOGIN_USER, GET_ALL_USERS, SET_USER, NUMBER_OF_USER, EDIT_USER_PROFIL, DELETE_USER, UPDATE_USER } from "../actions/user.action"
 
-const initialState = {}
+const initialState = {
+    liked: {}
+}
 
 export function allUserReducer(state = initialState, action){
     switch(action.type){

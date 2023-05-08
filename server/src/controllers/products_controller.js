@@ -6,16 +6,16 @@ import { currentDate } from "../utils.js";
 export async function getProductPage(req, res){
     const currentPage = parseInt(req.body.page);
     const limit = 6; // Number of article to return
-    let offset;
+    let offset = 0
     if (currentPage > 1)
     {
         offset = (currentPage * 6 - 6)
     }
     else 
     {
-        offset = 1
+        offset = 0
     }
-    if (isNaN(offset) || offset < 1)
+    if (isNaN(offset))
     {
         res.status(400).json({err: 'Le numéro de page doit être un entier positif'});
         return;
@@ -23,7 +23,7 @@ export async function getProductPage(req, res){
 
     products.page(offset, limit) // Enter database with offset and limit
     .then(product => {
-        res.status(200).json({product}) // Send product to response
+        res.status(200).json({success: product}) // Send product to response
     })
     .catch(err => {
         res.status(500).json({failure: `Erreur lors de la récupération des articles`, err})
@@ -83,20 +83,11 @@ export async function addProduct(req, res){
 
     products.add(id, name, price, description, category, created_at, inventory, JSON.stringify(files)).then(
         (response) => {
-            let data = {
-                id: response[0],
-                name: response[0],
-                price: response[0],
-                description: response[0],
-                category: response[0],
-                seller: response[0],
-                created_at: response[0].created_at,
-                url_image: response[0].url_image
-            }
-            res.status(200).json({success: data})
+            res.status(200).json({success: response})
         }
     )
     .catch(err => {
+        console.error(err)
         res.status(500).json({msg:`Une erreur est survenue, veuillez réessayer dans quelques instants`, err})
     })
 }

@@ -16,7 +16,8 @@ export const GET_LIKE_PRODUCTS = "GET_LIKE_PRODUCTS"
 export let getProductPage = (data) => {
     return (dispatch) => {
         return axios.post('http://localhost:3001/productPage', data).then(res => {
-            dispatch({ type: GET_PRODUCT_PAGE, payload: res.data.product })
+            console.log(res.data.success)
+            dispatch({ type: GET_PRODUCT_PAGE, payload: res.data.success })
         })
     }
 }

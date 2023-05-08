@@ -73,12 +73,23 @@ export async function uploadProfilFile(req, res){
         if(mimetype === 'image/png'){
             newFileName = path.join(path.dirname(oldPath), id + '.png');
             url = id + '.png'
-            users.picture(userId, url).then(user => {
+        } else if(mimetype === 'image/jpeg') {
+            newFileName = path.join(path.dirname(oldPath), id + '.jpg');
+            url = id + '.jpg'
+        } else if(mimetype === 'image/webp') {
+            newFileName = path.join(path.dirname(oldPath), id + '.webp');
+            url = id + '.webp'
+        } else {
+            return res.status(400).send('Unsupported file format.');
+        }
+
+        users.picture(userId, url)
+            .then(user => {
                 const token = jwt.sign(user[0], process.env.PRIVATE_KEY, {expiresIn: '1h'})
                 fs.rename(oldPath, path.join(process.cwd(), newFileName), (err) => {
                     if (err) {
-                    console.log(err);
-                    return res.status(500).send(err);
+                        console.log(err);
+                        return res.status(500).send(err);
                     }
                     console.log('File renamed successfully.');
                     return res.status(200).json({msg: 'File renamed successfully.', url, token: token});
@@ -88,22 +99,6 @@ export async function uploadProfilFile(req, res){
                 console.log(err)
                 res.status(500).json({err})
             })
-        } else if(mimetype === 'image/jpeg') {
-            newFileName = path.join(path.dirname(oldPath), id + '.jpg');
-            url = id + '.jpg'
-            users.picture(userId, url).then(user => {
-                const token = jwt.sign(user[0], process.env.PRIVATE_KEY, {expiresIn: '1h'})
-                fs.rename(oldPath, path.join(process.cwd(), newFileName), (err) => {
-                    if (err) {
-                    console.log(err);
-                    return res.status(500).send(err);
-                    }
-                
-                    console.log('File renamed successfully.');
-                    return res.status(200).json({msg: 'File renamed successfully.', url, token: token});
-                });
-            })
-        }
         
     } catch (err) {
         console.error(err);

@@ -90,7 +90,7 @@ export default function Navbar(){
                         {!isLogged ? <li className="cursor-pointer">
                             <Link to="/" className="text-md font-karla font-medium rounded-md text-blue-700">S'identifier</Link>
                         </li> : "" }
-                        {isLogged && (!isEmpty(currentUser) && currentUser.name == 'ADMINISTRATOR' ) || (!isEmpty(currentUser) && currentUser.name == 'MODERATOR') ? <li className="cursor-pointer">
+                        {isLogged && (!isEmpty(currentUser) && currentUser.permission == 'ADMINISTRATOR' ) || (!isEmpty(currentUser) && currentUser.permission == 'MODERATOR') ? <li className="cursor-pointer">
                             <Link 
                             className="text-md font-karla rounded-md text-black"
                             to="/dashboard"

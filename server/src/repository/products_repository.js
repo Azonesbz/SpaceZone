@@ -35,7 +35,7 @@ let getNextProducts = async (page) => {
 
 let addProduct = async (id, title, price, description, category, created_at, inventory, product_image) => {
     const [info] = await createPoolConnection().query(`INSERT INTO products (user_id, title, price, description, category_id, created_at, inventory, url_image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`, [id, title, price, description, category, created_at, inventory, product_image])
-    const [result] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username, u.profil_picture, CONVERT_TZ(p.created_at, '+00:00', '+02:00') AS created_at, p.url_image FROM products p INNER JOIN users u ON p.user_id = u.id WHERE p.id = ?`, [info[0].insertId])
+    const [result] = await createPoolConnection().query(`SELECT p.id, p.title, p.price, p.description, u.username, u.profil_picture, CONVERT_TZ(p.created_at, '+00:00', '+02:00') AS created_at, p.url_image FROM products p INNER JOIN users u ON p.user_id = u.id WHERE p.id = ?`, [info.insertId])
     return result
 }
 
@@ -84,8 +84,9 @@ let updateProductDb = async (id, title, author, price, inventory) => {
 let deleteProductDb = async (id) => {
     const [productIsLike] = await createPoolConnection().query(`SELECT pl.user_id FROM products p INNER JOIN products_likes pl ON p.id = pl.product_id WHERE p.id = ?`, [id])
     if(productIsLike.length){
-        await createPoolConnection().query(`DELETE FROM products_likes WHERE user_id = ?`, [productIsLike[0].user_id]);
+        await createPoolConnection().query(`DELETE FROM products_likes WHERE product_id = ?`, [id]);
     }
+    await createPoolConnection().query(`DELETE FROM carts_items WHERE product_id = ?`, [id]);
     const [info] = await createPoolConnection().query(`DELETE FROM products WHERE id = ?`, [id]);
     return info
 }
