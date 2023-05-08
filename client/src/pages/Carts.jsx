@@ -29,7 +29,7 @@ export default function Carts(){
 
             <Navbar />
             <section className="sm:p-10 container flex flex-col justify-center min-h-screen">
-                <div className="flex items-center justify-between pb-2 mt-20">
+                <div className="flex items-center justify-between pb-2">
                     <div className="flex justify-between items-end w-full">
                         <div className="flex flex-col">
                             <h1 className="uppercase font-karla font-medium text-3xl whitespace-nowrap">Mon Panier</h1>
@@ -44,7 +44,15 @@ export default function Carts(){
                             </button> 
                             : ""}
                         </div>
-                        <h2 className="flex font-karla font-medium text-xl sm:text-2xl md:text-3xl whitespace-nowrap duration-200">Prix total:<span>{totalPrice ? totalPrice + "€" : "Aucun article dans le panier"}</span></h2>
+                        {totalPrice ? 
+                        <h2 className="flex font-karla font-medium text-xl sm:text-2xl md:text-3xl duration-200">
+                            Prix total:
+                            <span>
+                                {totalPrice + '€'}
+                            </span>
+                        </h2>
+                        : null}
+                        
                     </div>
                 </div>
                 <div className="grid grid-cols-12 gap-5" >
@@ -91,7 +99,7 @@ export default function Carts(){
                                     <path d="m3 3 18 18"></path>
                                 </svg>
                                 Vous n'avez aucun article dans votre panier 
-                                <Link className="underline" to="/home">Revenir à la page d'acceuil</Link>
+                                <Link className="underline hover:text-indigo-800" to="/home">Revenir à la page d'acceuil</Link>
                             </h1>
                 </div>
                 }

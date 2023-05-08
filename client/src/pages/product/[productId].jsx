@@ -43,7 +43,7 @@ export default function ProductId() {
   return (
     <>
       <Header />
-      <div className='container mt-20'>
+      <div className='flex flex-col gap-10 container mt-20'>
 
         <section className='flex relative min-w-full container items-center mt-28 flex-col sm:flex-row'>
             <div className='grid grid-cols-12 items-center w-full'>
@@ -57,12 +57,12 @@ export default function ProductId() {
                   )}
                 </Carousel>
               </div>
-              <div className={`col-span-12 lg:col-span-8 flex flex-col justify-between mt-5 sm:mt-0 sm:p-10 md:p-14 bg-slate-50 duration-500 font-Lato h-full shadow`}>
-                <div className='flex flex-col space-y-10'>
-                  <h1 className='text-4xl p-3 sm:text-5xl'>{!isEmpty(productId) && productId.title}</h1>
-                  <div>
-                    <h2 className='text-3xl bg-neutral-900 text-slate-200 p-2 rounded'>A propos de cet article</h2>
-                    <p className="font-medium text-xl h-full overflow-auto font-SourceSansPro p-5">
+              <div className={`col-span-12 lg:col-span-8 flex flex-col justify-between mt-5 sm:mt-0 p-5 sm:p-10 md:p-14 bg-slate-50 duration-500 font-Lato h-full shadow`}>
+                <div className='flex flex-col space-y-2'>
+                  <h1 className='text-5xl p-3 sm:text-5xl'>{!isEmpty(productId) && productId.title}</h1>
+                  <div className='flex flex-col'>
+                    <h2 className='text-4xl px-2 sm:rounded'>A propos de cet article</h2>
+                    <p className="font-medium text-xl h-full overflow-auto font-SourceSansPro mt-5 px-2 sm:p-5">
                       {!isEmpty(productId) && productId.description}
                     </p>
                   </div>
@@ -144,14 +144,14 @@ export default function ProductId() {
             </div>
         </section>
 
-        <section className='bg-neutral-900 px-24 py-10 text-white min-w-screen rounded shadow'>
-          <div className='flex flex-col col-span-1'>
-            <h1 className='text-white text-3xl'>
+        <section className='bg-white px-10 py-10 w-full shadow'>
+          <div className='flex flex-col col-span-1 items-center sm:items-start'>
+            <h1 className='text-3xl'>
               Critères
             </h1>
-            <div className='grid grid-cols-12 h-full justify-center mt-5 gap-10'>
+            <div className='flex flex-col sm:flex-row h-full justify-center mt-5 gap-10 items-start'>
               {/* Catégorie */}
-              <div className='col-span-4 flex items-center'>
+              <div className='flex items-center'>
                 <svg 
                 width="46" 
                 height="46" 
@@ -167,7 +167,7 @@ export default function ProductId() {
                   <path d="M4 7v3.859c0 .537.213 1.052.593 1.432l8.116 8.116a2.023 2.023 0 0 0 2.864 0l4.834-4.834a2.023 2.023 0 0 0
                    0-2.864L12.29 4.593A2.025 2.025 0 0 0 10.859 4H7a3 3 0 0 0-3 3v0Z"></path>
                 </svg>
-                <h2 className='flex flex-col text-lg ml-5 text-slate-300'>
+                <h2 className='flex flex-col text-lg ml-5'>
                   Catégorie: 
                     <p 
                     className={!isEmpty(productId) && 
@@ -183,7 +183,7 @@ export default function ProductId() {
                   <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18a8 8 0 1 1 0-16.001A8 8 0 0 1 12 20Z"></path>
                   <path d="M16 11h-3V8a1 1 0 0 0-2 0v4a1 1 0 0 0 1 1h4a1 1 0 0 0 0-2Z"></path>
                 </svg>
-                <h2 className='flex flex-col text-lg ml-5 text-slate-300'>Disponibilité: 
+                <h2 className='flex flex-col text-lg ml-5'>Disponibilité: 
                     <span
                     className={!isEmpty(productId) && `lowercase first-letter:uppercase px-3 py-1 text-black font-SourceSansPro text-center
                     opacity-95 rounded-full text-sm ${!isEmpty(productId) && productId.inventory <= 0 ? "bg-red-600" : productId.inventory <= 10 ? 
@@ -200,10 +200,10 @@ export default function ProductId() {
           </div>
         </section>
 
-        <section className='my-10 py-10 text-gray-950 min-w-screen'>
-          <div className='flex flex-col w-3/4'>
-            <h1 className='text-3xl font-rajdhani font-semibold'>La livraison</h1>
-            <div className='flex flex-col space-y-5 mt-5 border-b-[1px] border-black pb-5 mb-5'>
+        <section className='mb-20 min-w-screen'>
+          <div className='flex flex-col w-full sm:w-3/4'>
+            <h1 className='text-3xl font-rajdhani font-semibold text-center sm:text-left'>La livraison</h1>
+            <div className='flex flex-col space-y-5 border-b-[1px] border-black p-5 sm:pl-0 mb-10'>
               <p className='text-xl font-SourceSansPro font-medium'>
                 Recevez votre produit à domicile, nous nous engageons à vous garantir la meilleur livraison possible, et si vous n'êtes
                 pas satisfait, un remboursement vous sera du dans les meilleurs délais.
@@ -213,16 +213,14 @@ export default function ProductId() {
                 produit est rendu en mauvaise état.
               </p>
             </div>
-            <div className='flex items-center'>
-              <div className='flex flex-col space-y-10 ml-5 w-full'>
+            <div className='flex items-center p-5 sm:p-0'>
+              <div className='flex flex-col space-y-10 w-full'>
                 <div className='flex items-center space-x-5'>
-                  <h2 className='font-karla text-xl'>Mondial Relay</h2>
                   <img src={mondialRelay} alt='logo mondial relay' width={100} className='hover:scale-110 duration-200' />
                   <div className='w-full h-[1px] bg-neutral-300'></div>
                   <span className='font-rajdhani text-xl font-semibold'>5.30€</span>
                 </div>
                 <div className='flex items-center space-x-5'>
-                  <h2 className='text-center font-karla text-xl'>Fedex</h2>
                   <img src={fedex} alt='logo mondial relay' width={100} className='hover:scale-110 duration-200' />
                   <div className='w-full h-[1px] bg-neutral-300'></div>
                   <span className='font-rajdhani text-xl font-semibold'>3.89€</span>

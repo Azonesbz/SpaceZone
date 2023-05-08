@@ -30,6 +30,7 @@ export default function Login({
         dispatch(loginUser(data)).then(res => {
             setConfetti(true)
             if (res.status === 200) {
+                
                 setTimeout(() => {
                     setConfetti(false)
                     setLoader(false)
