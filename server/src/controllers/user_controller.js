@@ -30,12 +30,13 @@ export async function addUser(req, res) {
     try {
         const hashedPassword = await bcrypt.hash(password, 15)
         const newUser = await users.add(username, email, hashedPassword, created_at, last_connection)
+        console.log(newUser)
         const tokenData = {
-            id: newUser.id,
-            username: newUser.username,
-            email: newUser.email,
-            created_at: newUser.created_at,
-            last_connection: newUser.last_connection,
+            id: newUser[0].id,
+            username: newUser[0].username,
+            email: newUser[0].email,
+            created_at: newUser[0].created_at,
+            last_connection: newUser[0].last_connection,
         };
         const token = jwt.sign(tokenData, process.env.PRIVATE_KEY, { expiresIn: '1h' })
         await users.newToken(email, token)

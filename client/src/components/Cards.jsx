@@ -94,6 +94,7 @@ export default function Cards({
                                         className="absolute right-5 rounded-full p-1 active:scale-90 duration-100"
                                         onClick={(e) => {
                                             e.preventDefault()
+                                            console.log(currentUser)
                                             let data = {
                                                 productId: parseInt(product.id),
                                                 userId: parseInt(currentUser.id)
