@@ -1,6 +1,6 @@
 import { users } from "../repository/user_repository.js"
-import bcrypt from '.pnpm/bcrypt@5.1.0/node_modules/bcrypt'
-import jwt from '.pnpm/jsonwebtoken@9.0.0/node_modules/jsonwebtoken'
+import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
 export async function getAllUsers(req, res) {
     try {

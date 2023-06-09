@@ -1,8 +1,8 @@
-import express from '.pnpm/express@4.18.2/node_modules/express'
+import express from 'express'
 import dotenv from 'dotenv'
 import router from './src/routes.js'
-import bodyParser from '.pnpm/body-parser@1.20.2/node_modules/body-parser'
-import cors from '.pnpm/cors@2.8.5/node_modules/cors'
+import bodyParser from 'body-parser'
+import cors from 'cors'
 
 dotenv.config()
 const app = express()

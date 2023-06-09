@@ -1,4 +1,4 @@
-import jwt from ".pnpm/jsonwebtoken@9.0.0/node_modules/jsonwebtoken";
+import jwt from "jsonwebtoken";
 
 export function verifyToken(token) {
     return new Promise((resolve, reject) => {
@@ -20,3 +20,16 @@ export function currentDate(){
 
     return date
 }
+
+export function generateId() {
+    const characters = "abcdefghijklmnopqrstuvwxyz0123456789";
+    const length = 8;
+    let id = "";
+  
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * characters.length);
+      id += characters[randomIndex];
+    }
+  
+    return id;
+  }

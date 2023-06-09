@@ -1,13 +1,10 @@
-import multer from '.pnpm/multer@1.4.5-lts.1/node_modules/multer'
+import multer from 'multer'
 import path from 'path';
 import fs from 'node:fs'
-import { generateId } from '../../../client/src/utils/generateId.js';
+import { generateId } from '../utils.js';
 import { users } from '../repository/user_repository.js';
-import { v4 as uuidv4 } from '.pnpm/uuid@9.0.0/node_modules/uuid';
-import jwt from '.pnpm/jsonwebtoken@9.0.0/node_modules/jsonwebtoken';
-
-
-let data; 
+import { v4 as uuidv4 } from 'uuid';
+import jwt from 'jsonwebtoken';
 
 const storageProfil = multer.diskStorage({
     destination: function (req, file, cb) {
