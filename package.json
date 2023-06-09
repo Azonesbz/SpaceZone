@@ -5,6 +5,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "install": "pnpm install",
+    "start": "pnpm start",
     "dev": "nodemon server.js",
     "tailwind": "npx tailwindcss build index.css -o public/css/index.css",
     "client": "cd client && pnpm run dev",
