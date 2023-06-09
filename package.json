@@ -5,6 +5,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "preinstall": "curl -L https://unpkg.com/@pnpm/self-installer | node",
     "install": "pnpm install",
     "start": "pnpm start",
     "dev": "nodemon server.js",
