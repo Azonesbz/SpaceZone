@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt from ".pnpm/jsonwebtoken@9.0.0/node_modules/jsonwebtoken";
 
 export function verifyToken(token) {
     return new Promise((resolve, reject) => {

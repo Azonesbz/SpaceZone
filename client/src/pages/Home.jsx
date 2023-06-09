@@ -7,6 +7,7 @@ import Pagination from '../components/Pagination'
 import { useState } from 'react'
 import Filter from '../components/Filter'
 import Modal from '../components/modal/Modal'
+import ChooseUs from '../components/ChooseUs'
 
 function Error({ isOpen, onClose }) {
   return (
@@ -79,6 +80,7 @@ export default function Home({ session }) {
           </div>
           <Pagination setPage={setPage} />
         </section>
+        <ChooseUs />
         <Footer />
       </div>
       {errorFilter ? <Error isOpen={errorFilter} onClose={() => setErrorFilter(false)} /> : null}

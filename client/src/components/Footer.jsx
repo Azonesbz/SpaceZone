@@ -71,7 +71,7 @@ export default function Footer() {
                         </div>
                     </div>
                     <footer className="py-5">
-                        <h3 className="text-gray-400">Copyright © 2023 Azones Inc.</h3>
+                        <h3 className="text-gray-400">Copyright © 2023 Azones Inc. All Rights Reserved.</h3>
                     </footer>
                 </section>
             </footer>

@@ -15,6 +15,7 @@ import Error from "./pages/404";
 import { getAllProduct, getLikeProduct, getProductNumber } from "./actions/product.action";
 import { isEmpty } from "./utils/utils";
 import { getCarts } from "./actions/cart.action";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 
 function RouteWrapper({ children }) {
@@ -25,7 +26,7 @@ function RouteWrapper({ children }) {
 
 
   const scrollToTop = () => {
-    const scrollStep = -window.scrollY / (200 / 15); // 500 est la durée de l'animation en millisecondes
+    const scrollStep = -window.scrollY / (100 / 15); // 500 est la durée de l'animation en millisecondes
     const scrollInterval = setInterval(() => {
       if (window.scrollY !== 0) {
         window.scrollBy(0, scrollStep);
@@ -40,7 +41,6 @@ function RouteWrapper({ children }) {
     dispatch(sessionIsValid())
     dispatch(getAllUser())
     dispatch(getProductNumber())
-    // dispatch(getUserNumber())
     dispatch(getAllProduct())
     dispatch(getCarts())
     dispatch(getLikeProduct())
@@ -66,6 +66,7 @@ export default function App() {
                 <Route path="/product/new" element={<CreateProduct />}/>
                 <Route path="/profil" element={<Profil />}/>
                 <Route path="/carts" element={<Carts />}/>
+                <Route path="/privacy-policy" element={<PrivacyPolicy />}/>
                 <Route path="/*" element={<Error />}/>
               </Routes>
           </RouteWrapper>

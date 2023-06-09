@@ -1,7 +1,7 @@
 export default function ChooseUs(){
     return(
         <>
-            <section className="flex flex-col  text-white py-10 container">
+            <section className="flex flex-col bg-neutral-900 text-white py-10 container">
                     <h1 className="text-center p-8 font-karla text-3xl">Nos engagements envers nos clients</h1>
                     <div className="grid grid-cols-6 border-t w-5/6 mx-auto border-white">
                         <div className="p-5 col-span-6 sm:col-span-2">

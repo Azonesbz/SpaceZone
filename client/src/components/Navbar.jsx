@@ -35,7 +35,7 @@ export default function Navbar(){
     return (
         <>
             <div className={`flex fixed inset-0 z-50 h-20 w-full backdrop-blur-lg duration-200 ${scrollPosition >= 20 ? "shadow" : ""}`}>
-                <div className={`h-full w-full opacity-75 duration-200 ${scrollPosition >= 20 ? "bg-slate-200" : ""}`}></div>
+                <div className={`h-full w-full opacity-75 ${scrollPosition >= 20 ? "bg-slate-200" : ""}`}></div>
             </div>
             <header className="flex fixed inset-0 z-50 h-20 w-full bg-transparent container">
                 <nav className="flex justify-between items-center h-full w-full">
