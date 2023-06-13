@@ -1,0 +1,9 @@
+{
+    "name": "votre-nom-d-application",
+    "buildpacks": [
+      {
+        "url": "https://github.com/heroku/heroku-buildpack-nodejs.git"
+      }
+    ]
+  }
+  
